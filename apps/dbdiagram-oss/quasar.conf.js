@@ -8,14 +8,20 @@
 
 /* eslint-env node */
 /* eslint-disable @typescript-eslint/no-var-requires */
-// import veauryVitePlugins from 'veaury/vite/index.js'
-const veauryVitePlugins = require('veaury/vite/index');
+const { configure } = require("quasar/wrappers");
 
-module.exports = function (ctx) {
+module.exports = configure(function (ctx) {
   return {
     supportTS: false,
-    boot: ['i18n', 'ace', 'pinia', 'v3num'],
-    css: ['app.scss'],
+    boot: [
+      "i18n",
+      "ace",
+      "pinia",
+      "v3num"
+    ],
+    css: [
+      "app.scss"
+    ],
     extras: [
       // 'ionicons-v4',
       // 'mdi-v5',
@@ -25,41 +31,38 @@ module.exports = function (ctx) {
       // 'line-awesome',
       // 'roboto-font-latin-ext', // this or either 'roboto-font', NEVER both!
 
-      'roboto-font', // optional, you are not bound to it
-      'material-icons', // optional, you are not bound to it
+      "roboto-font", // optional, you are not bound to it
+      "material-icons" // optional, you are not bound to it
     ],
     build: {
-      env: require('dotenv').config().parsed,
+      env: require("dotenv").config().parsed,
       publicPath: ctx.prod ? '/dbdiagram-oss/' : '/',
-      vueRouterMode: 'history',
-      // chainWebpack(/* chain */) {},
-      vitePlugins: [
-        veauryVitePlugins({
-          type: 'vue',
-          // Configuration of @vitejs/plugin-vue
-          // vueOptions: {...},
-          // Configuration of @vitejs/plugin-react
-          // reactOptions: {...},
-          // Configuration of @vitejs/plugin-vue-jsx
-          // vueJsxOptions: {...}
-        }),
-      ],
+      vueRouterMode: "history",
+      chainWebpack(/* chain */) {
+      }
     },
-    // devServer: {
-    //   server: {
-    //     type: 'http',
-    //   },
-    //   port: 3210,
-    //   open: true, // opens browser window automatically
-    // },
+    devServer: {
+      server: {
+        type: "http"
+      },
+      port: 3210,
+      open: true // opens browser window automatically
+    },
     framework: {
-      config: {},
-      iconSet: 'material-icons',
+      config: {
+
+      },
+      iconSet: "material-icons",
       // lang: 'en-US', // Quasar language pack
-      plugins: ['Dark', 'Notify', 'Dialog', 'Dark'],
+      plugins: [
+        "Dark",
+        "Notify",
+        "Dialog",
+        "Dark"
+      ]
     },
 
-    animations: 'all',
+    animations: "all",
     ssr: {
       pwa: false,
 
@@ -72,55 +75,92 @@ module.exports = function (ctx) {
       maxAge: 1000 * 60 * 60 * 24 * 30,
       // Tell browser when a file from the server should expire from cache (in ms)
 
-      // chainWebpackWebserver(/* chain */) {
-      //   //
-      // },
+      chainWebpackWebserver (/* chain */) {
+        //
+      },
 
       middlewares: [
         ctx.prod ? 'compression' : '',
-        'render', // keep this as last one
-      ],
+        'render' // keep this as last one
+      ]
     },
     pwa: {
-      workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
+      workboxPluginMode: "GenerateSW", // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
-      // chainWebpackCustomSW(/* chain */) {},
-      // manifest: {
-      //   name: 'DB Diagram OSS',
-      //   short_name: 'DB Diagram OSS',
-      //   description: 'An Open-Source dbdiagram.io',
-      //   display: 'standalone',
-      //   orientation: 'portrait',
-      //   background_color: '#ffffff',
-      //   theme_color: '#027be3',
-      //   icons: [
-      //     {
-      //       src: 'icons/icon-128x128.png',
-      //       sizes: '128x128',
-      //       type: 'image/png',
-      //     },
-      //     {
-      //       src: 'icons/icon-192x192.png',
-      //       sizes: '192x192',
-      //       type: 'image/png',
-      //     },
-      //     {
-      //       src: 'icons/icon-256x256.png',
-      //       sizes: '256x256',
-      //       type: 'image/png',
-      //     },
-      //     {
-      //       src: 'icons/icon-384x384.png',
-      //       sizes: '384x384',
-      //       type: 'image/png',
-      //     },
-      //     {
-      //       src: 'icons/icon-512x512.png',
-      //       sizes: '512x512',
-      //       type: 'image/png',
-      //     },
-      //   ],
-      // },
+      chainWebpackCustomSW(/* chain */) {
+      },
+      manifest: {
+        name: "DB Diagram OSS",
+        short_name: "DB Diagram OSS",
+        description: "An Open-Source dbdiagram.io",
+        display: "standalone",
+        orientation: "portrait",
+        background_color: "#ffffff",
+        theme_color: "#027be3",
+        icons: [
+          {
+            src: "icons/icon-128x128.png",
+            sizes: "128x128",
+            type: "image/png"
+          },
+          {
+            src: "icons/icon-192x192.png",
+            sizes: "192x192",
+            type: "image/png"
+          },
+          {
+            src: "icons/icon-256x256.png",
+            sizes: "256x256",
+            type: "image/png"
+          },
+          {
+            src: "icons/icon-384x384.png",
+            sizes: "384x384",
+            type: "image/png"
+          },
+          {
+            src: "icons/icon-512x512.png",
+            sizes: "512x512",
+            type: "image/png"
+          }
+        ]
+      }
     },
+    cordova: {
+
+    },
+    capacitor: {
+      hideSplashscreen: true
+    },
+    electron: {
+      bundler: "packager", // 'packager' or 'builder'
+      packager: {
+        // https://github.com/electron-userland/electron-packager/blob/master/docs/api.md#options
+
+        // OS X / Mac App Store
+        // appBundleId: '',
+        // appCategoryType: '',
+        // osxSign: '',
+        // protocol: 'myapp://path',
+
+        // Windows only
+        // win32metadata: { ... }
+      },
+
+      builder: {
+        appId: "dbdiagram-oss"
+      },
+      // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
+      chainWebpack (/* chain */) {
+        // do something with the Electron main process Webpack cfg
+        // extendWebpackMain also available besides this chainWebpackMain
+      },
+
+      // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain
+      chainWebpackPreload (/* chain */) {
+        // do something with the Electron main process Webpack cfg
+        // extendWebpackPreload also available besides this chainWebpackPreload
+      }
+    }
   };
-};
+});

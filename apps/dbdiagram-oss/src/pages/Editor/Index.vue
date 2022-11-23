@@ -1,8 +1,4 @@
 <template>
-  <div style="position: fixed; top: 10px; background-color: white; z-index: 9999">
-    <h1>Hello world</h1>
-    <basic></basic>
-  </div>
   <q-page>
     <q-splitter v-model="split" :limits="[10, 75]" class="editor-wrapper">
       <template #before>
@@ -16,15 +12,11 @@
 </template>
 
 <script setup>
-import { applyReactInVue, applyPureReactInVue } from 'veaury';
 import { computed, nextTick, onMounted, ref, watch } from 'vue';
 import DbmlEditor from 'components/DbmlEditor';
 import DbmlGraph from 'components/DbmlGraph';
 import { useEditorStore } from 'src/store/editor';
 import { debounce, throttle, useQuasar } from 'quasar';
-import BasicReactComponent from './app.jsx';
-
-const Basic = applyPureReactInVue(BasicReactComponent);
 
 const editorRef = ref(null);
 const editor = useEditorStore();
