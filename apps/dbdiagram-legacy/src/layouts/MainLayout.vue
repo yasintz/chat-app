@@ -7,17 +7,19 @@
             <q-img src="~assets/logo.png" />
           </q-avatar>
         </q-toolbar-title>
-        <router-view name="toolbar" />
+        <T></T>
       </q-toolbar>
     </q-header>
     <q-page-container>
-      <router-view />
+      <E></E>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue';
+import E from '../pages/Editor/Index.vue';
+import T from '../pages/Editor/Toolbar.vue';
 
 export default defineComponent({
   name: 'MainLayout',
