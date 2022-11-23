@@ -14,9 +14,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {
-      "@dbdiagram-legacy/*": ["./apps/dbdiagram-legacy/src/*"]
-    }
+    "paths": {}
   },
   "exclude": ["node_modules", "tmp"]
 }
