@@ -1,5 +1,7 @@
 {
   "version": 2,
-  "projects": {},
+  "projects": {
+    "dbdocs": "apps/dbdocs"
+  },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
