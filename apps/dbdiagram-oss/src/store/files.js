@@ -1,20 +1,20 @@
-import { defineStore } from "pinia";
-import { useEditorStore } from "src/store/editor";
-import { useChartStore } from "src/store/chart";
+import { defineStore } from 'pinia';
+import { useEditorStore } from 'src/store/editor';
+import { useChartStore } from 'src/store/chart';
 
-import localforage from "localforage";
+import localforage from 'localforage';
 
 const fs = localforage.createInstance({
-  name: "dbdiagram-oss",
-  storeName: "files"
+  name: 'dbdiagram-oss',
+  storeName: 'files',
 });
 
-export const useFilesStore = defineStore("files", {
+export const useFilesStore = defineStore('files', {
   state: () => ({
     saving: false,
     lastSave: 0,
-    currentFile: "",
-    files: []
+    currentFile: '',
+    files: [],
   }),
   getters: {
     getFiles(state) {
@@ -22,41 +22,38 @@ export const useFilesStore = defineStore("files", {
     },
     getCurrentFile(state) {
       return state.currentFile;
-    }
+    },
   },
   actions: {
     loadFileList() {
-      console.log("loading file list");
+      // console.log("loading file list");
 
-      fs.keys()
-        .then(keys => {
-          this.files = keys;
-        });
+      fs.keys().then((keys) => {
+        this.files = keys;
+      });
     },
     loadFile(fileName) {
       this.loadFileList();
-      console.log("loading file", fileName);
+      // console.log("loading file", fileName);
 
-      fs.getItem(fileName)
-        .then(file => {
-          if (file && file.source) {
-            const fSource = file.source;
-            const fChart = file.chart || {};
+      fs.getItem(fileName).then((file) => {
+        if (file && file.source) {
+          const fSource = file.source;
+          const fChart = file.chart || {};
 
-            const editor = useEditorStore();
-            const chart = useChartStore();
+          const editor = useEditorStore();
+          const chart = useChartStore();
 
-            chart.load(fChart);
-            editor.load({
-              source: fSource
-            });
+          chart.load(fChart);
+          editor.load({
+            source: fSource,
+          });
 
-            this.$patch({
-              currentFile: fileName
-            });
-
-          }
-        });
+          this.$patch({
+            currentFile: fileName,
+          });
+        }
+      });
     },
     saveFile(fileName) {
       this.saving = true;
@@ -72,14 +69,14 @@ export const useFilesStore = defineStore("files", {
           fileName = `Untitled (${i++})`;
         }
       }
-      console.log("saving file", fileName);
+      // console.log("saving file", fileName);
 
       const editor = useEditorStore();
       const chart = useChartStore();
 
       const file = {
         ...editor.save,
-        chart: chart.save
+        chart: chart.save,
       };
 
       fs.setItem(fileName, JSON.parse(JSON.stringify(file))).then(() => {
@@ -88,14 +85,14 @@ export const useFilesStore = defineStore("files", {
         this.lastSave = new Date();
         if (this.currentFile !== fileName) {
           this.$patch({
-            currentFile: fileName
+            currentFile: fileName,
           });
         }
       });
     },
     newFile() {
       this.$patch({
-        currentFile: undefined
+        currentFile: undefined,
       });
 
       const editor = useEditorStore();
@@ -119,6 +116,6 @@ export const useFilesStore = defineStore("files", {
         this.currentFile = newName;
       }
       this.loadFileList();
-    }
-  }
+    },
+  },
 });

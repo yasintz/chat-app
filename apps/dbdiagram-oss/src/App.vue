@@ -3,7 +3,7 @@
 </template>
 <script>
 import { defineComponent } from 'vue';
-import './react.min.js';
+import './react-main.tsx';
 
 export default defineComponent({
   name: 'App',
