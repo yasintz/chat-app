@@ -6,36 +6,10 @@ Project ChatApp {
   '''
 }
 
-Table customer as Cu {
-  id int [pk, increment]
-  userName varchar [unique]
-  email varchar [unique]
-  password varchar
-  password_salt varchar
-  app_id int [ref: > A.id]
-  role customer_role_enum
-}
-
-Table member as M {
-  id int [pk, increment]
-  userName varchar [unique]
-  email varchar [unique]
-  password varchar
-  password_salt varchar
-}
-
-Table app as A {
+Table app {
   id int [pk, increment]
   title varchar
   description varchar
-  owner_member_id int [ref: > M.id]
-}
-
-Table channel as C {
-  id int [pk, increment]
-  title varchar
-  description varchar
-  app_id int [ref: > A.id]
 }
 
 Enum customer_role_enum {
@@ -43,48 +17,73 @@ Enum customer_role_enum {
   admin
 }
 
-Table reaction as R {
+Table customer {
+  id int [pk, increment]
+  first_name varchar
+  last_name varchar
+  email varchar [unique]
+  password varchar
+  password_salt varchar
+  app_id int [ref: > app.id]
+  role customer_role_enum
+}
+
+Table member {
+  id int [pk, increment]
+  app_id int [ref: > app.id]
+  first_name varchar
+  last_name varchar
+  email varchar
+  password varchar
+  password_salt varchar
+}
+
+Enum member_role_enum {
+    moderator
+}
+
+Table member_role {
+    id int
+    member_id int [ref: > member.id]
+    role member_role_enum
+}
+
+Table channel {
+  id int [pk, increment]
+  title varchar
+  description varchar
+  app_id int [ref: > app.id]
+}
+
+Table reaction {
   id int [pk]
 }
 
-Table message_reaction as MR {
+Table file {
+  id int [pk]
+}
+
+Table message_reaction {
   id int
-  reaction_id int [ref: > R.id]
-  message_id int [ref: > Message.id]
+  reaction_id int [ref: > reaction.id]
+  message_id int [ref: > message.id]
 }
-
-Table file as F {
-  id int [pk, increment]
-}
-
-Table message_file as MF {
+Table message_file {
   id int
-  file_id int [ref: > R.id]
-  message_id int [ref: > Message.id]
+  file_id int [ref: > file.id]
+  message_id int [ref: > message.id]
 }
 
-Table message as Message {
+Table message {
   id int [pk, increment]
   created_at timestamptz
   updated_at timestamptz
   deleted_at timestamptz
-  sender_id int [ref: > M.id]
+  sender_id int [ref: > member.id]
   body varchar
-  channel_id int [ref: > C.id]
-  mentions json
-  attachements json
-  pinned_to_channel boolean
-  reply_to int [ref: > Message.id]
+  channel_id int [ref: > channel.id]
+  pinned boolean
+  reply_to int [ref: > message.id]
+  parent_id int [ref: > message.id]
 }
 
-Table thread as Thread {
-  id int [pk, increment]
-  channel_id int [ref: > C.id]
-  member_id int [ref: > M.id]
-  parent_message_id int 
-}
-
-Table thread_message_pivot {
-  message_id int [ref: > Message.id]
-  thread_id int [ref: > Thread.id]
-}
