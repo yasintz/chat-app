@@ -2,8 +2,7 @@ Project ChatApp {
   database_type: 'PostgreSQL'
   Note: '''
     # Chat App Database
-    **markdown content here is updates here**
-    updates
+    This is an embedded chat app
   '''
 }
 
