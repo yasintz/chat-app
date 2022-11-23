@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { applyPureVueInReact } from 'veaury';
 import { Route, Routes, Link } from 'react-router-dom';
 
-import BasicVueComponent from './Basic.vue';
+// import BasicVueComponent from './Basic.vue';
+import BasicVueComponent from '@dbdiagram-legacy/pages/Editor/Index.vue';
 
 const StyledApp = styled.div``;
 
