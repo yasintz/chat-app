@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
+    "dbdiagram": "apps/dbdiagram",
+    "dbdiagram-e2e": "apps/dbdiagram-e2e",
     "dbdocs": "apps/dbdocs"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
