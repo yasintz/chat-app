@@ -1,0 +1,13 @@
+Table app {
+  id int [pk, increment]
+  title varchar
+  description varchar
+}
+
+Table reaction {
+  id int [pk]
+}
+
+Table file {
+  id int [pk]
+}

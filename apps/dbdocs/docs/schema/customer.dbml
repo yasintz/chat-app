@@ -1,0 +1,15 @@
+Enum customer_role_enum {
+  owner
+  admin
+}
+
+Table customer {
+  id int [pk, increment]
+  first_name varchar
+  last_name varchar
+  email varchar [unique]
+  password varchar
+  password_salt varchar
+  app_id int [ref: > app.id]
+  role customer_role_enum
+}

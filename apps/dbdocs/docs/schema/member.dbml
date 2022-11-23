@@ -1,0 +1,19 @@
+Table member {
+  id int [pk, increment]
+  app_id int [ref: > app.id]
+  first_name varchar
+  last_name varchar
+  email varchar
+  password varchar
+  password_salt varchar
+}
+
+Enum member_role_enum {
+    moderator
+}
+
+Table member_role {
+    id int
+    member_id int [ref: > member.id]
+    role member_role_enum
+}

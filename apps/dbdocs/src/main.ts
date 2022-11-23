@@ -2,8 +2,14 @@ import * as chokidar from 'chokidar';
 import build from './build';
 import { environment } from './environments/environment';
 
-if (environment.production) {
-  build();
-} else {
-  chokidar.watch(`./apps/dbdocs/docs/**/*.dbml`).on('change', build);
+build();
+
+if (!environment.production) {
+  chokidar
+    .watch([
+      `./apps/dbdocs/docs/**/*.dbml`,
+      './apps/dbdocs/docs/*.json',
+      './apps/dbdocs/docs/*.md',
+    ])
+    .on('change', build);
 }
