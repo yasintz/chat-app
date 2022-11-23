@@ -3,6 +3,8 @@ name: Deploy dbdocs to cloud
 on:
   push:
     branches: [master]
+    paths:
+      - 'apps/dbdocs/**'
 
 jobs:
   Build_Deploy:
