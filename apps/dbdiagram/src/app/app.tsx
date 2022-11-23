@@ -1,20 +1,16 @@
 import styled from 'styled-components';
-import NxWelcome from './nx-welcome';
-
+import { applyPureVueInReact } from 'veaury';
 import { Route, Routes, Link } from 'react-router-dom';
 
-const StyledApp = styled.div`
-  // Your style here
-`;
+import BasicVueComponent from './Basic.vue';
 
+const StyledApp = styled.div``;
+
+const BasicWithPure = applyPureVueInReact(BasicVueComponent);
 export function App() {
   return (
     <StyledApp>
-      <NxWelcome title="dbdiagram" />
-
-      {/* START: routes */}
-      {/* These routes and navigation have been generated for you */}
-      {/* Feel free to move and update them to fit your needs */}
+      <BasicWithPure />
       <br />
       <hr />
       <br />

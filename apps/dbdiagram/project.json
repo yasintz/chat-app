@@ -5,31 +5,15 @@
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/webpack:webpack",
+      "executor": "@nrwl/vite:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "compiler": "babel",
-        "outputPath": "dist/apps/dbdiagram",
-        "index": "apps/dbdiagram/src/index.html",
-        "baseHref": "/",
-        "main": "apps/dbdiagram/src/main.tsx",
-        "polyfills": "apps/dbdiagram/src/polyfills.ts",
-        "tsConfig": "apps/dbdiagram/tsconfig.app.json",
-        "assets": [
-          "apps/dbdiagram/src/favicon.ico",
-          "apps/dbdiagram/src/assets"
-        ],
-        "styles": [],
-        "scripts": [],
-        "webpackConfig": "@nrwl/react/plugins/webpack"
+        "outputPath": "dist/apps/dbdiagram"
       },
       "configurations": {
         "development": {
-          "extractLicenses": false,
-          "optimization": false,
-          "sourceMap": true,
-          "vendorChunk": true
+          "sourceMap": true
         },
         "production": {
           "fileReplacements": [
@@ -38,17 +22,12 @@
               "with": "apps/dbdiagram/src/environments/environment.prod.ts"
             }
           ],
-          "optimization": true,
-          "outputHashing": "all",
-          "sourceMap": false,
-          "namedChunks": false,
-          "extractLicenses": true,
-          "vendorChunk": false
+          "sourceMap": false
         }
       }
     },
     "serve": {
-      "executor": "@nrwl/webpack:dev-server",
+      "executor": "@nrwl/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
         "buildTarget": "dbdiagram:build",
