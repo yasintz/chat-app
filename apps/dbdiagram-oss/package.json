@@ -29,7 +29,8 @@
     "vue": "^3.2.31",
     "vue-i18n": "^9.2.0-beta.23",
     "vue-router": "^4.0.12",
-    "vue3-ace-editor": "^2.2.2"
+    "vue3-ace-editor": "^2.2.2",
+    "webpack-watch-files-plugin": "^1.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",

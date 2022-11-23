@@ -6,8 +6,6 @@
       </template>
       <template #after>
         <dbml-graph class="db-graph-view" :schema="schema" />
-        <react :component="Button" :props="{ onClick: () => console.log(this) }" />
-        <react :component="Button" :props="{ onClick: () => console.log(123112) }" />
       </template>
     </q-splitter>
   </q-page>
@@ -19,7 +17,6 @@ import DbmlEditor from 'components/DbmlEditor';
 import DbmlGraph from 'components/DbmlGraph';
 import { useEditorStore } from 'src/store/editor';
 import { debounce, throttle, useQuasar } from 'quasar';
-import Button from './button.tsx';
 
 const editorRef = ref(null);
 const editor = useEditorStore();

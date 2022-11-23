@@ -33,8 +33,7 @@ module.exports = configure(function (ctx) {
       vueRouterMode: 'history',
       chainWebpack(/* chain */) {},
       extendWebpack(cfg, { isServer, isClient }) {
-        console.log(cfg);
-        cfg.resolve.extensions.push(...['tsx', 'ts']);
+        cfg.resolve.extensions.push(...['tsx', 'ts', 'dbml']);
         cfg.module.rules.push({
           test: /\.(js|ts)x?$/,
           exclude: /node_modules/,
