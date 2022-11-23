@@ -49,8 +49,8 @@
 
 <script setup>
   import { computed, onMounted, ref, watch } from 'vue'
-  import VDbField from './VDbField'
-  import VDbTableTooltip from './VDbTableTooltip'
+  import VDbField from './VDbField.vue'
+  import VDbTableTooltip from './VDbTableTooltip.vue'
   import { useChartStore } from '../../store/chart'
   import { snap } from '../../utils/MathUtil'
   import { useEditorStore } from '../../store/editor'

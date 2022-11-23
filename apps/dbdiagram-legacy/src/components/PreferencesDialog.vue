@@ -32,11 +32,9 @@
   import { useDialogPluginComponent } from 'quasar'
   import { ref } from 'vue'
   import ace from 'ace-builds'
-  import AceThemePreviewCard from './AceThemePreviewCard'
-  import { useEditorStore } from '../store/editor'
-  import DialogLayout from '../layouts/DialogLayout'
-  import GeneralTab from './PreferenceDialogTabs/GeneralTab'
-  import ThemeTab from './PreferenceDialogTabs/ThemeTab'
+  import DialogLayout from '../layouts/DialogLayout.vue'
+  import GeneralTab from './PreferenceDialogTabs/GeneralTab.vue'
+  import ThemeTab from './PreferenceDialogTabs/ThemeTab.vue'
 
   export default {
     name: 'PreferencesDialog',

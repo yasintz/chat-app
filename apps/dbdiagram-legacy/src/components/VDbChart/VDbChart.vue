@@ -121,12 +121,12 @@
 
 <script setup>
   import { computed, nextTick, onMounted, reactive, ref, watch, watchEffect } from 'vue'
-  import VDbTable from './VDbTable'
-  import VDbRef from './VDbRef'
+  import VDbTable from './VDbTable.vue'
+  import VDbRef from './VDbRef.vue'
   import svgPanZoom from 'svg-pan-zoom'
   import { useChartStore } from '../../store/chart'
-  import VDbTooltip from './VDbTooltip'
-  import VDbTableGroup from './VDbTableGroup'
+  import VDbTooltip from './VDbTooltip.vue'
+  import VDbTableGroup from './VDbTableGroup.vue'
 
   const store = useChartStore()
 

@@ -16,7 +16,7 @@
   import ace from 'ace-builds'
   import { ref } from 'vue'
 
-  import AceThemePreviewCard from '../AceThemePreviewCard'
+  import AceThemePreviewCard from '../AceThemePreviewCard.vue'
 
   const editor = useEditorStore()
 

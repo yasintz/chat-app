@@ -1,9 +1,8 @@
-import { boot } from 'quasar/wrappers'
-import { createPinia } from "pinia";
-import plugin from "src/store/plugin"
+import { createPinia } from 'pinia';
+import plugin from '../store/plugin';
 
-export default boot(({ app }) => {
+export default ({ app }) => {
   const pinia = createPinia();
   app.use(pinia);
-  pinia.use(plugin)
-});
+  pinia.use(plugin);
+};

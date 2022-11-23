@@ -1,6 +1,6 @@
 import { debounce, throttle, useQuasar, Dark } from "quasar";
-import { decode, encode, save, load } from "src/utils/storageUtils";
-import { useFilesStore } from "src/store/files";
+import { decode, encode, save, load } from "../utils/storageUtils";
+import { useFilesStore } from "../store/files";
 
 
 const throttledSave = debounce(save, 150);

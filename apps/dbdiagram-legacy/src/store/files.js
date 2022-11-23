@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { useEditorStore } from "src/store/editor";
-import { useChartStore } from "src/store/chart";
+import { useEditorStore } from "../store/editor";
+import { useChartStore } from "../store/chart";
 
 import localforage from "localforage";
 

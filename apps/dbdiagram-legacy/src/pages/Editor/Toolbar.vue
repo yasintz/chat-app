@@ -134,9 +134,9 @@
 
 <script setup>
   import { computed, ref } from 'vue'
-  import { useEditorStore } from 'src/store/editor'
+  import { useEditorStore } from '../../store/editor'
   import { useQuasar } from 'quasar'
-  import PreferencesDialog from '../../components/PreferencesDialog'
+  import PreferencesDialog from '../../components/PreferencesDialog.vue'
   import { useFilesStore } from '../../store/files'
 
   const editor = useEditorStore()

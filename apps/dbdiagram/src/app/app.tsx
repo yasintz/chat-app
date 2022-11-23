@@ -3,7 +3,7 @@ import { applyPureVueInReact } from 'veaury';
 import { Route, Routes, Link } from 'react-router-dom';
 
 // import BasicVueComponent from './Basic.vue';
-import BasicVueComponent from '@dbdiagram-legacy/pages/Editor/Index.vue';
+import BasicVueComponent from '@dbdiagram-legacy/layouts/MainLayout.vue';
 
 const StyledApp = styled.div``;
 

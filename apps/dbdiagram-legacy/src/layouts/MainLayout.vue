@@ -7,33 +7,32 @@
             <q-img src="~assets/logo.png" />
           </q-avatar>
         </q-toolbar-title>
-        <router-view name="toolbar"/>
+        <router-view name="toolbar" />
       </q-toolbar>
     </q-header>
     <q-page-container>
-      <router-view/>
+      <router-view />
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
+import { defineComponent, ref } from 'vue';
 
-  import { defineComponent, ref } from 'vue'
+export default defineComponent({
+  name: 'MainLayout',
 
-  export default defineComponent({
-    name: 'MainLayout',
+  components: {},
 
-    components: {},
+  setup() {
+    const leftDrawerOpen = ref(false);
 
-    setup () {
-      const leftDrawerOpen = ref(false)
-
-      return {
-        leftDrawerOpen,
-        toggleLeftDrawer () {
-          leftDrawerOpen.value = !leftDrawerOpen.value
-        }
-      }
-    }
-  })
+    return {
+      leftDrawerOpen,
+      toggleLeftDrawer() {
+        leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
+    };
+  },
+});
 </script>

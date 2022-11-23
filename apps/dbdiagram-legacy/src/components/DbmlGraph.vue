@@ -57,9 +57,9 @@
 <script setup>
   import { useEditorStore } from '../store/editor'
   import { computed, onMounted, ref, watch } from 'vue'
-  import VDbChart from './VDbChart/VDbChart'
+  import VDbChart from './VDbChart/VDbChart.vue'
   import { useChartStore } from '../store/chart'
-  import VDbStructure from './VDbStructure'
+  import VDbStructure from './VDbStructure.vue'
 
   const props = defineProps({
     schema: {

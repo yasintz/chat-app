@@ -14,7 +14,7 @@
 <script>
   import { VAceEditor } from 'vue3-ace-editor'
   import { computed, reactive, ref, watch } from 'vue'
-  import { useEditorStore } from 'src/store/editor'
+  import { useEditorStore } from '../store/editor'
   import { Range } from 'ace-builds'
   import { InlineAnnotation } from './ace/inline_annotation';
 
