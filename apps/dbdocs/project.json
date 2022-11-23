@@ -32,7 +32,8 @@
     "serve": {
       "executor": "@nrwl/js:node",
       "options": {
-        "buildTarget": "dbdocs:build"
+        "buildTarget": "dbdocs:build",
+        "watch": true
       },
       "configurations": {
         "production": {

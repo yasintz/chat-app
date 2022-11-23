@@ -1,0 +1,91 @@
+Project ChatApp {
+  database_type: 'PostgreSQL'
+  Note: '''
+    # Chat App Database
+    **markdown content here is updates here**
+    this is a markdownsfasdf
+  '''
+}
+
+Table customer as Cu {
+  id int [pk, increment]
+  userName varchar [unique]
+  email varchar [unique]
+  password varchar
+  password_salt varchar
+  app_id int [ref: > A.id]
+  role customer_role_enum
+}
+
+Table member as M {
+  id int [pk, increment]
+  userName varchar [unique]
+  email varchar [unique]
+  password varchar
+  password_salt varchar
+}
+
+Table app as A {
+  id int [pk, increment]
+  title varchar
+  description varchar
+  owner_member_id int [ref: > M.id]
+}
+
+Table channel as C {
+  id int [pk, increment]
+  title varchar
+  description varchar
+  app_id int [ref: > A.id]
+}
+
+Enum customer_role_enum {
+  owner
+  admin
+}
+
+Table reaction as R {
+  id int [pk]
+}
+
+Table message_reaction as MR {
+  id int
+  reaction_id int [ref: > R.id]
+  message_id int [ref: > Message.id]
+}
+
+Table file as F {
+  id int [pk, increment]
+}
+
+Table message_file as MF {
+  id int
+  file_id int [ref: > R.id]
+  message_id int [ref: > Message.id]
+}
+
+Table message as Message {
+  id int [pk, increment]
+  created_at timestamptz
+  updated_at timestamptz
+  deleted_at timestamptz
+  sender_id int [ref: > M.id]
+  body varchar
+  channel_id int [ref: > C.id]
+  mentions json
+  attachements json
+  pinned_to_channel boolean
+  reply_to int [ref: > Message.id]
+}
+
+Table thread as Thread {
+  id int [pk, increment]
+  channel_id int [ref: > C.id]
+  member_id int [ref: > M.id]
+  parent_message_id int 
+}
+
+Table thread_message_pivot {
+  message_id int [ref: > Message.id]
+  thread_id int [ref: > Thread.id]
+}
