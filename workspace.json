@@ -4,7 +4,8 @@
     "admin-dashboard": "apps/admin-dashboard",
     "admin-dashboard-e2e": "apps/admin-dashboard-e2e",
     "dbdocs": "apps/dbdocs",
-    "ui": "libs/ui"
+    "ui": "libs/ui",
+    "ui-e2e": "apps/ui-e2e"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
