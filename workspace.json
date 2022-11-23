@@ -3,7 +3,8 @@
   "projects": {
     "admin-dashboard": "apps/admin-dashboard",
     "admin-dashboard-e2e": "apps/admin-dashboard-e2e",
-    "dbdocs": "apps/dbdocs"
+    "dbdocs": "apps/dbdocs",
+    "ui": "libs/ui"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
