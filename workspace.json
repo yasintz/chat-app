@@ -1,8 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "admin-dashboard": "apps/admin-dashboard",
-    "admin-dashboard-e2e": "apps/admin-dashboard-e2e",
+    "dashboard": "apps/dashboard",
+    "dashboard-e2e": "apps/dashboard-e2e",
     "dbdocs": "apps/dbdocs",
     "hasura": "apps/hasura",
     "landing": "apps/landing",
