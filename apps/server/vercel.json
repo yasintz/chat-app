@@ -1,9 +1,8 @@
 {
   "version": 2,
-  "buildCommand": "nx vercel-build server",
+  "buildCommand": "echo \"build done 😋\"",
   "outputDirectory": ".",
   "installCommand": "pnpm install",
-  "framework": "Other",
   "builds": [
     {
       "src": "main.js",
