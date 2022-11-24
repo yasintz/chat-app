@@ -79,6 +79,12 @@
         "jestConfig": "apps/dashboard/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "type-check": {
+      "builder": "nx:run-commands",
+      "options": {
+        "command": "tsc -p apps/dashboard/tsconfig.app.json --noEmit"
+      }
     }
   },
   "tags": []

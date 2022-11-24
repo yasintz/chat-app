@@ -76,6 +76,12 @@
         "jestConfig": "apps/chat/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "type-check": {
+      "builder": "nx:run-commands",
+      "options": {
+        "command": "tsc -p apps/chat/tsconfig.app.json --noEmit"
+      }
     }
   },
   "tags": []

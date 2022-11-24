@@ -19,7 +19,6 @@
     "useDefineForClassFields": true
   },
   "files": [],
-  "include": [],
   "references": [
     {
       "path": "./tsconfig.app.json"
