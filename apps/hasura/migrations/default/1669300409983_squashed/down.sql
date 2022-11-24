@@ -1,3 +1,22 @@
+
+DROP TABLE "public"."member_channel";
+
+DROP TABLE "public"."member_file";
+
+DROP TABLE "public"."member";
+
+alter table "public"."file" drop constraint "file_service_fkey";
+
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- INSERT INTO public.file_service (value) VALUES ('cloudinary');
+
+DROP TABLE "public"."file_service";
+
+DROP TABLE "public"."file";
+
+DROP TABLE "public"."channel";
+
 alter table "public"."customer" drop constraint "customer_role_id_fkey";
 
 -- Could not auto-generate a down migration.
