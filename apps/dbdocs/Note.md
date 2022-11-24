@@ -3,11 +3,3 @@
 # Chat App Database
 
 This is app database document
-
-# Chat App Database
-
-1
-
-## Chat App Database
-
-2
