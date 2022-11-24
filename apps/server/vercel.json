@@ -1,5 +1,8 @@
 {
   "version": 2,
+  "buildCommand": "nx vercel-build server",
+  "outputDirectory": ".",
+  "installCommand": "pnpm install",
   "builds": [
     {
       "src": "main.js",
