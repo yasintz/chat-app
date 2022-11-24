@@ -1,4 +1,4 @@
-name: Deploy dbdocs to cloud
+name: Deploy dbdocs
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
       - 'apps/dbdocs/**'
 
 jobs:
-  Build_Deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
