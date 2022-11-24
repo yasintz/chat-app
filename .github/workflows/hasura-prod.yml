@@ -23,8 +23,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Deploy
+      - name: Deploy Hasura
         run: pnpm nx deploy hasura
         env:
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
           HASURA_GRAPHQL_ENDPOINT: ${{ secrets.HASURA_GRAPHQL_ENDPOINT }}
+      - name: Build Scripts
+        run: pnpm nx build-script hasura --prod
+
+      - name: Deploy Scripts
+        run: node dist/apps/hasura/main.js

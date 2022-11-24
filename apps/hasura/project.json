@@ -39,6 +39,42 @@
         "parallel": false,
         "cwd": "apps/hasura"
       }
+    },
+    "script-build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "target": "node",
+        "compiler": "tsc",
+        "outputPath": "dist/apps/hasura",
+        "main": "apps/hasura/scripts/main.ts",
+        "tsConfig": "apps/hasura/tsconfig.app.json"
+      },
+      "configurations": {
+        "production": {
+          "optimization": true,
+          "extractLicenses": true,
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/hasura/scrips/environments/environment.ts",
+              "with": "apps/hasura/scripts/environments/environment.prod.ts"
+            }
+          ]
+        }
+      }
+    },
+    "script-serve": {
+      "executor": "@nrwl/js:node",
+      "options": {
+        "buildTarget": "hasura:script-build",
+        "watch": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "hasura:script-build:production"
+        }
+      }
     }
   },
   "tags": []
