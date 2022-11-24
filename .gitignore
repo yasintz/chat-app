@@ -38,3 +38,4 @@ Thumbs.db
 
 # Next.js
 .next
+tsconfig.tsbuildinfo

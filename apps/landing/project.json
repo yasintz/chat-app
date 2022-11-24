@@ -62,7 +62,7 @@
     "type-check": {
       "builder": "nx:run-commands",
       "options": {
-        "command": "tsc -p apps/landing/tsconfig.app.json --noEmit"
+        "command": "tsc -p apps/landing/tsconfig.json --noEmit"
       }
     }
   },

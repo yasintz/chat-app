@@ -1,4 +1,4 @@
-import { environment } from '@dashboard/environments/environment';
+import { environment } from '../../environments/environment';
 
 const devLocal = environment.USE_LOCAL_HASURA;
 

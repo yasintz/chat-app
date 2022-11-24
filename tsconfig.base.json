@@ -15,9 +15,6 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@chat/*": ["apps/chat/src/*"],
-      "@dashboard/*": ["apps/dashboard/src/*"],
-      "@landing/*": ["apps/landing/src/*"],
       "@ui": ["libs/ui/src/index.ts"]
     }
   },

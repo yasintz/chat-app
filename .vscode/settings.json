@@ -1,0 +1,5 @@
+{
+  "files.exclude": {
+    "tsconfig.tsbuildinfo": true
+  }
+}
