@@ -67,7 +67,8 @@
         "commands": [
           "pnpm nx build server --prod",
           "cp apps/server/vercel.json dist/apps/server",
-          "cp package.json dist/apps/server"
+          "cp package.json dist/apps/server",
+          "cp pnpm-lock.yaml dist/apps/server"
         ],
         "parallel": false
       }
