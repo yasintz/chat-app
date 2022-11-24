@@ -10,6 +10,8 @@ ChatApp is a powerful all in one embedded chat app. You can add a chat feature t
 
 App root `./apps/chat`.
 
+[ychat-app.vercel.app](https://ychat-app.vercel.app)
+
 ## Dashboard (wip)
 
 App root `./apps/dashboard`.
