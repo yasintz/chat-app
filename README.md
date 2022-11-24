@@ -1,8 +1,6 @@
 # ChatApp
 
-<p align="center">
 ChatApp is a powerful all in one embedded chat app. You can add a chat feature to your application in seconds as powerful as slack.
-</p>
 
 ![cover](https://user-images.githubusercontent.com/36041339/203687842-4df1d0c5-f2ea-4258-b164-54afa191a8eb.jpeg)
 
