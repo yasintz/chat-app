@@ -3,6 +3,8 @@
   "projects": {
     "dashboard": "apps/dashboard",
     "dashboard-e2e": "apps/dashboard-e2e",
+    "chat": "apps/chat",
+    "chat-e2e": "apps/chat-e2e",
     "dbdocs": "apps/dbdocs",
     "hasura": "apps/hasura",
     "landing": "apps/landing",

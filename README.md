@@ -6,6 +6,10 @@ ChatApp is a powerful all in one embedded chat app. You can add a chat feature t
 
 # Development
 
+## Chat (wip)
+
+App root `./apps/chat`.
+
 ## Dashboard (wip)
 
 App root `./apps/dashboard`.
