@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Route, Routes, Link } from 'react-router-dom';
 
-import { Ui } from '@chat-app/ui';
+import { Ui } from '@ui';
 
 const StyledApp = styled.div`
   // Your style here
