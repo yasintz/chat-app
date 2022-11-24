@@ -54,6 +54,22 @@
         "jestConfig": "apps/server/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "type-check": {
+      "builder": "nx:run-commands",
+      "options": {
+        "command": "tsc -p apps/chat/tsconfig.app.json --noEmit"
+      }
+    },
+    "vercel-build": {
+      "builder": "nx:run-commands",
+      "options": {
+        "commands": [
+          "cp apps/server/src/main.ts ./main.js",
+          "cp apps/server/vercel.json ."
+        ],
+        "parallel": false
+      }
     }
   },
   "tags": []
