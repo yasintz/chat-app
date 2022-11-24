@@ -45,14 +45,14 @@ function createOutput(doc: DocType) {
     .join('\n');
 
   return `
-  Project ${doc.project} {
-  database_type: '${doc.database_type}'
-  Note: '''
-  ${noteOutput}
-  '''
-  ${schemaOutput}
+Project ${doc.project} {
+database_type: '${doc.database_type}'
+Note: '''
+${noteOutput}
+'''
 }
-  `;
+${schemaOutput}
+`;
 }
 
 let lastPromise = Promise.resolve();

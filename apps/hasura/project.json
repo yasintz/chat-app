@@ -14,7 +14,15 @@
     "console": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "hasura console --admin-secret \"chat\" --endpoint \"http://localhost:8080\"",
+        "command": "hasura console",
+        "cwd": "apps/hasura"
+      }
+    },
+    "cli": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "hasura --database-name=default",
+        "args": "",
         "cwd": "apps/hasura"
       }
     },

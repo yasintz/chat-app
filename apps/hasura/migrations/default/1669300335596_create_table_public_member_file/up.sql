@@ -1,0 +1,2 @@
+CREATE TABLE "public"."member_file" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "member_id" uuid NOT NULL, "file_id" uuid NOT NULL, PRIMARY KEY ("member_id","file_id") , FOREIGN KEY ("file_id") REFERENCES "public"."file"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("member_id") REFERENCES "public"."member"("id") ON UPDATE restrict ON DELETE restrict, UNIQUE ("id"));
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

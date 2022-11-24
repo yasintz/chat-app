@@ -1,5 +1,3 @@
-apps/**/.env
-
 # compiled output
 /dist
 /tmp

@@ -1,13 +1,18 @@
 Table app {
   id int [pk, increment]
-  title varchar
-  description varchar
+  name text
 }
 
 Table reaction {
   id int [pk]
 }
 
+Enum file_service_enum {
+  cloudinary
+}
+
 Table file {
   id int [pk]
+  name text
+  service file_service_enum
 }

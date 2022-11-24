@@ -1,0 +1,15 @@
+table:
+  name: file
+  schema: public
+object_relationships:
+  - name: file_service
+    using:
+      foreign_key_constraint_on: service
+array_relationships:
+  - name: member_files
+    using:
+      foreign_key_constraint_on:
+        column: file_id
+        table:
+          name: member_file
+          schema: public

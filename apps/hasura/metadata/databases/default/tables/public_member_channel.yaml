@@ -1,0 +1,10 @@
+table:
+  name: member_channel
+  schema: public
+object_relationships:
+  - name: channel
+    using:
+      foreign_key_constraint_on: channel_id
+  - name: member
+    using:
+      foreign_key_constraint_on: member_id

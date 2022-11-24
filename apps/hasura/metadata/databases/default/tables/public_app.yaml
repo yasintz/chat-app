@@ -2,10 +2,24 @@ table:
   name: app
   schema: public
 array_relationships:
+  - name: channels
+    using:
+      foreign_key_constraint_on:
+        column: app_id
+        table:
+          name: channel
+          schema: public
   - name: customers
     using:
       foreign_key_constraint_on:
         column: app_id
         table:
           name: customer
+          schema: public
+  - name: members
+    using:
+      foreign_key_constraint_on:
+        column: app_id
+        table:
+          name: member
           schema: public

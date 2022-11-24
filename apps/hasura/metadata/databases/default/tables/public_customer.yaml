@@ -1,6 +1,25 @@
 table:
   name: customer
   schema: public
+configuration:
+  column_config:
+    app_id:
+      custom_name: appId
+    created_at:
+      custom_name: createdAt
+    first_name:
+      custom_name: firstName
+    last_name:
+      custom_name: lastName
+    updated_at:
+      custom_name: updatedAt
+  custom_column_names:
+    app_id: appId
+    created_at: createdAt
+    first_name: firstName
+    last_name: lastName
+    updated_at: updatedAt
+  custom_root_fields: {}
 object_relationships:
   - name: app
     using:

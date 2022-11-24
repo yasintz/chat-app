@@ -1,6 +1,0 @@
-Table channel {
-  id int [pk, increment]
-  title varchar
-  description varchar
-  app_id int [ref: > app.id]
-}

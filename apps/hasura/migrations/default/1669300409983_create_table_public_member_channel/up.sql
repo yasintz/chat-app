@@ -1,0 +1,2 @@
+CREATE TABLE "public"."member_channel" ("id" uuid NOT NULL DEFAULT gen_random_uuid(), "member_id" uuid NOT NULL, "channel_id" uuid NOT NULL, PRIMARY KEY ("member_id","channel_id") , FOREIGN KEY ("member_id") REFERENCES "public"."member"("id") ON UPDATE restrict ON DELETE restrict, FOREIGN KEY ("channel_id") REFERENCES "public"."channel"("id") ON UPDATE restrict ON DELETE restrict, UNIQUE ("id"));
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

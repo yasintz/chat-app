@@ -1,0 +1,15 @@
+table:
+  name: channel
+  schema: public
+object_relationships:
+  - name: app
+    using:
+      foreign_key_constraint_on: app_id
+array_relationships:
+  - name: member_channels
+    using:
+      foreign_key_constraint_on:
+        column: channel_id
+        table:
+          name: member_channel
+          schema: public
