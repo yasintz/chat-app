@@ -1,11 +1,16 @@
 module.exports = {
   stories: [],
   addons: ['@storybook/addon-essentials'],
-  // uncomment the property below if you want to apply some webpack config globally
-  // webpackFinal: async (config, { configType }) => {
-  //   // Make whatever fine-grained changes you need that should apply to all storybook configs
+  core: {
+    builder: '@storybook/builder-vite',
+    disableTelemetry: true,
+  },
+  features: {
+    storyStoreV7: true,
+  },
+  async viteFinal(config, { configType }) {
+    config.root = process.cwd();
 
-  //   // Return the altered config
-  //   return config;
-  // },
+    return config;
+  },
 };
