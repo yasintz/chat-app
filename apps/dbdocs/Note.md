@@ -2,4 +2,4 @@
 
 # Chat App Database
 
-This is app database document
+This is app database document.
