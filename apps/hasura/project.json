@@ -47,7 +47,7 @@
         "target": "node",
         "compiler": "tsc",
         "outputPath": "dist/apps/hasura",
-        "main": "apps/hasura/scripts/main.ts",
+        "main": "apps/hasura/main.ts",
         "tsConfig": "apps/hasura/tsconfig.app.json"
       },
       "configurations": {
@@ -57,7 +57,7 @@
           "inspect": false,
           "fileReplacements": [
             {
-              "replace": "apps/hasura/scrips/environments/environment.ts",
+              "replace": "apps/hasura/scripts/environments/environment.ts",
               "with": "apps/hasura/scripts/environments/environment.prod.ts"
             }
           ]
