@@ -32,5 +32,5 @@ jobs:
       - name: Build Scripts
         run: pnpm nx script-build hasura --prod
 
-      - name: Deploy Scripts
+      - name: Deploy Database Documents
         run: node dist/apps/hasura/main.js

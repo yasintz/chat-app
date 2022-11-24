@@ -5,6 +5,7 @@ import { environment } from '../environments/environment';
 export default function run() {
   build();
 
+  console.log({ environment });
   if (!environment.production) {
     chokidar
       .watch([

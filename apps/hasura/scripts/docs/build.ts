@@ -40,7 +40,7 @@ function createOutput(doc: DocType) {
 
   const schemaOutput = doc.schema
     .map((file) =>
-      fs.readFileSync(path.join(projectRoot, `docs/${file}.dbml`), 'utf-8')
+      fs.readFileSync(path.join(projectRoot, `${file}.dbml`), 'utf-8')
     )
     .join('\n');
 
