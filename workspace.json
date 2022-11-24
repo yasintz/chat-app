@@ -1,13 +1,14 @@
 {
   "version": 2,
   "projects": {
-    "dashboard": "apps/dashboard",
-    "dashboard-e2e": "apps/dashboard-e2e",
     "chat": "apps/chat",
     "chat-e2e": "apps/chat-e2e",
+    "dashboard": "apps/dashboard",
+    "dashboard-e2e": "apps/dashboard-e2e",
     "hasura": "apps/hasura",
     "landing": "apps/landing",
     "landing-e2e": "apps/landing-e2e",
+    "server": "apps/server",
     "ui": "libs/ui",
     "ui-e2e": "apps/ui-e2e"
   },
