@@ -3,6 +3,7 @@
   "buildCommand": "nx vercel-build server",
   "outputDirectory": ".",
   "installCommand": "pnpm install",
+  "framework": "Other",
   "builds": [
     {
       "src": "main.js",
