@@ -3,6 +3,9 @@
   "affected": {
     "defaultBase": "main"
   },
+  "cli": {
+    "packageManager": "pnpm"
+  },
   "tasksRunnerOptions": {
     "default": {
       "runner": "@nrwl/nx-cloud",
@@ -64,6 +67,12 @@
       "library": {
         "style": "styled-components",
         "unitTestRunner": "jest",
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "style": "styled-components",
         "linter": "eslint"
       }
     }
