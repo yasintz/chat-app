@@ -23,3 +23,22 @@ array_relationships:
         table:
           name: member
           schema: public
+select_permissions:
+  - role: customer
+    permission:
+      columns:
+        - id
+        - name
+      filter: {}
+  - role: member
+    permission:
+      columns:
+        - id
+        - name
+      filter: {}
+  - role: public
+    permission:
+      columns:
+        - id
+        - name
+      filter: {}
