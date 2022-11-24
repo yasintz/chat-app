@@ -17,6 +17,20 @@
         "command": "hasura console --admin-secret \"chat\" --endpoint \"http://localhost:8080\"",
         "cwd": "apps/hasura"
       }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "hasura migrate status --database-name=default",
+          "hasura metadata apply",
+          "hasura migrate apply --all-databases",
+          "hasura metadata reload",
+          "echo \"\nDeploy successful! 🎉\""
+        ],
+        "parallel": false,
+        "cwd": "apps/hasura"
+      }
     }
   },
   "tags": []

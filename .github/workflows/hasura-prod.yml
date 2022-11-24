@@ -1,0 +1,30 @@
+name: Deploy hasura to cloud
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'apps/hasura/**'
+
+jobs:
+  Build_Deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Cache node modules
+        id: cache-yarn
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Deploy
+        run: yarn nx deploy hasura
+        env:
+          HASURA_GRAPHQL_ADMIN_SECRET: ${secrets.HASURA_GRAPHQL_ADMIN_SECRET}
+          HASURA_GRAPHQL_ENDPOINT: ${secrets.HASURA_GRAPHQL_ENDPOINT}
