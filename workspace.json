@@ -5,6 +5,7 @@
     "admin-dashboard-e2e": "apps/admin-dashboard-e2e",
     "dbdocs": "apps/dbdocs",
     "ui": "libs/ui",
+    "hasura": "apps/hasura",
     "ui-e2e": "apps/ui-e2e"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"

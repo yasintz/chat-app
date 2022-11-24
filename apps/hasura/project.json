@@ -1,0 +1,23 @@
+{
+  "name": "hasura",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/hasura",
+  "projectType": "application",
+  "targets": {
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker-compose up",
+        "cwd": "apps/hasura"
+      }
+    },
+    "console": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "hasura console --admin-secret \"chat\" --endpoint \"http://localhost:8080\"",
+        "cwd": "apps/hasura"
+      }
+    }
+  },
+  "tags": []
+}

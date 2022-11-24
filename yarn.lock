@@ -5163,7 +5163,7 @@ axios@0.27.2:
     follow-redirects "^1.14.9"
     form-data "^4.0.0"
 
-axios@^0.21.2:
+axios@^0.21.1, axios@^0.21.2:
   version "0.21.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.4.tgz#c67b90dc0568e5c1cf2b0b858c43ba28e2eda575"
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
@@ -9368,6 +9368,14 @@ hastscript@^6.0.0:
     hast-util-parse-selector "^2.0.0"
     property-information "^5.0.0"
     space-separated-tokens "^1.0.0"
+
+hasura-cli@^2.15.1:
+  version "2.15.1"
+  resolved "https://registry.yarnpkg.com/hasura-cli/-/hasura-cli-2.15.1.tgz#229fb91b51fcebc90c1e467d684949cdd2a8e9c9"
+  integrity sha512-uFyo0yaxvhRj3s9u3ScBhRRtr4muwQhfCUpQ4TchbAYxYcZ8Oly75dCuaakB1Abt4GbpJMCNKR4pPyIAUzUkgw==
+  dependencies:
+    axios "^0.21.1"
+    chalk "^2.4.2"
 
 he@^1.2.0:
   version "1.2.0"
