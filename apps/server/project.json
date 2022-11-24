@@ -64,10 +64,7 @@
     "vercel-build": {
       "builder": "nx:run-commands",
       "options": {
-        "commands": [
-          "cp apps/server/src/main.ts ./main.js",
-          "cp apps/server/vercel.json ."
-        ],
+        "commands": ["cp apps/server/src/main.ts apps/server/main.js"],
         "parallel": false
       }
     }
