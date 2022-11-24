@@ -7,9 +7,9 @@ build();
 if (!environment.production) {
   chokidar
     .watch([
-      `./apps/dbdocs/docs/**/*.dbml`,
-      './apps/dbdocs/docs/*.json',
-      './apps/dbdocs/docs/*.md',
+      `./apps/dbdocs/**/*.dbml`,
+      './apps/dbdocs/*.json',
+      './apps/dbdocs/*.md',
     ])
     .on('change', build);
 }

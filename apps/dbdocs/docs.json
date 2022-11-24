@@ -1,6 +1,5 @@
 {
   "project": "ChatApp",
   "database_type": "PostgreSQL",
-  "schema": ["app", "customer", "member", "chat/channel", "chat/message"],
-  "note": "Readme.md"
+  "schema": ["app", "customer", "member", "chat/channel", "chat/message"]
 }

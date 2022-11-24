@@ -12,8 +12,7 @@
         "compiler": "tsc",
         "outputPath": "dist/apps/dbdocs",
         "main": "apps/dbdocs/src/main.ts",
-        "tsConfig": "apps/dbdocs/tsconfig.app.json",
-        "assets": ["apps/dbdocs/src/assets"]
+        "tsConfig": "apps/dbdocs/tsconfig.app.json"
       },
       "configurations": {
         "production": {

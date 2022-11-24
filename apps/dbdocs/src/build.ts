@@ -3,7 +3,8 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { environment } from './environments/environment';
 
-const docSchemaFilePath = path.join(process.cwd(), 'apps/dbdocs/docs/doc.json');
+const projectRoot = path.join(process.cwd(), 'apps/dbdocs');
+const docSchemaFilePath = path.join(projectRoot, 'docs.json');
 const docOutputFile = path.join(process.cwd(), 'dist/apps/dbdocs/main.dbml');
 
 process.env.DBDOCS_TOKEN =
@@ -28,19 +29,18 @@ type DocType = {
 };
 
 function createOutput(doc: DocType) {
-  const dirname = path.dirname(docSchemaFilePath);
   if (!environment.production) {
     doc.project += 'Dev';
   }
 
   const noteOutput = fs
-    .readFileSync(path.join(dirname, doc.note), 'utf-8')
+    .readFileSync(path.join(projectRoot, 'Note.md'), 'utf-8')
     .split('\n')
     .join('\n  ');
 
   const schemaOutput = doc.schema
     .map((file) =>
-      fs.readFileSync(path.join(dirname, `schema/${file}.dbml`), 'utf-8')
+      fs.readFileSync(path.join(projectRoot, `docs/${file}.dbml`), 'utf-8')
     )
     .join('\n');
 
