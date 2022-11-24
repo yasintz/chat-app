@@ -15,13 +15,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14.18.0
-          cache: 'yarn'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: yarn
+        run: pnpm install
 
       - name: Build
-        run: yarn nx build dbdocs --prod
+        run: pnpm nx build dbdocs --prod
 
       - name: Deploy
         run: node dist/apps/dbdocs/main.js
