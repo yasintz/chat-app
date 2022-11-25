@@ -40,6 +40,20 @@
         "cwd": "apps/hasura"
       }
     },
+    "dumbdb": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["sh tools/generators/dumpdb/dumpdb.sh"],
+        "parallel": false
+      }
+    },
+    "loaddb": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["sh tools/generators/dumpdb/loaddb.sh"],
+        "parallel": false
+      }
+    },
     "script-build": {
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
