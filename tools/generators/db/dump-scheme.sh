@@ -2,7 +2,6 @@ DATABASE_CONNECTION_URL="postgresql://chatuser:chatpass@127.0.0.1:5432/chat"
 
 PG_DUMP_PARAMS=(
     --dbname=$DATABASE_CONNECTION_URL
-    --column-inserts
     --schema=public
     --schema-only
 )

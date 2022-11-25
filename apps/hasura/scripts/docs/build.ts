@@ -39,9 +39,11 @@ export default async function build() {
   );
 
   await deploy(doc);
-  // await deploy({
-  //   project: doc.project + 'Database',
-  //   note: doc.note,
-  //   schema: getDatabaseSchema(),
-  // });
+  if (1 > 0) {
+    await deploy({
+      project: doc.project + 'Database',
+      note: doc.note,
+      schema: getDatabaseSchema(),
+    });
+  }
 }
