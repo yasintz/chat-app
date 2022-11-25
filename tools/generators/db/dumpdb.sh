@@ -5,12 +5,13 @@ EXCLUDED_TABLE_PARAMS=$(sed 's/^/--exclude-table-data /' apps/hasura/datadump/db
 PG_DUMP_PARAMS=(
     --dbname=$DATABASE_CONNECTION_URL
     --column-inserts
-    --data-only
     --schema=public
+    --data-only
     $EXCLUDED_TABLE_PARAMS
+    # --schema-only
 )
 
-SQL_OUTPUT=$(docker exec chat_postgres pg_dump ${PG_DUMP_PARAMS[@]})
+SQL_OUTPUT=$(docker exec chat_postgress pg_dump ${PG_DUMP_PARAMS[@]})
 
 
 # IMPORTANT: Use only number and char. [0-9] and [a-zA-Z]

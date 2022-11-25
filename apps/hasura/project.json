@@ -40,17 +40,17 @@
         "cwd": "apps/hasura"
       }
     },
-    "dumbdb": {
+    "dumpdb": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["sh tools/generators/dumpdb/dumpdb.sh"],
+        "commands": ["sh tools/generators/db/dumpdb.sh"],
         "parallel": false
       }
     },
     "loaddb": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["sh tools/generators/dumpdb/loaddb.sh"],
+        "commands": ["sh tools/generators/db/loaddb.sh"],
         "parallel": false
       }
     },
