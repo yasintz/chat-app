@@ -13,10 +13,7 @@ export type ProjectType = {
   schema: string;
 };
 
-let lastPromise = Promise.resolve();
-export default async function deploy(project: ProjectType) {
-  await lastPromise;
-
+function deploy(project: ProjectType) {
   const docOutputFile = path.join(
     process.cwd(),
     `dist/apps/hasura/${project.project}.dbml`
@@ -45,5 +42,14 @@ ${project.schema}
 
   fs.writeFileSync(docOutputFile, file);
 
-  lastPromise = builder.run();
+  return builder.run();
 }
+
+let lastPromise = Promise.resolve();
+
+const deployFn = async function (project: ProjectType) {
+  await lastPromise;
+  lastPromise = deploy(project);
+};
+
+export default deployFn;

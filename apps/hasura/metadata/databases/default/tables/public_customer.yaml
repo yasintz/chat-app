@@ -7,17 +7,23 @@ configuration:
       custom_name: appId
     created_at:
       custom_name: createdAt
+    encrypted_password:
+      custom_name: encryptedPassword
     first_name:
       custom_name: firstName
     last_name:
       custom_name: lastName
+    password_salt:
+      custom_name: passwordSalt
     updated_at:
       custom_name: updatedAt
   custom_column_names:
     app_id: appId
     created_at: createdAt
+    encrypted_password: encryptedPassword
     first_name: firstName
     last_name: lastName
+    password_salt: passwordSalt
     updated_at: updatedAt
   custom_root_fields: {}
 object_relationships:

@@ -1,6 +1,16 @@
 table:
   name: member_channel
   schema: public
+configuration:
+  column_config:
+    channel_id:
+      custom_name: channelId
+    member_id:
+      custom_name: memberId
+  custom_column_names:
+    channel_id: channelId
+    member_id: memberId
+  custom_root_fields: {}
 object_relationships:
   - name: channel
     using:

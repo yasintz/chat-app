@@ -34,6 +34,7 @@ function createOutput(doc: DocType): ProjectType {
 }
 
 export default async function build() {
+  console.log('working...');
   const doc = createOutput(
     JSON.parse(fs.readFileSync(docSchemaFilePath, 'utf-8'))
   );

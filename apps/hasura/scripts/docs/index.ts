@@ -1,5 +1,6 @@
 import * as chokidar from 'chokidar';
 import build from './build';
+import * as _ from 'lodash';
 import { environment } from '../environments/environment';
 
 export default function run() {
@@ -8,10 +9,8 @@ export default function run() {
   if (!environment.production) {
     chokidar
       .watch([
-        `./apps/hasura/docs/**/*.dbml`,
-        './apps/hasura/docs/*.json',
-        './apps/hasura/docs/*.md',
+        './apps/hasura/**/*',
       ])
-      .on('change', build);
+      .on('change', _.debounce(build, 100));
   }
 }

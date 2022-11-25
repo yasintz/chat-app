@@ -1,22 +1,51 @@
 table:
   name: member
   schema: public
+configuration:
+  column_config:
+    app_id:
+      custom_name: appId
+    created_at:
+      custom_name: createdAt
+    deleted_at:
+      custom_name: deletedAt
+    first_name:
+      custom_name: firstName
+    last_name:
+      custom_name: lastName
+    updated_at:
+      custom_name: updatedAt
+  custom_column_names:
+    app_id: appId
+    created_at: createdAt
+    deleted_at: deletedAt
+    first_name: firstName
+    last_name: lastName
+    updated_at: updatedAt
+  custom_root_fields: {}
 object_relationships:
   - name: app
     using:
       foreign_key_constraint_on: app_id
 array_relationships:
-  - name: member_channels
+  - name: channels
     using:
       foreign_key_constraint_on:
         column: member_id
         table:
           name: member_channel
           schema: public
-  - name: member_files
+  - name: files
     using:
       foreign_key_constraint_on:
         column: member_id
         table:
           name: member_file
+          schema: public
+  - name: messages
+    using:
+      foreign_key_constraint_on:
+        column: sender_id
+        table:
+          name: message
           schema: public

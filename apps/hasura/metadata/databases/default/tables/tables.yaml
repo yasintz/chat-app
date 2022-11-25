@@ -7,3 +7,7 @@
 - "!include public_member.yaml"
 - "!include public_member_channel.yaml"
 - "!include public_member_file.yaml"
+- "!include public_message.yaml"
+- "!include public_message_file.yaml"
+- "!include public_message_reaction.yaml"
+- "!include public_reaction.yaml"
