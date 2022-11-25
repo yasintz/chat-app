@@ -7,15 +7,27 @@
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "docker-compose -p=\"chat-app\" up",
-        "cwd": "apps/hasura"
+        "commands": [
+          "echo \"\n🏃‍♂️ Starting hasura...\n\"",
+          "docker-compose -p=\"chat-app\" up -d",
+          "echo \"\n😴 Waiting 30 seconds for hasura get ready\n\"",
+          "sleep 3",
+          "(nx deploy hasura && echo \"\n\n🤩 Hasura started successfully.\") || echo \"😔 Please run 'nx deploy hasura' manually\""
+        ],
+        "cwd": "apps/hasura",
+        "parallel": false
       }
     },
     "stop": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "docker-compose -p=\"chat-app\" down",
-        "cwd": "apps/hasura"
+        "commands": [
+          "echo \"\n🛑 Stopping hasura...\n\"",
+          "docker-compose -p=\"chat-app\" down",
+          "docker volume rm chat-app_postgres"
+        ],
+        "cwd": "apps/hasura",
+        "parallel": false
       }
     },
     "console": {
@@ -37,11 +49,12 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
+          "echo \"\n🚀 Deploying hasura...\"",
           "hasura migrate status --database-name=default",
           "hasura metadata apply",
           "hasura migrate apply --all-databases",
           "hasura metadata reload",
-          "echo \"\nDeploy successful! 🎉\""
+          "echo \"\n🎉 Deploy successful!\""
         ],
         "parallel": false,
         "cwd": "apps/hasura"
