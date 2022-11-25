@@ -17,12 +17,12 @@ const documents = {
 };
 
 /**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  query App {\n    app {\n      id\n    }\n  }\n"): (typeof documents)["\n  query App {\n    app {\n      id\n    }\n  }\n"];
+export function gql(source: "\n  query App {\n    app {\n      id\n    }\n  }\n"): (typeof documents)["\n  query App {\n    app {\n      id\n    }\n  }\n"];
 
 /**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  *
  *
  * @example
@@ -33,9 +33,9 @@ export function graphql(source: "\n  query App {\n    app {\n      id\n    }\n  
  * The query argument is unknown!
  * Please regenerate the types.
 **/
-export function graphql(source: string): unknown;
+export function gql(source: string): unknown;
 
-export function graphql(source: string) {
+export function gql(source: string) {
   return (documents as any)[source] ?? {};
 }
 

@@ -73,7 +73,6 @@ specifiers:
   jest-environment-jsdom: 28.1.1
   next: 13.0.0
   nx: 15.2.1
-  patch-package: ^6.5.0
   prettier: 2.7.1
   react: 18.2.0
   react-dom: 18.2.0
@@ -92,6 +91,7 @@ specifiers:
   url-loader: ^3.0.0
   vite: ^3.2.4
   vite-plugin-eslint: ^1.6.0
+  vite-plugin-graphql: ^0.1.0
   vite-tsconfig-paths: ^3.5.2
   vitest: ^0.25.1
 
@@ -180,7 +180,6 @@ devDependencies:
   jest: 28.1.1_sgupjgtkb76w4hsvieap2xky7i
   jest-environment-jsdom: 28.1.1
   nx: 15.2.1
-  patch-package: 6.5.0
   prettier: 2.7.1
   react-test-renderer: 18.2.0_react@18.2.0
   ts-jest: 28.0.5_gforb6sncjlnszxhl7qvl2lzvm
@@ -189,6 +188,7 @@ devDependencies:
   url-loader: 3.0.0
   vite: 3.2.4_@types+node@18.7.18
   vite-plugin-eslint: 1.8.1_eslint@8.15.0+vite@3.2.4
+  vite-plugin-graphql: 0.1.0_graphql@16.6.0+vite@3.2.4
   vite-tsconfig-paths: 3.6.0_vite@3.2.4
   vitest: 0.25.3_@vitest+ui@0.9.4
 
@@ -12952,12 +12952,6 @@ packages:
       path-exists: 4.0.0
     dev: true
 
-  /find-yarn-workspace-root/2.0.0:
-    resolution: {integrity: sha512-1IMnbjt4KzsQfnhnzNd8wUEgXZ44IzZaZmnLYx7D5FZlaHt2gW20Cri8Q+E/t5tIj4+epTBub+2Zxu/vNILzqQ==}
-    dependencies:
-      micromatch: 4.0.5
-    dev: true
-
   /flat-cache/3.0.4:
     resolution: {integrity: sha512-dm9s5Pw7Jc0GvMYbshN6zchCA9RgQlzzEZX3vylR9IqFfS8XciblUXOKfW6SiuJ0e13eDYZoZV5wdrev7P3Nwg==}
     engines: {node: ^10.12.0 || >=12.0.0}
@@ -13207,15 +13201,6 @@ packages:
       graceful-fs: 4.2.10
       jsonfile: 6.1.0
       universalify: 2.0.0
-    dev: true
-
-  /fs-extra/7.0.1:
-    resolution: {integrity: sha512-YJDaCJZEnBmcbw13fvdAM9AwNOJwOzrE4pqMqBq5nFiEqXUqHwlK4B+3pUw6JNvfSPtX05xFHtYy/1ni01eGCw==}
-    engines: {node: '>=6 <7 || >=8'}
-    dependencies:
-      graceful-fs: 4.2.10
-      jsonfile: 4.0.0
-      universalify: 0.1.2
     dev: true
 
   /fs-extra/8.1.0:
@@ -15842,12 +15827,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /klaw-sync/6.0.0:
-    resolution: {integrity: sha512-nIeuVSzdCCs6TDPTqI8w1Yre34sSq7AkZ4B3sfOBbI2CgVSB4Du4aLQijFU2+lhAFCwt9+42Hel6lQNIv6AntQ==}
-    dependencies:
-      graceful-fs: 4.2.10
-    dev: true
-
   /kleur/3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
@@ -17544,27 +17523,6 @@ packages:
       ansi-escapes: 3.2.0
       cross-spawn: 6.0.5
     dev: false
-
-  /patch-package/6.5.0:
-    resolution: {integrity: sha512-tC3EqJmo74yKqfsMzELaFwxOAu6FH6t+FzFOsnWAuARm7/n2xB5AOeOueE221eM9gtMuIKMKpF9tBy/X2mNP0Q==}
-    engines: {node: '>=10', npm: '>5'}
-    hasBin: true
-    dependencies:
-      '@yarnpkg/lockfile': 1.1.0
-      chalk: 4.1.2
-      cross-spawn: 6.0.5
-      find-yarn-workspace-root: 2.0.0
-      fs-extra: 7.0.1
-      is-ci: 2.0.0
-      klaw-sync: 6.0.0
-      minimist: 1.2.7
-      open: 7.4.2
-      rimraf: 2.7.1
-      semver: 5.7.1
-      slash: 2.0.0
-      tmp: 0.0.33
-      yaml: 1.10.2
-    dev: true
 
   /path-browserify/0.0.1:
     resolution: {integrity: sha512-BapA40NHICOS+USX9SN4tyhq+A2RrN/Ws5F0Z5aMHDp98Fl86lX8Oti8B7uN93L4Ifv4fHOEA+pQw87gmMO/lQ==}
@@ -21530,6 +21488,17 @@ packages:
       eslint: 8.15.0
       rollup: 2.79.1
       vite: 3.2.4_@types+node@18.7.18
+    dev: true
+
+  /vite-plugin-graphql/0.1.0_graphql@16.6.0+vite@3.2.4:
+    resolution: {integrity: sha512-e8517azfqF7R95gsfQ4WVOySIfmVdK61fJaH0DrH47vVXs+O2BOJF1mkoHV3X65GLDrmMCHp5H+cTmsVlv8kNA==}
+    peerDependencies:
+      vite: ^1.0.0-beta.11 || ^1.0.0
+    dependencies:
+      graphql-tag: 2.12.6_graphql@16.6.0
+      vite: 3.2.4_@types+node@18.7.18
+    transitivePeerDependencies:
+      - graphql
     dev: true
 
   /vite-tsconfig-paths/3.6.0_vite@3.2.4:

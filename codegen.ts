@@ -1,5 +1,13 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
+const generateConfig: CodegenConfig['generates'][string] = {
+  preset: 'client',
+  plugins: [],
+  presetConfig: {
+    gqlTagName: 'gql',
+  },
+};
+
 const config: CodegenConfig = {
   overwrite: true,
   schema: {
@@ -11,19 +19,16 @@ const config: CodegenConfig = {
     },
   },
   generates: {
-    'apps/dashboard/src/gql/generated/': {
-      preset: 'client',
-      plugins: [],
+    'apps/dashboard/src/gql/': {
+      ...generateConfig,
       documents: 'apps/dashboard/**/*.(ts|tsx)',
     },
-    'apps/chat/src/gql/generated/': {
-      preset: 'client',
-      plugins: [],
+    'apps/chat/src/gql/': {
+      ...generateConfig,
       documents: 'apps/chat/**/*.(ts|tsx)',
     },
-    'apps/server/src/gql/generated/': {
-      preset: 'client',
-      plugins: [],
+    'apps/server/src/gql/': {
+      ...generateConfig,
       documents: 'apps/server/**/*.ts',
     },
     './graphql.schema.json': {
