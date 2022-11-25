@@ -1,68 +1,47 @@
-import * as BuildCommand from 'dbdocs/src/commands/build';
 import * as path from 'path';
 import * as fs from 'fs';
 import { environment } from '../environments/environment';
+import deploy, { ProjectType } from './deploy';
+import { getDatabaseSchema } from './db';
 
 const projectRoot = path.join(process.cwd(), 'apps/hasura/docs');
 const docSchemaFilePath = path.join(projectRoot, 'docs.json');
-const docOutputFile = path.join(process.cwd(), 'dist/apps/hasura/main.dbml');
-
-process.env.DBDOCS_TOKEN =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NjQ3OSwidG9rZW4iOiIzZDVlMDljNWY3NWU3ZGI3ODZlZWMzNjM2N2M5YzQ2MCIsImlhdCI6MTY2OTIyODAwM30.-AMvgXFzY4qccb5fomD1GaYcJviyC7LB4k4T4zGxZPQ';
-
-BuildCommand.prototype.parse = () => {
-  return {
-    flags: {},
-    args: {
-      filepath: docOutputFile,
-    },
-  };
-};
-
-const builder = new BuildCommand();
 
 type DocType = {
   project: string;
-  database_type: string;
   note: string;
   schema: string[];
 };
 
-function createOutput(doc: DocType) {
+function createOutput(doc: DocType): ProjectType {
   if (!environment.production) {
     doc.project += 'Dev';
   }
 
-  const noteOutput = fs
-    .readFileSync(path.join(projectRoot, 'Note.md'), 'utf-8')
-    .split('\n')
-    .join('\n  ');
+  const note = fs.readFileSync(path.join(projectRoot, 'Note.md'), 'utf-8');
 
-  const schemaOutput = doc.schema
+  const schema = doc.schema
     .map((file) =>
       fs.readFileSync(path.join(projectRoot, `${file}.dbml`), 'utf-8')
     )
     .join('\n');
 
-  return `
-Project ${doc.project} {
-database_type: '${doc.database_type}'
-Note: '''
-${noteOutput}
-'''
-}
-${schemaOutput}
-`;
+  return {
+    project: doc.project,
+    note,
+    schema,
+  };
 }
 
-let lastPromise = Promise.resolve();
 export default async function build() {
-  await lastPromise;
-  const file = createOutput(
+  const doc = createOutput(
     JSON.parse(fs.readFileSync(docSchemaFilePath, 'utf-8'))
   );
 
-  fs.writeFileSync(docOutputFile, file);
-
-  lastPromise = builder.run();
+  await deploy(doc);
+  // await deploy({
+  //   project: doc.project + 'Database',
+  //   note: doc.note,
+  //   schema: getDatabaseSchema(),
+  // });
 }

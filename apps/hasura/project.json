@@ -7,7 +7,14 @@
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "docker-compose up",
+        "command": "docker-compose -p=\"chat-app\" up",
+        "cwd": "apps/hasura"
+      }
+    },
+    "stop": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker-compose -p=\"chat-app\" down",
         "cwd": "apps/hasura"
       }
     },
