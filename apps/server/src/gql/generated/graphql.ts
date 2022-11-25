@@ -3204,10 +3204,10 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type AppQueryVariables = Exact<{ [key: string]: never; }>;
+export type AppListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AppQuery = { __typename?: 'query_root', app: Array<{ __typename?: 'app', id: any }> };
+export type AppListQuery = { __typename?: 'query_root', app: Array<{ __typename?: 'app', id: any }> };
 
 
-export const AppDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"App"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AppQuery, AppQueryVariables>;
+export const AppListDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AppList"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AppListQuery, AppListQueryVariables>;

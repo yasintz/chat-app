@@ -1,8 +1,17 @@
 import { Injectable } from '@nestjs/common';
+import { gql, gqlRequest } from '../gql';
+
+const appListQuery = gql(`
+  query AppList {
+    app {
+      id
+    }
+  }
+`);
 
 @Injectable()
 export class AppService {
-  getData(): { message: string } {
-    return { message: 'Welcome to server!' };
+  async getData() {
+    return gqlRequest(appListQuery);
   }
 }

@@ -1,8 +1,17 @@
 import styled from 'styled-components';
 
 import { Route, Routes, Link } from 'react-router-dom';
+import { gql } from '../gql';
 
 import { Ui } from '@ui';
+
+gql(`
+  query App {
+    app {
+      id
+    }
+  }
+`);
 
 const StyledApp = styled.div`
   // Your style here

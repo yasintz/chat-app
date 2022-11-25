@@ -16,6 +16,16 @@ const config: CodegenConfig = {
       plugins: [],
       documents: 'apps/dashboard/**/*.(ts|tsx)',
     },
+    'apps/chat/src/gql/generated/': {
+      preset: 'client',
+      plugins: [],
+      documents: 'apps/chat/**/*.(ts|tsx)',
+    },
+    'apps/server/src/gql/generated/': {
+      preset: 'client',
+      plugins: [],
+      documents: 'apps/server/**/*.ts',
+    },
     './graphql.schema.json': {
       plugins: ['introspection'],
     },
