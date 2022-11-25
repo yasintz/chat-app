@@ -1,7 +1,7 @@
 import { GraphQLClient } from 'graphql-request';
 import { environment } from '../environments/environment';
 
-const graphqlClient = new GraphQLClient(
+const hasura = new GraphQLClient(
   environment.hasura[environment.hasuraEnv].endpoint,
   {
     headers: {
@@ -10,4 +10,4 @@ const graphqlClient = new GraphQLClient(
   }
 );
 
-export default graphqlClient;
+export default hasura;

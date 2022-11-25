@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  hasuraEnv: 'prod' as 'prod' | 'local',
+  hasuraEnv: 'local' as 'prod' | 'local',
   hasura: {
     prod: {
       endpoint: 'https://embedded-chat-app-12.hasura.app/v1/graphql',
@@ -11,6 +11,13 @@ export const environment = {
       endpoint: 'http://localhost:8080/v1/graphql',
       secret: 'chat',
     },
+  },
+  jwtConstants: {
+    secret: 'secret',
+    expiresIn: '90 day',
+  },
+  bcrypt: {
+    saltRounds: 10,
   },
 };
 

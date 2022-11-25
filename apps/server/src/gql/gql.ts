@@ -13,13 +13,13 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n  query AppList {\n    app {\n      id\n    }\n  }\n": types.AppListDocument,
+    "\n  query AuthServiceGetCustomerByEmail($email: String!) {\n    customer(where: { email: { _eq: $email } }) {\n      id\n      encryptedPassword\n    }\n  }\n": types.AuthServiceGetCustomerByEmailDocument,
 };
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query AppList {\n    app {\n      id\n    }\n  }\n"): (typeof documents)["\n  query AppList {\n    app {\n      id\n    }\n  }\n"];
+export function gql(source: "\n  query AuthServiceGetCustomerByEmail($email: String!) {\n    customer(where: { email: { _eq: $email } }) {\n      id\n      encryptedPassword\n    }\n  }\n"): (typeof documents)["\n  query AuthServiceGetCustomerByEmail($email: String!) {\n    customer(where: { email: { _eq: $email } }) {\n      id\n      encryptedPassword\n    }\n  }\n"];
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

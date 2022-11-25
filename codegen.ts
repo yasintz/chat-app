@@ -8,6 +8,37 @@ const generateConfig: CodegenConfig['generates'][string] = {
   },
 };
 
+const generatesByProject: Record<string, CodegenConfig['generates']> = {
+  dashboard: {
+    'apps/dashboard/src/gql/': {
+      ...generateConfig,
+      documents: 'apps/dashboard/**/*.(ts|tsx)',
+    },
+  },
+  chat: {
+    'apps/server/src/gql/': {
+      ...generateConfig,
+      documents: 'apps/server/**/*.ts',
+    },
+  },
+  server: {
+    'apps/server/src/gql/': {
+      ...generateConfig,
+      documents: 'apps/server/**/*.ts',
+    },
+  },
+};
+
+const projects = process.argv.slice(3) || Object.keys(generatesByProject);
+
+const generates = projects.reduce(
+  (acc, project) => ({
+    ...acc,
+    ...generatesByProject[project],
+  }),
+  {}
+);
+
 const config: CodegenConfig = {
   overwrite: true,
   schema: {
@@ -19,18 +50,7 @@ const config: CodegenConfig = {
     },
   },
   generates: {
-    'apps/dashboard/src/gql/': {
-      ...generateConfig,
-      documents: 'apps/dashboard/**/*.(ts|tsx)',
-    },
-    'apps/chat/src/gql/': {
-      ...generateConfig,
-      documents: 'apps/chat/**/*.(ts|tsx)',
-    },
-    'apps/server/src/gql/': {
-      ...generateConfig,
-      documents: 'apps/server/**/*.ts',
-    },
+    ...generates,
     './graphql.schema.json': {
       plugins: ['introspection'],
     },

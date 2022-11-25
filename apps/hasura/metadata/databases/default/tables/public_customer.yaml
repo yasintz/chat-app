@@ -13,8 +13,6 @@ configuration:
       custom_name: firstName
     last_name:
       custom_name: lastName
-    password_salt:
-      custom_name: passwordSalt
     updated_at:
       custom_name: updatedAt
   custom_column_names:
@@ -23,7 +21,6 @@ configuration:
     encrypted_password: encryptedPassword
     first_name: firstName
     last_name: lastName
-    password_salt: passwordSalt
     updated_at: updatedAt
   custom_root_fields: {}
 object_relationships:

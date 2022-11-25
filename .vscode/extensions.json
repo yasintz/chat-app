@@ -4,6 +4,8 @@
     "esbenp.prettier-vscode",
     "firsttris.vscode-jest-runner",
     "dbaeumer.vscode-eslint",
-    "matt-meyers.vscode-dbml"
+    "matt-meyers.vscode-dbml",
+    "graphql.vscode-graphql",
+    "prantlf.fold-on-open"
   ]
 }

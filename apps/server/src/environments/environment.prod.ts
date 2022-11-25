@@ -14,4 +14,11 @@ export const environment: Environment = {
       secret: 'chat',
     },
   },
+  jwtConstants: {
+    secret: process.env.JWT_CONSTANTS_SECRET,
+    expiresIn: '90 day',
+  },
+  bcrypt: {
+    saltRounds: 10,
+  },
 };
