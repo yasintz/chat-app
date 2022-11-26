@@ -19,10 +19,6 @@ const StyledApp = styled.div`
   // Your style here
 `;
 
-// setInterval(() => {
-//   useAuthStore.getState().setToken(Math.random().toString());
-// }, 1000);
-
 export function App() {
   const { authenticated, tokens } = useAuthStore();
 

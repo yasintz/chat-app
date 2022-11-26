@@ -11,15 +11,18 @@ type StoreComputedType = {
   authenticated: boolean;
 };
 
-const useAuthStore = createStore<StoreType, StoreComputedType>({
-  state: (set) => ({
+const useAuthStore = createStore<StoreType, StoreComputedType>(
+  (set) => ({
     tokens: undefined,
     setToken: (idToken) => set({ tokens: { idToken } }),
+
+    compute: (state) => ({
+      authenticated: Boolean(state.tokens?.idToken),
+    }),
   }),
-  computed: (state) => ({
-    authenticated: Boolean(state.tokens?.idToken),
-  }),
-  persist: { name: 'auth' },
-});
+  {
+    persist: { name: 'auth' },
+  }
+);
 
 export default useAuthStore;
