@@ -1,4 +1,4 @@
-const dataEnv: 'prod' | 'local' = 'local';
+const dataEnv = 'local' as 'prod' | 'local';
 export const environment = {
   production: false,
   dataEnv,
