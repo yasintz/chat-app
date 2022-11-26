@@ -8,7 +8,7 @@ type StoreType = {
 };
 
 type StoreComputedType = {
-  authenticated: boolean;
+  authenticated: string;
 };
 
 const useAuthStore = createStore<StoreType, StoreComputedType>(
@@ -16,8 +16,8 @@ const useAuthStore = createStore<StoreType, StoreComputedType>(
     tokens: undefined,
     setToken: (idToken) => set({ tokens: { idToken } }),
 
-    compute: (state) => ({
-      authenticated: Boolean(state.tokens?.idToken),
+    computed: (state) => ({
+      authenticated: state.tokens?.idToken || '',
     }),
   }),
   {

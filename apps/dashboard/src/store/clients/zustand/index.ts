@@ -31,7 +31,7 @@ export const createStore = <
 >(
   creator: StateCreator<
     S & {
-      compute?: (s: S) => C;
+      computed?: (s: S) => C;
     }
   >,
   config: Config

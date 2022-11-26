@@ -7,8 +7,8 @@ export const computedImpl =
     type T = ReturnType<typeof f>;
 
     const computeAndMerge = (state: T): T => {
-      const fullComputedState = state.compute
-        ? state.compute({ ...state })
+      const fullComputedState = state.computed
+        ? state.computed({ ...state })
         : {};
       const newState = { ...fullComputedState, ...state };
 

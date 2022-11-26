@@ -14,16 +14,20 @@ import { BatchHttpLink } from '@apollo/client/link/batch-http';
 import { createClient } from 'graphql-ws';
 import unfetch from 'unfetch';
 import { httpURI, wsURI } from './config';
+import useAuthStore from '../../store/auth';
 
 const errorLink = onError(({ operation, graphQLErrors, networkError }) => {
   //
 });
 
 const authLink = setContext(() => {
-  return null;
-  // return devLocal
-  //   ? { headers: { 'x-hasura-admin-secret': HASURA_LOCAL_SECRET } }
-  //   : { headers: { Authorization: `Bearer ${tokens.idToken}` } };
+  const { tokens, authenticated } = useAuthStore.getState();
+
+  if (!authenticated) {
+    return null;
+  }
+
+  return { headers: { Authorization: `Bearer ${tokens?.idToken}` } };
 });
 
 const httpLinkOptions: HttpOptions = {
