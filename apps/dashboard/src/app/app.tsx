@@ -5,6 +5,7 @@ import { Route, Routes, Link } from 'react-router-dom';
 import { gql } from '../gql';
 
 import { Ui } from '@ui';
+import useAuthStore from '../store/auth';
 
 gql(`
   query App {
@@ -18,7 +19,15 @@ const StyledApp = styled.div`
   // Your style here
 `;
 
+// setInterval(() => {
+//   useAuthStore.getState().setToken(Math.random().toString());
+// }, 1000);
+
 export function App() {
+  const { authenticated, tokens } = useAuthStore();
+
+  console.log({ authenticated, ...tokens });
+
   return (
     <StyledApp>
       <Ui />
@@ -32,6 +41,7 @@ export function App() {
           </li>
         </ul>
       </div>
+      from ('|")zustand
       <Routes>
         <Route
           path="/"

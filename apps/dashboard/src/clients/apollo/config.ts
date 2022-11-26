@@ -1,14 +1,17 @@
 import { environment } from '../../environments/environment';
 
-const devLocal = environment.USE_LOCAL_HASURA;
+const httpSchemes: Record<typeof environment.hasuraEnv, string> = {
+  prod: 'https',
+  local: 'http',
+};
+const wsSchemes: Record<typeof environment.hasuraEnv, string> = {
+  prod: 'wss',
+  local: 'ws',
+};
 
-const httpScheme = devLocal ? 'http' : 'https';
-const wsScheme = devLocal ? 'ws' : 'wss';
-const endpoint = devLocal
-  ? environment.HASURA_LOCAL_ENDPOINT
-  : environment.HASURA_PROD_ENDPOINT;
+const endpoint = environment.hasura[environment.hasuraEnv].endpoint;
+const httpScheme = httpSchemes[environment.hasuraEnv];
+const wsScheme = wsSchemes[environment.hasuraEnv];
 
 export const httpURI = `${httpScheme}://${endpoint}/v1/graphql`;
 export const wsURI = `${wsScheme}://${endpoint}/v1/graphql`;
-
-export const HASURA_LOCAL_SECRET = 'localhost';

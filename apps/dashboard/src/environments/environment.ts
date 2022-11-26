@@ -1,8 +1,14 @@
 export const environment = {
   production: false,
-  USE_LOCAL_HASURA: false,
-  HASURA_PROD_ENDPOINT: 'https://embedded-chat-app-12.hasura.app/v1/graphql',
-  HASURA_LOCAL_ENDPOINT: 'http://localhost:8080/v1/graphql',
+  hasuraEnv: 'local' as 'prod' | 'local',
+  hasura: {
+    prod: {
+      endpoint: 'embedded-chat-app-12.hasura.app',
+    },
+    local: {
+      endpoint: 'localhost:8080',
+    },
+  },
 };
 
 export type Environment = typeof environment;
