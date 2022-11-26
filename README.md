@@ -25,6 +25,11 @@ App root `./apps/landing`.
 App root `./apps/server`.
 [ychat-server.vercel.app](https://ychat-server.vercel.app)
 
+
+### Auth
+- Customer login
+- Customer signup
+
 ## Hasura (wip)
 
 App root `./apps/hasura`.
