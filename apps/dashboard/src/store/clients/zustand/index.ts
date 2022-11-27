@@ -1,7 +1,7 @@
 import create, { StateCreator } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { persist } from 'zustand/middleware';
-import { computedImpl, createComputed } from './computed-impl';
+import computed from './computed';
 import { pipe } from './pipe';
 
 type Config = {
@@ -21,7 +21,7 @@ export const createStore = <S>(creator: StateCreator<S>, config: Config) => {
 
   const middleware = pipe<CreatorType>(
     immer,
-    computedImpl,
+    computed.middleware,
     config.persist && ((i) => persist(i, { name: persistKey }))
   );
 
@@ -39,5 +39,3 @@ export const createStore = <S>(creator: StateCreator<S>, config: Config) => {
   Object.assign(storeHook, store);
   return storeHook as typeof store;
 };
-
-export { createComputed };
