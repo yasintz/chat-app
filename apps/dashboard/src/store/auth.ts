@@ -1,7 +1,6 @@
 import shallow from 'zustand/shallow';
 import { parseJwt, HasuraJwtPayloadType } from '../utils/jwt';
-import { createStore } from './clients/zustand';
-import createComputed from './clients/zustand/computed';
+import create, { computed as createComputed } from '@helpers/client/zustand';
 
 type StoreType = {
   tokens?: {
@@ -17,7 +16,7 @@ type StoreType = {
 
 const computed = createComputed<StoreType>();
 
-const useAuthStore = createStore<StoreType>(
+const useAuthStore = create<StoreType>(
   (set) => ({
     tokens: undefined,
     setToken: (idToken) => {

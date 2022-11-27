@@ -1,6 +1,6 @@
-import create, { StateCreator } from 'zustand';
+import createStore, { StateCreator } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { persist } from 'zustand/middleware';
+import { persist, StateStorage } from 'zustand/middleware';
 import computed from './computed';
 import { pipe } from './pipe';
 
@@ -8,11 +8,12 @@ type Config = {
   persist?: {
     name: string;
     keepOnLogout?: boolean;
+    getStorage?: () => StateStorage;
   };
   equalityFn?: <T>(objA: T, objB: T) => boolean;
 };
 
-export const createStore = <S>(creator: StateCreator<S>, config: Config) => {
+const create = <S>(creator: StateCreator<S>, config: Config) => {
   type CreatorType = () => S;
 
   const persistKey = `${
@@ -22,10 +23,15 @@ export const createStore = <S>(creator: StateCreator<S>, config: Config) => {
   const middleware = pipe<CreatorType>(
     immer,
     computed.middleware,
-    config.persist && ((i) => persist(i, { name: persistKey }))
+    config.persist &&
+      ((i) =>
+        persist(i, {
+          name: persistKey,
+          getStorage: config.persist?.getStorage,
+        }))
   );
 
-  const store = create(middleware(creator) as CreatorType);
+  const store = createStore(middleware(creator) as CreatorType);
 
   type ParamsType = Parameters<typeof store>;
   const storeHook = (selector: ParamsType[0], equals: ParamsType[1]) => {
@@ -39,3 +45,7 @@ export const createStore = <S>(creator: StateCreator<S>, config: Config) => {
   Object.assign(storeHook, store);
   return storeHook as typeof store;
 };
+
+export default create;
+
+export { computed };
