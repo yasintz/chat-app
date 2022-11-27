@@ -6,6 +6,7 @@
     "dashboard": "apps/dashboard",
     "dashboard-e2e": "apps/dashboard-e2e",
     "hasura": "apps/hasura",
+    "client-helpers": "libs/helpers/client",
     "landing": "apps/landing",
     "landing-e2e": "apps/landing-e2e",
     "server": "apps/server",
