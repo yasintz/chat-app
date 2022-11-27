@@ -1,3 +1,5 @@
+import { JWT_TOKEN_PRIVATE_KEY } from './jwt-token.key';
+
 export const environment = {
   production: false,
   hasuraEnv: 'local' as 'prod' | 'local',
@@ -13,7 +15,7 @@ export const environment = {
     },
   },
   jwtConstants: {
-    secret: 'secret',
+    privateKey: JWT_TOKEN_PRIVATE_KEY,
     expiresIn: '90 day',
   },
   bcrypt: {

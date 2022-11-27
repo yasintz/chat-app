@@ -8,11 +8,12 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "echo \"\n🏃‍♂️ Starting hasura...\n\"",
+          "sh ../../tools/generators/echo.sh \"🏃‍♂️ Starting hasura\"",
           "docker-compose -p=\"chat-app\" up -d",
-          "echo \"\n😴 Waiting 30 seconds for hasura get ready\n\"",
-          "sleep 3",
-          "(nx deploy hasura && echo \"\n\n🤩 Hasura started successfully.\") || echo \"😔 Please run 'nx deploy hasura' manually\""
+          "echo \"\n⏰ Waiting 30 seconds for hasura get ready\n\"",
+          "sleep 30",
+          "(nx deploy hasura && sh ../../tools/generators/echo.sh \"✅ Start Successful\") || (echo \"😔 Please run 'nx deploy hasura' manually\")",
+          "echo \"\""
         ],
         "cwd": "apps/hasura",
         "parallel": false
@@ -22,9 +23,10 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "echo \"\n🛑 Stopping hasura...\n\"",
+          "sh ../../tools/generators/echo.sh \"🛑 Stopping Hasura\"",
           "docker-compose -p=\"chat-app\" down",
-          "docker volume rm chat-app_postgres"
+          "docker volume rm chat-app_postgres",
+          "sh ../../tools/generators/echo.sh \"✅ Stop Successful\""
         ],
         "cwd": "apps/hasura",
         "parallel": false
@@ -49,12 +51,12 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "echo \"\n🚀 Deploying hasura...\"",
+          "sh ../../tools/generators/echo.sh \"🚀 Deploying Hasura\"",
           "hasura migrate status --database-name=default",
           "hasura metadata apply",
           "hasura migrate apply --all-databases",
           "hasura metadata reload",
-          "echo \"\n🎉 Deploy successful!\""
+          "sh ../../tools/generators/echo.sh \"✅ Deploy Successful\""
         ],
         "parallel": false,
         "cwd": "apps/hasura"

@@ -54,6 +54,7 @@ export class AuthService {
         'x-hasura-allowed-roles': ['customer'],
         'x-hasura-default-role': 'customer',
         'x-hasura-user-id': user.id,
+        'x-hasura-role': 'customer',
       },
     };
     return {

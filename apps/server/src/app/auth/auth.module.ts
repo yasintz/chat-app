@@ -10,8 +10,11 @@ import { LocalStrategy } from './local.strategy';
   imports: [
     PassportModule,
     JwtModule.register({
-      secret: environment.jwtConstants.secret,
-      signOptions: { expiresIn: environment.jwtConstants.expiresIn },
+      privateKey: environment.jwtConstants.privateKey,
+      signOptions: {
+        expiresIn: environment.jwtConstants.expiresIn,
+        algorithm: 'RS256',
+      },
     }),
   ],
   providers: [AuthService, LocalStrategy],

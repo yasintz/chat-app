@@ -1,8 +1,9 @@
+import React from 'react';
 import { Navigate } from 'react-router-dom';
 import useAuthStore from '../store/auth';
 
 type ProtectedRouteProps = {
-  children: JSX.Element;
+  children?: React.ReactNode;
   redirect?: string;
 };
 
@@ -15,5 +16,5 @@ export const ProtectedRoute = ({
     return <Navigate to={redirect} replace />;
   }
 
-  return children;
+  return children as JSX.Element;
 };

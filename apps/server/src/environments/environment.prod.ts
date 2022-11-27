@@ -1,4 +1,5 @@
 import type { Environment } from './environment';
+import { JWT_TOKEN_PRIVATE_KEY } from './jwt-token.key';
 
 export const environment: Environment = {
   production: true,
@@ -15,7 +16,7 @@ export const environment: Environment = {
     },
   },
   jwtConstants: {
-    secret: process.env.JWT_CONSTANTS_SECRET,
+    privateKey: JWT_TOKEN_PRIVATE_KEY,
     expiresIn: '90 day',
   },
   bcrypt: {

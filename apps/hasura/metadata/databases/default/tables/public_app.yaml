@@ -38,7 +38,17 @@ select_permissions:
       filter: {}
   - role: public
     permission:
+      columns: []
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
+update_permissions:
+  - role: customer
+    permission:
       columns:
-        - id
         - name
-      filter: {}
+      filter:
+        customers:
+          id:
+            _eq: X-Hasura-User-Id
+      check: null
