@@ -2,38 +2,24 @@ import create, { StateCreator } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { persist } from 'zustand/middleware';
 import { computedImpl } from './computed-impl';
-
-const pipe =
-  <T>(...fns: Array<((f: T) => any) | boolean | undefined>) =>
-  (x: any) =>
-    fns.reduce((v, f) => {
-      if (typeof f !== 'function') {
-        return v;
-      }
-
-      const res = f(v);
-      if (typeof res !== 'function') {
-        return v;
-      }
-      return res;
-    }, x);
+import { pipe } from './pipe';
 
 type Config = {
   persist?: {
     name: string;
     keepOnLogout?: boolean;
   };
+  equalityFn?: <T>(objA: T, objB: T) => boolean;
 };
 
-export const createStore = <
-  S extends object,
-  C extends object = Record<string, unknown>
->(
-  creator: StateCreator<
-    S & {
-      computed?: (s: S) => C;
-    }
-  >,
+type CreatorType<S, C> = StateCreator<
+  S & {
+    computed?: (s: S) => C;
+  }
+>;
+
+export const createStore = <S, C = Record<string, unknown>>(
+  creator: CreatorType<S, C>,
   config: Config
 ) => {
   type CreatorType = () => S & C;
@@ -48,5 +34,17 @@ export const createStore = <
     config.persist && ((i) => persist(i, { name: persistKey }))
   );
 
-  return create(middleware(creator) as CreatorType);
+  const store = create(middleware(creator) as CreatorType);
+
+  type ParamsType = Parameters<typeof store>;
+  const storeHook = (selector: ParamsType[0], equals: ParamsType[1]) => {
+    if (!equals && config.equalityFn) {
+      return store(selector, config.equalityFn);
+    }
+
+    return store(selector, equals);
+  };
+
+  Object.assign(storeHook, store);
+  return storeHook as typeof store;
 };

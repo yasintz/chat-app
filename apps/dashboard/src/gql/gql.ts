@@ -13,13 +13,23 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n  query App {\n    app {\n      id\n    }\n  }\n": types.AppDocument,
+    "\n  query home_getCurrentCustomerWithApp($customerId: uuid!) {\n    customer(where: { id: { _eq: $customerId } }) {\n      id\n      firstName\n      lastName\n      app {\n        id\n        name\n        customers {\n          id\n          email\n          firstName\n          lastName\n          role\n        }\n      }\n    }\n  }\n": types.Home_GetCurrentCustomerWithAppDocument,
+    "\n  mutation home_updateAppName($appId: uuid!, $name: String!) {\n    update_app_by_pk(pk_columns: { id: $appId }, _set: { name: $name }) {\n      id\n      name\n    }\n  }\n": types.Home_UpdateAppNameDocument,
+    "\n  mutation home_createNewCustomer($email: String!) {\n    insert_customer_one(\n      object: { email: $email, firstName: \"f\", lastName: \"l\", role: admin }\n    ) {\n      id\n      firstName\n      lastName\n      appId\n    }\n  }\n": types.Home_CreateNewCustomerDocument,
 };
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query App {\n    app {\n      id\n    }\n  }\n"): (typeof documents)["\n  query App {\n    app {\n      id\n    }\n  }\n"];
+export function gql(source: "\n  query home_getCurrentCustomerWithApp($customerId: uuid!) {\n    customer(where: { id: { _eq: $customerId } }) {\n      id\n      firstName\n      lastName\n      app {\n        id\n        name\n        customers {\n          id\n          email\n          firstName\n          lastName\n          role\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query home_getCurrentCustomerWithApp($customerId: uuid!) {\n    customer(where: { id: { _eq: $customerId } }) {\n      id\n      firstName\n      lastName\n      app {\n        id\n        name\n        customers {\n          id\n          email\n          firstName\n          lastName\n          role\n        }\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation home_updateAppName($appId: uuid!, $name: String!) {\n    update_app_by_pk(pk_columns: { id: $appId }, _set: { name: $name }) {\n      id\n      name\n    }\n  }\n"): (typeof documents)["\n  mutation home_updateAppName($appId: uuid!, $name: String!) {\n    update_app_by_pk(pk_columns: { id: $appId }, _set: { name: $name }) {\n      id\n      name\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation home_createNewCustomer($email: String!) {\n    insert_customer_one(\n      object: { email: $email, firstName: \"f\", lastName: \"l\", role: admin }\n    ) {\n      id\n      firstName\n      lastName\n      appId\n    }\n  }\n"): (typeof documents)["\n  mutation home_createNewCustomer($email: String!) {\n    insert_customer_one(\n      object: { email: $email, firstName: \"f\", lastName: \"l\", role: admin }\n    ) {\n      id\n      firstName\n      lastName\n      appId\n    }\n  }\n"];
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

@@ -5138,22 +5138,6 @@
             "deprecationReason": null
           },
           {
-            "name": "passwordSalt",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "args": [],
@@ -5665,18 +5649,6 @@
             "deprecationReason": null
           },
           {
-            "name": "passwordSalt",
-            "description": null,
-            "type": {
-              "kind": "INPUT_OBJECT",
-              "name": "String_comparison_exp",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "type": {
@@ -5831,18 +5803,6 @@
             "deprecationReason": null
           },
           {
-            "name": "passwordSalt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "type": {
@@ -5950,18 +5910,6 @@
           },
           {
             "name": "lastName",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "passwordSalt",
             "description": null,
             "args": [],
             "type": {
@@ -6081,18 +6029,6 @@
             "deprecationReason": null
           },
           {
-            "name": "passwordSalt",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "updatedAt",
             "description": null,
             "type": {
@@ -6188,18 +6124,6 @@
           },
           {
             "name": "lastName",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "passwordSalt",
             "description": null,
             "args": [],
             "type": {
@@ -6308,18 +6232,6 @@
           },
           {
             "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "passwordSalt",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -6553,18 +6465,6 @@
           },
           {
             "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "ENUM",
-              "name": "order_by",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "passwordSalt",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -7433,12 +7333,6 @@
             "deprecationReason": null
           },
           {
-            "name": "passwordSalt",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": "column name",
             "isDeprecated": false,
@@ -7533,18 +7427,6 @@
           },
           {
             "name": "lastName",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "passwordSalt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7714,18 +7596,6 @@
             "deprecationReason": null
           },
           {
-            "name": "passwordSalt",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "role",
             "description": null,
             "type": {
@@ -7800,12 +7670,6 @@
           },
           {
             "name": "lastName",
-            "description": "column name",
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "passwordSalt",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null

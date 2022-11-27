@@ -11,6 +11,7 @@ const getCustomerByEmailQuery = gql(/* GraphQL */ `
     customer(where: { email: { _eq: $email } }) {
       id
       encryptedPassword
+      appId
     }
   }
 `);
@@ -54,6 +55,7 @@ export class AuthService {
         'x-hasura-allowed-roles': ['customer'],
         'x-hasura-default-role': 'customer',
         'x-hasura-user-id': user.id,
+        'x-hasura-app-id': user.appId,
         'x-hasura-role': 'customer',
       },
     };

@@ -600,7 +600,6 @@ export type Customer = {
   firstName: Scalars['String'];
   id: Scalars['uuid'];
   lastName: Scalars['String'];
-  passwordSalt: Scalars['String'];
   role: Customer_Role_Enum;
   updatedAt: Scalars['timestamptz'];
 };
@@ -665,7 +664,6 @@ export type Customer_Bool_Exp = {
   firstName?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   lastName?: InputMaybe<String_Comparison_Exp>;
-  passwordSalt?: InputMaybe<String_Comparison_Exp>;
   role?: InputMaybe<Customer_Role_Enum_Comparison_Exp>;
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
@@ -688,7 +686,6 @@ export type Customer_Insert_Input = {
   firstName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   lastName?: InputMaybe<Scalars['String']>;
-  passwordSalt?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Customer_Role_Enum>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };
@@ -703,7 +700,6 @@ export type Customer_Max_Fields = {
   firstName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   lastName?: Maybe<Scalars['String']>;
-  passwordSalt?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -716,7 +712,6 @@ export type Customer_Max_Order_By = {
   firstName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   lastName?: InputMaybe<Order_By>;
-  passwordSalt?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
 };
 
@@ -730,7 +725,6 @@ export type Customer_Min_Fields = {
   firstName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   lastName?: Maybe<Scalars['String']>;
-  passwordSalt?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
@@ -743,7 +737,6 @@ export type Customer_Min_Order_By = {
   firstName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   lastName?: InputMaybe<Order_By>;
-  passwordSalt?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
 };
 
@@ -773,7 +766,6 @@ export type Customer_Order_By = {
   firstName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   lastName?: InputMaybe<Order_By>;
-  passwordSalt?: InputMaybe<Order_By>;
   role?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
 };
@@ -935,8 +927,6 @@ export enum Customer_Select_Column {
   /** column name */
   LastName = 'lastName',
   /** column name */
-  PasswordSalt = 'passwordSalt',
-  /** column name */
   Role = 'role',
   /** column name */
   UpdatedAt = 'updatedAt'
@@ -951,7 +941,6 @@ export type Customer_Set_Input = {
   firstName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   lastName?: InputMaybe<Scalars['String']>;
-  passwordSalt?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Customer_Role_Enum>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };
@@ -973,7 +962,6 @@ export type Customer_Stream_Cursor_Value_Input = {
   firstName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   lastName?: InputMaybe<Scalars['String']>;
-  passwordSalt?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Customer_Role_Enum>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };
@@ -994,8 +982,6 @@ export enum Customer_Update_Column {
   Id = 'id',
   /** column name */
   LastName = 'lastName',
-  /** column name */
-  PasswordSalt = 'passwordSalt',
   /** column name */
   Role = 'role',
   /** column name */
@@ -4713,10 +4699,29 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type AppQueryVariables = Exact<{ [key: string]: never; }>;
+export type Home_GetCurrentCustomerWithAppQueryVariables = Exact<{
+  customerId: Scalars['uuid'];
+}>;
 
 
-export type AppQuery = { __typename?: 'query_root', app: Array<{ __typename?: 'app', id: any }> };
+export type Home_GetCurrentCustomerWithAppQuery = { __typename?: 'query_root', customer: Array<{ __typename?: 'customer', id: any, firstName: string, lastName: string, app: { __typename?: 'app', id: any, name: string, customers: Array<{ __typename?: 'customer', id: any, email: string, firstName: string, lastName: string, role: Customer_Role_Enum }> } }> };
+
+export type Home_UpdateAppNameMutationVariables = Exact<{
+  appId: Scalars['uuid'];
+  name: Scalars['String'];
+}>;
 
 
-export const AppDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"App"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AppQuery, AppQueryVariables>;
+export type Home_UpdateAppNameMutation = { __typename?: 'mutation_root', update_app_by_pk?: { __typename?: 'app', id: any, name: string } | null };
+
+export type Home_CreateNewCustomerMutationVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type Home_CreateNewCustomerMutation = { __typename?: 'mutation_root', insert_customer_one?: { __typename?: 'customer', id: any, firstName: string, lastName: string, appId: any } | null };
+
+
+export const Home_GetCurrentCustomerWithAppDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"home_getCurrentCustomerWithApp"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"customerId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"customerId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"app"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"customers"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"role"}}]}}]}}]}}]}}]} as unknown as DocumentNode<Home_GetCurrentCustomerWithAppQuery, Home_GetCurrentCustomerWithAppQueryVariables>;
+export const Home_UpdateAppNameDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"home_updateAppName"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"appId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"update_app_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"pk_columns"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"appId"}}}]}},{"kind":"Argument","name":{"kind":"Name","value":"_set"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<Home_UpdateAppNameMutation, Home_UpdateAppNameMutationVariables>;
+export const Home_CreateNewCustomerDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"home_createNewCustomer"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_customer_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"firstName"},"value":{"kind":"StringValue","value":"f","block":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"lastName"},"value":{"kind":"StringValue","value":"l","block":false}},{"kind":"ObjectField","name":{"kind":"Name","value":"role"},"value":{"kind":"EnumValue","value":"admin"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"appId"}}]}}]}}]} as unknown as DocumentNode<Home_CreateNewCustomerMutation, Home_CreateNewCustomerMutationVariables>;

@@ -27,7 +27,7 @@ const authLink = setContext(() => {
     return null;
   }
 
-  return { headers: { Authorization: `Bearer ${tokens?.idToken}` } };
+  return { headers: { Authorization: tokens?.idToken } };
 });
 
 const httpLinkOptions: HttpOptions = {
