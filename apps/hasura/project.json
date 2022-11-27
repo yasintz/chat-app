@@ -19,7 +19,7 @@
         "parallel": false
       }
     },
-    "stop": {
+    "destroy": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
@@ -36,14 +36,6 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "hasura console",
-        "cwd": "apps/hasura"
-      }
-    },
-    "cli": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "hasura --database-name=default",
-        "args": "",
         "cwd": "apps/hasura"
       }
     },

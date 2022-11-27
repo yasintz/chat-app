@@ -2,6 +2,7 @@ import { Form, ActionFunction, redirect } from 'react-router-dom';
 import { environment } from '../../environments/environment';
 import useAuthStore from '../../store/auth';
 
+//#region Page Action
 const serverUrl = environment.server[environment.dataEnv].endpoint;
 
 export const authAction: ActionFunction = async ({ request }) => {
@@ -20,6 +21,7 @@ export const authAction: ActionFunction = async ({ request }) => {
   useAuthStore.getState().setToken(response.token);
   return redirect('/');
 };
+//#endregion
 
 export const AuthPage = () => {
   return (

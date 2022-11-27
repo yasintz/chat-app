@@ -4,4 +4,4 @@ PG_DUMP_PARAMS=(
     --dbname=$DATABASE_CONNECTION_URL
 )
 
-docker exec chat-app_postgres_1 psql ${PG_DUMP_PARAMS[@]} < ./apps/hasura/datadump/data.sql
+docker exec -i chat-app_postgres_1 psql ${PG_DUMP_PARAMS[@]} < ./apps/hasura/datadump/data.sql
