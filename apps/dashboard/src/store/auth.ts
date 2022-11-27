@@ -1,6 +1,6 @@
 import shallow from 'zustand/shallow';
 import { parseJwt, HasuraJwtPayloadType } from '../utils/jwt';
-import { createStore } from './clients/zustand';
+import { createComputed, createStore } from './clients/zustand';
 
 type StoreType = {
   tokens?: {
@@ -9,17 +9,16 @@ type StoreType = {
   };
   setToken: (idToken: string) => void;
   logout: () => void;
-};
 
-type StoreComputedType = {
-  authenticated: string;
+  authenticated: boolean;
   customerId?: string;
 };
 
-const useAuthStore = createStore<StoreType, StoreComputedType>(
-  (set) => ({
+const computed = createComputed<StoreType>();
+
+const useAuthStore = createStore<StoreType>(
+  (set, get, api) => ({
     tokens: undefined,
-    customerId: undefined,
     setToken: (idToken) => {
       const payload = parseJwt<HasuraJwtPayloadType>(idToken);
       set({
@@ -27,13 +26,11 @@ const useAuthStore = createStore<StoreType, StoreComputedType>(
       });
     },
     logout: () => set({ tokens: undefined }),
-    computed: (state) => ({
-      authenticated: state.tokens?.idToken || '',
-      customerId:
-        state.tokens?.payload['https://hasura.io/jwt/claims'][
-          'x-hasura-user-id'
-        ],
-    }),
+    authenticated: computed((s) => Boolean(s.tokens?.idToken)),
+    customerId: computed(
+      (s) =>
+        s.tokens?.payload['https://hasura.io/jwt/claims']['x-hasura-user-id']
+    ),
   }),
   {
     persist: { name: 'auth' },

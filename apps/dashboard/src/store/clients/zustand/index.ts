@@ -1,7 +1,7 @@
 import create, { StateCreator } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { persist } from 'zustand/middleware';
-import { computedImpl } from './computed-impl';
+import { computedImpl, createComputed } from './computed-impl';
 import { pipe } from './pipe';
 
 type Config = {
@@ -12,17 +12,8 @@ type Config = {
   equalityFn?: <T>(objA: T, objB: T) => boolean;
 };
 
-type CreatorType<S, C> = StateCreator<
-  S & {
-    computed?: (s: S) => C;
-  }
->;
-
-export const createStore = <S, C = Record<string, unknown>>(
-  creator: CreatorType<S, C>,
-  config: Config
-) => {
-  type CreatorType = () => S & C;
+export const createStore = <S>(creator: StateCreator<S>, config: Config) => {
+  type CreatorType = () => S;
 
   const persistKey = `${
     config.persist?.keepOnLogout ? 'keep-on-logout:' : ''
@@ -48,3 +39,5 @@ export const createStore = <S, C = Record<string, unknown>>(
   Object.assign(storeHook, store);
   return storeHook as typeof store;
 };
+
+export { createComputed };
