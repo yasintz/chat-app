@@ -44,5 +44,7 @@ computed.batch = (compute): any => {
 };
 
 computed.middleware = middleware;
+const batch = computed.batch;
 
+export { middleware, batch };
 export default computed;
