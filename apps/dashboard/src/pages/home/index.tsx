@@ -1,11 +1,9 @@
 //#region Import
 import { useMutation, useQuery } from '@apollo/client';
 import { useState } from 'react';
+import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { gql } from '../../gql';
-import {
-  AuthenticatedHOC,
-  AuthenticatedProps,
-} from '../../hocs/AuthenticatedHOC';
+import { useAuthenticated } from '../../hooks/authenticated';
 import useAuthStore from '../../store/auth';
 //#endregion
 
@@ -33,56 +31,63 @@ const createNewCustomerMutation = gql(/* GraphQL */ `
 `);
 //#endregion
 
-export const HomePage = AuthenticatedHOC(
-  ({ app, customer }: AuthenticatedProps) => {
-    const [customerId] = useAuthStore((s) => [s.customerId]);
-    const [newAppName, setNewAppName] = useState('');
-    const [newCustomerEmail, setNewCustomerEmail] = useState('');
+export const HomePage = () => {
+  const [customerId] = useAuthStore((s) => [s.customerId]);
+  const [newAppName, setNewAppName] = useState('');
+  const [newCustomerEmail, setNewCustomerEmail] = useState('');
 
-    const [updateAppName] = useMutation(updateAppNameMutation, {
-      variables: {
-        appId: customer?.app.id,
-        name: newAppName,
-      },
-    });
+  const { customer, app, isLoading, error } = useAuthenticated();
 
-    const [createNewCustomer] = useMutation(createNewCustomerMutation, {
-      variables: { email: newCustomerEmail },
-    });
+  const [updateAppName] = useMutation(updateAppNameMutation, {
+    variables: {
+      appId: customer?.app.id,
+      name: newAppName,
+    },
+  });
 
-    return (
-      <>
-        <h1>App: {app?.name}</h1>
-        <h1>
-          Customer: {customer.firstName} {customer.lastName}
-        </h1>
+  const [createNewCustomer] = useMutation(createNewCustomerMutation, {
+    variables: { email: newCustomerEmail },
+  });
 
-        <hr />
-        <div>
-          <h2>Update App Name</h2>
-          <input
-            value={newAppName}
-            onChange={(e) => setNewAppName(e.target.value)}
-          />
-          <button onClick={() => updateAppName()}>Update</button>
-        </div>
-        <hr />
-        <div>
-          <h2>Customers</h2>
-          <ul>
-            {app?.customers
-              .filter((i) => i.id !== customerId)
-              .map((cus) => (
-                <li key={cus.id}>{cus.email}</li>
-              ))}
-          </ul>
-          <input
-            value={newCustomerEmail}
-            onChange={(e) => setNewCustomerEmail(e.target.value)}
-          />
-          <button onClick={() => createNewCustomer()}>Add New Customer</button>
-        </div>
-      </>
-    );
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-);
+  if (error || !customer) {
+    return <div>Error</div>;
+  }
+
+  return (
+    <AuthenticatedPageLayout>
+      <h1>App: {app?.name}</h1>
+      <h1>
+        Customer: {customer.firstName} {customer.lastName}
+      </h1>
+
+      <hr />
+      <div>
+        <h2>Update App Name</h2>
+        <input
+          value={newAppName}
+          onChange={(e) => setNewAppName(e.target.value)}
+        />
+        <button onClick={() => updateAppName()}>Update</button>
+      </div>
+      <hr />
+      <div>
+        <h2>Customers</h2>
+        <ul>
+          {app?.customers
+            .filter((i) => i.id !== customerId)
+            .map((cus) => (
+              <li key={cus.id}>{cus.email}</li>
+            ))}
+        </ul>
+        <input
+          value={newCustomerEmail}
+          onChange={(e) => setNewCustomerEmail(e.target.value)}
+        />
+        <button onClick={() => createNewCustomer()}>Add New Customer</button>
+      </div>
+    </AuthenticatedPageLayout>
+  );
+};
