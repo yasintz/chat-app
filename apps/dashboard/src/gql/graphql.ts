@@ -596,7 +596,7 @@ export type Customer = {
   appId: Scalars['uuid'];
   createdAt: Scalars['timestamptz'];
   email: Scalars['String'];
-  encryptedPassword: Scalars['String'];
+  encryptedPassword?: Maybe<Scalars['String']>;
   firstName: Scalars['String'];
   id: Scalars['uuid'];
   lastName: Scalars['String'];

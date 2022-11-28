@@ -16,20 +16,33 @@ const generatesByProject: Record<string, CodegenConfig['generates']> = {
     },
   },
   chat: {
-    'apps/server/src/gql/': {
+    'apps/chat/src/gql/': {
       ...generateConfig,
-      documents: 'apps/server/**/*.ts',
+      documents: 'apps/chat/**/*.(ts|tsx)',
     },
   },
-  server: {
-    'apps/server/src/gql/': {
+  manager: {
+    'apps/manager/src/gql/': {
       ...generateConfig,
-      documents: 'apps/server/**/*.ts',
+      documents: 'apps/manager/**/*.ts',
     },
   },
 };
 
-const projects = process.argv.slice(3) || Object.keys(generatesByProject);
+const argvProjects = process.argv.slice(3).filter((i) => i !== 'codegen.ts');
+const projects = argvProjects.length
+  ? argvProjects
+  : Object.keys(generatesByProject);
+
+if (!argvProjects.length) {
+  console.log(`
+\t ------ ⚠️  WARNING ⚠️ ------
+
+You are running gql generator for all apps. This can be slow. You can run it for specific project. Try "pnpm gql-generate dashboard"
+projects : ${projects.join(', ')}
+
+`);
+}
 
 const generates = projects.reduce(
   (acc, project) => ({

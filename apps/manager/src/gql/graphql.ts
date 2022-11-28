@@ -2,15 +2,9 @@
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -87,6 +81,7 @@ export type App = {
   name: Scalars['String'];
 };
 
+
 /** columns and relationships of "app" */
 export type AppChannelsArgs = {
   distinct_on?: InputMaybe<Array<Channel_Select_Column>>;
@@ -95,6 +90,7 @@ export type AppChannelsArgs = {
   order_by?: InputMaybe<Array<Channel_Order_By>>;
   where?: InputMaybe<Channel_Bool_Exp>;
 };
+
 
 /** columns and relationships of "app" */
 export type AppChannels_AggregateArgs = {
@@ -105,6 +101,7 @@ export type AppChannels_AggregateArgs = {
   where?: InputMaybe<Channel_Bool_Exp>;
 };
 
+
 /** columns and relationships of "app" */
 export type AppCustomersArgs = {
   distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
@@ -113,6 +110,7 @@ export type AppCustomersArgs = {
   order_by?: InputMaybe<Array<Customer_Order_By>>;
   where?: InputMaybe<Customer_Bool_Exp>;
 };
+
 
 /** columns and relationships of "app" */
 export type AppCustomers_AggregateArgs = {
@@ -123,6 +121,7 @@ export type AppCustomers_AggregateArgs = {
   where?: InputMaybe<Customer_Bool_Exp>;
 };
 
+
 /** columns and relationships of "app" */
 export type AppMembersArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
@@ -131,6 +130,7 @@ export type AppMembersArgs = {
   order_by?: InputMaybe<Array<Member_Order_By>>;
   where?: InputMaybe<Member_Bool_Exp>;
 };
+
 
 /** columns and relationships of "app" */
 export type AppMembers_AggregateArgs = {
@@ -156,6 +156,7 @@ export type App_Aggregate_Fields = {
   min?: Maybe<App_Min_Fields>;
 };
 
+
 /** aggregate fields of "app" */
 export type App_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<App_Select_Column>>;
@@ -180,7 +181,7 @@ export type App_Bool_Exp = {
 /** unique or primary key constraints on table "app" */
 export enum App_Constraint {
   /** unique or primary key constraint on columns "id" */
-  AppPkey = 'app_pkey',
+  AppPkey = 'app_pkey'
 }
 
 /** input type for inserting data into table "app" */
@@ -248,7 +249,7 @@ export enum App_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** input type for updating data in table "app" */
@@ -276,7 +277,7 @@ export enum App_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 export type App_Updates = {
@@ -306,6 +307,7 @@ export type Channel = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "channel" */
 export type ChannelMembersArgs = {
   distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
@@ -314,6 +316,7 @@ export type ChannelMembersArgs = {
   order_by?: InputMaybe<Array<Member_Channel_Order_By>>;
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
+
 
 /** columns and relationships of "channel" */
 export type ChannelMembers_AggregateArgs = {
@@ -324,6 +327,7 @@ export type ChannelMembers_AggregateArgs = {
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
 
+
 /** columns and relationships of "channel" */
 export type ChannelMessagesArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
@@ -332,6 +336,7 @@ export type ChannelMessagesArgs = {
   order_by?: InputMaybe<Array<Message_Order_By>>;
   where?: InputMaybe<Message_Bool_Exp>;
 };
+
 
 /** columns and relationships of "channel" */
 export type ChannelMessages_AggregateArgs = {
@@ -367,6 +372,7 @@ export type Channel_Aggregate_Fields = {
   max?: Maybe<Channel_Max_Fields>;
   min?: Maybe<Channel_Min_Fields>;
 };
+
 
 /** aggregate fields of "channel" */
 export type Channel_Aggregate_FieldsCountArgs = {
@@ -409,7 +415,7 @@ export type Channel_Bool_Exp = {
 /** unique or primary key constraints on table "channel" */
 export enum Channel_Constraint {
   /** unique or primary key constraint on columns "id" */
-  ChannelPkey = 'channel_pkey',
+  ChannelPkey = 'channel_pkey'
 }
 
 /** input type for inserting data into table "channel" */
@@ -521,7 +527,7 @@ export enum Channel_Select_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "channel" */
@@ -565,7 +571,7 @@ export enum Channel_Update_Column {
   /** column name */
   Name = 'name',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type Channel_Updates = {
@@ -579,7 +585,7 @@ export enum Cursor_Ordering {
   /** ascending ordering of the cursor */
   Asc = 'ASC',
   /** descending ordering of the cursor */
-  Desc = 'DESC',
+  Desc = 'DESC'
 }
 
 /** columns and relationships of "customer" */
@@ -590,7 +596,7 @@ export type Customer = {
   appId: Scalars['uuid'];
   createdAt: Scalars['timestamptz'];
   email: Scalars['String'];
-  encryptedPassword: Scalars['String'];
+  encryptedPassword?: Maybe<Scalars['String']>;
   firstName: Scalars['String'];
   id: Scalars['uuid'];
   lastName: Scalars['String'];
@@ -623,6 +629,7 @@ export type Customer_Aggregate_Fields = {
   max?: Maybe<Customer_Max_Fields>;
   min?: Maybe<Customer_Min_Fields>;
 };
+
 
 /** aggregate fields of "customer" */
 export type Customer_Aggregate_FieldsCountArgs = {
@@ -666,7 +673,7 @@ export enum Customer_Constraint {
   /** unique or primary key constraint on columns "email" */
   CustomerEmailKey = 'customer_email_key',
   /** unique or primary key constraint on columns "id" */
-  CustomerPkey = 'customer_pkey',
+  CustomerPkey = 'customer_pkey'
 }
 
 /** input type for inserting data into table "customer" */
@@ -789,6 +796,7 @@ export type Customer_Role_Aggregate_Fields = {
   min?: Maybe<Customer_Role_Min_Fields>;
 };
 
+
 /** aggregate fields of "customer_role" */
 export type Customer_Role_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Customer_Role_Select_Column>>;
@@ -806,12 +814,12 @@ export type Customer_Role_Bool_Exp = {
 /** unique or primary key constraints on table "customer_role" */
 export enum Customer_Role_Constraint {
   /** unique or primary key constraint on columns "value" */
-  CustomerRolePkey = 'customer_role_pkey',
+  CustomerRolePkey = 'customer_role_pkey'
 }
 
 export enum Customer_Role_Enum {
   Admin = 'admin',
-  Owner = 'owner',
+  Owner = 'owner'
 }
 
 /** Boolean expression to compare columns of type "customer_role_enum". All fields are combined with logical 'AND'. */
@@ -869,7 +877,7 @@ export type Customer_Role_Pk_Columns_Input = {
 /** select columns of table "customer_role" */
 export enum Customer_Role_Select_Column {
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** input type for updating data in table "customer_role" */
@@ -893,7 +901,7 @@ export type Customer_Role_Stream_Cursor_Value_Input = {
 /** update columns of table "customer_role" */
 export enum Customer_Role_Update_Column {
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 export type Customer_Role_Updates = {
@@ -921,7 +929,7 @@ export enum Customer_Select_Column {
   /** column name */
   Role = 'role',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "customer" */
@@ -977,7 +985,7 @@ export enum Customer_Update_Column {
   /** column name */
   Role = 'role',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type Customer_Updates = {
@@ -1008,6 +1016,7 @@ export type File = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "file" */
 export type FileMember_FilesArgs = {
   distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
@@ -1016,6 +1025,7 @@ export type FileMember_FilesArgs = {
   order_by?: InputMaybe<Array<Member_File_Order_By>>;
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
+
 
 /** columns and relationships of "file" */
 export type FileMember_Files_AggregateArgs = {
@@ -1026,6 +1036,7 @@ export type FileMember_Files_AggregateArgs = {
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
 
+
 /** columns and relationships of "file" */
 export type FileMessage_FilesArgs = {
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
@@ -1034,6 +1045,7 @@ export type FileMessage_FilesArgs = {
   order_by?: InputMaybe<Array<Message_File_Order_By>>;
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
+
 
 /** columns and relationships of "file" */
 export type FileMessage_Files_AggregateArgs = {
@@ -1058,6 +1070,7 @@ export type File_Aggregate_Fields = {
   max?: Maybe<File_Max_Fields>;
   min?: Maybe<File_Min_Fields>;
 };
+
 
 /** aggregate fields of "file" */
 export type File_Aggregate_FieldsCountArgs = {
@@ -1087,7 +1100,7 @@ export type File_Bool_Exp = {
 /** unique or primary key constraints on table "file" */
 export enum File_Constraint {
   /** unique or primary key constraint on columns "id" */
-  FilePkey = 'file_pkey',
+  FilePkey = 'file_pkey'
 }
 
 /** input type for inserting data into table "file" */
@@ -1183,7 +1196,7 @@ export enum File_Select_Column {
   /** column name */
   Service = 'service',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** columns and relationships of "file_service" */
@@ -1207,6 +1220,7 @@ export type File_Service_Aggregate_Fields = {
   min?: Maybe<File_Service_Min_Fields>;
 };
 
+
 /** aggregate fields of "file_service" */
 export type File_Service_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<File_Service_Select_Column>>;
@@ -1224,11 +1238,11 @@ export type File_Service_Bool_Exp = {
 /** unique or primary key constraints on table "file_service" */
 export enum File_Service_Constraint {
   /** unique or primary key constraint on columns "value" */
-  FileServicePkey = 'file_service_pkey',
+  FileServicePkey = 'file_service_pkey'
 }
 
 export enum File_Service_Enum {
-  Cloudinary = 'cloudinary',
+  Cloudinary = 'cloudinary'
 }
 
 /** Boolean expression to compare columns of type "file_service_enum". All fields are combined with logical 'AND'. */
@@ -1293,7 +1307,7 @@ export type File_Service_Pk_Columns_Input = {
 /** select columns of table "file_service" */
 export enum File_Service_Select_Column {
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 /** input type for updating data in table "file_service" */
@@ -1317,7 +1331,7 @@ export type File_Service_Stream_Cursor_Value_Input = {
 /** update columns of table "file_service" */
 export enum File_Service_Update_Column {
   /** column name */
-  Value = 'value',
+  Value = 'value'
 }
 
 export type File_Service_Updates = {
@@ -1371,7 +1385,7 @@ export enum File_Update_Column {
   /** column name */
   Service = 'service',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type File_Updates = {
@@ -1406,6 +1420,7 @@ export type Member = {
   updatedAt: Scalars['timestamptz'];
 };
 
+
 /** columns and relationships of "member" */
 export type MemberChannelsArgs = {
   distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
@@ -1414,6 +1429,7 @@ export type MemberChannelsArgs = {
   order_by?: InputMaybe<Array<Member_Channel_Order_By>>;
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
+
 
 /** columns and relationships of "member" */
 export type MemberChannels_AggregateArgs = {
@@ -1424,6 +1440,7 @@ export type MemberChannels_AggregateArgs = {
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
 
+
 /** columns and relationships of "member" */
 export type MemberFilesArgs = {
   distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
@@ -1432,6 +1449,7 @@ export type MemberFilesArgs = {
   order_by?: InputMaybe<Array<Member_File_Order_By>>;
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
+
 
 /** columns and relationships of "member" */
 export type MemberFiles_AggregateArgs = {
@@ -1442,6 +1460,7 @@ export type MemberFiles_AggregateArgs = {
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
 
+
 /** columns and relationships of "member" */
 export type MemberMessagesArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
@@ -1450,6 +1469,7 @@ export type MemberMessagesArgs = {
   order_by?: InputMaybe<Array<Message_Order_By>>;
   where?: InputMaybe<Message_Bool_Exp>;
 };
+
 
 /** columns and relationships of "member" */
 export type MemberMessages_AggregateArgs = {
@@ -1485,6 +1505,7 @@ export type Member_Aggregate_Fields = {
   max?: Maybe<Member_Max_Fields>;
   min?: Maybe<Member_Min_Fields>;
 };
+
 
 /** aggregate fields of "member" */
 export type Member_Aggregate_FieldsCountArgs = {
@@ -1565,6 +1586,7 @@ export type Member_Channel_Aggregate_Fields = {
   min?: Maybe<Member_Channel_Min_Fields>;
 };
 
+
 /** aggregate fields of "member_channel" */
 export type Member_Channel_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Member_Channel_Select_Column>>;
@@ -1602,7 +1624,7 @@ export enum Member_Channel_Constraint {
   /** unique or primary key constraint on columns "id" */
   MemberChannelIdKey = 'member_channel_id_key',
   /** unique or primary key constraint on columns "member_id", "channel_id" */
-  MemberChannelPkey = 'member_channel_pkey',
+  MemberChannelPkey = 'member_channel_pkey'
 }
 
 /** input type for inserting data into table "member_channel" */
@@ -1682,7 +1704,7 @@ export enum Member_Channel_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  MemberId = 'memberId',
+  MemberId = 'memberId'
 }
 
 /** input type for updating data in table "member_channel" */
@@ -1714,7 +1736,7 @@ export enum Member_Channel_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  MemberId = 'memberId',
+  MemberId = 'memberId'
 }
 
 export type Member_Channel_Updates = {
@@ -1726,7 +1748,7 @@ export type Member_Channel_Updates = {
 /** unique or primary key constraints on table "member" */
 export enum Member_Constraint {
   /** unique or primary key constraint on columns "id" */
-  MemberPkey = 'member_pkey',
+  MemberPkey = 'member_pkey'
 }
 
 /** columns and relationships of "member_file" */
@@ -1767,6 +1789,7 @@ export type Member_File_Aggregate_Fields = {
   min?: Maybe<Member_File_Min_Fields>;
 };
 
+
 /** aggregate fields of "member_file" */
 export type Member_File_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Member_File_Select_Column>>;
@@ -1804,7 +1827,7 @@ export enum Member_File_Constraint {
   /** unique or primary key constraint on columns "id" */
   MemberFileIdKey = 'member_file_id_key',
   /** unique or primary key constraint on columns "member_id", "file_id" */
-  MemberFilePkey = 'member_file_pkey',
+  MemberFilePkey = 'member_file_pkey'
 }
 
 /** input type for inserting data into table "member_file" */
@@ -1884,7 +1907,7 @@ export enum Member_File_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  MemberId = 'memberId',
+  MemberId = 'memberId'
 }
 
 /** input type for updating data in table "member_file" */
@@ -1916,7 +1939,7 @@ export enum Member_File_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  MemberId = 'memberId',
+  MemberId = 'memberId'
 }
 
 export type Member_File_Updates = {
@@ -2044,7 +2067,7 @@ export enum Member_Select_Column {
   /** column name */
   LastName = 'lastName',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "member" */
@@ -2092,7 +2115,7 @@ export enum Member_Update_Column {
   /** column name */
   LastName = 'lastName',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type Member_Updates = {
@@ -2135,6 +2158,7 @@ export type Message = {
   updatedAt?: Maybe<Scalars['timestamptz']>;
 };
 
+
 /** columns and relationships of "message" */
 export type MessageChildrenArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
@@ -2143,6 +2167,7 @@ export type MessageChildrenArgs = {
   order_by?: InputMaybe<Array<Message_Order_By>>;
   where?: InputMaybe<Message_Bool_Exp>;
 };
+
 
 /** columns and relationships of "message" */
 export type MessageChildren_AggregateArgs = {
@@ -2153,6 +2178,7 @@ export type MessageChildren_AggregateArgs = {
   where?: InputMaybe<Message_Bool_Exp>;
 };
 
+
 /** columns and relationships of "message" */
 export type MessageFilesArgs = {
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
@@ -2161,6 +2187,7 @@ export type MessageFilesArgs = {
   order_by?: InputMaybe<Array<Message_File_Order_By>>;
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
+
 
 /** columns and relationships of "message" */
 export type MessageFiles_AggregateArgs = {
@@ -2171,6 +2198,7 @@ export type MessageFiles_AggregateArgs = {
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
 
+
 /** columns and relationships of "message" */
 export type MessageReferencesArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
@@ -2179,6 +2207,7 @@ export type MessageReferencesArgs = {
   order_by?: InputMaybe<Array<Message_Order_By>>;
   where?: InputMaybe<Message_Bool_Exp>;
 };
+
 
 /** columns and relationships of "message" */
 export type MessageReferences_AggregateArgs = {
@@ -2214,6 +2243,7 @@ export type Message_Aggregate_Fields = {
   max?: Maybe<Message_Max_Fields>;
   min?: Maybe<Message_Min_Fields>;
 };
+
 
 /** aggregate fields of "message" */
 export type Message_Aggregate_FieldsCountArgs = {
@@ -2264,7 +2294,7 @@ export type Message_Bool_Exp = {
 /** unique or primary key constraints on table "message" */
 export enum Message_Constraint {
   /** unique or primary key constraint on columns "id" */
-  MessagePkey = 'message_pkey',
+  MessagePkey = 'message_pkey'
 }
 
 /** columns and relationships of "message_file" */
@@ -2305,6 +2335,7 @@ export type Message_File_Aggregate_Fields = {
   min?: Maybe<Message_File_Min_Fields>;
 };
 
+
 /** aggregate fields of "message_file" */
 export type Message_File_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Message_File_Select_Column>>;
@@ -2342,7 +2373,7 @@ export enum Message_File_Constraint {
   /** unique or primary key constraint on columns "id" */
   MessageFileIdKey = 'message_file_id_key',
   /** unique or primary key constraint on columns "message_id", "file_id" */
-  MessageFilePkey = 'message_file_pkey',
+  MessageFilePkey = 'message_file_pkey'
 }
 
 /** input type for inserting data into table "message_file" */
@@ -2422,7 +2453,7 @@ export enum Message_File_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  MessageId = 'messageId',
+  MessageId = 'messageId'
 }
 
 /** input type for updating data in table "message_file" */
@@ -2454,7 +2485,7 @@ export enum Message_File_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  MessageId = 'messageId',
+  MessageId = 'messageId'
 }
 
 export type Message_File_Updates = {
@@ -2608,6 +2639,7 @@ export type Message_Reaction_Aggregate_Fields = {
   min?: Maybe<Message_Reaction_Min_Fields>;
 };
 
+
 /** aggregate fields of "message_reaction" */
 export type Message_Reaction_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Message_Reaction_Select_Column>>;
@@ -2629,7 +2661,7 @@ export enum Message_Reaction_Constraint {
   /** unique or primary key constraint on columns "id" */
   MessageReactionIdKey = 'message_reaction_id_key',
   /** unique or primary key constraint on columns "message_id", "reaction_id" */
-  MessageReactionPkey = 'message_reaction_pkey',
+  MessageReactionPkey = 'message_reaction_pkey'
 }
 
 /** input type for inserting data into table "message_reaction" */
@@ -2691,7 +2723,7 @@ export enum Message_Reaction_Select_Column {
   /** column name */
   MessageId = 'messageId',
   /** column name */
-  ReactionId = 'reactionId',
+  ReactionId = 'reactionId'
 }
 
 /** input type for updating data in table "message_reaction" */
@@ -2723,7 +2755,7 @@ export enum Message_Reaction_Update_Column {
   /** column name */
   MessageId = 'messageId',
   /** column name */
-  ReactionId = 'reactionId',
+  ReactionId = 'reactionId'
 }
 
 export type Message_Reaction_Updates = {
@@ -2751,7 +2783,7 @@ export enum Message_Select_Column {
   /** column name */
   SenderId = 'senderId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 /** input type for updating data in table "message" */
@@ -2807,7 +2839,7 @@ export enum Message_Update_Column {
   /** column name */
   SenderId = 'senderId',
   /** column name */
-  UpdatedAt = 'updatedAt',
+  UpdatedAt = 'updatedAt'
 }
 
 export type Message_Updates = {
@@ -2946,9 +2978,7 @@ export type Mutation_Root = {
   /** update single row of the table: "customer_role" */
   update_customer_role_by_pk?: Maybe<Customer_Role>;
   /** update multiples rows of table: "customer_role" */
-  update_customer_role_many?: Maybe<
-    Array<Maybe<Customer_Role_Mutation_Response>>
-  >;
+  update_customer_role_many?: Maybe<Array<Maybe<Customer_Role_Mutation_Response>>>;
   /** update data of the table: "file" */
   update_file?: Maybe<File_Mutation_Response>;
   /** update single row of the table: "file" */
@@ -2960,9 +2990,7 @@ export type Mutation_Root = {
   /** update single row of the table: "file_service" */
   update_file_service_by_pk?: Maybe<File_Service>;
   /** update multiples rows of table: "file_service" */
-  update_file_service_many?: Maybe<
-    Array<Maybe<File_Service_Mutation_Response>>
-  >;
+  update_file_service_many?: Maybe<Array<Maybe<File_Service_Mutation_Response>>>;
   /** update data of the table: "member" */
   update_member?: Maybe<Member_Mutation_Response>;
   /** update single row of the table: "member" */
@@ -2972,9 +3000,7 @@ export type Mutation_Root = {
   /** update single row of the table: "member_channel" */
   update_member_channel_by_pk?: Maybe<Member_Channel>;
   /** update multiples rows of table: "member_channel" */
-  update_member_channel_many?: Maybe<
-    Array<Maybe<Member_Channel_Mutation_Response>>
-  >;
+  update_member_channel_many?: Maybe<Array<Maybe<Member_Channel_Mutation_Response>>>;
   /** update data of the table: "member_file" */
   update_member_file?: Maybe<Member_File_Mutation_Response>;
   /** update single row of the table: "member_file" */
@@ -2992,9 +3018,7 @@ export type Mutation_Root = {
   /** update single row of the table: "message_file" */
   update_message_file_by_pk?: Maybe<Message_File>;
   /** update multiples rows of table: "message_file" */
-  update_message_file_many?: Maybe<
-    Array<Maybe<Message_File_Mutation_Response>>
-  >;
+  update_message_file_many?: Maybe<Array<Maybe<Message_File_Mutation_Response>>>;
   /** update multiples rows of table: "message" */
   update_message_many?: Maybe<Array<Maybe<Message_Mutation_Response>>>;
   /** update data of the table: "message_reaction" */
@@ -3002,9 +3026,7 @@ export type Mutation_Root = {
   /** update single row of the table: "message_reaction" */
   update_message_reaction_by_pk?: Maybe<Message_Reaction>;
   /** update multiples rows of table: "message_reaction" */
-  update_message_reaction_many?: Maybe<
-    Array<Maybe<Message_Reaction_Mutation_Response>>
-  >;
+  update_message_reaction_many?: Maybe<Array<Maybe<Message_Reaction_Mutation_Response>>>;
   /** update data of the table: "reaction" */
   update_reaction?: Maybe<Reaction_Mutation_Response>;
   /** update single row of the table: "reaction" */
@@ -3013,80 +3035,96 @@ export type Mutation_Root = {
   update_reaction_many?: Maybe<Array<Maybe<Reaction_Mutation_Response>>>;
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_AppArgs = {
   where: App_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_App_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_ChannelArgs = {
   where: Channel_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_Channel_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_CustomerArgs = {
   where: Customer_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_Customer_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Customer_RoleArgs = {
   where: Customer_Role_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_Customer_Role_By_PkArgs = {
   value: Scalars['String'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_FileArgs = {
   where: File_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_File_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_File_ServiceArgs = {
   where: File_Service_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_File_Service_By_PkArgs = {
   value: Scalars['String'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_MemberArgs = {
   where: Member_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_Member_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Member_ChannelArgs = {
   where: Member_Channel_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_Member_Channel_By_PkArgs = {
@@ -3094,10 +3132,12 @@ export type Mutation_RootDelete_Member_Channel_By_PkArgs = {
   memberId: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Member_FileArgs = {
   where: Member_File_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_Member_File_By_PkArgs = {
@@ -3105,20 +3145,24 @@ export type Mutation_RootDelete_Member_File_By_PkArgs = {
   memberId: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_MessageArgs = {
   where: Message_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_Message_By_PkArgs = {
   id: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Message_FileArgs = {
   where: Message_File_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_Message_File_By_PkArgs = {
@@ -3126,10 +3170,12 @@ export type Mutation_RootDelete_Message_File_By_PkArgs = {
   messageId: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Message_ReactionArgs = {
   where: Message_Reaction_Bool_Exp;
 };
+
 
 /** mutation root */
 export type Mutation_RootDelete_Message_Reaction_By_PkArgs = {
@@ -3137,15 +3183,18 @@ export type Mutation_RootDelete_Message_Reaction_By_PkArgs = {
   reactionId: Scalars['uuid'];
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_ReactionArgs = {
   where: Reaction_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootDelete_Reaction_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_AppArgs = {
@@ -3153,11 +3202,13 @@ export type Mutation_RootInsert_AppArgs = {
   on_conflict?: InputMaybe<App_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_App_OneArgs = {
   object: App_Insert_Input;
   on_conflict?: InputMaybe<App_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_ChannelArgs = {
@@ -3165,11 +3216,13 @@ export type Mutation_RootInsert_ChannelArgs = {
   on_conflict?: InputMaybe<Channel_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Channel_OneArgs = {
   object: Channel_Insert_Input;
   on_conflict?: InputMaybe<Channel_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_CustomerArgs = {
@@ -3177,11 +3230,13 @@ export type Mutation_RootInsert_CustomerArgs = {
   on_conflict?: InputMaybe<Customer_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Customer_OneArgs = {
   object: Customer_Insert_Input;
   on_conflict?: InputMaybe<Customer_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_Customer_RoleArgs = {
@@ -3189,11 +3244,13 @@ export type Mutation_RootInsert_Customer_RoleArgs = {
   on_conflict?: InputMaybe<Customer_Role_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Customer_Role_OneArgs = {
   object: Customer_Role_Insert_Input;
   on_conflict?: InputMaybe<Customer_Role_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_FileArgs = {
@@ -3201,11 +3258,13 @@ export type Mutation_RootInsert_FileArgs = {
   on_conflict?: InputMaybe<File_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_File_OneArgs = {
   object: File_Insert_Input;
   on_conflict?: InputMaybe<File_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_File_ServiceArgs = {
@@ -3213,11 +3272,13 @@ export type Mutation_RootInsert_File_ServiceArgs = {
   on_conflict?: InputMaybe<File_Service_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_File_Service_OneArgs = {
   object: File_Service_Insert_Input;
   on_conflict?: InputMaybe<File_Service_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_MemberArgs = {
@@ -3225,11 +3286,13 @@ export type Mutation_RootInsert_MemberArgs = {
   on_conflict?: InputMaybe<Member_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Member_ChannelArgs = {
   objects: Array<Member_Channel_Insert_Input>;
   on_conflict?: InputMaybe<Member_Channel_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_Member_Channel_OneArgs = {
@@ -3237,11 +3300,13 @@ export type Mutation_RootInsert_Member_Channel_OneArgs = {
   on_conflict?: InputMaybe<Member_Channel_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Member_FileArgs = {
   objects: Array<Member_File_Insert_Input>;
   on_conflict?: InputMaybe<Member_File_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_Member_File_OneArgs = {
@@ -3249,11 +3314,13 @@ export type Mutation_RootInsert_Member_File_OneArgs = {
   on_conflict?: InputMaybe<Member_File_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Member_OneArgs = {
   object: Member_Insert_Input;
   on_conflict?: InputMaybe<Member_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_MessageArgs = {
@@ -3261,11 +3328,13 @@ export type Mutation_RootInsert_MessageArgs = {
   on_conflict?: InputMaybe<Message_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Message_FileArgs = {
   objects: Array<Message_File_Insert_Input>;
   on_conflict?: InputMaybe<Message_File_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_Message_File_OneArgs = {
@@ -3273,11 +3342,13 @@ export type Mutation_RootInsert_Message_File_OneArgs = {
   on_conflict?: InputMaybe<Message_File_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Message_OneArgs = {
   object: Message_Insert_Input;
   on_conflict?: InputMaybe<Message_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_Message_ReactionArgs = {
@@ -3285,11 +3356,13 @@ export type Mutation_RootInsert_Message_ReactionArgs = {
   on_conflict?: InputMaybe<Message_Reaction_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Message_Reaction_OneArgs = {
   object: Message_Reaction_Insert_Input;
   on_conflict?: InputMaybe<Message_Reaction_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootInsert_ReactionArgs = {
@@ -3297,11 +3370,13 @@ export type Mutation_RootInsert_ReactionArgs = {
   on_conflict?: InputMaybe<Reaction_On_Conflict>;
 };
 
+
 /** mutation root */
 export type Mutation_RootInsert_Reaction_OneArgs = {
   object: Reaction_Insert_Input;
   on_conflict?: InputMaybe<Reaction_On_Conflict>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_AppArgs = {
@@ -3309,16 +3384,19 @@ export type Mutation_RootUpdate_AppArgs = {
   where: App_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_App_By_PkArgs = {
   _set?: InputMaybe<App_Set_Input>;
   pk_columns: App_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_App_ManyArgs = {
   updates: Array<App_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_ChannelArgs = {
@@ -3326,16 +3404,19 @@ export type Mutation_RootUpdate_ChannelArgs = {
   where: Channel_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Channel_By_PkArgs = {
   _set?: InputMaybe<Channel_Set_Input>;
   pk_columns: Channel_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Channel_ManyArgs = {
   updates: Array<Channel_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_CustomerArgs = {
@@ -3343,16 +3424,19 @@ export type Mutation_RootUpdate_CustomerArgs = {
   where: Customer_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Customer_By_PkArgs = {
   _set?: InputMaybe<Customer_Set_Input>;
   pk_columns: Customer_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Customer_ManyArgs = {
   updates: Array<Customer_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_Customer_RoleArgs = {
@@ -3360,16 +3444,19 @@ export type Mutation_RootUpdate_Customer_RoleArgs = {
   where: Customer_Role_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Customer_Role_By_PkArgs = {
   _set?: InputMaybe<Customer_Role_Set_Input>;
   pk_columns: Customer_Role_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Customer_Role_ManyArgs = {
   updates: Array<Customer_Role_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_FileArgs = {
@@ -3377,16 +3464,19 @@ export type Mutation_RootUpdate_FileArgs = {
   where: File_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_File_By_PkArgs = {
   _set?: InputMaybe<File_Set_Input>;
   pk_columns: File_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_File_ManyArgs = {
   updates: Array<File_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_File_ServiceArgs = {
@@ -3394,16 +3484,19 @@ export type Mutation_RootUpdate_File_ServiceArgs = {
   where: File_Service_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_File_Service_By_PkArgs = {
   _set?: InputMaybe<File_Service_Set_Input>;
   pk_columns: File_Service_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_File_Service_ManyArgs = {
   updates: Array<File_Service_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_MemberArgs = {
@@ -3411,11 +3504,13 @@ export type Mutation_RootUpdate_MemberArgs = {
   where: Member_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Member_By_PkArgs = {
   _set?: InputMaybe<Member_Set_Input>;
   pk_columns: Member_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_Member_ChannelArgs = {
@@ -3423,16 +3518,19 @@ export type Mutation_RootUpdate_Member_ChannelArgs = {
   where: Member_Channel_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Member_Channel_By_PkArgs = {
   _set?: InputMaybe<Member_Channel_Set_Input>;
   pk_columns: Member_Channel_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Member_Channel_ManyArgs = {
   updates: Array<Member_Channel_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_Member_FileArgs = {
@@ -3440,21 +3538,25 @@ export type Mutation_RootUpdate_Member_FileArgs = {
   where: Member_File_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Member_File_By_PkArgs = {
   _set?: InputMaybe<Member_File_Set_Input>;
   pk_columns: Member_File_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Member_File_ManyArgs = {
   updates: Array<Member_File_Updates>;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Member_ManyArgs = {
   updates: Array<Member_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_MessageArgs = {
@@ -3462,11 +3564,13 @@ export type Mutation_RootUpdate_MessageArgs = {
   where: Message_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Message_By_PkArgs = {
   _set?: InputMaybe<Message_Set_Input>;
   pk_columns: Message_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_Message_FileArgs = {
@@ -3474,21 +3578,25 @@ export type Mutation_RootUpdate_Message_FileArgs = {
   where: Message_File_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Message_File_By_PkArgs = {
   _set?: InputMaybe<Message_File_Set_Input>;
   pk_columns: Message_File_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Message_File_ManyArgs = {
   updates: Array<Message_File_Updates>;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Message_ManyArgs = {
   updates: Array<Message_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_Message_ReactionArgs = {
@@ -3496,16 +3604,19 @@ export type Mutation_RootUpdate_Message_ReactionArgs = {
   where: Message_Reaction_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Message_Reaction_By_PkArgs = {
   _set?: InputMaybe<Message_Reaction_Set_Input>;
   pk_columns: Message_Reaction_Pk_Columns_Input;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Message_Reaction_ManyArgs = {
   updates: Array<Message_Reaction_Updates>;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_ReactionArgs = {
@@ -3513,11 +3624,13 @@ export type Mutation_RootUpdate_ReactionArgs = {
   where: Reaction_Bool_Exp;
 };
 
+
 /** mutation root */
 export type Mutation_RootUpdate_Reaction_By_PkArgs = {
   _set?: InputMaybe<Reaction_Set_Input>;
   pk_columns: Reaction_Pk_Columns_Input;
 };
+
 
 /** mutation root */
 export type Mutation_RootUpdate_Reaction_ManyArgs = {
@@ -3537,7 +3650,7 @@ export enum Order_By {
   /** in descending order, nulls first */
   DescNullsFirst = 'desc_nulls_first',
   /** in descending order, nulls last */
-  DescNullsLast = 'desc_nulls_last',
+  DescNullsLast = 'desc_nulls_last'
 }
 
 export type Query_Root = {
@@ -3622,6 +3735,7 @@ export type Query_Root = {
   reaction_by_pk?: Maybe<Reaction>;
 };
 
+
 export type Query_RootAppArgs = {
   distinct_on?: InputMaybe<Array<App_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3629,6 +3743,7 @@ export type Query_RootAppArgs = {
   order_by?: InputMaybe<Array<App_Order_By>>;
   where?: InputMaybe<App_Bool_Exp>;
 };
+
 
 export type Query_RootApp_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Select_Column>>;
@@ -3638,9 +3753,11 @@ export type Query_RootApp_AggregateArgs = {
   where?: InputMaybe<App_Bool_Exp>;
 };
 
+
 export type Query_RootApp_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootChannelArgs = {
   distinct_on?: InputMaybe<Array<Channel_Select_Column>>;
@@ -3650,6 +3767,7 @@ export type Query_RootChannelArgs = {
   where?: InputMaybe<Channel_Bool_Exp>;
 };
 
+
 export type Query_RootChannel_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Channel_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3658,9 +3776,11 @@ export type Query_RootChannel_AggregateArgs = {
   where?: InputMaybe<Channel_Bool_Exp>;
 };
 
+
 export type Query_RootChannel_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootCustomerArgs = {
   distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
@@ -3670,6 +3790,7 @@ export type Query_RootCustomerArgs = {
   where?: InputMaybe<Customer_Bool_Exp>;
 };
 
+
 export type Query_RootCustomer_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3678,9 +3799,11 @@ export type Query_RootCustomer_AggregateArgs = {
   where?: InputMaybe<Customer_Bool_Exp>;
 };
 
+
 export type Query_RootCustomer_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootCustomer_RoleArgs = {
   distinct_on?: InputMaybe<Array<Customer_Role_Select_Column>>;
@@ -3690,6 +3813,7 @@ export type Query_RootCustomer_RoleArgs = {
   where?: InputMaybe<Customer_Role_Bool_Exp>;
 };
 
+
 export type Query_RootCustomer_Role_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Customer_Role_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3698,9 +3822,11 @@ export type Query_RootCustomer_Role_AggregateArgs = {
   where?: InputMaybe<Customer_Role_Bool_Exp>;
 };
 
+
 export type Query_RootCustomer_Role_By_PkArgs = {
   value: Scalars['String'];
 };
+
 
 export type Query_RootFileArgs = {
   distinct_on?: InputMaybe<Array<File_Select_Column>>;
@@ -3710,6 +3836,7 @@ export type Query_RootFileArgs = {
   where?: InputMaybe<File_Bool_Exp>;
 };
 
+
 export type Query_RootFile_AggregateArgs = {
   distinct_on?: InputMaybe<Array<File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3718,9 +3845,11 @@ export type Query_RootFile_AggregateArgs = {
   where?: InputMaybe<File_Bool_Exp>;
 };
 
+
 export type Query_RootFile_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootFile_ServiceArgs = {
   distinct_on?: InputMaybe<Array<File_Service_Select_Column>>;
@@ -3730,6 +3859,7 @@ export type Query_RootFile_ServiceArgs = {
   where?: InputMaybe<File_Service_Bool_Exp>;
 };
 
+
 export type Query_RootFile_Service_AggregateArgs = {
   distinct_on?: InputMaybe<Array<File_Service_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3738,9 +3868,11 @@ export type Query_RootFile_Service_AggregateArgs = {
   where?: InputMaybe<File_Service_Bool_Exp>;
 };
 
+
 export type Query_RootFile_Service_By_PkArgs = {
   value: Scalars['String'];
 };
+
 
 export type Query_RootMemberArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
@@ -3750,6 +3882,7 @@ export type Query_RootMemberArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
+
 export type Query_RootMember_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3758,9 +3891,11 @@ export type Query_RootMember_AggregateArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
+
 export type Query_RootMember_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootMember_ChannelArgs = {
   distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
@@ -3770,6 +3905,7 @@ export type Query_RootMember_ChannelArgs = {
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
 
+
 export type Query_RootMember_Channel_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3778,10 +3914,12 @@ export type Query_RootMember_Channel_AggregateArgs = {
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
 
+
 export type Query_RootMember_Channel_By_PkArgs = {
   channelId: Scalars['uuid'];
   memberId: Scalars['uuid'];
 };
+
 
 export type Query_RootMember_FileArgs = {
   distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
@@ -3791,6 +3929,7 @@ export type Query_RootMember_FileArgs = {
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
 
+
 export type Query_RootMember_File_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3799,10 +3938,12 @@ export type Query_RootMember_File_AggregateArgs = {
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
 
+
 export type Query_RootMember_File_By_PkArgs = {
   fileId: Scalars['uuid'];
   memberId: Scalars['uuid'];
 };
+
 
 export type Query_RootMessageArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
@@ -3812,6 +3953,7 @@ export type Query_RootMessageArgs = {
   where?: InputMaybe<Message_Bool_Exp>;
 };
 
+
 export type Query_RootMessage_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3820,9 +3962,11 @@ export type Query_RootMessage_AggregateArgs = {
   where?: InputMaybe<Message_Bool_Exp>;
 };
 
+
 export type Query_RootMessage_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Query_RootMessage_FileArgs = {
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
@@ -3832,6 +3976,7 @@ export type Query_RootMessage_FileArgs = {
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
 
+
 export type Query_RootMessage_File_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3840,10 +3985,12 @@ export type Query_RootMessage_File_AggregateArgs = {
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
 
+
 export type Query_RootMessage_File_By_PkArgs = {
   fileId: Scalars['uuid'];
   messageId: Scalars['uuid'];
 };
+
 
 export type Query_RootMessage_ReactionArgs = {
   distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
@@ -3853,6 +4000,7 @@ export type Query_RootMessage_ReactionArgs = {
   where?: InputMaybe<Message_Reaction_Bool_Exp>;
 };
 
+
 export type Query_RootMessage_Reaction_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3861,10 +4009,12 @@ export type Query_RootMessage_Reaction_AggregateArgs = {
   where?: InputMaybe<Message_Reaction_Bool_Exp>;
 };
 
+
 export type Query_RootMessage_Reaction_By_PkArgs = {
   messageId: Scalars['uuid'];
   reactionId: Scalars['uuid'];
 };
+
 
 export type Query_RootReactionArgs = {
   distinct_on?: InputMaybe<Array<Reaction_Select_Column>>;
@@ -3874,6 +4024,7 @@ export type Query_RootReactionArgs = {
   where?: InputMaybe<Reaction_Bool_Exp>;
 };
 
+
 export type Query_RootReaction_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Reaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -3881,6 +4032,7 @@ export type Query_RootReaction_AggregateArgs = {
   order_by?: InputMaybe<Array<Reaction_Order_By>>;
   where?: InputMaybe<Reaction_Bool_Exp>;
 };
+
 
 export type Query_RootReaction_By_PkArgs = {
   id: Scalars['uuid'];
@@ -3908,6 +4060,7 @@ export type Reaction_Aggregate_Fields = {
   min?: Maybe<Reaction_Min_Fields>;
 };
 
+
 /** aggregate fields of "reaction" */
 export type Reaction_Aggregate_FieldsCountArgs = {
   columns?: InputMaybe<Array<Reaction_Select_Column>>;
@@ -3926,7 +4079,7 @@ export type Reaction_Bool_Exp = {
 /** unique or primary key constraints on table "reaction" */
 export enum Reaction_Constraint {
   /** unique or primary key constraint on columns "id" */
-  ReactionPkey = 'reaction_pkey',
+  ReactionPkey = 'reaction_pkey'
 }
 
 /** input type for inserting data into table "reaction" */
@@ -3981,7 +4134,7 @@ export enum Reaction_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 /** input type for updating data in table "reaction" */
@@ -4009,7 +4162,7 @@ export enum Reaction_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  Name = 'name',
+  Name = 'name'
 }
 
 export type Reaction_Updates = {
@@ -4126,6 +4279,7 @@ export type Subscription_Root = {
   reaction_stream: Array<Reaction>;
 };
 
+
 export type Subscription_RootAppArgs = {
   distinct_on?: InputMaybe<Array<App_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4133,6 +4287,7 @@ export type Subscription_RootAppArgs = {
   order_by?: InputMaybe<Array<App_Order_By>>;
   where?: InputMaybe<App_Bool_Exp>;
 };
+
 
 export type Subscription_RootApp_AggregateArgs = {
   distinct_on?: InputMaybe<Array<App_Select_Column>>;
@@ -4142,15 +4297,18 @@ export type Subscription_RootApp_AggregateArgs = {
   where?: InputMaybe<App_Bool_Exp>;
 };
 
+
 export type Subscription_RootApp_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootApp_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<App_Stream_Cursor_Input>>;
   where?: InputMaybe<App_Bool_Exp>;
 };
+
 
 export type Subscription_RootChannelArgs = {
   distinct_on?: InputMaybe<Array<Channel_Select_Column>>;
@@ -4160,6 +4318,7 @@ export type Subscription_RootChannelArgs = {
   where?: InputMaybe<Channel_Bool_Exp>;
 };
 
+
 export type Subscription_RootChannel_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Channel_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4168,15 +4327,18 @@ export type Subscription_RootChannel_AggregateArgs = {
   where?: InputMaybe<Channel_Bool_Exp>;
 };
 
+
 export type Subscription_RootChannel_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootChannel_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Channel_Stream_Cursor_Input>>;
   where?: InputMaybe<Channel_Bool_Exp>;
 };
+
 
 export type Subscription_RootCustomerArgs = {
   distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
@@ -4186,6 +4348,7 @@ export type Subscription_RootCustomerArgs = {
   where?: InputMaybe<Customer_Bool_Exp>;
 };
 
+
 export type Subscription_RootCustomer_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4194,9 +4357,11 @@ export type Subscription_RootCustomer_AggregateArgs = {
   where?: InputMaybe<Customer_Bool_Exp>;
 };
 
+
 export type Subscription_RootCustomer_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootCustomer_RoleArgs = {
   distinct_on?: InputMaybe<Array<Customer_Role_Select_Column>>;
@@ -4206,6 +4371,7 @@ export type Subscription_RootCustomer_RoleArgs = {
   where?: InputMaybe<Customer_Role_Bool_Exp>;
 };
 
+
 export type Subscription_RootCustomer_Role_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Customer_Role_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4214,9 +4380,11 @@ export type Subscription_RootCustomer_Role_AggregateArgs = {
   where?: InputMaybe<Customer_Role_Bool_Exp>;
 };
 
+
 export type Subscription_RootCustomer_Role_By_PkArgs = {
   value: Scalars['String'];
 };
+
 
 export type Subscription_RootCustomer_Role_StreamArgs = {
   batch_size: Scalars['Int'];
@@ -4224,11 +4392,13 @@ export type Subscription_RootCustomer_Role_StreamArgs = {
   where?: InputMaybe<Customer_Role_Bool_Exp>;
 };
 
+
 export type Subscription_RootCustomer_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Customer_Stream_Cursor_Input>>;
   where?: InputMaybe<Customer_Bool_Exp>;
 };
+
 
 export type Subscription_RootFileArgs = {
   distinct_on?: InputMaybe<Array<File_Select_Column>>;
@@ -4238,6 +4408,7 @@ export type Subscription_RootFileArgs = {
   where?: InputMaybe<File_Bool_Exp>;
 };
 
+
 export type Subscription_RootFile_AggregateArgs = {
   distinct_on?: InputMaybe<Array<File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4246,9 +4417,11 @@ export type Subscription_RootFile_AggregateArgs = {
   where?: InputMaybe<File_Bool_Exp>;
 };
 
+
 export type Subscription_RootFile_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootFile_ServiceArgs = {
   distinct_on?: InputMaybe<Array<File_Service_Select_Column>>;
@@ -4258,6 +4431,7 @@ export type Subscription_RootFile_ServiceArgs = {
   where?: InputMaybe<File_Service_Bool_Exp>;
 };
 
+
 export type Subscription_RootFile_Service_AggregateArgs = {
   distinct_on?: InputMaybe<Array<File_Service_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4266,9 +4440,11 @@ export type Subscription_RootFile_Service_AggregateArgs = {
   where?: InputMaybe<File_Service_Bool_Exp>;
 };
 
+
 export type Subscription_RootFile_Service_By_PkArgs = {
   value: Scalars['String'];
 };
+
 
 export type Subscription_RootFile_Service_StreamArgs = {
   batch_size: Scalars['Int'];
@@ -4276,11 +4452,13 @@ export type Subscription_RootFile_Service_StreamArgs = {
   where?: InputMaybe<File_Service_Bool_Exp>;
 };
 
+
 export type Subscription_RootFile_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<File_Stream_Cursor_Input>>;
   where?: InputMaybe<File_Bool_Exp>;
 };
+
 
 export type Subscription_RootMemberArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
@@ -4290,6 +4468,7 @@ export type Subscription_RootMemberArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
+
 export type Subscription_RootMember_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4298,9 +4477,11 @@ export type Subscription_RootMember_AggregateArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
+
 export type Subscription_RootMember_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootMember_ChannelArgs = {
   distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
@@ -4310,6 +4491,7 @@ export type Subscription_RootMember_ChannelArgs = {
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
 
+
 export type Subscription_RootMember_Channel_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4318,16 +4500,19 @@ export type Subscription_RootMember_Channel_AggregateArgs = {
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
 
+
 export type Subscription_RootMember_Channel_By_PkArgs = {
   channelId: Scalars['uuid'];
   memberId: Scalars['uuid'];
 };
+
 
 export type Subscription_RootMember_Channel_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Member_Channel_Stream_Cursor_Input>>;
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
+
 
 export type Subscription_RootMember_FileArgs = {
   distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
@@ -4337,6 +4522,7 @@ export type Subscription_RootMember_FileArgs = {
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
 
+
 export type Subscription_RootMember_File_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4345,10 +4531,12 @@ export type Subscription_RootMember_File_AggregateArgs = {
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
 
+
 export type Subscription_RootMember_File_By_PkArgs = {
   fileId: Scalars['uuid'];
   memberId: Scalars['uuid'];
 };
+
 
 export type Subscription_RootMember_File_StreamArgs = {
   batch_size: Scalars['Int'];
@@ -4356,11 +4544,13 @@ export type Subscription_RootMember_File_StreamArgs = {
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
 
+
 export type Subscription_RootMember_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Member_Stream_Cursor_Input>>;
   where?: InputMaybe<Member_Bool_Exp>;
 };
+
 
 export type Subscription_RootMessageArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
@@ -4370,6 +4560,7 @@ export type Subscription_RootMessageArgs = {
   where?: InputMaybe<Message_Bool_Exp>;
 };
 
+
 export type Subscription_RootMessage_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4378,9 +4569,11 @@ export type Subscription_RootMessage_AggregateArgs = {
   where?: InputMaybe<Message_Bool_Exp>;
 };
 
+
 export type Subscription_RootMessage_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootMessage_FileArgs = {
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
@@ -4390,6 +4583,7 @@ export type Subscription_RootMessage_FileArgs = {
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
 
+
 export type Subscription_RootMessage_File_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4398,16 +4592,19 @@ export type Subscription_RootMessage_File_AggregateArgs = {
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
 
+
 export type Subscription_RootMessage_File_By_PkArgs = {
   fileId: Scalars['uuid'];
   messageId: Scalars['uuid'];
 };
+
 
 export type Subscription_RootMessage_File_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Message_File_Stream_Cursor_Input>>;
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
+
 
 export type Subscription_RootMessage_ReactionArgs = {
   distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
@@ -4417,6 +4614,7 @@ export type Subscription_RootMessage_ReactionArgs = {
   where?: InputMaybe<Message_Reaction_Bool_Exp>;
 };
 
+
 export type Subscription_RootMessage_Reaction_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4425,10 +4623,12 @@ export type Subscription_RootMessage_Reaction_AggregateArgs = {
   where?: InputMaybe<Message_Reaction_Bool_Exp>;
 };
 
+
 export type Subscription_RootMessage_Reaction_By_PkArgs = {
   messageId: Scalars['uuid'];
   reactionId: Scalars['uuid'];
 };
+
 
 export type Subscription_RootMessage_Reaction_StreamArgs = {
   batch_size: Scalars['Int'];
@@ -4436,11 +4636,13 @@ export type Subscription_RootMessage_Reaction_StreamArgs = {
   where?: InputMaybe<Message_Reaction_Bool_Exp>;
 };
 
+
 export type Subscription_RootMessage_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<Message_Stream_Cursor_Input>>;
   where?: InputMaybe<Message_Bool_Exp>;
 };
+
 
 export type Subscription_RootReactionArgs = {
   distinct_on?: InputMaybe<Array<Reaction_Select_Column>>;
@@ -4450,6 +4652,7 @@ export type Subscription_RootReactionArgs = {
   where?: InputMaybe<Reaction_Bool_Exp>;
 };
 
+
 export type Subscription_RootReaction_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Reaction_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -4458,9 +4661,11 @@ export type Subscription_RootReaction_AggregateArgs = {
   where?: InputMaybe<Reaction_Bool_Exp>;
 };
 
+
 export type Subscription_RootReaction_By_PkArgs = {
   id: Scalars['uuid'];
 };
+
 
 export type Subscription_RootReaction_StreamArgs = {
   batch_size: Scalars['Int'];
@@ -4498,90 +4703,8 @@ export type AuthServiceGetCustomerByEmailQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
-export type AuthServiceGetCustomerByEmailQuery = {
-  __typename?: 'query_root';
-  customer: Array<{
-    __typename?: 'customer';
-    id: any;
-    encryptedPassword: string;
-    appId: any;
-  }>;
-};
 
-export const AuthServiceGetCustomerByEmailDocument = {
-  kind: 'Document',
-  definitions: [
-    {
-      kind: 'OperationDefinition',
-      operation: 'query',
-      name: { kind: 'Name', value: 'AuthServiceGetCustomerByEmail' },
-      variableDefinitions: [
-        {
-          kind: 'VariableDefinition',
-          variable: {
-            kind: 'Variable',
-            name: { kind: 'Name', value: 'email' },
-          },
-          type: {
-            kind: 'NonNullType',
-            type: {
-              kind: 'NamedType',
-              name: { kind: 'Name', value: 'String' },
-            },
-          },
-        },
-      ],
-      selectionSet: {
-        kind: 'SelectionSet',
-        selections: [
-          {
-            kind: 'Field',
-            name: { kind: 'Name', value: 'customer' },
-            arguments: [
-              {
-                kind: 'Argument',
-                name: { kind: 'Name', value: 'where' },
-                value: {
-                  kind: 'ObjectValue',
-                  fields: [
-                    {
-                      kind: 'ObjectField',
-                      name: { kind: 'Name', value: 'email' },
-                      value: {
-                        kind: 'ObjectValue',
-                        fields: [
-                          {
-                            kind: 'ObjectField',
-                            name: { kind: 'Name', value: '_eq' },
-                            value: {
-                              kind: 'Variable',
-                              name: { kind: 'Name', value: 'email' },
-                            },
-                          },
-                        ],
-                      },
-                    },
-                  ],
-                },
-              },
-            ],
-            selectionSet: {
-              kind: 'SelectionSet',
-              selections: [
-                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
-                {
-                  kind: 'Field',
-                  name: { kind: 'Name', value: 'encryptedPassword' },
-                },
-                { kind: 'Field', name: { kind: 'Name', value: 'appId' } },
-              ],
-            },
-          },
-        ],
-      },
-    },
-  ],
-} as unknown as DocumentNode<
-  AuthServiceGetCustomerByEmailQuery,
-  AuthServiceGetCustomerByEmailQueryVariables
->;
+export type AuthServiceGetCustomerByEmailQuery = { __typename?: 'query_root', customer: Array<{ __typename?: 'customer', id: any, encryptedPassword?: string | null, appId: any }> };
+
+
+export const AuthServiceGetCustomerByEmailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AuthServiceGetCustomerByEmail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"encryptedPassword"}},{"kind":"Field","name":{"kind":"Name","value":"appId"}}]}}]}}]} as unknown as DocumentNode<AuthServiceGetCustomerByEmailQuery, AuthServiceGetCustomerByEmailQueryVariables>;
