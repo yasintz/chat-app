@@ -1,5 +1,5 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
-
+const isProd = process.env.CODEGEN_TARGET === 'prod';
 const generateConfig: CodegenConfig['generates'][string] = {
   preset: 'client',
   plugins: [],
@@ -39,15 +39,27 @@ const generates = projects.reduce(
   {}
 );
 
+const prodSchema = {
+  'https://embedded-chat-app-12.hasura.app/v1/graphql': {
+    headers: {
+      'x-hasura-admin-secret':
+        'Oeh1m5lyFvFTMBBelE1zpFBkhfqfxjpcmeWKzXUPPRHQ9qgn2DEDpYxhyLMJfMeJ',
+    },
+  },
+};
+
+const localSchema = {
+  'http://localhost:8080/v1/graphql': {
+    headers: {
+      'x-hasura-admin-secret': 'chat',
+    },
+  },
+};
+
 const config: CodegenConfig = {
   overwrite: true,
   schema: {
-    'https://embedded-chat-app-12.hasura.app/v1/graphql': {
-      headers: {
-        'x-hasura-admin-secret':
-          'Oeh1m5lyFvFTMBBelE1zpFBkhfqfxjpcmeWKzXUPPRHQ9qgn2DEDpYxhyLMJfMeJ',
-      },
-    },
+    ...(isProd ? prodSchema : localSchema),
   },
   generates: {
     ...generates,

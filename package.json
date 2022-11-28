@@ -7,7 +7,8 @@
     "build": "nx build",
     "test": "nx test",
     "hasura": "nx cli hasura",
-    "gql-generate": "graphql-codegen --config codegen.ts"
+    "gql-generate": "graphql-codegen --config codegen.ts",
+    "gql-generate:prod": "CODEGEN_TARGET=prod graphql-codegen --config codegen.ts"
   },
   "private": true,
   "dependencies": {
