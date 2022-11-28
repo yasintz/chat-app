@@ -7,6 +7,7 @@ import {
 import { HomePage } from '../pages/home';
 import { AuthPage, authAction } from '../pages/auth';
 import { ProtectedRoute } from './protected-route';
+import { ChannelsPage } from '../pages/channels';
 // #endregion
 
 // #region Types
@@ -23,6 +24,11 @@ const routes: RouteType[] = [
   {
     path: '/',
     element: <HomePage />,
+    protected: true,
+  },
+  {
+    path: '/channels',
+    element: <ChannelsPage />,
     protected: true,
   },
   {
