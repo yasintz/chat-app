@@ -1,7 +1,7 @@
 version: '3.7'
 services:
   postgres:
-    container_name: chat-app_postgres_1
+    container_name: chat-app-postgres-1
     image: mdillon/postgis
     ports:
       - '5432:5432'

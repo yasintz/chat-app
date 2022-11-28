@@ -11,7 +11,7 @@ PG_DUMP_PARAMS=(
     # --schema-only
 )
 
-SQL_OUTPUT=$(docker exec chat-app_postgres_1 pg_dump ${PG_DUMP_PARAMS[@]})
+SQL_OUTPUT=$(docker exec chat-app-postgres-1 pg_dump ${PG_DUMP_PARAMS[@]})
 
 
 # IMPORTANT: Use only number and char. [0-9] and [a-zA-Z]
