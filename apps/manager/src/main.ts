@@ -14,9 +14,10 @@ const developmentCorsOrigins = [
   'http://127.0.0.1:4201',
 ];
 
-const corsOrigins = ['https://ychat-dashboard.vercel.app'].concat(
-  environment.production ? [] : developmentCorsOrigins
-);
+const corsOrigins = [
+  'https://ychat-dashboard.vercel.app',
+  ...(environment.production ? [] : developmentCorsOrigins),
+];
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
