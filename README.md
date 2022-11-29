@@ -23,7 +23,7 @@ App root `./apps/landing`.
 ## Manager (wip)
 
 App root `./apps/manager`.
-[ychat-manager.vercel.app](https://ychat-manager.vercel.app)
+[ychat-manager.up.railway.app](https://ychat-manager.up.railway.app)
 
 
 ### Auth

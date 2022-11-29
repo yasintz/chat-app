@@ -12,7 +12,7 @@ export const environment = {
   },
   manager: {
     prod: {
-      endpoint: 'https://ychat-manager.vercel.app/api',
+      endpoint: 'https://ychat-manager.up.railway.app/api',
     },
     local: {
       endpoint: 'http://localhost:3333/api',
