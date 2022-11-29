@@ -8,6 +8,7 @@
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
+        "generatePackageJson": true,
         "target": "node",
         "compiler": "tsc",
         "outputPath": "dist/apps/manager",
@@ -59,18 +60,6 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "tsc -p apps/chat/tsconfig.app.json --noEmit"
-      }
-    },
-    "vercel-build": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "pnpm nx build manager --prod",
-          "cp apps/manager/vercel.json dist/apps/manager",
-          "cp package.json dist/apps/manager",
-          "cp pnpm-lock.yaml dist/apps/manager"
-        ],
-        "parallel": false
       }
     }
   },

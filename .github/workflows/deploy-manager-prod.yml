@@ -17,18 +17,15 @@ jobs:
         with:
           node-version: 14.18.0
           cache: 'pnpm'
-
       - name: Install dependencies
         run: pnpm install
-
       - name: Build
-        run: pnpm nx vercel-build manager
-
+        run: pnpm nx build manager --prod && cp pnpm-lock.yaml dist/apps/manager
       - name: Push
         uses: s0/git-publish-subdir-action@develop
         env:
           REPO: self
-          BRANCH: manager-vercel-prod
+          BRANCH: manager-railway-prod
           FOLDER: dist/apps/manager
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
-          MESSAGE: 'Build: ({sha}) {msg}' # The commit message
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MESSAGE: 'Build: ({sha}) {msg}'
