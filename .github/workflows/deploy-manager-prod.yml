@@ -24,7 +24,7 @@ jobs:
           pnpm nx build manager --prod
           cp pnpm-lock.yaml dist/apps/manager
           cd dist/apps/manager
-          pnpm install
+          pnpm install --no-frozen-lockfile
       - name: Push
         uses: s0/git-publish-subdir-action@develop
         env:
