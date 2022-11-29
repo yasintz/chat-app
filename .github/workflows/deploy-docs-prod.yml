@@ -25,6 +25,8 @@ jobs:
 
       - name: Build VuePress site
         run: pnpm nx build docs
+        env:
+          DOCS_BASE: chat-app
 
       - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v2

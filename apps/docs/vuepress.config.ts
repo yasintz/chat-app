@@ -12,4 +12,5 @@ export default defineUserConfig({
   dest: '../../dist/apps/docs',
   base: process.env.DOCS_BASE ? `/${process.env.DOCS_BASE}/` : '/',
   plugins: [searchPlugin({}), prismjsPlugin({}), nprogressPlugin()],
+  port: 4202,
 });
