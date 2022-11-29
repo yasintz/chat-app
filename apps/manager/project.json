@@ -65,7 +65,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "pnpm nx build server --prod",
+          "pnpm nx build manager --prod",
           "cp apps/manager/vercel.json dist/apps/manager",
           "cp package.json dist/apps/manager",
           "cp pnpm-lock.yaml dist/apps/manager"

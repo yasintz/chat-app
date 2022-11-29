@@ -20,10 +20,10 @@ App root `./apps/dashboard`.
 
 App root `./apps/landing`.
 
-## Server (wip)
+## Manager (wip)
 
-App root `./apps/server`.
-[ychat-server.vercel.app](https://ychat-server.vercel.app)
+App root `./apps/manager`.
+[ychat-manager.vercel.app](https://ychat-manager.vercel.app)
 
 
 ### Auth

@@ -3,14 +3,14 @@ import { environment } from '../../environments/environment';
 import useAuthStore from '../../store/auth';
 
 //#region Page Action
-const serverUrl = environment.server[environment.dataEnv].endpoint;
+const managerUrl = environment.manager[environment.dataEnv].endpoint;
 
 export const authAction: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const email = form.get('email');
   const password = form.get('password');
 
-  const response = await fetch(`${serverUrl}/auth/customer/login`, {
+  const response = await fetch(`${managerUrl}/auth/customer/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

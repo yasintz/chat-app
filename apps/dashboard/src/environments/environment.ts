@@ -10,9 +10,9 @@ export const environment = {
       endpoint: 'localhost:8080',
     },
   },
-  server: {
+  manager: {
     prod: {
-      endpoint: 'https://ychat-server.vercel.app/api',
+      endpoint: 'https://ychat-manager.vercel.app/api',
     },
     local: {
       endpoint: 'http://localhost:3333/api',

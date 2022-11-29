@@ -1,4 +1,4 @@
-// apps/server/jwt-token.key
+// apps/manager/jwt-token.key
 export const JWT_TOKEN_PRIVATE_KEY = `-----BEGIN RSA PRIVATE KEY-----
 MIIEpQIBAAKCAQEAyyCeIzIABTM1tuO8WNRkY9Zl32CYnueiu4JQlGnKTl1WSKnU
 wN1yixAlObuCpKLFXPeiKPs0Gkf6aCUNmkfN1OGuWkksQLRaZ8Kzu4Lp7H0jioiv
