@@ -1,4 +1,6 @@
 import { StateCreator, StoreMutatorIdentifier } from 'zustand';
+// eslint-disable-next-line
+// @ts-ignore
 import deepEqual from 'fast-deep-equal';
 import { ComputedFieldType, getComputedFieldKeys, isComputed } from './helpers';
 
