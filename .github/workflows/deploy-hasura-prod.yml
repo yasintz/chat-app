@@ -1,4 +1,4 @@
-name: Deploy hasura
+name: Deploy hasura prod
 
 on:
   push:
