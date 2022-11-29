@@ -40,4 +40,5 @@ Thumbs.db
 # Next.js
 .next
 tsconfig.tsbuildinfo
-**/.vuepress
+**/.vuepress/.cache
+**/.vuepress/.temp
