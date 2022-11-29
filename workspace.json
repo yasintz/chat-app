@@ -11,7 +11,8 @@
     "landing-e2e": "apps/landing-e2e",
     "manager": "apps/manager",
     "ui": "libs/ui",
-    "ui-e2e": "apps/ui-e2e"
+    "ui-e2e": "apps/ui-e2e",
+    "docs": "apps/docs"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
