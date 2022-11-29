@@ -1,0 +1,21 @@
+{
+  "name": "manager",
+  "version": "0.0.1",
+  "dependencies": {
+    "@graphql-typed-document-node/core": "3.1.1",
+    "@nestjs/common": "9.2.0",
+    "@nestjs/core": "9.2.0",
+    "@nestjs/jwt": "9.0.0",
+    "@nestjs/passport": "9.0.0",
+    "@nestjs/platform-express": "9.2.0",
+    "bcrypt": "5.1.0",
+    "graphql": "16.6.0",
+    "graphql-request": "5.0.0",
+    "passport": "0.6.0",
+    "passport-local": "1.0.0",
+    "reflect-metadata": "0.1.13",
+    "rxjs": "7.5.7",
+    "tslib": "2.4.1"
+  },
+  "main": "main.js"
+}
