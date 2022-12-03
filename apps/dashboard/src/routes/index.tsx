@@ -5,7 +5,7 @@ import {
   createBrowserRouter,
 } from 'react-router-dom';
 import { HomePage } from '../pages/home';
-import { AuthPage, authAction } from '../pages/auth';
+import { AuthPage } from '../pages/auth';
 import { ProtectedRoute } from './protected-route';
 // #endregion
 
@@ -28,7 +28,6 @@ const routes: RouteType[] = [
   {
     path: '/auth',
     element: <AuthPage />,
-    action: authAction,
   },
 ];
 

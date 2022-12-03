@@ -33,7 +33,7 @@ const useAuthStore = create<StoreType>(
     ),
   }),
   {
-    persist: { name: 'auth' },
+    persist: { name: 'auth', getStorage: () => localStorage },
     equalityFn: shallow,
   }
 );

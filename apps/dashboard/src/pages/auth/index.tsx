@@ -1,39 +1,55 @@
-import { Form, ActionFunction, redirect } from 'react-router-dom';
 import { environment } from '../../environments/environment';
+import { useForm } from 'react-hook-form';
 import useAuthStore from '../../store/auth';
+import { useNavigate } from 'react-router-dom';
+import { toast } from '@ui';
 
-//#region Page Action
 const managerUrl = environment.manager[environment.dataEnv].endpoint;
 
-export const authAction: ActionFunction = async ({ request }) => {
-  const form = await request.formData();
-  const email = form.get('email');
-  const password = form.get('password');
-
-  const response = await fetch(`${managerUrl}/auth/customer/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, password }),
-  }).then((r) => r.json());
-
-  useAuthStore.getState().setToken(response.token);
-  return redirect('/');
+type FormValues = {
+  email: string;
+  password: string;
 };
-//#endregion
 
 export const AuthPage = () => {
+  const navigate = useNavigate();
+  const { setToken } = useAuthStore();
+  const { register, handleSubmit } = useForm<FormValues>();
+
+  const onSubmit = async ({ email, password }: FormValues) => {
+    try {
+      const response = await fetch(`${managerUrl}/auth/customer/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      }).then((r) => r.json());
+      setToken(response.token);
+      toast.success('Login successful 🎉');
+      navigate('/', { replace: true });
+    } catch (error) {
+      toast.error(
+        'Login failed',
+        "Maybe server is down or user doesn't exist"
+      );
+    }
+  };
+
   return (
     <div>
       <div>
         <h1>Signin</h1>
 
-        <Form method="post">
-          <input type="text" name="email" placeholder="example@gmail.com" />
-          <input type="password" name="password" placeholder="****" />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            type="text"
+            placeholder="example@gmail.com"
+            {...register('email')}
+          />
+          <input type="password" placeholder="****" {...register('password')} />
           <button type="submit">Signin</button>
-        </Form>
+        </form>
       </div>
       <hr />
       <div>
