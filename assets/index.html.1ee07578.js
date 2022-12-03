@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-1466d87e","path":"/chat/","title":"Chat (wip)","lang":"en-US","frontmatter":{},"excerpt":"","headers":[],"git":{"updatedTime":1670027333000,"contributors":[{"name":"Yasin Tazeoglu","email":"yasinntazeoglu@gmail.com","commits":1}]},"filePathRelative":"chat/index.md"}');export{e as data};

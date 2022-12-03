@@ -1,0 +1,1 @@
+const a=JSON.parse('{"key":"v-3fe8b7d4","path":"/dashboard/","title":"Dashboard (wip)","lang":"en-US","frontmatter":{},"excerpt":"","headers":[],"git":{"updatedTime":1670027333000,"contributors":[{"name":"Yasin Tazeoglu","email":"yasinntazeoglu@gmail.com","commits":1}]},"filePathRelative":"dashboard/index.md"}');export{a as data};
