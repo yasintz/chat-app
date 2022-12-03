@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@apollo/client';
 import { useState } from 'react';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { gql } from '../../gql';
-import { useAuthenticated } from '../../hooks/authenticated';
+import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
 import useAuthStore from '../../store/auth';
 //#endregion
 
@@ -36,7 +36,7 @@ export const HomePage = () => {
   const [newAppName, setNewAppName] = useState('');
   const [newCustomerEmail, setNewCustomerEmail] = useState('');
 
-  const { customer, app, isLoading, error } = useAuthenticated();
+  const { customer, app, isLoading, error } = useAuthenticatedUserData();
 
   const [updateAppName] = useMutation(updateAppNameMutation, {
     variables: {

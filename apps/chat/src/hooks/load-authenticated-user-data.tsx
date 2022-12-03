@@ -19,7 +19,7 @@ const getMemberChannels = gql(/* GraphQL */ `
 `);
 //#endregion
 
-export const useAuthenticated = () => {
+export const useAuthenticatedUserData = () => {
   const [memberId] = useAuthStore((s) => [s.memberId]);
   const {
     data,

@@ -3,7 +3,7 @@ import React from 'react';
 import { useMutation, useSubscription } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
-import { useAuthenticated } from '../../hooks/authenticated';
+import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
 import { gql } from '../../gql';
 import { MessageList } from '../../components/page/channel/message-list';
 //#endregion
@@ -42,7 +42,7 @@ const addNewMessage = gql(`
 //#endregion
 
 export const ChannelPage = () => {
-  const { channels, memberId, isLoading, error } = useAuthenticated();
+  const { channels, memberId, isLoading, error } = useAuthenticatedUserData();
   const { channelId } = useParams();
   const [newMessage, setNewMessage] = React.useState<string>();
 

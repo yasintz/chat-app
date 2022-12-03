@@ -1,6 +1,6 @@
 //#region Import
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
-import { useAuthenticated } from '../../hooks/authenticated';
+import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
 //#endregion
 
 //#region GQL
@@ -8,7 +8,7 @@ import { useAuthenticated } from '../../hooks/authenticated';
 //#endregion
 
 export const HomePage = () => {
-  const { channels, isLoading, error } = useAuthenticated();
+  const { channels, isLoading, error } = useAuthenticatedUserData();
 
   if (isLoading) {
     return <div>Loading...</div>;

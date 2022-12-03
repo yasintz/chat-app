@@ -4,7 +4,7 @@ import React from 'react';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { ChannelList } from '../../components/page/channels-page/channel-list';
 import { gql } from '../../gql';
-import { useAuthenticated } from '../../hooks/authenticated';
+import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
 //#endregion
 
 //#region GQL
@@ -60,7 +60,7 @@ export const ChannelsPage = () => {
     app,
     isLoading: isAppLoading,
     error: appError,
-  } = useAuthenticated();
+  } = useAuthenticatedUserData();
 
   const [newChannelName, setNewChannelName] = React.useState('');
 

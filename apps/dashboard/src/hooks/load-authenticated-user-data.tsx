@@ -29,7 +29,7 @@ const getCurrentCustomerWithAppQuery = gql(/* GraphQL */ `
 `);
 //#endregion
 
-export const useAuthenticated = () => {
+export const useAuthenticatedUserData = () => {
   const [customerId] = useAuthStore((s) => [s.customerId]);
   const {
     data,
