@@ -1,6 +1,23 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// When building for production, this file is replaced with `environment.prod.ts`.
-
+const dataEnv = 'local' as 'prod' | 'local';
 export const environment = {
   production: false,
+  dataEnv,
+  hasura: {
+    prod: {
+      endpoint: 'embedded-chat-app-12.hasura.app',
+    },
+    local: {
+      endpoint: 'localhost:8080',
+    },
+  },
+  server: {
+    prod: {
+      endpoint: 'https://ychat-server.vercel.app/api',
+    },
+    local: {
+      endpoint: 'http://localhost:3333/api',
+    },
+  },
 };
+
+export type Environment = typeof environment;

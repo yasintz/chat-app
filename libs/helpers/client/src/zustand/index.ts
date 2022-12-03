@@ -20,6 +20,9 @@ const create = <S>(creator: StateCreator<S>, config: Config) => {
     config.persist?.keepOnLogout ? 'keep-on-logout:' : ''
   }persistent-store:${config.persist?.name}`;
 
+  const storage = config.persist?.getStorage
+    ? config.persist?.getStorage
+    : () => localStorage;
   const middleware = pipe<CreatorType>(
     immer,
     computed.middleware,
@@ -27,7 +30,7 @@ const create = <S>(creator: StateCreator<S>, config: Config) => {
       ((i) =>
         persist(i, {
           name: persistKey,
-          getStorage: config.persist?.getStorage,
+          getStorage: storage,
         }))
   );
 

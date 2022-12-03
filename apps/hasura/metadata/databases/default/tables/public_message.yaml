@@ -61,3 +61,77 @@ array_relationships:
         table:
           name: message
           schema: public
+insert_permissions:
+  - role: customer
+    permission:
+      check: {}
+      columns:
+        - body
+        - created_at
+        - deleted_at
+        - updated_at
+        - channel_id
+        - id
+        - parent_id
+        - reply_to_id
+        - sender_id
+  - role: member
+    permission:
+      check: {}
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - deleted_at
+        - sender_id
+        - body
+        - channel_id
+        - parent_id
+        - reply_to_id
+select_permissions:
+  - role: customer
+    permission:
+      columns:
+        - body
+        - created_at
+        - deleted_at
+        - updated_at
+        - channel_id
+        - id
+        - parent_id
+        - reply_to_id
+        - sender_id
+      filter: {}
+  - role: member
+    permission:
+      columns:
+        - id
+        - created_at
+        - updated_at
+        - deleted_at
+        - sender_id
+        - body
+        - channel_id
+        - parent_id
+        - reply_to_id
+      filter: {}
+      allow_aggregations: true
+  - role: public
+    permission:
+      columns: []
+      filter: {}
+update_permissions:
+  - role: member
+    permission:
+      columns:
+        - body
+        - created_at
+        - deleted_at
+        - updated_at
+        - channel_id
+        - id
+        - parent_id
+        - reply_to_id
+        - sender_id
+      filter: {}
+      check: null

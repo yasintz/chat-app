@@ -7,7 +7,8 @@
     "build": "nx build",
     "test": "nx test",
     "hasura": "nx cli hasura",
-    "gql-generate": "graphql-codegen --config codegen.ts"
+    "gql-generate": "graphql-codegen --config codegen.ts",
+    "gql-generate:prod": "CODEGEN_TARGET=prod graphql-codegen --config codegen.ts"
   },
   "private": true,
   "dependencies": {
@@ -119,6 +120,7 @@
     "url-loader": "^3.0.0",
     "vite": "^3.2.4",
     "vite-plugin-eslint": "^1.6.0",
+    "vite-plugin-svgr": "^2.2.2",
     "vite-tsconfig-paths": "^3.5.2",
     "vitest": "^0.25.1"
   }

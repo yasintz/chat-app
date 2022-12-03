@@ -1,6 +1,7 @@
 version: '3.7'
 services:
   postgres:
+    container_name: chat-app-postgres-1
     image: mdillon/postgis
     ports:
       - '5432:5432'
@@ -12,6 +13,7 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
   graphql-engine:
+    container_name: chat-app-graphql-engine
     image: hasura/graphql-engine:v2.15.2
     ports:
       - '8080:8080'

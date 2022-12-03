@@ -13,13 +13,23 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel-plugin for production.
  */
 const documents = {
-    "\n  query App {\n    app {\n      id\n    }\n  }\n": types.AppDocument,
+    "\n  query getMemberChannels($memberId: uuid!) {\n    member_channel(where: { memberId: { _eq: $memberId } }) {\n      channel {\n        id\n        name\n      }\n    }\n  }\n": types.GetMemberChannelsDocument,
+    "\n  subscription getChannelMessages($channelId: uuid!) {\n    message(where: { channelId: { _eq: $channelId } }) {\n      id\n      body\n      parentId\n      replyToId\n      sender {\n        firstName\n        lastName\n        id\n      }\n    }\n  }\n": types.GetChannelMessagesDocument,
+    "\n  mutation insertNewMessage($body: String!, $channelId: uuid!, $senderId: uuid!) {\n    insert_message_one(object: {body: $body, channelId: $channelId, senderId: $senderId}) {\n    body\n    parentId\n    replyToId\n    sender {\n      firstName\n      lastName\n      id\n    }\n  }\n}\n": types.InsertNewMessageDocument,
 };
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query App {\n    app {\n      id\n    }\n  }\n"): (typeof documents)["\n  query App {\n    app {\n      id\n    }\n  }\n"];
+export function gql(source: "\n  query getMemberChannels($memberId: uuid!) {\n    member_channel(where: { memberId: { _eq: $memberId } }) {\n      channel {\n        id\n        name\n      }\n    }\n  }\n"): (typeof documents)["\n  query getMemberChannels($memberId: uuid!) {\n    member_channel(where: { memberId: { _eq: $memberId } }) {\n      channel {\n        id\n        name\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  subscription getChannelMessages($channelId: uuid!) {\n    message(where: { channelId: { _eq: $channelId } }) {\n      id\n      body\n      parentId\n      replyToId\n      sender {\n        firstName\n        lastName\n        id\n      }\n    }\n  }\n"): (typeof documents)["\n  subscription getChannelMessages($channelId: uuid!) {\n    message(where: { channelId: { _eq: $channelId } }) {\n      id\n      body\n      parentId\n      replyToId\n      sender {\n        firstName\n        lastName\n        id\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation insertNewMessage($body: String!, $channelId: uuid!, $senderId: uuid!) {\n    insert_message_one(object: {body: $body, channelId: $channelId, senderId: $senderId}) {\n    body\n    parentId\n    replyToId\n    sender {\n      firstName\n      lastName\n      id\n    }\n  }\n}\n"): (typeof documents)["\n  mutation insertNewMessage($body: String!, $channelId: uuid!, $senderId: uuid!) {\n    insert_message_one(object: {body: $body, channelId: $channelId, senderId: $senderId}) {\n    body\n    parentId\n    replyToId\n    sender {\n      firstName\n      lastName\n      id\n    }\n  }\n}\n"];
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
