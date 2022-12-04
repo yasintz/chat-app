@@ -9,7 +9,7 @@
       "options": {
         "commands": [
           "sh ../../tools/generators/echo.sh \"🏃‍♂️ Starting hasura\"",
-          "docker-compose -p=\"chat-app\" up -d",
+          "docker compose -p=\"chat-app\" up -d",
           "echo \"\n⏰ Waiting 30 seconds for hasura get ready\n\"",
           "sleep 30",
           "(nx deploy hasura && sh ../../tools/generators/echo.sh \"✅ Start Successful\") || (echo \"😔 Please run 'nx deploy hasura' manually\")",
@@ -24,7 +24,7 @@
       "options": {
         "commands": [
           "sh ../../tools/generators/echo.sh \"🛑 Stopping Hasura\"",
-          "docker-compose -p=\"chat-app\" down",
+          "docker compose -p=\"chat-app\" down",
           "docker volume rm chat-app_postgres",
           "sh ../../tools/generators/echo.sh \"✅ Stop Successful\""
         ],

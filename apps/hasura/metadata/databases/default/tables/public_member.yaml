@@ -49,3 +49,43 @@ array_relationships:
         table:
           name: message
           schema: public
+select_permissions:
+  - role: customer
+    permission:
+      columns:
+        - first_name
+        - last_name
+        - created_at
+        - deleted_at
+        - updated_at
+        - app_id
+        - id
+      filter: {}
+      allow_aggregations: true
+  - role: member
+    permission:
+      columns:
+        - email
+        - encryptedPassword
+        - first_name
+        - last_name
+        - created_at
+        - deleted_at
+        - updated_at
+        - app_id
+        - id
+      filter: {}
+      allow_aggregations: true
+update_permissions:
+  - role: customer
+    permission:
+      columns:
+        - first_name
+        - last_name
+        - created_at
+        - deleted_at
+        - updated_at
+        - app_id
+        - id
+      filter: {}
+      check: null

@@ -1406,6 +1406,8 @@ export type Member = {
   channels_aggregate: Member_Channel_Aggregate;
   createdAt: Scalars['timestamptz'];
   deletedAt?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  encryptedPassword?: Maybe<Scalars['String']>;
   /** An array relationship */
   files: Array<Member_File>;
   /** An aggregate relationship */
@@ -1538,6 +1540,8 @@ export type Member_Bool_Exp = {
   channels_aggregate?: InputMaybe<Member_Channel_Aggregate_Bool_Exp>;
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
   deletedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  email?: InputMaybe<String_Comparison_Exp>;
+  encryptedPassword?: InputMaybe<String_Comparison_Exp>;
   files?: InputMaybe<Member_File_Bool_Exp>;
   files_aggregate?: InputMaybe<Member_File_Aggregate_Bool_Exp>;
   firstName?: InputMaybe<String_Comparison_Exp>;
@@ -1747,6 +1751,8 @@ export type Member_Channel_Updates = {
 
 /** unique or primary key constraints on table "member" */
 export enum Member_Constraint {
+  /** unique or primary key constraint on columns "email" */
+  MemberEmailKey = 'member_email_key',
   /** unique or primary key constraint on columns "id" */
   MemberPkey = 'member_pkey'
 }
@@ -1955,6 +1961,8 @@ export type Member_Insert_Input = {
   channels?: InputMaybe<Member_Channel_Arr_Rel_Insert_Input>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  email?: InputMaybe<Scalars['String']>;
+  encryptedPassword?: InputMaybe<Scalars['String']>;
   files?: InputMaybe<Member_File_Arr_Rel_Insert_Input>;
   firstName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
@@ -1969,6 +1977,8 @@ export type Member_Max_Fields = {
   appId?: Maybe<Scalars['uuid']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   deletedAt?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  encryptedPassword?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   lastName?: Maybe<Scalars['String']>;
@@ -1980,6 +1990,8 @@ export type Member_Max_Order_By = {
   appId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   deletedAt?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  encryptedPassword?: InputMaybe<Order_By>;
   firstName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   lastName?: InputMaybe<Order_By>;
@@ -1992,6 +2004,8 @@ export type Member_Min_Fields = {
   appId?: Maybe<Scalars['uuid']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   deletedAt?: Maybe<Scalars['timestamptz']>;
+  email?: Maybe<Scalars['String']>;
+  encryptedPassword?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   lastName?: Maybe<Scalars['String']>;
@@ -2003,6 +2017,8 @@ export type Member_Min_Order_By = {
   appId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   deletedAt?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  encryptedPassword?: InputMaybe<Order_By>;
   firstName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   lastName?: InputMaybe<Order_By>;
@@ -2039,6 +2055,8 @@ export type Member_Order_By = {
   channels_aggregate?: InputMaybe<Member_Channel_Aggregate_Order_By>;
   createdAt?: InputMaybe<Order_By>;
   deletedAt?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  encryptedPassword?: InputMaybe<Order_By>;
   files_aggregate?: InputMaybe<Member_File_Aggregate_Order_By>;
   firstName?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -2061,6 +2079,10 @@ export enum Member_Select_Column {
   /** column name */
   DeletedAt = 'deletedAt',
   /** column name */
+  Email = 'email',
+  /** column name */
+  EncryptedPassword = 'encryptedPassword',
+  /** column name */
   FirstName = 'firstName',
   /** column name */
   Id = 'id',
@@ -2075,6 +2097,8 @@ export type Member_Set_Input = {
   appId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  email?: InputMaybe<Scalars['String']>;
+  encryptedPassword?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   lastName?: InputMaybe<Scalars['String']>;
@@ -2094,6 +2118,8 @@ export type Member_Stream_Cursor_Value_Input = {
   appId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  email?: InputMaybe<Scalars['String']>;
+  encryptedPassword?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   lastName?: InputMaybe<Scalars['String']>;
@@ -2108,6 +2134,10 @@ export enum Member_Update_Column {
   CreatedAt = 'createdAt',
   /** column name */
   DeletedAt = 'deletedAt',
+  /** column name */
+  Email = 'email',
+  /** column name */
+  EncryptedPassword = 'encryptedPassword',
   /** column name */
   FirstName = 'firstName',
   /** column name */
@@ -4699,10 +4729,30 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
-export type AppQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetMemberChannelsQueryVariables = Exact<{
+  memberId: Scalars['uuid'];
+}>;
 
 
-export type AppQuery = { __typename?: 'query_root', app: Array<{ __typename?: 'app', id: any }> };
+export type GetMemberChannelsQuery = { __typename?: 'query_root', member_channel: Array<{ __typename?: 'member_channel', channel: { __typename?: 'channel', id: any, name: string } }> };
+
+export type GetChannelMessagesSubscriptionVariables = Exact<{
+  channelId: Scalars['uuid'];
+}>;
 
 
-export const AppDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"App"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AppQuery, AppQueryVariables>;
+export type GetChannelMessagesSubscription = { __typename?: 'subscription_root', message: Array<{ __typename?: 'message', id: any, body: string, parentId?: any | null, replyToId?: any | null, sender: { __typename?: 'member', firstName: string, lastName: string, id: any } }> };
+
+export type InsertNewMessageMutationVariables = Exact<{
+  body: Scalars['String'];
+  channelId: Scalars['uuid'];
+  senderId: Scalars['uuid'];
+}>;
+
+
+export type InsertNewMessageMutation = { __typename?: 'mutation_root', insert_message_one?: { __typename?: 'message', body: string, parentId?: any | null, replyToId?: any | null, sender: { __typename?: 'member', firstName: string, lastName: string, id: any } } | null };
+
+
+export const GetMemberChannelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMemberChannels"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"memberId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"member_channel"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"memberId"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"memberId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"channel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<GetMemberChannelsQuery, GetMemberChannelsQueryVariables>;
+export const GetChannelMessagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"getChannelMessages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"channelId"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"parentId"}},{"kind":"Field","name":{"kind":"Name","value":"replyToId"}},{"kind":"Field","name":{"kind":"Name","value":"sender"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<GetChannelMessagesSubscription, GetChannelMessagesSubscriptionVariables>;
+export const InsertNewMessageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertNewMessage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"senderId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_message_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"channelId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"senderId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"senderId"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"parentId"}},{"kind":"Field","name":{"kind":"Name","value":"replyToId"}},{"kind":"Field","name":{"kind":"Name","value":"sender"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"firstName"}},{"kind":"Field","name":{"kind":"Name","value":"lastName"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]} as unknown as DocumentNode<InsertNewMessageMutation, InsertNewMessageMutationVariables>;

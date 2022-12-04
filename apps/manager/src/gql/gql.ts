@@ -14,12 +14,17 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query AuthServiceGetCustomerByEmail($email: String!) {\n    customer(where: { email: { _eq: $email } }) {\n      id\n      encryptedPassword\n      appId\n    }\n  }\n": types.AuthServiceGetCustomerByEmailDocument,
+    "\n  query AuthServiceGetMemberByEmail($email: String!) {\n    member(where: { email: { _eq: $email } }) {\n      id\n      encryptedPassword\n      appId\n    }\n  }\n": types.AuthServiceGetMemberByEmailDocument,
 };
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query AuthServiceGetCustomerByEmail($email: String!) {\n    customer(where: { email: { _eq: $email } }) {\n      id\n      encryptedPassword\n      appId\n    }\n  }\n"): (typeof documents)["\n  query AuthServiceGetCustomerByEmail($email: String!) {\n    customer(where: { email: { _eq: $email } }) {\n      id\n      encryptedPassword\n      appId\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query AuthServiceGetMemberByEmail($email: String!) {\n    member(where: { email: { _eq: $email } }) {\n      id\n      encryptedPassword\n      appId\n    }\n  }\n"): (typeof documents)["\n  query AuthServiceGetMemberByEmail($email: String!) {\n    member(where: { email: { _eq: $email } }) {\n      id\n      encryptedPassword\n      appId\n    }\n  }\n"];
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

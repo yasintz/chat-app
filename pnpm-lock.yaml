@@ -112,6 +112,7 @@ specifiers:
   url-loader: ^3.0.0
   vite: ^3.2.4
   vite-plugin-eslint: ^1.6.0
+  vite-plugin-svgr: ^2.2.2
   vite-tsconfig-paths: ^3.5.2
   vitest: ^0.25.1
   vue: ^3.2.45
@@ -233,6 +234,7 @@ devDependencies:
   url-loader: 3.0.0
   vite: 3.2.4_@types+node@18.7.18
   vite-plugin-eslint: 1.8.1_eslint@8.15.0+vite@3.2.4
+  vite-plugin-svgr: 2.2.2_vite@3.2.4
   vite-tsconfig-paths: 3.6.0_vite@3.2.4
   vitest: 0.25.3_@vitest+ui@0.9.4
   vue: 3.2.45
@@ -5577,6 +5579,20 @@ packages:
       picomatch: 2.3.1
     dev: true
 
+  /@rollup/pluginutils/5.0.2:
+    resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+    dependencies:
+      '@types/estree': 1.0.0
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    dev: true
+
   /@rushstack/eslint-patch/1.2.0:
     resolution: {integrity: sha512-sXo/qW2/pAcmT43VoRKOJbDOfV3cYpq3szSVfIThQXNt+E4DfKj361vaAt3c88U5tPUxzEswam7GW48PJqtKAg==}
     dev: true
@@ -7583,7 +7599,7 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.4.10
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
     dev: true
 
   /@types/eslint/8.4.10:
@@ -22445,6 +22461,19 @@ packages:
       eslint: 8.15.0
       rollup: 2.79.1
       vite: 3.2.4_@types+node@18.7.18
+    dev: true
+
+  /vite-plugin-svgr/2.2.2_vite@3.2.4:
+    resolution: {integrity: sha512-u8Ac27uZmDHTVGawpAhvLMJMuzbGeZGhe61TGeHoRQLxVhmQfIYCefa0iLbjC0ui1zFo6XZnS8EkzPITCYp85g==}
+    peerDependencies:
+      vite: ^2.6.0 || 3
+    dependencies:
+      '@rollup/pluginutils': 5.0.2
+      '@svgr/core': 6.5.1
+      vite: 3.2.4_@types+node@18.7.18
+    transitivePeerDependencies:
+      - rollup
+      - supports-color
     dev: true
 
   /vite-tsconfig-paths/3.6.0_vite@3.2.4:

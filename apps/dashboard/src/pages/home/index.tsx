@@ -1,32 +1,13 @@
 //#region Import
 import { useMutation, useQuery } from '@apollo/client';
 import { useState } from 'react';
+import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { gql } from '../../gql';
+import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
 import useAuthStore from '../../store/auth';
 //#endregion
 
 //#region GQL
-const getCurrentCustomerWithAppQuery = gql(/* GraphQL */ `
-  query home_getCurrentCustomerWithApp($customerId: uuid!) {
-    customer(where: { id: { _eq: $customerId } }) {
-      id
-      firstName
-      lastName
-      app {
-        id
-        name
-        customers {
-          id
-          email
-          firstName
-          lastName
-          role
-        }
-      }
-    }
-  }
-`);
-
 const updateAppNameMutation = gql(/* GraphQL */ `
   mutation home_updateAppName($appId: uuid!, $name: String!) {
     update_app_by_pk(pk_columns: { id: $appId }, _set: { name: $name }) {
@@ -51,17 +32,11 @@ const createNewCustomerMutation = gql(/* GraphQL */ `
 //#endregion
 
 export const HomePage = () => {
-  const [customerId, logout] = useAuthStore((s) => [s.customerId, s.logout]);
+  const [customerId] = useAuthStore((s) => [s.customerId]);
   const [newAppName, setNewAppName] = useState('');
   const [newCustomerEmail, setNewCustomerEmail] = useState('');
 
-  const { data, loading, error } = useQuery(getCurrentCustomerWithAppQuery, {
-    variables: { customerId },
-    onCompleted: ({ customer: [customer] }) => setNewAppName(customer.app.name),
-  });
-
-  const customer = data?.customer[0];
-  const app = customer?.app;
+  const { customer, app, isLoading, error } = useAuthenticatedUserData();
 
   const [updateAppName] = useMutation(updateAppNameMutation, {
     variables: {
@@ -74,7 +49,7 @@ export const HomePage = () => {
     variables: { email: newCustomerEmail },
   });
 
-  if (loading) {
+  if (isLoading) {
     return <div>Loading...</div>;
   }
   if (error || !customer) {
@@ -82,8 +57,7 @@ export const HomePage = () => {
   }
 
   return (
-    <div>
-      <button onClick={logout}>Logout</button>
+    <AuthenticatedPageLayout>
       <h1>App: {app?.name}</h1>
       <h1>
         Customer: {customer.firstName} {customer.lastName}
@@ -114,6 +88,6 @@ export const HomePage = () => {
         />
         <button onClick={() => createNewCustomer()}>Add New Customer</button>
       </div>
-    </div>
+    </AuthenticatedPageLayout>
   );
 };
