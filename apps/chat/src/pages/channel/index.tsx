@@ -25,19 +25,25 @@ const getChannelMessages = gql(/* GraphQL */ `
   }
 `);
 
-const addNewMessage = gql(`
-  mutation insertNewMessage($body: String!, $channelId: uuid!, $senderId: uuid!) {
-    insert_message_one(object: {body: $body, channelId: $channelId, senderId: $senderId}) {
-    body
-    parentId
-    replyToId
-    sender {
-      firstName
-      lastName
-      id
+const addNewMessage = gql(/* GraphQL */ `
+  mutation insertNewMessage(
+    $body: String!
+    $channelId: uuid!
+    $senderId: uuid!
+  ) {
+    insert_message_one(
+      object: { body: $body, channelId: $channelId, senderId: $senderId }
+    ) {
+      body
+      parentId
+      replyToId
+      sender {
+        firstName
+        lastName
+        id
+      }
     }
   }
-}
 `);
 //#endregion
 

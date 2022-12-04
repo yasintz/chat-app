@@ -23,34 +23,37 @@ const getChannels = gql(/* GraphQL */ `
   }
 `);
 
-const updateChannelNameMutation = gql(`
+const updateChannelNameMutation = gql(/* GraphQL */ `
   mutation updateChannelNameMutation($channelId: uuid!, $name: String!) {
-  update_channel_by_pk(pk_columns: {id: $channelId}, _set: {name: $name}) {
-    id
-    appId
-    name
-    members_aggregate {
-      aggregate {
-        count
+    update_channel_by_pk(
+      pk_columns: { id: $channelId }
+      _set: { name: $name }
+    ) {
+      id
+      appId
+      name
+      members_aggregate {
+        aggregate {
+          count
+        }
       }
     }
   }
-}
 `);
 
-const addChannelMutation = gql(`
+const addChannelMutation = gql(/* GraphQL */ `
   mutation createChannelNameMutation($name: String!, $appId: uuid!) {
-  insert_channel_one(object: {name: $name, appId: $appId}) {
-    id
-    appId
-    name
-    members_aggregate {
-      aggregate {
-        count
+    insert_channel_one(object: { name: $name, appId: $appId }) {
+      id
+      appId
+      name
+      members_aggregate {
+        aggregate {
+          count
+        }
       }
     }
   }
-}
 `);
 //#endregion
 
