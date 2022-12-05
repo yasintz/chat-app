@@ -1,17 +1,10 @@
 {
   "version": 2,
   "projects": {
-    "chat": "apps/chat",
-    "chat-e2e": "apps/chat-e2e",
     "client-helpers": "libs/helpers/client",
     "dashboard": "apps/dashboard",
-    "dashboard-e2e": "apps/dashboard-e2e",
-    "docs": "apps/docs",
-    "landing": "apps/landing",
-    "landing-e2e": "apps/landing-e2e",
     "manager": "apps/manager",
-    "ui": "libs/ui",
-    "ui-e2e": "apps/ui-e2e"
+    "ui": "libs/ui"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
