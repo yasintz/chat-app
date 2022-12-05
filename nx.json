@@ -52,7 +52,7 @@
       "!{projectRoot}/**/*.stories.@(js|jsx|ts|tsx|mdx)"
     ]
   },
-  "defaultProject": "dashboard",
+  "defaultProject": "simple-iframe",
   "generators": {
     "@nrwl/react": {
       "application": {

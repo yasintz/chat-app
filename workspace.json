@@ -1,8 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "dashboard": "apps/dashboard",
-    "manager": "apps/manager"
+    "manager": "apps/manager",
+    "simple-iframe": "apps/simple-iframe"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
