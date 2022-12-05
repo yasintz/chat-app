@@ -5,9 +5,6 @@ import {
   createBrowserRouter,
 } from 'react-router-dom';
 import { HomePage } from '../pages/home';
-import { AuthPage } from '../pages/auth';
-import { ProtectedRoute } from './protected-route';
-import { ChannelsPage } from '../pages/channels';
 // #endregion
 
 // #region Types
@@ -24,16 +21,6 @@ const routes: RouteType[] = [
   {
     path: '/',
     element: <HomePage />,
-    protected: true,
-  },
-  {
-    path: '/channels',
-    element: <ChannelsPage />,
-    protected: true,
-  },
-  {
-    path: '/auth',
-    element: <AuthPage />,
   },
 ];
 
@@ -41,19 +28,6 @@ const routes: RouteType[] = [
 const router = createBrowserRouter(
   routes.map((route) => ({
     ...route,
-    element: route.protected ? (
-      <ProtectedRoute
-        redirect={
-          typeof route.protected === 'object'
-            ? route.protected.redirect
-            : undefined
-        }
-      >
-        {route.element}
-      </ProtectedRoute>
-    ) : (
-      route.element
-    ),
   }))
 );
 // #endregion

@@ -1,10 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "client-helpers": "libs/helpers/client",
     "dashboard": "apps/dashboard",
-    "manager": "apps/manager",
-    "ui": "libs/ui"
+    "manager": "apps/manager"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"
 }
