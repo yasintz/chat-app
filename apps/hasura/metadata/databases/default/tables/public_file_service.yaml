@@ -1,4 +1,0 @@
-table:
-  name: file_service
-  schema: public
-is_enum: true

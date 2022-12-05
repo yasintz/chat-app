@@ -1,4 +1,0 @@
-{
-  "project": "ChatApp",
-  "schema": ["app", "customer", "member", "chat"]
-}
