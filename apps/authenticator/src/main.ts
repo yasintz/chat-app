@@ -7,19 +7,8 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
 
-const developmentCorsOrigins = [
-  'http://localhost:4201',
-  'http://127.0.0.1:4201',
-  'http://localhost:4200',
-  'http://127.0.0.1:4200',
-];
-
-const corsOrigins = [
-  'https://ychat-dashboard.vercel.app',
-  ...(environment.production ? [] : developmentCorsOrigins),
-];
+const corsOrigins = ['*'];
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
