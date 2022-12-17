@@ -12,6 +12,7 @@ Table message_reaction {
   id int
   reaction_id int [ref: > reaction.id]
   message_id int [ref: > message.id]
+  member_id int [ref: > member.id]
 }
 
 Table message_file {

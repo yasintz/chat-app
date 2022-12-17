@@ -40,7 +40,7 @@ export default async function build() {
   );
 
   await deploy(doc);
-  if (1 > 0) {
+  if (false) {
     await deploy({
       project: doc.project + 'Database',
       note: doc.note,
