@@ -1,7 +1,7 @@
 import createStore, { StateCreator } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { persist, StateStorage } from 'zustand/middleware';
-import computed from './computed';
+import zustandComputed from './computed';
 import { pipe } from './pipe';
 
 type Config = {
@@ -13,7 +13,7 @@ type Config = {
   equalityFn?: <T>(objA: T, objB: T) => boolean;
 };
 
-const create = <S>(creator: StateCreator<S>, config: Config) => {
+const zustand = <S>(creator: StateCreator<S>, config: Config) => {
   type CreatorType = () => S;
 
   const persistKey = `${
@@ -25,7 +25,7 @@ const create = <S>(creator: StateCreator<S>, config: Config) => {
     : () => localStorage;
   const middleware = pipe<CreatorType>(
     immer,
-    computed.middleware,
+    zustandComputed.middleware,
     config.persist &&
       ((i) =>
         persist(i, {
@@ -49,6 +49,4 @@ const create = <S>(creator: StateCreator<S>, config: Config) => {
   return storeHook as typeof store;
 };
 
-export default create;
-
-export { computed };
+export { zustandComputed, zustand };

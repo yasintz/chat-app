@@ -71,6 +71,4 @@ const upload = async (
   return data;
 };
 
-const cloudinary = { upload, UploadPresets };
-
-export default cloudinary;
+export const cloudinary = { upload, UploadPresets };
