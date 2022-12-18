@@ -1,14 +1,14 @@
 Table member {
-  id int [pk, increment]
-  app_id int [ref: > app.id]
+  id uuid [pk, increment]
+  app_id uuid [ref: > app.id]
   first_name varchar
   last_name varchar
 }
 
 Table member_file {
   id int
-  member_id int [ref: > member.id]
-  file_id int [ref: > file.id]
+  member_id uuid [ref: > member.id]
+  file_id uuid [ref: > file.id]
   Note: 'Member uploadings'
 }
 
@@ -18,6 +18,6 @@ Enum member_role_enum {
 
 Table member_role {
   id int
-  member_id int [ref: > member.id]
+  member_id uuid [ref: > member.id]
   role member_role_enum
 }

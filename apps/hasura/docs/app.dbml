@@ -1,10 +1,29 @@
 Table app {
-  id int [pk, increment]
+  id uuid [pk, increment]
   name text
+  jwt_secrets jsonb [
+    note:'''
+  ### Schema
+  ```json
+  {
+    "type": "<optional-type-of-key>",
+    "key": "<optional-key-as-string>",
+    "jwk_url": "<optional-url-to-refresh-jwks>",
+    "claims_namespace": "<optional-key-name-in-claims>",
+    "claims_namespace_path":"<optional-json-path-to-the-claims>",
+    "claims_format": "json|stringified_json",
+    "audience": <optional-string-or-list-of-strings-to-verify-audience>,
+    "issuer": "<optional-string-to-verify-issuer>",
+    "claims_map": <optional-object-of-session-variable-to-claim-jsonpath-or-literal-value>,
+    "allowed_skew": <optional-number-of-seconds-in-integer>,
+    "header": "<optional-key-to-indicate-cookie-or-authorization-header>"
+  }
+  ``` 
+  ''']
 }
 
 Table reaction {
-  id int [pk]
+  id uuid [pk]
 }
 
 Enum file_service_enum {
@@ -12,7 +31,7 @@ Enum file_service_enum {
 }
 
 Table file {
-  id int [pk]
+  id uuid [pk]
   name text
   service file_service_enum
 }

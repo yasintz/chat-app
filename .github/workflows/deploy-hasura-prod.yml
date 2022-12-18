@@ -30,7 +30,7 @@ jobs:
           HASURA_GRAPHQL_ADMIN_SECRET: ${{ secrets.HASURA_GRAPHQL_ADMIN_SECRET }}
           HASURA_GRAPHQL_ENDPOINT: ${{ secrets.HASURA_GRAPHQL_ENDPOINT }}
       - name: Build Scripts
-        run: pnpm nx script-build hasura --prod
+        run: pnpm nx build-dbdocs hasura --prod
 
       - name: Deploy Database Documents
         run: node dist/apps/hasura/main.js

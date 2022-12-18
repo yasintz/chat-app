@@ -35,7 +35,7 @@
     "console": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "hasura console",
+        "command": "hasura console --skip-update-check",
         "cwd": "apps/hasura"
       }
     },
@@ -44,10 +44,10 @@
       "options": {
         "commands": [
           "sh ../../tools/generators/echo.sh \"🚀 Deploying Hasura\"",
-          "hasura migrate status --database-name=default",
-          "hasura metadata apply",
-          "hasura migrate apply --all-databases",
-          "hasura metadata reload",
+          "hasura migrate status --database-name=default --skip-update-check",
+          "hasura metadata apply --skip-update-check",
+          "hasura migrate apply --all-databases --skip-update-check",
+          "hasura metadata reload --skip-update-check",
           "sh ../../tools/generators/echo.sh \"✅ Deploy Successful\""
         ],
         "parallel": false,
@@ -68,7 +68,7 @@
         "parallel": false
       }
     },
-    "script-build": {
+    "build-dbdocs": {
       "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
@@ -92,15 +92,15 @@
         }
       }
     },
-    "script-serve": {
+    "serve-dbdocs": {
       "executor": "@nrwl/js:node",
       "options": {
-        "buildTarget": "hasura:script-build",
+        "buildTarget": "hasura:build-dbdocs",
         "watch": true
       },
       "configurations": {
         "production": {
-          "buildTarget": "hasura:script-build:production"
+          "buildTarget": "hasura:build-dbdocs:production"
         }
       }
     }
