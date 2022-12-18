@@ -1,6 +1,13 @@
 table:
   name: app
   schema: public
+configuration:
+  column_config:
+    jwt_secrets:
+      custom_name: jwtSecrets
+  custom_column_names:
+    jwt_secrets: jwtSecrets
+  custom_root_fields: {}
 array_relationships:
   - name: channels
     using:

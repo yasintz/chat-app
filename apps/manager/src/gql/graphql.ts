@@ -12,6 +12,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  jsonb: any;
   timestamptz: any;
   uuid: any;
 };
@@ -74,6 +75,7 @@ export type App = {
   /** An aggregate relationship */
   customers_aggregate: Customer_Aggregate;
   id: Scalars['uuid'];
+  jwtSecrets?: Maybe<Scalars['jsonb']>;
   /** An array relationship */
   members: Array<Member>;
   /** An aggregate relationship */
@@ -123,6 +125,12 @@ export type AppCustomers_AggregateArgs = {
 
 
 /** columns and relationships of "app" */
+export type AppJwtSecretsArgs = {
+  path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "app" */
 export type AppMembersArgs = {
   distinct_on?: InputMaybe<Array<Member_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -163,6 +171,11 @@ export type App_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** append existing jsonb value of filtered columns with new jsonb value */
+export type App_Append_Input = {
+  jwtSecrets?: InputMaybe<Scalars['jsonb']>;
+};
+
 /** Boolean expression to filter rows from the table "app". All fields are combined with a logical 'AND'. */
 export type App_Bool_Exp = {
   _and?: InputMaybe<Array<App_Bool_Exp>>;
@@ -173,6 +186,7 @@ export type App_Bool_Exp = {
   customers?: InputMaybe<Customer_Bool_Exp>;
   customers_aggregate?: InputMaybe<Customer_Aggregate_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  jwtSecrets?: InputMaybe<Jsonb_Comparison_Exp>;
   members?: InputMaybe<Member_Bool_Exp>;
   members_aggregate?: InputMaybe<Member_Aggregate_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
@@ -184,11 +198,27 @@ export enum App_Constraint {
   AppPkey = 'app_pkey'
 }
 
+/** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+export type App_Delete_At_Path_Input = {
+  jwtSecrets?: InputMaybe<Array<Scalars['String']>>;
+};
+
+/** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+export type App_Delete_Elem_Input = {
+  jwtSecrets?: InputMaybe<Scalars['Int']>;
+};
+
+/** delete key/value pair or string element. key/value pairs are matched based on their key value */
+export type App_Delete_Key_Input = {
+  jwtSecrets?: InputMaybe<Scalars['String']>;
+};
+
 /** input type for inserting data into table "app" */
 export type App_Insert_Input = {
   channels?: InputMaybe<Channel_Arr_Rel_Insert_Input>;
   customers?: InputMaybe<Customer_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['uuid']>;
+  jwtSecrets?: InputMaybe<Scalars['jsonb']>;
   members?: InputMaybe<Member_Arr_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
 };
@@ -235,6 +265,7 @@ export type App_Order_By = {
   channels_aggregate?: InputMaybe<Channel_Aggregate_Order_By>;
   customers_aggregate?: InputMaybe<Customer_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
+  jwtSecrets?: InputMaybe<Order_By>;
   members_aggregate?: InputMaybe<Member_Aggregate_Order_By>;
   name?: InputMaybe<Order_By>;
 };
@@ -244,10 +275,17 @@ export type App_Pk_Columns_Input = {
   id: Scalars['uuid'];
 };
 
+/** prepend existing jsonb value of filtered columns with new jsonb value */
+export type App_Prepend_Input = {
+  jwtSecrets?: InputMaybe<Scalars['jsonb']>;
+};
+
 /** select columns of table "app" */
 export enum App_Select_Column {
   /** column name */
   Id = 'id',
+  /** column name */
+  JwtSecrets = 'jwtSecrets',
   /** column name */
   Name = 'name'
 }
@@ -255,6 +293,7 @@ export enum App_Select_Column {
 /** input type for updating data in table "app" */
 export type App_Set_Input = {
   id?: InputMaybe<Scalars['uuid']>;
+  jwtSecrets?: InputMaybe<Scalars['jsonb']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -269,6 +308,7 @@ export type App_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type App_Stream_Cursor_Value_Input = {
   id?: InputMaybe<Scalars['uuid']>;
+  jwtSecrets?: InputMaybe<Scalars['jsonb']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -277,10 +317,22 @@ export enum App_Update_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  JwtSecrets = 'jwtSecrets',
+  /** column name */
   Name = 'name'
 }
 
 export type App_Updates = {
+  /** append existing jsonb value of filtered columns with new jsonb value */
+  _append?: InputMaybe<App_Append_Input>;
+  /** delete the field or element with specified path (for JSON arrays, negative integers count from the end) */
+  _delete_at_path?: InputMaybe<App_Delete_At_Path_Input>;
+  /** delete the array element with specified index (negative integers count from the end). throws an error if top level container is not an array */
+  _delete_elem?: InputMaybe<App_Delete_Elem_Input>;
+  /** delete key/value pair or string element. key/value pairs are matched based on their key value */
+  _delete_key?: InputMaybe<App_Delete_Key_Input>;
+  /** prepend existing jsonb value of filtered columns with new jsonb value */
+  _prepend?: InputMaybe<App_Prepend_Input>;
   /** sets the columns of the filtered rows to the given values */
   _set?: InputMaybe<App_Set_Input>;
   where: App_Bool_Exp;
@@ -1394,6 +1446,34 @@ export type File_Updates = {
   where: File_Bool_Exp;
 };
 
+export type Jsonb_Cast_Exp = {
+  String?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** Boolean expression to compare columns of type "jsonb". All fields are combined with logical 'AND'. */
+export type Jsonb_Comparison_Exp = {
+  _cast?: InputMaybe<Jsonb_Cast_Exp>;
+  /** is the column contained in the given json value */
+  _contained_in?: InputMaybe<Scalars['jsonb']>;
+  /** does the column contain the given json value at the top level */
+  _contains?: InputMaybe<Scalars['jsonb']>;
+  _eq?: InputMaybe<Scalars['jsonb']>;
+  _gt?: InputMaybe<Scalars['jsonb']>;
+  _gte?: InputMaybe<Scalars['jsonb']>;
+  /** does the string exist as a top-level key in the column */
+  _has_key?: InputMaybe<Scalars['String']>;
+  /** do all of these strings exist as top-level keys in the column */
+  _has_keys_all?: InputMaybe<Array<Scalars['String']>>;
+  /** do any of these strings exist as top-level keys in the column */
+  _has_keys_any?: InputMaybe<Array<Scalars['String']>>;
+  _in?: InputMaybe<Array<Scalars['jsonb']>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _lt?: InputMaybe<Scalars['jsonb']>;
+  _lte?: InputMaybe<Scalars['jsonb']>;
+  _neq?: InputMaybe<Scalars['jsonb']>;
+  _nin?: InputMaybe<Array<Scalars['jsonb']>>;
+};
+
 /** columns and relationships of "member" */
 export type Member = {
   __typename?: 'member';
@@ -1751,8 +1831,8 @@ export type Member_Channel_Updates = {
 
 /** unique or primary key constraints on table "member" */
 export enum Member_Constraint {
-  /** unique or primary key constraint on columns "email" */
-  MemberEmailKey = 'member_email_key',
+  /** unique or primary key constraint on columns "email", "app_id" */
+  MemberEmailAppIdKey = 'member_email_app_id_key',
   /** unique or primary key constraint on columns "id" */
   MemberPkey = 'member_pkey'
 }
@@ -3410,6 +3490,11 @@ export type Mutation_RootInsert_Reaction_OneArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_AppArgs = {
+  _append?: InputMaybe<App_Append_Input>;
+  _delete_at_path?: InputMaybe<App_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<App_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<App_Delete_Key_Input>;
+  _prepend?: InputMaybe<App_Prepend_Input>;
   _set?: InputMaybe<App_Set_Input>;
   where: App_Bool_Exp;
 };
@@ -3417,6 +3502,11 @@ export type Mutation_RootUpdate_AppArgs = {
 
 /** mutation root */
 export type Mutation_RootUpdate_App_By_PkArgs = {
+  _append?: InputMaybe<App_Append_Input>;
+  _delete_at_path?: InputMaybe<App_Delete_At_Path_Input>;
+  _delete_elem?: InputMaybe<App_Delete_Elem_Input>;
+  _delete_key?: InputMaybe<App_Delete_Key_Input>;
+  _prepend?: InputMaybe<App_Prepend_Input>;
   _set?: InputMaybe<App_Set_Input>;
   pk_columns: App_Pk_Columns_Input;
 };
@@ -4729,6 +4819,13 @@ export type Uuid_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uuid']>>;
 };
 
+export type AppAuthServiceGetAppByIdQueryVariables = Exact<{
+  id: Scalars['uuid'];
+}>;
+
+
+export type AppAuthServiceGetAppByIdQuery = { __typename?: 'query_root', app_by_pk?: { __typename?: 'app', id: any, jwtSecrets?: any | null } | null };
+
 export type AuthServiceGetCustomerByEmailQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
@@ -4744,5 +4841,6 @@ export type AuthServiceGetMemberByEmailQueryVariables = Exact<{
 export type AuthServiceGetMemberByEmailQuery = { __typename?: 'query_root', member: Array<{ __typename?: 'member', id: any, encryptedPassword?: string | null, appId: any }> };
 
 
+export const AppAuthServiceGetAppByIdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AppAuthServiceGetAppById"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"app_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"jwtSecrets"}}]}}]}}]} as unknown as DocumentNode<AppAuthServiceGetAppByIdQuery, AppAuthServiceGetAppByIdQueryVariables>;
 export const AuthServiceGetCustomerByEmailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AuthServiceGetCustomerByEmail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"customer"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"encryptedPassword"}},{"kind":"Field","name":{"kind":"Name","value":"appId"}}]}}]}}]} as unknown as DocumentNode<AuthServiceGetCustomerByEmailQuery, AuthServiceGetCustomerByEmailQueryVariables>;
 export const AuthServiceGetMemberByEmailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AuthServiceGetMemberByEmail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"member"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"encryptedPassword"}},{"kind":"Field","name":{"kind":"Name","value":"appId"}}]}}]}}]} as unknown as DocumentNode<AuthServiceGetMemberByEmailQuery, AuthServiceGetMemberByEmailQueryVariables>;

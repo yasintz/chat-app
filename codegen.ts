@@ -38,7 +38,8 @@ if (!argvProjects.length) {
   console.log(`
 \t ------ ⚠️  WARNING ⚠️ ------
 
-You are running gql generator for all apps. This can be slow. You can run it for specific project. Try "pnpm gql-generate dashboard"
+You are running gql generator for all apps. This can be slow.
+You can run it for specific project. Try "pnpm gql-generate dashboard"
 projects : ${projects.join(', ')}
 
 `);
