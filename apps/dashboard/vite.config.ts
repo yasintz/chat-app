@@ -1,5 +1,5 @@
 import { mergeConfig, defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 import ViteTsConfigPathsPlugin from 'vite-tsconfig-paths';
 import baseConfig from '../../vite.config';
 import svgr from 'vite-plugin-svgr';
