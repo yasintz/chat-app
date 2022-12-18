@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
 import { useAuthStorage } from './store';
+import { TodoListApp } from './todo-list';
 
 type FormDataType = {
   username: string;
@@ -8,7 +9,7 @@ type FormDataType = {
 };
 
 export const HomePage = () => {
-  const { token, isLoggedIn, setToken } = useAuthStorage();
+  const { token, setToken } = useAuthStorage();
   const { handleSubmit, register } = useForm<FormDataType>();
 
   const onSubmit = async ({ username, password, operation }: FormDataType) => {
@@ -27,7 +28,9 @@ export const HomePage = () => {
 
   return (
     <div>
-      {!isLoggedIn && (
+      {token ? (
+        <TodoListApp token={token} />
+      ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           username: <input {...register('username', { required: true })} />
           <br />
