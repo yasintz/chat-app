@@ -4,11 +4,13 @@ import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
 import { environment } from '../../environments/environment';
 import { AuthController } from './auth.controller';
-import { CustomerStrategy } from './customer.strategy';
-import { MemberStrategy } from './member.strategy';
+import { SimpleUserStrategy } from './strategy/simple-user.strategy';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { SimpleUser } from '../../database/entities/simple-user.entity';
 
 @Module({
   imports: [
+    TypeOrmModule.forFeature([SimpleUser]),
     PassportModule,
     JwtModule.register({
       privateKey: environment.jwtConstants.privateKey,
@@ -18,7 +20,7 @@ import { MemberStrategy } from './member.strategy';
       },
     }),
   ],
-  providers: [AuthService, CustomerStrategy, MemberStrategy],
+  providers: [AuthService, SimpleUserStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

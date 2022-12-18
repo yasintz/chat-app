@@ -1,22 +1,15 @@
 import { Controller, Request, Post, UseGuards, Body } from '@nestjs/common';
-import { CustomerAuthGuard } from './customer-auth.guard';
 import { AuthService } from './auth.service';
-import { MemberAuthGuard } from './member-auth.guard';
+import { SimpleUserAuthGuard } from './simple-user-auth.guard';
 
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
-  @UseGuards(CustomerAuthGuard)
-  @Post('customer/login')
+  @UseGuards(SimpleUserAuthGuard)
+  @Post('login/simple-user')
   async login(@Request() req) {
-    return this.authService.loginCustomer(req.user);
-  }
-
-  @UseGuards(MemberAuthGuard)
-  @Post('member/login')
-  async memberLogin(@Request() req) {
-    return this.authService.loginMember(req.user);
+    return this.authService.loginSimpleUser(req.user);
   }
 
   // TODO: remove after signup implementation

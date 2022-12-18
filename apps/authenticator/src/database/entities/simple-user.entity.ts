@@ -1,12 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, Column } from 'typeorm';
 
 @Entity()
 export class SimpleUser {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @Column()
-  email: string;
+  @Column({ unique: true, primary: true })
+  username: string;
 
   @Column()
   encryptedPassword: string;

@@ -1,37 +1,47 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
+import { Repository } from 'typeorm';
+import { SimpleUser } from '../../database/entities/simple-user.entity';
 import { environment } from '../../environments/environment';
-
-type CustomerType = { email: string; password: string };
-type MemberType = { email: string; password: string };
 
 @Injectable()
 export class AuthService {
-  constructor(private jwtService: JwtService) {}
+  constructor(
+    private jwtService: JwtService,
 
-  async validateCustomer(
-    email: string,
+    @InjectRepository(SimpleUser)
+    private usersRepository: Repository<SimpleUser>
+  ) {}
+
+  async validateSimpleUser(
+    username: string,
     password: string
-  ): Promise<CustomerType | null> {
-    return { email, password };
-  }
-  async validateMember(
-    email: string,
-    password: string
-  ): Promise<CustomerType | null> {
-    return { email, password };
+  ): Promise<SimpleUser | null> {
+    const user = await this.usersRepository.findOneBy({ username });
+    if (!user) {
+      return null;
+    }
+
+    const isPasswordMatching = await bcrypt.compare(
+      password,
+      user.encryptedPassword
+    );
+
+    if (!isPasswordMatching) {
+      return null;
+    }
+
+    return user;
   }
 
-  async loginCustomer(user: CustomerType) {
-    return {
-      token: `Bearer ${this.jwtService.sign(user)}`,
+  async loginSimpleUser(user: SimpleUser) {
+    const data = {
+      username: user.username,
     };
-  }
-
-  async loginMember(user: MemberType) {
     return {
-      token: `Bearer ${this.jwtService.sign(user)}`,
+      token: `Bearer ${this.jwtService.sign(data)}`,
     };
   }
 
