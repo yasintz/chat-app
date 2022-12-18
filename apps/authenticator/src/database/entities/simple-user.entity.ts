@@ -1,4 +1,5 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
+import { SimpleTodo } from './simple-todo.entity';
 
 @Entity()
 export class SimpleUser {
@@ -7,4 +8,7 @@ export class SimpleUser {
 
   @Column()
   encryptedPassword: string;
+
+  @OneToMany(() => SimpleTodo, (photo) => photo.user)
+  todos: SimpleTodo[];
 }

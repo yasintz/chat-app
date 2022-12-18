@@ -2,6 +2,7 @@
   "version": 2,
   "projects": {
     "authenticator": "apps/authenticator",
+    "helpers": "libs/helpers",
     "simple-iframe": "apps/simple-iframe"
   },
   "$schema": "./node_modules/nx/schemas/workspace-schema.json"

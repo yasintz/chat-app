@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SimpleTodo } from '../database/entities/simple-todo.entity';
 import { SimpleUser } from '../database/entities/simple-user.entity';
 
 import { AppController } from './app.controller';
@@ -12,7 +13,7 @@ import { AuthModule } from './auth/auth.module';
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: `${process.cwd()}/dist/db.sqlite`,
-      entities: [SimpleUser],
+      entities: [SimpleUser, SimpleTodo],
       synchronize: true,
     }),
   ],
