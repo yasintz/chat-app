@@ -1,5 +1,15 @@
 PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS "simple_user" ("username" varchar PRIMARY KEY NOT NULL, "encryptedPassword" varchar NOT NULL, CONSTRAINT "UQ_a45681227a700b12aab46c1992f" UNIQUE ("username"));
+CREATE TABLE IF NOT EXISTS "simple_user" ("id" varchar PRIMARY KEY NOT NULL, "username" varchar NOT NULL, "encryptedPassword" varchar NOT NULL, CONSTRAINT "UQ_a45681227a700b12aab46c1992f" UNIQUE ("username"));
 INSERT INTO simple_user VALUES('207b8a60-e962-4ff6-a34d-3330029043ca','yasin','$2b$10$1NPoPCpjzMqr0Uv.E4/vEe5DjyeR.aWEDOm7vyKEDbpWShmJJBilK');
+INSERT INTO simple_user VALUES('5f87821f-46d4-438d-8668-32b8be1713c3','yasintz','$2b$10$Bi1PNzdYEmE2rHnBjcL0EOeVBbGDbzlATlvMqptFt.jlxoXNXPufO');
+CREATE TABLE IF NOT EXISTS "simple_todo" ("id" varchar PRIMARY KEY NOT NULL, "text" varchar NOT NULL, "completed" boolean NOT NULL, "userId" varchar NOT NULL, CONSTRAINT "FK_ff8fb3165e5daee0e7a1b9689a3" FOREIGN KEY ("userId") REFERENCES "simple_user" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION);
+INSERT INTO simple_todo VALUES('ba7a3555-5483-4870-9b84-821b8b0bc4f5','Sleep earlier',0,'207b8a60-e962-4ff6-a34d-3330029043ca');
+INSERT INTO simple_todo VALUES('ae327833-184d-468f-b9bc-2e702029bf95','Sleep earlier',0,'207b8a60-e962-4ff6-a34d-3330029043ca');
+INSERT INTO simple_todo VALUES('b98ff28c-ef2c-41ca-8f8e-9b3f915a76dd','Sleep earlier',1,'207b8a60-e962-4ff6-a34d-3330029043ca');
+INSERT INTO simple_todo VALUES('ee61044f-d1ee-4d76-bdc6-59f684a03776','Sleep earlier',0,'207b8a60-e962-4ff6-a34d-3330029043ca');
+INSERT INTO simple_todo VALUES('41b6b127-6773-41ee-a4b0-2889dd10dcb3','Sleep earlier',0,'207b8a60-e962-4ff6-a34d-3330029043ca');
+INSERT INTO simple_todo VALUES('811dd37c-9a7a-4a78-8c53-587c14d74b6d','Sleep earlier',1,'207b8a60-e962-4ff6-a34d-3330029043ca');
+INSERT INTO simple_todo VALUES('a2160249-30bb-4ab4-a938-127a7454db71','This is a test',0,'5f87821f-46d4-438d-8668-32b8be1713c3');
+INSERT INTO simple_todo VALUES('a007e0d4-d6d4-499c-aed0-a60926e5b984','Test another',0,'5f87821f-46d4-438d-8668-32b8be1713c3');
 COMMIT;
