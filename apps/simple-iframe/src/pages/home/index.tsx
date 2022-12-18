@@ -1,6 +1,10 @@
 import { useForm } from 'react-hook-form';
+import { authenticate } from './api';
 import { useAuthStorage } from './store';
 import { TodoListApp } from './todo-list';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 type FormDataType = {
   username: string;
@@ -9,27 +13,28 @@ type FormDataType = {
 };
 
 export const HomePage = () => {
-  const { token, setToken } = useAuthStorage();
+  const { token, login, logout } = useAuthStorage();
   const { handleSubmit, register } = useForm<FormDataType>();
 
   const onSubmit = async ({ username, password, operation }: FormDataType) => {
-    const response = await fetch(
-      `http://localhost:3333/api/auth/${operation}/simple-user`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      }
-    ).then((r) => r.json());
-    setToken(response.token);
+    const response = await authenticate(operation, username, password);
+    console.log(response);
+    login(response.token, response.user);
   };
 
   return (
-    <div>
+    <div style={{ height: '100%' }}>
       {token ? (
-        <TodoListApp token={token} />
+        <>
+          <button onClick={logout}>Logout</button>
+          <br />
+          <hr />
+          <QueryClientProvider client={queryClient}>
+            <div style={{ height: 'calc(100% - 48px)' }}>
+              <TodoListApp token={token} />
+            </div>
+          </QueryClientProvider>
+        </>
       ) : (
         <form onSubmit={handleSubmit(onSubmit)}>
           username: <input {...register('username', { required: true })} />

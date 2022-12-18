@@ -1,4 +1,5 @@
 import { Controller, Request, Post, UseGuards, Body } from '@nestjs/common';
+import { UserSignupDto } from './auth.schema';
 import { AuthService } from './auth.service';
 import { SimpleUserAuthGuard } from './guard/simple-user-auth.guard';
 
@@ -10,6 +11,11 @@ export class AuthController {
   @Post('login/simple-user')
   async login(@Request() req) {
     return this.authService.loginSimpleUser(req.user);
+  }
+
+  @Post('signup/simple-user')
+  async signup(@Body() user: UserSignupDto) {
+    return this.authService.signupSimpleUser(user);
   }
 
   // TODO: remove after signup implementation

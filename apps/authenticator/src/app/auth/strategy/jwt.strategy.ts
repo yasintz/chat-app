@@ -17,6 +17,6 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
 
   async validate(payload: JwtCommonPayloadType) {
     const username = payload.sub;
-    return this.authService.getSimpleUserByUsername(username);
+    return this.authService.getSimpleUserById(username);
   }
 }

@@ -31,9 +31,13 @@ export class AppService {
       where: { id: todoId, userId: user.id },
     });
 
-    return this.todoRepository.update(
+    await this.todoRepository.update(
       { id: todo.id },
       { completed: !todo.completed }
     );
+
+    todo.completed = !todo.completed;
+
+    return todo;
   }
 }

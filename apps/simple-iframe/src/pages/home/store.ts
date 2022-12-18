@@ -4,8 +4,21 @@ import create, {
 
 type AuthStorageType = {
   token: string | undefined;
+  user:
+    | {
+        id: string;
+        username: string;
+      }
+    | undefined;
   isLoggedIn: boolean;
-  setToken: (token: string) => void;
+  login: (
+    token: string,
+    user: {
+      id: string;
+      username: string;
+    }
+  ) => void;
+  logout: () => void;
 };
 
 const computed = computedProvider<AuthStorageType>();
@@ -13,8 +26,10 @@ const computed = computedProvider<AuthStorageType>();
 export const useAuthStorage = create<AuthStorageType>(
   (set) => ({
     token: undefined,
+    user: undefined,
     isLoggedIn: computed((s) => Boolean(s.token)),
-    setToken: (token) => set({ token }),
+    login: (token, user) => set({ token, user }),
+    logout: () => set({ token: undefined, user: undefined }),
   }),
   {
     persist: {

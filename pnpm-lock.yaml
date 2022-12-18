@@ -36,6 +36,7 @@ specifiers:
   '@storybook/manager-webpack5': ~6.5.9
   '@storybook/react': ~6.5.9
   '@svgr/webpack': ^5.4.0
+  '@tanstack/react-query': ^4.20.4
   '@testing-library/react': 13.4.0
   '@types/bcrypt': ^5.0.0
   '@types/jest': 28.1.1
@@ -123,6 +124,7 @@ dependencies:
   '@nestjs/passport': 9.0.0_s6va3jdeufsye4wwu25es3p4om
   '@nestjs/platform-express': 9.2.0_pf2fb646rsvo5szivgkaevcpvi
   '@nestjs/typeorm': 9.0.1_huh3cujqzzdsyvg3jblhh3lwna
+  '@tanstack/react-query': 4.20.4_biqbaboplfbrettd7655fr4n2y
   axios: 1.2.0
   bcrypt: 5.1.0
   class-transformer: 0.5.1
@@ -6979,6 +6981,28 @@ packages:
     dependencies:
       tslib: 2.4.1
     dev: true
+
+  /@tanstack/query-core/4.20.4:
+    resolution: {integrity: sha512-lhLtGVNJDsJ/DyZXrLzekDEywQqRVykgBqTmkv0La32a/RleILXy6JMLBb7UmS3QCatg/F/0N9/5b0i5j6IKcA==}
+    dev: false
+
+  /@tanstack/react-query/4.20.4_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-SJRxx13k/csb9lXAJfycgVA1N/yU/h3bvRNWP0+aHMfMjmbyX82FdoAcckDBbOdEyAupvb0byelNHNeypCFSyA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      '@tanstack/query-core': 4.20.4
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      use-sync-external-store: 1.2.0_react@18.2.0
+    dev: false
 
   /@testing-library/dom/8.19.0:
     resolution: {integrity: sha512-6YWYPPpxG3e/xOo6HIWwB/58HukkwIVTOaZ0VwdMVjhRUX/01E4FtQbck9GazOOj7MXHc5RBzMrU86iBJHbI+A==}

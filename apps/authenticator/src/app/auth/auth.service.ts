@@ -5,6 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { SimpleUser } from '../../database/entities/simple-user.entity';
 import { environment } from '../../environments/environment';
+import { UserSignupDto } from './auth.schema';
 import { JwtCommonPayloadType } from './auth.types';
 
 @Injectable()
@@ -39,18 +40,33 @@ export class AuthService {
 
   async loginSimpleUser(user: SimpleUser) {
     const data: JwtCommonPayloadType = {
-      sub: user.username,
+      sub: user.id,
     };
     return {
       token: `Bearer ${this.jwtService.sign(data, { issuer: 'simple-user' })}`,
+      user: {
+        id: user.id,
+        username: user.username,
+      },
     };
+  }
+
+  async signupSimpleUser(user: UserSignupDto) {
+    const simpleUser = this.usersRepository.create({
+      encryptedPassword: await this.encryptPassword(user.password),
+      username: user.username,
+    });
+
+    await this.usersRepository.save(simpleUser);
+
+    return this.loginSimpleUser(simpleUser);
   }
 
   async encryptPassword(password: string) {
     return bcrypt.hash(password, environment.bcrypt.saltRounds);
   }
 
-  async getSimpleUserByUsername(username: string) {
-    return this.usersRepository.findOneBy({ username });
+  async getSimpleUserById(id: string) {
+    return this.usersRepository.findOneBy({ id });
   }
 }
