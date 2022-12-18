@@ -7,20 +7,20 @@ import { AuthController } from './auth.controller';
 import { SimpleUserStrategy } from './strategy/simple-user.strategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SimpleUser } from '../../database/entities/simple-user.entity';
+import { JwtStrategy } from './strategy/jwt.strategy';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([SimpleUser]),
     PassportModule,
     JwtModule.register({
-      privateKey: environment.jwtConstants.privateKey,
+      secret: environment.jwtConstants.secret,
       signOptions: {
         expiresIn: environment.jwtConstants.expiresIn,
-        algorithm: 'RS256',
       },
     }),
   ],
-  providers: [AuthService, SimpleUserStrategy],
+  providers: [AuthService, SimpleUserStrategy, JwtStrategy],
   controllers: [AuthController],
 })
 export class AuthModule {}

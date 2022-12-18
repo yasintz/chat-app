@@ -1,9 +1,7 @@
-import { JWT_TOKEN_PRIVATE_KEY } from './jwt-token.key';
-
 export const environment = {
   production: false,
   jwtConstants: {
-    privateKey: JWT_TOKEN_PRIVATE_KEY,
+    secret: 'secret',
     expiresIn: '90 day',
   },
   bcrypt: {

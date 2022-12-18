@@ -38,6 +38,7 @@ specifiers:
   '@testing-library/react': 13.4.0
   '@types/bcrypt': ^5.0.0
   '@types/jest': 28.1.1
+  '@types/jsonwebtoken': ^8.5.9
   '@types/lodash': ^4.14.190
   '@types/node': 18.7.18
   '@types/passport-jwt': ^3.0.7
@@ -75,6 +76,7 @@ specifiers:
   immer: ^9.0.16
   jest: 28.1.1
   jest-environment-jsdom: 28.1.1
+  jsonwebtoken: ^8.5.1
   lodash: ^4.17.21
   next: 13.0.0
   nx: 15.2.1
@@ -121,6 +123,7 @@ dependencies:
   core-js: 3.26.1
   fast-deep-equal: 3.1.3
   immer: 9.0.16
+  jsonwebtoken: 8.5.1
   lodash: 4.17.21
   next: 13.0.0_a7mipu7kvrstgwvi56qu2qyzhe
   passport: 0.6.0
@@ -172,6 +175,7 @@ devDependencies:
   '@testing-library/react': 13.4.0_biqbaboplfbrettd7655fr4n2y
   '@types/bcrypt': 5.0.0
   '@types/jest': 28.1.1
+  '@types/jsonwebtoken': 8.5.9
   '@types/lodash': 4.14.190
   '@types/node': 18.7.18
   '@types/passport-jwt': 3.0.7
