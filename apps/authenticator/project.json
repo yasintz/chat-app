@@ -56,6 +56,12 @@
         "passWithNoTests": true
       }
     },
+    "dumpdb": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "sqlite3 dist/db.sqlite .dump > apps/authenticator/src/database/dump/data.sql"
+      }
+    },
     "type-check": {
       "executor": "nx:run-commands",
       "options": {
