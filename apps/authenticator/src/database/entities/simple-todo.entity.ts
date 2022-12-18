@@ -7,7 +7,13 @@ export class SimpleTodo {
   id: string;
 
   @Column()
-  toto: string;
+  text: string;
+
+  @Column()
+  completed: boolean;
+
+  @Column()
+  userId: string;
 
   @ManyToOne(() => SimpleUser, (user) => user.todos)
   user: SimpleUser;
