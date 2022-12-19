@@ -11,3 +11,68 @@ configuration:
     message_id: messageId
     reaction_id: reactionId
   custom_root_fields: {}
+object_relationships:
+  - name: member
+    using:
+      foreign_key_constraint_on: member_id
+  - name: message
+    using:
+      foreign_key_constraint_on: message_id
+  - name: reaction
+    using:
+      foreign_key_constraint_on: reaction_id
+insert_permissions:
+  - role: customer
+    permission:
+      check:
+        message:
+          channel:
+            app_id:
+              _eq: X-Hasura-App-Id
+      columns:
+        - id
+        - member_id
+        - message_id
+        - reaction_id
+  - role: member
+    permission:
+      check:
+        message:
+          channel:
+            members:
+              member_id:
+                _eq: X-Hasura-User-Id
+      columns:
+        - member_id
+        - message_id
+        - reaction_id
+select_permissions:
+  - role: customer
+    permission:
+      columns:
+        - id
+        - member_id
+        - message_id
+        - reaction_id
+      filter: {}
+  - role: member
+    permission:
+      columns:
+        - id
+        - member_id
+        - message_id
+        - reaction_id
+      filter: {}
+delete_permissions:
+  - role: customer
+    permission:
+      filter:
+        message:
+          channel:
+            app_id:
+              _eq: X-Hasura-App-Id
+  - role: member
+    permission:
+      filter:
+        member_id:
+          _eq: X-Hasura-User-Id

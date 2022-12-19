@@ -33,7 +33,7 @@ object_relationships:
   - name: parent
     using:
       foreign_key_constraint_on: parent_id
-  - name: reply_to
+  - name: replyTo
     using:
       foreign_key_constraint_on: reply_to_id
   - name: sender
@@ -53,6 +53,13 @@ array_relationships:
         column: message_id
         table:
           name: message_file
+          schema: public
+  - name: messageReactions
+    using:
+      foreign_key_constraint_on:
+        column: message_id
+        table:
+          name: message_reaction
           schema: public
   - name: references
     using:

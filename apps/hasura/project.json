@@ -54,6 +54,14 @@
         "cwd": "apps/hasura"
       }
     },
+    "cli": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "hasura --database-name=default",
+        "args": "",
+        "cwd": "apps/hasura"
+      }
+    },
     "dumpdb": {
       "executor": "nx:run-commands",
       "options": {
