@@ -59,7 +59,7 @@
     "type-check": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "tsc -p apps/chat/tsconfig.app.json --noEmit"
+        "command": "tsc -p apps/manager/tsconfig.app.json --noEmit"
       }
     }
   },

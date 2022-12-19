@@ -54,7 +54,7 @@ export class AuthService {
     });
     const user = data?.customer[0];
 
-    if (!user) return null;
+    if (!user || !user.encryptedPassword) return null;
 
     const isPasswordMatching = await bcrypt.compare(
       pass,
@@ -77,7 +77,7 @@ export class AuthService {
     });
     const user = data?.member[0];
 
-    if (!user) return null;
+    if (!user || !user.encryptedPassword) return null;
 
     const isPasswordMatching = await bcrypt.compare(
       pass,

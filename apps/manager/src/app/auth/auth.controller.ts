@@ -1,7 +1,8 @@
-import { Controller, Request, Post, UseGuards, Body } from '@nestjs/common';
+import { Controller, Req, Post, UseGuards, Body } from '@nestjs/common';
 import { CustomerAuthGuard } from './guard/customer-auth.guard';
 import { AuthService } from './auth.service';
 import { MemberAuthGuard } from './guard/member-auth.guard';
+import type { Request } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -9,14 +10,14 @@ export class AuthController {
 
   @UseGuards(CustomerAuthGuard)
   @Post('customer/login')
-  async login(@Request() req) {
-    return this.authService.loginCustomer(req.user);
+  async login(@Req() req: Request) {
+    return this.authService.loginCustomer(req.user as any);
   }
 
   @UseGuards(MemberAuthGuard)
   @Post('member/login')
-  async memberLogin(@Request() req) {
-    return this.authService.loginMember(req.user);
+  async memberLogin(@Req() req: Request) {
+    return this.authService.loginMember(req.user as any);
   }
 
   // TODO: remove after signup implementation
