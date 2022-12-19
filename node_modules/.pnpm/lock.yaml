@@ -8,13 +8,16 @@ specifiers:
   '@nestjs/passport': 9.0.0
   '@nestjs/platform-express': 9.2.0
   bcrypt: 5.1.0
+  express: 4.18.2
   graphql: 16.6.0
   graphql-request: 5.0.0
+  jsonwebtoken: 8.5.1
   passport: 0.6.0
   passport-local: 1.0.0
   reflect-metadata: 0.1.13
   rxjs: 7.5.7
   tslib: 2.4.1
+  zod: 3.20.2
 
 dependencies:
   '@graphql-typed-document-node/core': 3.1.1_graphql@16.6.0
@@ -24,13 +27,16 @@ dependencies:
   '@nestjs/passport': 9.0.0_s6va3jdeufsye4wwu25es3p4om
   '@nestjs/platform-express': 9.2.0_pf2fb646rsvo5szivgkaevcpvi
   bcrypt: 5.1.0
+  express: 4.18.2
   graphql: 16.6.0
   graphql-request: 5.0.0_graphql@16.6.0
+  jsonwebtoken: 8.5.1
   passport: 0.6.0
   passport-local: 1.0.0
   reflect-metadata: 0.1.13
   rxjs: 7.5.7
   tslib: 2.4.1
+  zod: 3.20.2
 
 packages:
 
@@ -1270,4 +1276,8 @@ packages:
 
   /yallist/4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
+    dev: false
+
+  /zod/3.20.2:
+    resolution: {integrity: sha512-1MzNQdAvO+54H+EaK5YpyEy0T+Ejo/7YLHS93G3RnYWh5gaotGHwGeN/ZO687qEDU2y4CdStQYXVHIgrUl5UVQ==}
     dev: false
