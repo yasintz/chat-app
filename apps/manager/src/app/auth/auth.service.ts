@@ -24,7 +24,7 @@ const getCustomerByEmailQuery = gql(/* GraphQL */ `
 
 const getMemberByEmailQuery = gql(/* GraphQL */ `
   query AuthServiceGetMemberByEmail($email: String!) {
-    member(where: { email: { _eq: $email } }) {
+    member(where: { externalId: { _eq: $email } }) {
       id
       encryptedPassword
       appId

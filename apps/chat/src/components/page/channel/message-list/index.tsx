@@ -3,11 +3,9 @@ import React from 'react';
 import { MessageItem, MessageItemProps } from './MessageItem';
 //#endregion
 
-//#region Props
 export interface MessageListProps {
   messageList?: Array<MessageItemProps>;
 }
-//#endregion
 
 export const MessageList = ({ messageList }: MessageListProps) => {
   return (

@@ -19,15 +19,20 @@ export const jwtSecretTypeKeySchema = z.array(
 export const memberTokenPayloadSchema = z
   .object({
     iss: z.string(),
-    [claimKey]: z
-      .object({
-        'c-user-id': z.string().uuid(),
-      })
-      .transform((claim) => ({
-        memberId: claim['c-user-id'],
-      })),
+    [claimKey]: z.object({
+      'user-id': z.string().uuid(),
+      user: z
+        .object({
+          name: z.string(),
+          // avatar: z.string().url()
+        })
+        .optional(),
+    }),
   })
   .transform((payload) => ({
-    claim: payload[claimKey],
+    claim: {
+      externalMemberId: payload[claimKey]['user-id'],
+      externalMember: payload[claimKey].user,
+    },
     issuer: payload.iss,
   }));

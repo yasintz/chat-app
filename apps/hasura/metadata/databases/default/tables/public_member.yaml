@@ -9,18 +9,18 @@ configuration:
       custom_name: createdAt
     deleted_at:
       custom_name: deletedAt
-    first_name:
-      custom_name: firstName
-    last_name:
-      custom_name: lastName
+    external_id:
+      custom_name: externalId
+    name:
+      custom_name: name
     updated_at:
       custom_name: updatedAt
   custom_column_names:
     app_id: appId
     created_at: createdAt
     deleted_at: deletedAt
-    first_name: firstName
-    last_name: lastName
+    external_id: externalId
+    name: name
     updated_at: updatedAt
   custom_root_fields: {}
 object_relationships:
@@ -53,39 +53,35 @@ select_permissions:
   - role: customer
     permission:
       columns:
-        - first_name
-        - last_name
+        - app_id
         - created_at
         - deleted_at
-        - updated_at
-        - app_id
+        - name
         - id
+        - updated_at
       filter: {}
       allow_aggregations: true
   - role: member
     permission:
       columns:
-        - email
-        - encryptedPassword
-        - first_name
-        - last_name
+        - app_id
         - created_at
         - deleted_at
-        - updated_at
-        - app_id
+        - encryptedPassword
+        - name
         - id
+        - updated_at
       filter: {}
       allow_aggregations: true
 update_permissions:
   - role: customer
     permission:
       columns:
-        - first_name
-        - last_name
+        - app_id
         - created_at
         - deleted_at
-        - updated_at
-        - app_id
+        - name
         - id
+        - updated_at
       filter: {}
       check: null

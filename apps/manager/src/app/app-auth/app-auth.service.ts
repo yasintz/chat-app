@@ -5,7 +5,7 @@ import {
   memberTokenPayloadSchema,
 } from './app-auth.schema';
 import * as jwt from 'jsonwebtoken';
-import { getAppByIdQuery } from './app-auth.gql';
+import { getAppByIdQuery, createMemberMutation } from './app-auth.gql';
 
 @Injectable()
 export class AppAuthService {
@@ -29,16 +29,33 @@ export class AppAuthService {
     const payload = parsedPayload.data;
     const data = await hasura.request(getAppByIdQuery, {
       appId,
-      memberId: payload.claim.memberId,
+      externalMemberId: payload.claim.externalMemberId,
     });
-    const { app, member } = data;
+    const { app } = data;
+    let member = data.member?.[0];
 
     if (!app) {
       throw new Error("App doesn't exists");
     }
 
     if (!member) {
-      throw new Error("Member doesn't exists");
+      if (!payload.claim.externalMember) {
+        throw new Error("Member doesn't exists");
+      }
+
+      const newMemberData = await hasura.request(createMemberMutation, {
+        data: {
+          appId,
+          name: payload.claim.externalMember.name,
+          externalId: payload.claim.externalMemberId,
+        },
+      });
+      const newMember = newMemberData.member;
+      if (!newMember) {
+        throw new Error("Member couldn't created");
+      }
+
+      member = newMember;
     }
 
     if (!app.jwtSecrets) {

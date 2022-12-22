@@ -17,9 +17,8 @@ const getChannelMessages = gql(/* GraphQL */ `
       parentId
       replyToId
       sender {
-        firstName
-        lastName
         id
+        name
       }
     }
   }
@@ -38,9 +37,8 @@ const addNewMessage = gql(/* GraphQL */ `
       parentId
       replyToId
       sender {
-        firstName
-        lastName
         id
+        name
       }
     }
   }
@@ -61,7 +59,7 @@ export const ChannelPage = () => {
   });
 
   const [createNewCustomer] = useMutation(addNewMessage, {
-    variables: { channelId, body: newMessage, senderId: memberId },
+    variables: { channelId, body: newMessage || '', senderId: memberId },
   });
 
   const onMessageSent = React.useCallback(() => {
