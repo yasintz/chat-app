@@ -21,6 +21,7 @@ export const memberTokenPayloadSchema = z
   .object({
     iss: z.string(),
     [claimKey]: z.object({
+      'app-id': z.string(),
       'user-id': z.string(),
       user: z
         .object({
@@ -34,6 +35,7 @@ export const memberTokenPayloadSchema = z
     claim: {
       externalMemberId: payload[claimKey]['user-id'],
       externalMember: payload[claimKey].user,
+      appId: payload[claimKey]['app-id'],
     },
     issuer: payload.iss,
   }));
