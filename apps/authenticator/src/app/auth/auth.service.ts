@@ -41,6 +41,14 @@ export class AuthService {
   async loginSimpleUser(user: SimpleUser) {
     const data: JwtCommonPayloadType = {
       sub: user.id,
+      iss: 'example',
+      'https://chat.app/jwt/claim': {
+        'user-id': user.id,
+        'app-id': 'ae993ef6-7618-49c5-b032-2e072aa57973',
+        user: {
+          name: user.username,
+        },
+      },
     };
     return {
       token: `Bearer ${this.jwtService.sign(data, { issuer: 'simple-user' })}`,
