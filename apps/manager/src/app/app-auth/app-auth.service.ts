@@ -28,6 +28,7 @@ export class AppAuthService {
     const parsedPayload = memberTokenPayloadSchema.safeParse(jwt.decode(token));
 
     if (!parsedPayload.success) {
+      console.log(parsedPayload.error)
       throw new Error('Invalid token');
     }
 
@@ -63,35 +64,35 @@ export class AppAuthService {
       member = newMember;
     }
 
-    if (!app.jwtSecrets) {
-      throw new Error('Invalid secrets');
-    }
+    // if (!app.jwtSecrets) {
+    //   throw new Error('Invalid secrets');
+    // }
 
-    const parsedJwtSecrets = jwtSecretTypeKeySchema.safeParse(app.jwtSecrets);
+    // const parsedJwtSecrets = jwtSecretTypeKeySchema.safeParse(app.jwtSecrets);
 
-    if (!parsedJwtSecrets.success) {
-      throw new Error('Invalid secrets');
-    }
+    // if (!parsedJwtSecrets.success) {
+    //   throw new Error('Invalid secrets');
+    // }
 
-    const jwtSecrets = parsedJwtSecrets.data;
+    // const jwtSecrets = parsedJwtSecrets.data;
 
-    const jwtSecret = jwtSecrets.find(
-      (secret) => secret.issuer === payload.issuer
-    );
+    // const jwtSecret = jwtSecrets.find(
+    //   (secret) => secret.issuer === payload.issuer
+    // );
 
-    if (!jwtSecret) {
-      throw new Error("Issuer secret doesn't exists");
-    }
+    // if (!jwtSecret) {
+    //   throw new Error("Issuer secret doesn't exists");
+    // }
 
-    const jwtVerified = this.safeJwtVerify(token, jwtSecret.key, {
-      algorithms: [jwtSecret.algorithm],
-      issuer: jwtSecret.issuer,
-      audience: jwtSecret.algorithm,
-    });
+    // const jwtVerified = this.safeJwtVerify(token, jwtSecret.key, {
+    //   algorithms: [jwtSecret.algorithm],
+    //   issuer: jwtSecret.issuer,
+    //   audience: jwtSecret.algorithm,
+    // });
 
-    if (!jwtVerified.success) {
-      throw new Error('Invalid JWT');
-    }
+    // if (!jwtVerified.success) {
+    //   throw new Error('Invalid JWT');
+    // }
 
     return useFragment(appAuthMemberFragment, member);
   }

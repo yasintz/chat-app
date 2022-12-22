@@ -3,21 +3,27 @@ import { CustomerAuthGuard } from './guard/customer-auth.guard';
 import { AuthService } from './auth.service';
 import { MemberAuthGuard } from './guard/member-auth.guard';
 import type { Request } from 'express';
+import { JwtSignService } from './jwt-sign.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private jwtSignService: JwtSignService
+  ) {}
 
   @UseGuards(CustomerAuthGuard)
   @Post('customer/login')
   async login(@Req() req: Request) {
-    return this.authService.loginCustomer(req.user as any);
+    const token = await this.jwtSignService.signCustomerToken(req.user as any);
+
+    return { token };
   }
 
   @UseGuards(MemberAuthGuard)
   @Post('member/login')
   async memberLogin(@Req() req: Request) {
-    const token = await this.authService.loginMember(req.user as any);
+    const token = await this.jwtSignService.signMemberToken(req.user as any);
 
     return { token };
   }

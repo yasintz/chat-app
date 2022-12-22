@@ -21,7 +21,7 @@ export const memberTokenPayloadSchema = z
   .object({
     iss: z.string(),
     [claimKey]: z.object({
-      'user-id': z.string().uuid(),
+      'user-id': z.string(),
       user: z
         .object({
           name: z.string(),

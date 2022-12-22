@@ -1,5 +1,5 @@
 import { Controller, Post, Headers, Param } from '@nestjs/common';
-import { AuthService } from '../auth/auth.service';
+import { JwtSignService } from '../auth/jwt-sign.service';
 import { PostMemberHeadersDto } from './app-auth.schema';
 import { AppAuthService } from './app-auth.service';
 
@@ -7,7 +7,7 @@ import { AppAuthService } from './app-auth.service';
 export class AppAuthController {
   constructor(
     private appAuthService: AppAuthService,
-    // private authService: AuthService
+    private jwtSignService: JwtSignService
   ) {}
 
   @Post('/:appId/member')
@@ -22,7 +22,7 @@ export class AppAuthController {
     if (!member) {
       throw new Error();
     }
-    // const token = await this.authService.loginMember(member);
-    // return { token };
+    const token = await this.jwtSignService.signCustomerToken(member);
+    return { token };
   }
 }
