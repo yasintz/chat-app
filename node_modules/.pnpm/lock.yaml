@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@anatine/zod-nestjs': 1.8.0
   '@graphql-typed-document-node/core': 3.1.1
   '@nestjs/common': 9.2.0
   '@nestjs/core': 9.2.0
@@ -16,10 +17,12 @@ specifiers:
   passport-local: 1.0.0
   reflect-metadata: 0.1.13
   rxjs: 7.5.7
+  ts-deepmerge: 4.0.0
   tslib: 2.4.1
   zod: 3.20.2
 
 dependencies:
+  '@anatine/zod-nestjs': 1.8.0_436kp2valrqjsefzzjyql463wi
   '@graphql-typed-document-node/core': 3.1.1_graphql@16.6.0
   '@nestjs/common': 9.2.0_yzt46al3aifnexifjjdb4dxxja
   '@nestjs/core': 9.2.0_jfowmhmgk7kwjudosrpv7e7liy
@@ -35,10 +38,36 @@ dependencies:
   passport-local: 1.0.0
   reflect-metadata: 0.1.13
   rxjs: 7.5.7
+  ts-deepmerge: 4.0.0
   tslib: 2.4.1
   zod: 3.20.2
 
 packages:
+
+  /@anatine/zod-nestjs/1.8.0_436kp2valrqjsefzzjyql463wi:
+    resolution: {integrity: sha512-+3erKMNJ1w9FoOcl9W1aPCO4hC2A2OBG7ieOEDuvYuCwWw5a/Md7R16Kyp0/cecvne9hRPjhWelLa697ipEUwA==}
+    peerDependencies:
+      '@nestjs/core': ^7.0.0 || ^8.0.0 || ^9.0.0
+      '@nestjs/swagger': ^6.0.0
+      openapi3-ts: ^2.0.0 || ^3.0.0
+      ts-deepmerge: ^4.0.0
+      zod: ^3.17.0 || ^3.18.0
+    dependencies:
+      '@anatine/zod-openapi': 1.11.0_zod@3.20.2
+      '@nestjs/core': 9.2.0_jfowmhmgk7kwjudosrpv7e7liy
+      ts-deepmerge: 4.0.0
+      zod: 3.20.2
+    dev: false
+
+  /@anatine/zod-openapi/1.11.0_zod@3.20.2:
+    resolution: {integrity: sha512-MmZQMKa/nfM9KpqgiAuGVIT6TJXmts06JF3+EeT1jw3Y5GB7UOuljnIAgGAMExa0tAIP9uFhp5RhIMNDtZcqWw==}
+    peerDependencies:
+      openapi3-ts: ^2.0.0 || ^3.0.0
+      zod: ^3.20.0
+    dependencies:
+      ts-deepmerge: 4.0.0
+      zod: 3.20.2
+    dev: false
 
   /@graphql-typed-document-node/core/3.1.1_graphql@16.6.0:
     resolution: {integrity: sha512-NQ17ii0rK1b34VZonlmT2QMJFI70m0TRwbknO/ihlbatXyaktDhN/98vBiUU6kNBPljqGqyIrl2T4nY2RpFANg==}
@@ -1206,6 +1235,11 @@ packages:
 
   /tr46/0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
+    dev: false
+
+  /ts-deepmerge/4.0.0:
+    resolution: {integrity: sha512-IrjjAwfM/J6ajWv5wDRZBdpVaTmuONJN1vC85mXlWVPXKelouLFiqsjR7m0h245qY6zZEtcDtcOTc4Rozgg1TQ==}
+    engines: {node: '>=14'}
     dev: false
 
   /tslib/2.4.1:
