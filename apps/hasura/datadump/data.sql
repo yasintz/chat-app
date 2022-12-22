@@ -18,7 +18,7 @@ SET row_security = off;
 -- Data for Name: app; Type: TABLE DATA; Schema: public; Owner: chatuser
 --
 
-INSERT INTO public.app (id, name) VALUES ('ae993ef6-7618-49c5-b032-2e072aa57973', 'Deneme App 3');
+INSERT INTO public.app (id, name, jwt_secrets) VALUES ('ae993ef6-7618-49c5-b032-2e072aa57973', 'Deneme App 3', NULL);
 
 
 --
@@ -53,8 +53,8 @@ INSERT INTO public.customer (id, app_id, first_name, created_at, updated_at, las
 -- Data for Name: member; Type: TABLE DATA; Schema: public; Owner: chatuser
 --
 
-INSERT INTO public.member (id, app_id, first_name, last_name, created_at, updated_at, deleted_at, email, "encryptedPassword") VALUES ('48af78d8-246f-482b-826c-a5c61194e612', 'ae993ef6-7618-49c5-b032-2e072aa57973', 'qwe', 'qwe', '2022-11-28 23:46:58.86627+00', '2022-11-28 23:46:58.86627+00', NULL, NULL, NULL);
-INSERT INTO public.member (id, app_id, first_name, last_name, created_at, updated_at, deleted_at, email, "encryptedPassword") VALUES ('a7f4c2d8-11db-4564-a194-e5f550e0ac51', 'ae993ef6-7618-49c5-b032-2e072aa57973', 'asd', 'asd', '2022-11-28 23:46:48.201652+00', '2022-12-02 21:40:55.721073+00', NULL, 'member@app.com', '$2b$10$1NPoPCpjzMqr0Uv.E4/vEe5DjyeR.aWEDOm7vyKEDbpWShmJJBilK');
+INSERT INTO public.member (id, app_id, name, created_at, updated_at, deleted_at, "encryptedPassword", external_id) VALUES ('48af78d8-246f-482b-826c-a5c61194e612', 'ae993ef6-7618-49c5-b032-2e072aa57973', 'qwe', '2022-11-28 23:46:58.86627+00', '2022-11-28 23:46:58.86627+00', NULL, NULL, 'member@app.com');
+INSERT INTO public.member (id, app_id, name, created_at, updated_at, deleted_at, "encryptedPassword", external_id) VALUES ('a7f4c2d8-11db-4564-a194-e5f550e0ac51', 'ae993ef6-7618-49c5-b032-2e072aa57973', 'asd', '2022-11-28 23:46:48.201652+00', '2022-12-02 21:40:55.721073+00', NULL, '$2b$10$1NPoPCpjzMqr0Uv.E4/vEe5DjyeR.aWEDOm7vyKEDbpWShmJJBilK', 'member1@app.com');
 
 
 --
