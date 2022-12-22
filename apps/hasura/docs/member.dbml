@@ -1,8 +1,8 @@
 Table member {
   id uuid [pk, increment]
   app_id uuid [ref: > app.id]
-  first_name varchar
-  last_name varchar
+  name varchar
+  external_id varchar
 }
 
 Table member_file {
