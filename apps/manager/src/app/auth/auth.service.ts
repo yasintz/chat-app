@@ -3,35 +3,15 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import hasura from '../../clients/graphql-request';
 import { environment } from '../../environments/environment';
-import { gql, DocumentType } from '../../gql';
+import { DocumentType } from '../../gql';
+import { Member } from '../../gql/graphql';
+import { getCustomerByEmailQuery, getMemberByEmailQuery } from './auth.gql';
 
 enum Roles {
   CUSTOMER = 'customer',
   MEMBER = 'member',
   ADMIN = 'admin',
 }
-
-// #region GQL
-const getCustomerByEmailQuery = gql(/* GraphQL */ `
-  query AuthServiceGetCustomerByEmail($email: String!) {
-    customer(where: { email: { _eq: $email } }) {
-      id
-      encryptedPassword
-      appId
-    }
-  }
-`);
-
-const getMemberByEmailQuery = gql(/* GraphQL */ `
-  query AuthServiceGetMemberByEmail($email: String!) {
-    member(where: { externalId: { _eq: $email } }) {
-      id
-      encryptedPassword
-      appId
-    }
-  }
-`);
-// #endregion
 
 type CustomerType = DocumentType<
   typeof getCustomerByEmailQuery
@@ -107,21 +87,19 @@ export class AuthService {
     };
   }
 
-  async loginMember(user: MemberType) {
+  async loginMember(member: Pick<Member, 'id' | 'appId'>) {
     const payload = {
-      sub: user.id,
+      sub: member.id,
       'https://hasura.io/jwt/claims': {
         'x-hasura-allowed-roles': this.allowedRoles,
         'x-hasura-default-role': this.defaultRole,
-        'x-hasura-user-id': user.id,
-        'x-hasura-app-id': user.appId,
+        'x-hasura-user-id': member.id,
+        'x-hasura-app-id': member.appId,
         'x-hasura-role': Roles.MEMBER,
       },
     };
 
-    return {
-      token: `Bearer ${this.jwtService.sign(payload)}`,
-    };
+    return `Bearer ${this.jwtService.sign(payload)}`;
   }
 
   async encryptPassword(password: string) {

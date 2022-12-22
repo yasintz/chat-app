@@ -1,4 +1,5 @@
 import * as z from 'zod';
+import { createZodDto } from '@anatine/zod-nestjs';
 
 const claimKey = 'https://chat.app/jwt/claim';
 
@@ -36,3 +37,11 @@ export const memberTokenPayloadSchema = z
     },
     issuer: payload.iss,
   }));
+
+const postMemberHeadersSchema = z.object({
+  authorization: jwtTokenSchema,
+});
+
+export class PostMemberHeadersDto extends createZodDto(
+  postMemberHeadersSchema
+) {}

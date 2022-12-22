@@ -12,6 +12,7 @@
   },
   "private": true,
   "dependencies": {
+    "@anatine/zod-nestjs": "^1.8.0",
     "@apollo/client": "^3.7.1",
     "@graphql-typed-document-node/core": "^3.1.1",
     "@nestjs/common": "^9.0.0",

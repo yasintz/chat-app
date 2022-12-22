@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@anatine/zod-nestjs': ^1.8.0
   '@apollo/client': ^3.7.1
   '@babel/core': 7.12.13
   '@babel/preset-typescript': 7.12.13
@@ -126,6 +127,7 @@ specifiers:
   zustand: ^4.1.4
 
 dependencies:
+  '@anatine/zod-nestjs': 1.8.0_z27xi5wz5uv5jzbbwy55zr5iiy
   '@apollo/client': 3.7.1_xe4twbeoqswbn2uas4ov5melbq
   '@graphql-typed-document-node/core': 3.1.1_graphql@16.6.0
   '@nestjs/common': 9.2.0_yzt46al3aifnexifjjdb4dxxja
@@ -261,6 +263,30 @@ packages:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.17
     dev: true
+
+  /@anatine/zod-nestjs/1.8.0_z27xi5wz5uv5jzbbwy55zr5iiy:
+    resolution: {integrity: sha512-+3erKMNJ1w9FoOcl9W1aPCO4hC2A2OBG7ieOEDuvYuCwWw5a/Md7R16Kyp0/cecvne9hRPjhWelLa697ipEUwA==}
+    peerDependencies:
+      '@nestjs/core': ^7.0.0 || ^8.0.0 || ^9.0.0
+      '@nestjs/swagger': ^6.0.0
+      openapi3-ts: ^2.0.0 || ^3.0.0
+      ts-deepmerge: ^4.0.0
+      zod: ^3.17.0 || ^3.18.0
+    dependencies:
+      '@anatine/zod-openapi': 1.11.0_zod@3.20.2
+      '@nestjs/core': 9.2.0_jfowmhmgk7kwjudosrpv7e7liy
+      zod: 3.20.2
+    dev: false
+
+  /@anatine/zod-openapi/1.11.0_zod@3.20.2:
+    resolution: {integrity: sha512-MmZQMKa/nfM9KpqgiAuGVIT6TJXmts06JF3+EeT1jw3Y5GB7UOuljnIAgGAMExa0tAIP9uFhp5RhIMNDtZcqWw==}
+    peerDependencies:
+      openapi3-ts: ^2.0.0 || ^3.0.0
+      zod: ^3.20.0
+    dependencies:
+      ts-deepmerge: 4.0.0
+      zod: 3.20.2
+    dev: false
 
   /@angular-devkit/core/14.2.1_chokidar@3.5.3:
     resolution: {integrity: sha512-lW8oNGuJqr4r31FWBjfWQYkSXdiOHBGOThIEtHvUVBKfPF/oVrupLueCUgBPel+NvxENXdo93uPsqHN7bZbmsQ==}
@@ -23646,6 +23672,11 @@ packages:
     resolution: {integrity: sha512-q5W7tVM71e2xjHZTlgfTDoPF/SmqKG5hddq9SzR49CH2hayqRKJtQ4mtRlSxKaJlR/+9rEM+mnBHf7I2/BQcpQ==}
     engines: {node: '>=6.10'}
     dev: true
+
+  /ts-deepmerge/4.0.0:
+    resolution: {integrity: sha512-IrjjAwfM/J6ajWv5wDRZBdpVaTmuONJN1vC85mXlWVPXKelouLFiqsjR7m0h245qY6zZEtcDtcOTc4Rozgg1TQ==}
+    engines: {node: '>=14'}
+    dev: false
 
   /ts-invariant/0.10.3:
     resolution: {integrity: sha512-uivwYcQaxAucv1CzRp2n/QdYPo4ILf9VXgH19zEIjFx2EJufV16P0JtJVpYHy89DItG6Kwj2oIUjrcK5au+4tQ==}

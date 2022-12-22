@@ -5,7 +5,12 @@ import {
   memberTokenPayloadSchema,
 } from './app-auth.schema';
 import * as jwt from 'jsonwebtoken';
-import { getAppByIdQuery, createMemberMutation } from './app-auth.gql';
+import {
+  getAppByIdQuery,
+  createMemberMutation,
+  appAuthMemberFragment,
+} from './app-auth.gql';
+import { useFragment } from '../../gql';
 
 @Injectable()
 export class AppAuthService {
@@ -88,6 +93,6 @@ export class AppAuthService {
       throw new Error('Invalid JWT');
     }
 
-    return member;
+    return useFragment(appAuthMemberFragment, member);
   }
 }

@@ -1,8 +1,9 @@
 import { gql } from '../../gql';
 
-gql(/* GraphQL */ `
-  fragment AuthServiceMember on member {
+export const appAuthMemberFragment = gql(/* GraphQL */ `
+  fragment AppAuthMember on member {
     id
+    appId
   }
 `);
 
@@ -12,10 +13,11 @@ export const getAppByIdQuery = gql(/* GraphQL */ `
       id
       jwtSecrets
     }
+
     member(
       where: { appId: { _eq: $appId }, externalId: { _eq: $externalMemberId } }
     ) {
-      ...AuthServiceMember
+      ...AppAuthMember
     }
   }
 `);
@@ -29,7 +31,7 @@ export const createMemberMutation = gql(/* GraphQL */ `
         update_columns: [name]
       }
     ) {
-      ...AuthServiceMember
+      ...AppAuthMember
     }
   }
 `);
