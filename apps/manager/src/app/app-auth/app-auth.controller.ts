@@ -15,7 +15,7 @@ export class AppAuthController {
     const member = await this.appAuthService.validateMemberToken(
       headers.authorization
     );
-    const token = await this.jwtSignService.signCustomerToken(member);
+    const token = await this.jwtSignService.signMemberToken(member);
     return { token };
   }
 }

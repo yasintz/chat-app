@@ -15,7 +15,7 @@ export const environment = {
       endpoint: 'https://ychat-server.vercel.app/api',
     },
     local: {
-      endpoint: 'http://localhost:3333/api',
+      endpoint: 'http://localhost:4203/api',
     },
   },
 };

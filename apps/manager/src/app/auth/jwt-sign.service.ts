@@ -5,7 +5,7 @@ import { Member, Customer } from '../../gql/graphql';
 enum Roles {
   CUSTOMER = 'customer',
   MEMBER = 'member',
-  ADMIN = 'admin',
+  PUBLIC = 'public',
 }
 
 @Injectable()
@@ -16,11 +16,10 @@ export class JwtSignService {
     return {
       sub: id,
       'https://hasura.io/jwt/claims': {
-        'x-hasura-allowed-roles': Object.values(Roles),
-        'x-hasura-default-role': 'public',
+        'x-hasura-allowed-roles': [role],
+        'x-hasura-default-role': role,
         'x-hasura-user-id': id,
         'x-hasura-app-id': appId,
-        'x-hasura-role': role,
       },
     };
   }

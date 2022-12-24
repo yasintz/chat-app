@@ -87,7 +87,7 @@ export class AppAuthService {
     const jwtVerified = this.safeJwtVerify(token, jwtSecret.key, {
       algorithms: [jwtSecret.algorithm],
       issuer: jwtSecret.issuer,
-      audience: jwtSecret.algorithm,
+      audience: jwtSecret.audience,
     });
 
     if (!jwtVerified.success) {

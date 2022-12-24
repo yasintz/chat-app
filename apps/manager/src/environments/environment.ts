@@ -1,6 +1,7 @@
 import { JWT_TOKEN_PRIVATE_KEY } from './jwt-token.key';
 
 export const environment = {
+  port: 4203,
   production: false,
   hasuraEnv: 'local' as 'prod' | 'local',
   hasura: {

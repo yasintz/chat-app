@@ -8,6 +8,7 @@ import { HomePage } from '../pages/home';
 import { AuthPage, authAction } from '../pages/auth';
 import { ProtectedRoute } from './protected-route';
 import { ChannelPage } from '../pages/channel';
+import { EmbeddedChatApp } from '../pages/embedded';
 // #endregion
 
 // #region Types
@@ -35,6 +36,10 @@ const routes: RouteType[] = [
     path: '/auth',
     element: <AuthPage />,
     action: authAction,
+  },
+  {
+    path: '/embedded/:channelId',
+    element: <EmbeddedChatApp />,
   },
 ];
 

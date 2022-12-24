@@ -2,6 +2,7 @@ import type { Environment } from './environment';
 import { JWT_TOKEN_PRIVATE_KEY } from './jwt-token.key';
 
 export const environment: Environment = {
+  port: parseInt(process.env.PORT || '3333'),
   production: true,
   hasuraEnv: 'prod',
   hasura: {

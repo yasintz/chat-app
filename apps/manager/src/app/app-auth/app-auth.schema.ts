@@ -13,7 +13,7 @@ export const jwtSecretTypeKeySchema = z.array(
     algorithm: z.enum(['RS256']),
     issuer: z.string(),
     audience: z.string().optional(),
-    key: jwtTokenSchema,
+    key: z.string(),
   })
 );
 
