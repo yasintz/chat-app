@@ -1,7 +1,7 @@
 export const environment = {
+  port: 4301,
   production: false,
   jwtConstants: {
-    secret: 'secret',
     expiresIn: '90 day',
   },
   bcrypt: {

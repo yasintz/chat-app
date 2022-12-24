@@ -15,7 +15,7 @@ export const environment: Environment = {
       endpoint: 'https://ychat-manager.up.railway.app/api',
     },
     local: {
-      endpoint: 'http://localhost:3333/api',
+      endpoint: 'http://localhost:4301/api',
     },
   },
 };

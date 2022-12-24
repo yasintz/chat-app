@@ -1,9 +1,9 @@
 import { ExtractJwt, Strategy, StrategyOptions } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
-import { environment } from '../../../environments/environment';
 import { JwtCommonPayloadType } from '../auth.types';
 import { AuthService } from '../auth.service';
+import { publicKey } from '../../../environments/jwt.keys';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -11,7 +11,8 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: environment.jwtConstants.secret,
+      secretOrKey: publicKey,
+      algorithms: ['RS256'],
     } as StrategyOptions);
   }
 

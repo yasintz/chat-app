@@ -1,5 +1,4 @@
 export type JwtCommonPayloadType = {
-  iss: string;
   sub: string;
   'https://chat.app/jwt/claim': {
     'user-id': string;

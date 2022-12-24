@@ -8,7 +8,7 @@ type TodoType = {
 };
 
 const getTodoList = async () => {
-  return fetch(`http://localhost:3333/api/todos`, {
+  return fetch(`http://localhost:4301/api/todos`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ const getTodoList = async () => {
 };
 
 const toggleTodo = async (id: string) => {
-  return fetch(`http://localhost:3333/api/todo/toggle/${id}`, {
+  return fetch(`http://localhost:4301/api/todo/toggle/${id}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ const toggleTodo = async (id: string) => {
   }).then<TodoType>((r) => r.json());
 };
 const createTodo = async (text: string) => {
-  return fetch(`http://localhost:3333/api/todo/create`, {
+  return fetch(`http://localhost:4301/api/todo/create`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ const authenticate = (
   username: string,
   password: string
 ) => {
-  return fetch(`http://localhost:3333/api/auth/${operation}/simple-user`, {
+  return fetch(`http://localhost:4301/api/auth/${operation}/simple-user`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

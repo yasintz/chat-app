@@ -18,7 +18,6 @@ export const HomePage = () => {
 
   const onSubmit = async ({ username, password, operation }: FormDataType) => {
     const response = await authenticate(operation, username, password);
-    console.log(response);
     login(response.token, response.user);
   };
 

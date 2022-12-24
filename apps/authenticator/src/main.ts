@@ -8,8 +8,9 @@ import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app/app.module';
 import 'reflect-metadata';
+import { environment } from './environments/environment';
 
-const corsOrigins = ['http://localhost:4201', 'http://127.0.0.1:4201'];
+const corsOrigins = ['http://localhost:4301', 'http://127.0.0.1:4301'];
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -18,7 +19,7 @@ async function bootstrap() {
 
   app.enableCors({ origin: corsOrigins });
 
-  const port = process.env.PORT || 3333;
+  const port = environment.port;
   await app.listen(port);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${globalPrefix}`

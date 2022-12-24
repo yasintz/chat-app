@@ -8,7 +8,7 @@ type TodoListAppProps = {
 };
 
 export const TodoListApp = (props: TodoListAppProps) => {
-  const user = useAuthStorage((s) => s.user);
+  const [user, token] = useAuthStorage((s) => [s.user, s.token] as const);
   const createInputRef = useRef<HTMLInputElement>(null);
   const queryClient = useQueryClient();
   const { data: todos, isLoading } = useQuery(['todos'], getTodoList);
@@ -73,10 +73,24 @@ export const TodoListApp = (props: TodoListAppProps) => {
           justifyContent: 'center',
         }}
       >
-        <img
-          src="https://user-images.githubusercontent.com/36041339/208322017-e377a3ab-b51f-4111-9053-5d2926b06069.png"
-          alt="chat"
-          style={{ flex: 1, maxWidth: '100%', maxHeight: '100%' }}
+        <iframe
+          src="http://127.0.0.1:4200/embedded"
+          title="Chat App"
+          style={{
+            flex: 1,
+            height: '100%',
+            borderLeft: '1px solid #ddd',
+          }}
+          frameBorder="0"
+          onLoad={(event) => {
+            (event.target as HTMLIFrameElement).contentWindow?.postMessage(
+              JSON.stringify({
+                type: 'send_member_token',
+                message: token,
+              }),
+              '*'
+            );
+          }}
         />
       </div>
     </div>

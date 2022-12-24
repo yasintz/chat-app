@@ -8,15 +8,18 @@ import { SimpleUserStrategy } from './strategy/simple-user.strategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SimpleUser } from '../../database/entities/simple-user.entity';
 import { JwtStrategy } from './strategy/jwt.strategy';
+import { privateKey, publicKey } from '../../environments/jwt.keys';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([SimpleUser]),
     PassportModule,
     JwtModule.register({
-      secret: environment.jwtConstants.secret,
+      privateKey,
+      publicKey,
       signOptions: {
         expiresIn: environment.jwtConstants.expiresIn,
+        algorithm: 'RS256',
       },
     }),
   ],
