@@ -18,7 +18,13 @@ SET row_security = off;
 -- Data for Name: app; Type: TABLE DATA; Schema: public; Owner: chatuser
 --
 
-INSERT INTO public.app (id, name, jwt_secrets) VALUES ('ae993ef6-7618-49c5-b032-2e072aa57973', 'Deneme App 3', NULL);
+INSERT INTO public.app (id, name, jwt_secrets) VALUES ('ae993ef6-7618-49c5-b032-2e072aa57973', 'Deneme App 3', '[{"key": "-----BEGIN PUBLIC KEY-----
+MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQClDyElcTC9VnPjJgn4IRHAVGoT
+Fi1Un/uYWQcKs76G7EinDUbgiaCkVcHc1J9jfiZK+mzV/4YAJkMCaOzAbX2ZxB7b
+MyA2NJECGGcZnjxR9FQv46TvnNnNpz13bQIyMzIXBIFky51Juitxb/e7KC7+nd6F
+ml0IiXX4dipLG1jMbQIDAQAB
+-----END PUBLIC KEY-----
+", "issuer": "simple-user", "algorithm": "RS256"}]');
 
 
 --
@@ -55,6 +61,7 @@ INSERT INTO public.customer (id, app_id, first_name, created_at, updated_at, las
 
 INSERT INTO public.member (id, app_id, name, created_at, updated_at, deleted_at, "encryptedPassword", external_id) VALUES ('48af78d8-246f-482b-826c-a5c61194e612', 'ae993ef6-7618-49c5-b032-2e072aa57973', 'qwe', '2022-11-28 23:46:58.86627+00', '2022-11-28 23:46:58.86627+00', NULL, NULL, 'member@app.com');
 INSERT INTO public.member (id, app_id, name, created_at, updated_at, deleted_at, "encryptedPassword", external_id) VALUES ('a7f4c2d8-11db-4564-a194-e5f550e0ac51', 'ae993ef6-7618-49c5-b032-2e072aa57973', 'asd', '2022-11-28 23:46:48.201652+00', '2022-12-02 21:40:55.721073+00', NULL, '$2b$10$1NPoPCpjzMqr0Uv.E4/vEe5DjyeR.aWEDOm7vyKEDbpWShmJJBilK', 'member1@app.com');
+INSERT INTO public.member (id, app_id, name, created_at, updated_at, deleted_at, "encryptedPassword", external_id) VALUES ('d49fa8e5-4708-4f53-9648-4b57ae36e34e', 'ae993ef6-7618-49c5-b032-2e072aa57973', 'yasin', '2022-12-23 23:09:25.239207+00', '2022-12-23 23:09:25.239207+00', NULL, NULL, '207b8a60-e962-4ff6-a34d-3330029043ca');
 
 
 --
@@ -62,6 +69,10 @@ INSERT INTO public.member (id, app_id, name, created_at, updated_at, deleted_at,
 --
 
 INSERT INTO public.member_channel (id, member_id, channel_id) VALUES ('4d741b15-346c-4a3c-aacc-74ed24889aff', 'a7f4c2d8-11db-4564-a194-e5f550e0ac51', 'd9526cd5-b04f-4003-9ac8-fea05175f62d');
+INSERT INTO public.member_channel (id, member_id, channel_id) VALUES ('1a40e8f9-123d-4e16-a1d3-04ccd4c7964f', 'd49fa8e5-4708-4f53-9648-4b57ae36e34e', 'd9526cd5-b04f-4003-9ac8-fea05175f62d');
+INSERT INTO public.member_channel (id, member_id, channel_id) VALUES ('9b3cf0ba-b041-4f06-8766-a8392bd1c037', 'd49fa8e5-4708-4f53-9648-4b57ae36e34e', 'f904b9a2-e2ec-4627-8f26-69e7b92b89c5');
+INSERT INTO public.member_channel (id, member_id, channel_id) VALUES ('82787853-0c08-4580-bd12-32e8d63cf0ed', 'd49fa8e5-4708-4f53-9648-4b57ae36e34e', 'feaaec2b-f499-4578-bba9-a01dc2596386');
+INSERT INTO public.member_channel (id, member_id, channel_id) VALUES ('810a40a1-db73-478a-81a6-b41942630c30', 'd49fa8e5-4708-4f53-9648-4b57ae36e34e', 'b352755e-fb73-4c45-9c85-60981c7645f2');
 
 
 --
@@ -83,6 +94,7 @@ INSERT INTO public.message (id, created_at, updated_at, deleted_at, sender_id, b
 INSERT INTO public.message (id, created_at, updated_at, deleted_at, sender_id, body, channel_id, parent_id, reply_to_id) VALUES ('a3d7cc00-fec9-4c3e-9238-740fdcbbbf31', '2022-12-03 22:25:30.65017+00', NULL, NULL, 'a7f4c2d8-11db-4564-a194-e5f550e0ac51', 'werwe', 'd9526cd5-b04f-4003-9ac8-fea05175f62d', NULL, NULL);
 INSERT INTO public.message (id, created_at, updated_at, deleted_at, sender_id, body, channel_id, parent_id, reply_to_id) VALUES ('cb5e14aa-64e7-45ec-ac25-39d4409541aa', '2022-12-03 22:27:19.516204+00', NULL, NULL, 'a7f4c2d8-11db-4564-a194-e5f550e0ac51', 'ret', 'd9526cd5-b04f-4003-9ac8-fea05175f62d', NULL, NULL);
 INSERT INTO public.message (id, created_at, updated_at, deleted_at, sender_id, body, channel_id, parent_id, reply_to_id) VALUES ('7a41703c-388f-4f19-abc1-eb433af9e036', '2022-12-03 22:27:35.23563+00', NULL, NULL, 'a7f4c2d8-11db-4564-a194-e5f550e0ac51', 'bu bitti', 'd9526cd5-b04f-4003-9ac8-fea05175f62d', NULL, NULL);
+INSERT INTO public.message (id, created_at, updated_at, deleted_at, sender_id, body, channel_id, parent_id, reply_to_id) VALUES ('888939fc-7f56-4c47-98f4-0a4ee83b0932', '2022-12-24 00:04:02.430696+00', NULL, NULL, 'd49fa8e5-4708-4f53-9648-4b57ae36e34e', 'testing..', 'd9526cd5-b04f-4003-9ac8-fea05175f62d', NULL, NULL);
 
 
 --
