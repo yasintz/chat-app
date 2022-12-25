@@ -1,4 +1,4 @@
-import { Form, ActionFunction, redirect, useParams } from 'react-router-dom';
+import { Form, ActionFunction, redirect } from 'react-router-dom';
 import { environment } from '../../environments/environment';
 import useAuthStore from '../../store/auth';
 
@@ -9,9 +9,7 @@ export const authAction: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const email = form.get('email');
   const password = form.get('password');
-  const appId = form.get('appId');
 
-  console.log(appId);
   const response = await fetch(`${serverUrl}/auth/member/login`, {
     method: 'POST',
     headers: {
@@ -26,7 +24,6 @@ export const authAction: ActionFunction = async ({ request }) => {
 //#endregion
 
 export const AuthPage = () => {
-  const { appId } = useParams();
   return (
     <div>
       <div>
@@ -35,7 +32,6 @@ export const AuthPage = () => {
         <Form method="post">
           <input type="text" name="email" placeholder="example@gmail.com" />
           <input type="password" name="password" placeholder="****" />
-          <input type="hidden" name="appId" value={appId} />
           <button type="submit">Signin</button>
         </Form>
       </div>

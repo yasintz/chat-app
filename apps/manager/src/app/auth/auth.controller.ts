@@ -23,7 +23,6 @@ export class AuthController {
   @UseGuards(MemberAuthGuard)
   @Post('member/login')
   async memberLogin(@Req() req: Request) {
-    console.log(req.user);
     const token = await this.jwtSignService.signMemberToken(req.user as any);
 
     return { token };
