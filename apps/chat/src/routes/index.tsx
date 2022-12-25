@@ -33,7 +33,7 @@ const routes: RouteType[] = [
     protected: true,
   },
   {
-    path: '/auth',
+    path: ':appId/auth',
     element: <AuthPage />,
     action: authAction,
   },

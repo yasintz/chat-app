@@ -18,13 +18,7 @@ SET row_security = off;
 -- Data for Name: app; Type: TABLE DATA; Schema: public; Owner: chatuser
 --
 
-INSERT INTO public.app (id, name, jwt_secrets) VALUES ('ae993ef6-7618-49c5-b032-2e072aa57973', 'Deneme App 3', '[{"key": "-----BEGIN PUBLIC KEY-----
-MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQClDyElcTC9VnPjJgn4IRHAVGoT
-Fi1Un/uYWQcKs76G7EinDUbgiaCkVcHc1J9jfiZK+mzV/4YAJkMCaOzAbX2ZxB7b
-MyA2NJECGGcZnjxR9FQv46TvnNnNpz13bQIyMzIXBIFky51Juitxb/e7KC7+nd6F
-ml0IiXX4dipLG1jMbQIDAQAB
------END PUBLIC KEY-----
-", "issuer": "simple-user", "algorithm": "RS256"}]');
+INSERT INTO public.app (id, name, jwt_secrets) VALUES ('ae993ef6-7618-49c5-b032-2e072aa57973', 'Deneme App 3', '[{"key": "-----BEGIN PUBLIC KEY---MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQClDyElcTC9VnPjJgn4IRHAVGoTFi1Un/uYWQcKs76G7EinDUbgiaCkVcHc1J9jfiZK+mzV/4YAJkMCaOzAbX2ZxB7bMyA2NJECGGcZnjxR9FQv46TvnNnNpz13bQIyMzIXBIFky51Juitxb/e7KC7+nd6Fml0IiXX4dipLG1jMbQIDAQAB-----END PUBLIC KEY-----", "issuer": "simple-user", "algorithm": "RS256"}]');
 
 
 --

@@ -6,6 +6,8 @@ import { AuthenticatedPageLayout } from '../../components/common/layouts/Authent
 import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
 import { gql } from '../../gql';
 import { MessageList } from '../../components/page/channel/message-list';
+import martData from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
 //#endregion
 
 //#region GQL
@@ -48,7 +50,8 @@ const addNewMessage = gql(/* GraphQL */ `
 export const ChannelPage = () => {
   const { channels, memberId, isLoading, error } = useAuthenticatedUserData();
   const { channelId } = useParams();
-  const [newMessage, setNewMessage] = React.useState<string>();
+  const [newMessage, setNewMessage] = React.useState<string>('');
+  const [isEmojiModalOpen, setEmojiModalOpen] = React.useState<boolean>(false);
 
   const {
     data,
@@ -67,6 +70,15 @@ export const ChannelPage = () => {
     setNewMessage('');
   }, [createNewCustomer]);
 
+  const addEmoji = React.useCallback((emoji: { native: string | number }) => {
+    setNewMessage((prev) => (prev ? prev + emoji.native : emoji.native));
+    setEmojiModalOpen(false);
+  }, []);
+
+  const onEmojiModalOpened = React.useCallback(() => {
+    setEmojiModalOpen(true);
+  }, []);
+
   if (isLoading || loading) {
     return <div>Loading...</div>;
   }
@@ -84,6 +96,15 @@ export const ChannelPage = () => {
         onChange={(e) => setNewMessage(e.target.value)}
       />
       <button onClick={onMessageSent}>Send Message</button>
+      {isEmojiModalOpen && (
+        <Picker
+          theme={'auto'}
+          skin={3}
+          data={martData}
+          onEmojiSelect={addEmoji}
+        />
+      )}
+      <button onClick={onEmojiModalOpened}>Add Emoji</button>
     </AuthenticatedPageLayout>
   );
 };
