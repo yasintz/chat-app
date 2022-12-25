@@ -40,6 +40,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.40.0",
     "react-is": "18.2.0",
+    "react-markdown": "^8.0.4",
     "react-router-dom": "6.4.1",
     "react-toastify": "^9.1.1",
     "reflect-metadata": "^0.1.13",
