@@ -8,8 +8,8 @@ import { AuthenticatedPageLayout } from '../../components/common/layouts/Authent
 import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
 import { gql } from '../../gql';
 
-import { MessageList } from '../../components/page/channel/message-list';
 import { ChatInput } from './chat-input';
+import { MessageItem } from './message-item';
 //#endregion
 
 //#region GQL
@@ -17,13 +17,7 @@ const getChannelMessages = gql(/* GraphQL */ `
   subscription getChannelMessages($channelId: uuid!) {
     message(where: { channelId: { _eq: $channelId } }) {
       id
-      body
-      parentId
-      replyToId
-      sender {
-        id
-        name
-      }
+      ...Message
     }
   }
 `);
@@ -37,13 +31,7 @@ const addNewMessage = gql(/* GraphQL */ `
     insert_message_one(
       object: { body: $body, channelId: $channelId, senderId: $senderId }
     ) {
-      body
-      parentId
-      replyToId
-      sender {
-        id
-        name
-      }
+      ...Message
     }
   }
 `);
@@ -95,15 +83,10 @@ export const ChannelPage = () => {
   return (
     <AuthenticatedPageLayout channels={channels}>
       <StyledMessageListContainer>
-        <MessageList messageList={data?.message} />
-        {showPreview && (
-          <>
-            <b>Preview</b>
-            <hr />
-            <ReactMarkdown>{newMessage}</ReactMarkdown>
-            <hr />
-          </>
-        )}
+        {data?.message.map((message) => (
+          <MessageItem key={message.id} message={message} />
+        ))}
+        {/* <MessageList messageList={data?.message} /> */}
       </StyledMessageListContainer>
 
       <ChatInput
@@ -112,6 +95,14 @@ export const ChannelPage = () => {
         onPreview={onPreviewClick}
         onSend={onMessageSent}
       />
+      {showPreview && (
+        <>
+          <b>Preview</b>
+          <hr />
+          <ReactMarkdown>{newMessage}</ReactMarkdown>
+          <hr />
+        </>
+      )}
     </AuthenticatedPageLayout>
   );
 };

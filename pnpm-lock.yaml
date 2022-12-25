@@ -72,6 +72,7 @@ specifiers:
   chokidar: ^3.5.3
   core-js: ^3.6.5
   cypress: ^11.0.0
+  dayjs: ^1.11.7
   dbdocs: ^0.7.3
   eslint: ~8.15.0
   eslint-config-next: 13.0.0
@@ -139,6 +140,7 @@ dependencies:
   axios: 1.2.0
   bcrypt: 5.1.0
   core-js: 3.26.1
+  dayjs: 1.11.7
   dbdocs: 0.7.3
   express: 4.18.2
   fast-deep-equal: 3.1.3
@@ -13332,7 +13334,7 @@ packages:
       cli-table3: 0.6.3
       commander: 5.1.0
       common-tags: 1.8.2
-      dayjs: 1.11.6
+      dayjs: 1.11.7
       debug: 4.3.4_supports-color@8.1.1
       enquirer: 2.3.6
       eventemitter2: 6.4.7
@@ -13384,9 +13386,8 @@ packages:
     resolution: {integrity: sha512-qTcEYLen3r7ojZNgVUaRggOI+KM7jrKxXeSHhogh/TWxYMeONEMqY+hmkobiYQozsGIyg9OYVzO4ZIfoB4I0pQ==}
     dev: true
 
-  /dayjs/1.11.6:
-    resolution: {integrity: sha512-zZbY5giJAinCG+7AGaw0wIhNZ6J8AhWuSXKvuc1KAyMiRsvGQWqh4L+MomvhdAYjN+lqvVCMq1I41e3YHvXkyQ==}
-    dev: true
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
 
   /dbdocs/0.7.3:
     resolution: {integrity: sha512-2gPLfj4kIQJeGpQFA+RSBfk/gxr/SpCW4GDXar9fAX3ZaiFWpU5vVxmAVpm3ZIL/zndPXHkTja9oAgyF6AlFig==}
