@@ -2,7 +2,6 @@
 import useAuthStore from '../../../store/auth';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { channel } from 'diagnostics_channel';
 //#endregion
 
 //#region Props
