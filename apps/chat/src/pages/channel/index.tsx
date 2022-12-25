@@ -86,7 +86,6 @@ export const ChannelPage = () => {
         {data?.message.map((message) => (
           <MessageItem key={message.id} message={message} />
         ))}
-        {/* <MessageList messageList={data?.message} /> */}
       </StyledMessageListContainer>
 
       <ChatInput
