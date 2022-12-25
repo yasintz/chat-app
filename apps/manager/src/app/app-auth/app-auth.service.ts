@@ -44,26 +44,6 @@ export class AppAuthService {
       throw new Error("App doesn't exists");
     }
 
-    if (!member) {
-      if (!claim.externalMember) {
-        throw new Error("Member doesn't exists");
-      }
-
-      const newMemberData = await hasura.request(createMemberMutation, {
-        data: {
-          appId: claim.appId,
-          name: claim.externalMember.name,
-          externalId: claim.externalMemberId,
-        },
-      });
-      const newMember = newMemberData.member;
-      if (!newMember) {
-        throw new Error("Member couldn't created");
-      }
-
-      member = newMember;
-    }
-
     if (!app.jwtSecrets) {
       throw new Error('Invalid secrets');
     }
@@ -92,6 +72,26 @@ export class AppAuthService {
 
     if (!jwtVerified.success) {
       throw new Error('Invalid JWT');
+    }
+
+    if (!member) {
+      if (!claim.externalMember) {
+        throw new Error("Member doesn't exists");
+      }
+
+      const newMemberData = await hasura.request(createMemberMutation, {
+        data: {
+          appId: claim.appId,
+          name: claim.externalMember.name,
+          externalId: claim.externalMemberId,
+        },
+      });
+      const newMember = newMemberData.member;
+      if (!newMember) {
+        throw new Error("Member couldn't created");
+      }
+
+      member = newMember;
     }
 
     return useFragment(appAuthMemberFragment, member);

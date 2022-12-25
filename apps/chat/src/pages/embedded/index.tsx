@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useAuthStore from '../../store/auth';
 import { WindowMessageType } from './schema';
 import { authMemberWithExternalToken, safeParseEventDataString } from './util';
 
 export const EmbeddedChatApp = () => {
   const navigate = useNavigate();
+  const { channelId } = useParams();
   useEffect(() => {
     const listener = async (event: MessageEvent<string>) => {
       // skip initial event
@@ -31,7 +32,7 @@ export const EmbeddedChatApp = () => {
         const token = await authMemberWithExternalToken(data.message);
 
         useAuthStore.getState().setToken(token);
-        navigate('/', { replace: true });
+        navigate(`/channel/${channelId}`, { replace: true });
       }
     };
 
@@ -40,7 +41,8 @@ export const EmbeddedChatApp = () => {
     return () => {
       window.removeEventListener('message', listener, false);
     };
-  }, [navigate]);
+  }, [navigate, channelId]);
+
   return (
     <div>
       <h1>Loading....</h1>
