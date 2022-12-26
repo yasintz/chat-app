@@ -1,5 +1,5 @@
 //#region Import
-import React, { useState } from 'react';
+import { useState, useEvent } from 'react';
 import { useMutation, useSubscription } from '@apollo/client';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router-dom';
@@ -50,8 +50,8 @@ export const ChannelPage = () => {
   const { channels, memberId, isLoading, error } = useAuthenticatedUserData();
   const { channelId } = useParams();
   const [showPreview, setShowPreview] = useState(false);
-  const [newMessage, setNewMessage] = React.useState<string>('');
-  const [isEmojiModalOpen, setEmojiModalOpen] = React.useState<boolean>(false);
+  const [newMessage, setNewMessage] = useState<string>('');
+  const [isEmojiModalOpen, setEmojiModalOpen] = useState<boolean>(false);
 
   const {
     data,
@@ -65,23 +65,23 @@ export const ChannelPage = () => {
     variables: { channelId, body: newMessage || '', senderId: memberId },
   });
 
-  const onMessageSent = React.useCallback(() => {
+  const onMessageSent = useEvent(() => {
     createNewCustomer();
     setNewMessage('');
-  }, [createNewCustomer]);
+  });
 
   const onPreviewClick = () => {
     setShowPreview((prev) => !prev);
   };
 
-  const addEmoji = React.useCallback((emoji: { native: string | number }) => {
-    setNewMessage((prev) => (prev ? prev + emoji.native : emoji.native));
+  const addEmoji = useEvent((emoji: { native: string | number }) => {
+    setNewMessage((prev) => `${prev}${emoji.native}`);
     setEmojiModalOpen(false);
-  }, []);
+  });
 
-  const onEmojiModalOpened = React.useCallback(() => {
+  const onEmojiModalOpened = useEvent(() => {
     setEmojiModalOpen(true);
-  }, []);
+  });
 
   if (isLoading || loading) {
     return <div>Loading...</div>;

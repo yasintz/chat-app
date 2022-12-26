@@ -98,7 +98,7 @@
     "@types/node": "18.7.18",
     "@types/passport-jwt": "^3.0.7",
     "@types/passport-local": "^1.0.34",
-    "@types/react": "18.0.20",
+    "@types/react": "18.0.26",
     "@types/react-dom": "18.0.6",
     "@types/react-is": "17.0.3",
     "@types/react-router-dom": "5.3.3",
@@ -143,5 +143,11 @@
     "vitest": "^0.25.8",
     "vue": "^3.2.45",
     "vuepress": "2.0.0-beta.53"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "react@18.2.0": "patches/react@18.2.0.patch",
+      "@types/react@18.0.26": "patches/@types__react@18.0.26.patch"
+    }
   }
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEvent } from 'react';
 import { ChannelItem } from './channel-item';
 
 interface ChannelListProps {
@@ -7,14 +7,11 @@ interface ChannelListProps {
 }
 
 export const ChannelList = ({ itemList, onChange }: ChannelListProps) => {
-  const onItemChanged = React.useCallback(
-    (id: string, name: string) => {
-      if (onChange) {
-        onChange(id, name);
-      }
-    },
-    [onChange]
-  );
+  const onItemChanged = useEvent((id: string, name: string) => {
+    if (onChange) {
+      onChange(id, name);
+    }
+  });
 
   return (
     <ul>

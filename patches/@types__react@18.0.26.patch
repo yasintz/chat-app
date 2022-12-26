@@ -1,0 +1,12 @@
+diff --git a/index.d.ts b/index.d.ts
+index 31e68a114624dd6d97e326c6b3c9b9fd66368efd..d7109bdc975c37dc003d6e97834ff7d652603da9 100755
+--- a/index.d.ts
++++ b/index.d.ts
+@@ -1082,6 +1082,7 @@ declare namespace React {
+     // See https://github.com/DefinitelyTyped/DefinitelyTyped/issues/52873#issuecomment-845806435 for a comparison between `Function` and more specific types.
+     // tslint:disable-next-line ban-types
+     function useCallback<T extends Function>(callback: T, deps: DependencyList): T;
++    function useEvent<T extends Function>(callback: T): T;
+     /**
+      * `useMemo` will only recompute the memoized value when one of the `deps` has changed.
+      *

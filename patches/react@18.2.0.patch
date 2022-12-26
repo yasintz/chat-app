@@ -1,0 +1,19 @@
+diff --git a/index.js b/index.js
+index 999ead77897d1726c100686831187fff3041fc2e..ba23bfa5dda3333a3ddb097a19756443d15aeb21 100644
+--- a/index.js
++++ b/index.js
+@@ -5,3 +5,14 @@ if (process.env.NODE_ENV === 'production') {
+ } else {
+   module.exports = require('./cjs/react.development.js');
+ }
++
++Object.assign(module.exports, {
++  useEvent: (cb) => {
++    const callback = module.exports.useRef(cb);
++    callback.current = cb;
++
++    const mem = module.exports.useRef((...args) => callback.current(...args));
++
++    return mem.current;
++  },
++});

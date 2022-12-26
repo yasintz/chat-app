@@ -1,18 +1,18 @@
-import React from 'react';
+import { useEvent, useState, memo } from 'react';
 
 interface ChannelItemProps {
   item: { id: string; name: string; count?: number };
   onChange?: (id: string, name: string) => void;
 }
 
-const ChannelItem = ({ item, onChange }: ChannelItemProps) => {
-  const [givenName, setGivenName] = React.useState(item.name);
+export const ChannelItem = memo(({ item, onChange }: ChannelItemProps) => {
+  const [givenName, setGivenName] = useState(item.name);
 
-  const onSubmit = React.useCallback(() => {
+  const onSubmit = useEvent(() => {
     if (onChange) {
       onChange(item.id, givenName);
     }
-  }, [givenName, item, onChange]);
+  });
 
   return (
     <>
@@ -23,8 +23,4 @@ const ChannelItem = ({ item, onChange }: ChannelItemProps) => {
       <button onClick={() => onSubmit()}>Update</button>
     </>
   );
-};
-
-const PureChannelItem = React.memo(ChannelItem);
-
-export { PureChannelItem as ChannelItem };
+});
