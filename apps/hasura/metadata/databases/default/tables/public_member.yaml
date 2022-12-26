@@ -5,6 +5,8 @@ configuration:
   column_config:
     app_id:
       custom_name: appId
+    avatar_file_id:
+      custom_name: avatarFileId
     created_at:
       custom_name: createdAt
     deleted_at:
@@ -17,6 +19,7 @@ configuration:
       custom_name: updatedAt
   custom_column_names:
     app_id: appId
+    avatar_file_id: avatarFileId
     created_at: createdAt
     deleted_at: deletedAt
     external_id: externalId
@@ -27,6 +30,9 @@ object_relationships:
   - name: app
     using:
       foreign_key_constraint_on: app_id
+  - name: avatarFile
+    using:
+      foreign_key_constraint_on: avatar_file_id
 array_relationships:
   - name: channels
     using:
@@ -41,6 +47,13 @@ array_relationships:
         column: member_id
         table:
           name: member_file
+          schema: public
+  - name: message_reactions
+    using:
+      foreign_key_constraint_on:
+        column: member_id
+        table:
+          name: message_reaction
           schema: public
   - name: messages
     using:

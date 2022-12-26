@@ -1065,6 +1065,7 @@ export type File = {
   name: Scalars['String'];
   path: Scalars['String'];
   service: File_Service_Enum;
+  type: File_Type_Enum;
   updatedAt: Scalars['timestamptz'];
 };
 
@@ -1146,6 +1147,7 @@ export type File_Bool_Exp = {
   name?: InputMaybe<String_Comparison_Exp>;
   path?: InputMaybe<String_Comparison_Exp>;
   service?: InputMaybe<File_Service_Enum_Comparison_Exp>;
+  type?: InputMaybe<File_Type_Enum_Comparison_Exp>;
   updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
 };
 
@@ -1166,6 +1168,7 @@ export type File_Insert_Input = {
   name?: InputMaybe<Scalars['String']>;
   path?: InputMaybe<Scalars['String']>;
   service?: InputMaybe<File_Service_Enum>;
+  type?: InputMaybe<File_Type_Enum>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -1225,6 +1228,7 @@ export type File_Order_By = {
   name?: InputMaybe<Order_By>;
   path?: InputMaybe<Order_By>;
   service?: InputMaybe<Order_By>;
+  type?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
 };
 
@@ -1247,6 +1251,8 @@ export enum File_Select_Column {
   Path = 'path',
   /** column name */
   Service = 'service',
+  /** column name */
+  Type = 'type',
   /** column name */
   UpdatedAt = 'updatedAt'
 }
@@ -1400,6 +1406,7 @@ export type File_Set_Input = {
   name?: InputMaybe<Scalars['String']>;
   path?: InputMaybe<Scalars['String']>;
   service?: InputMaybe<File_Service_Enum>;
+  type?: InputMaybe<File_Type_Enum>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
 };
 
@@ -1419,7 +1426,145 @@ export type File_Stream_Cursor_Value_Input = {
   name?: InputMaybe<Scalars['String']>;
   path?: InputMaybe<Scalars['String']>;
   service?: InputMaybe<File_Service_Enum>;
+  type?: InputMaybe<File_Type_Enum>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
+};
+
+/** columns and relationships of "file_type" */
+export type File_Type = {
+  __typename?: 'file_type';
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "file_type" */
+export type File_Type_Aggregate = {
+  __typename?: 'file_type_aggregate';
+  aggregate?: Maybe<File_Type_Aggregate_Fields>;
+  nodes: Array<File_Type>;
+};
+
+/** aggregate fields of "file_type" */
+export type File_Type_Aggregate_Fields = {
+  __typename?: 'file_type_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<File_Type_Max_Fields>;
+  min?: Maybe<File_Type_Min_Fields>;
+};
+
+
+/** aggregate fields of "file_type" */
+export type File_Type_Aggregate_FieldsCountArgs = {
+  columns?: InputMaybe<Array<File_Type_Select_Column>>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "file_type". All fields are combined with a logical 'AND'. */
+export type File_Type_Bool_Exp = {
+  _and?: InputMaybe<Array<File_Type_Bool_Exp>>;
+  _not?: InputMaybe<File_Type_Bool_Exp>;
+  _or?: InputMaybe<Array<File_Type_Bool_Exp>>;
+  value?: InputMaybe<String_Comparison_Exp>;
+};
+
+/** unique or primary key constraints on table "file_type" */
+export enum File_Type_Constraint {
+  /** unique or primary key constraint on columns "value" */
+  FileTypePkey = 'file_type_pkey'
+}
+
+export enum File_Type_Enum {
+  Jpeg = 'jpeg',
+  Jpg = 'jpg',
+  Mp4 = 'mp4',
+  Png = 'png'
+}
+
+/** Boolean expression to compare columns of type "file_type_enum". All fields are combined with logical 'AND'. */
+export type File_Type_Enum_Comparison_Exp = {
+  _eq?: InputMaybe<File_Type_Enum>;
+  _in?: InputMaybe<Array<File_Type_Enum>>;
+  _is_null?: InputMaybe<Scalars['Boolean']>;
+  _neq?: InputMaybe<File_Type_Enum>;
+  _nin?: InputMaybe<Array<File_Type_Enum>>;
+};
+
+/** input type for inserting data into table "file_type" */
+export type File_Type_Insert_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** aggregate max on columns */
+export type File_Type_Max_Fields = {
+  __typename?: 'file_type_max_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type File_Type_Min_Fields = {
+  __typename?: 'file_type_min_fields';
+  value?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "file_type" */
+export type File_Type_Mutation_Response = {
+  __typename?: 'file_type_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<File_Type>;
+};
+
+/** on_conflict condition type for table "file_type" */
+export type File_Type_On_Conflict = {
+  constraint: File_Type_Constraint;
+  update_columns?: Array<File_Type_Update_Column>;
+  where?: InputMaybe<File_Type_Bool_Exp>;
+};
+
+/** Ordering options when selecting data from "file_type". */
+export type File_Type_Order_By = {
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: file_type */
+export type File_Type_Pk_Columns_Input = {
+  value: Scalars['String'];
+};
+
+/** select columns of table "file_type" */
+export enum File_Type_Select_Column {
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "file_type" */
+export type File_Type_Set_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** Streaming cursor of the table "file_type" */
+export type File_Type_Stream_Cursor_Input = {
+  /** Stream column input with initial value */
+  initial_value: File_Type_Stream_Cursor_Value_Input;
+  /** cursor ordering */
+  ordering?: InputMaybe<Cursor_Ordering>;
+};
+
+/** Initial value of the column from where the streaming should start */
+export type File_Type_Stream_Cursor_Value_Input = {
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "file_type" */
+export enum File_Type_Update_Column {
+  /** column name */
+  Value = 'value'
+}
+
+export type File_Type_Updates = {
+  /** sets the columns of the filtered rows to the given values */
+  _set?: InputMaybe<File_Type_Set_Input>;
+  where: File_Type_Bool_Exp;
 };
 
 /** update columns of table "file" */
@@ -1436,6 +1581,8 @@ export enum File_Update_Column {
   Path = 'path',
   /** column name */
   Service = 'service',
+  /** column name */
+  Type = 'type',
   /** column name */
   UpdatedAt = 'updatedAt'
 }
@@ -1480,6 +1627,9 @@ export type Member = {
   /** An object relationship */
   app: App;
   appId: Scalars['uuid'];
+  /** An object relationship */
+  avatarFile?: Maybe<File>;
+  avatarFileId?: Maybe<Scalars['uuid']>;
   /** An array relationship */
   channels: Array<Member_Channel>;
   /** An aggregate relationship */
@@ -1493,6 +1643,10 @@ export type Member = {
   /** An aggregate relationship */
   files_aggregate: Member_File_Aggregate;
   id: Scalars['uuid'];
+  /** An array relationship */
+  message_reactions: Array<Message_Reaction>;
+  /** An aggregate relationship */
+  message_reactions_aggregate: Message_Reaction_Aggregate;
   /** An array relationship */
   messages: Array<Message>;
   /** An aggregate relationship */
@@ -1539,6 +1693,26 @@ export type MemberFiles_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Member_File_Order_By>>;
   where?: InputMaybe<Member_File_Bool_Exp>;
+};
+
+
+/** columns and relationships of "member" */
+export type MemberMessage_ReactionsArgs = {
+  distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Message_Reaction_Order_By>>;
+  where?: InputMaybe<Message_Reaction_Bool_Exp>;
+};
+
+
+/** columns and relationships of "member" */
+export type MemberMessage_Reactions_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Message_Reaction_Order_By>>;
+  where?: InputMaybe<Message_Reaction_Bool_Exp>;
 };
 
 
@@ -1615,6 +1789,8 @@ export type Member_Bool_Exp = {
   _or?: InputMaybe<Array<Member_Bool_Exp>>;
   app?: InputMaybe<App_Bool_Exp>;
   appId?: InputMaybe<Uuid_Comparison_Exp>;
+  avatarFile?: InputMaybe<File_Bool_Exp>;
+  avatarFileId?: InputMaybe<Uuid_Comparison_Exp>;
   channels?: InputMaybe<Member_Channel_Bool_Exp>;
   channels_aggregate?: InputMaybe<Member_Channel_Aggregate_Bool_Exp>;
   createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -1624,6 +1800,8 @@ export type Member_Bool_Exp = {
   files?: InputMaybe<Member_File_Bool_Exp>;
   files_aggregate?: InputMaybe<Member_File_Aggregate_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  message_reactions?: InputMaybe<Message_Reaction_Bool_Exp>;
+  message_reactions_aggregate?: InputMaybe<Message_Reaction_Aggregate_Bool_Exp>;
   messages?: InputMaybe<Message_Bool_Exp>;
   messages_aggregate?: InputMaybe<Message_Aggregate_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
@@ -2036,6 +2214,8 @@ export type Member_File_Updates = {
 export type Member_Insert_Input = {
   app?: InputMaybe<App_Obj_Rel_Insert_Input>;
   appId?: InputMaybe<Scalars['uuid']>;
+  avatarFile?: InputMaybe<File_Obj_Rel_Insert_Input>;
+  avatarFileId?: InputMaybe<Scalars['uuid']>;
   channels?: InputMaybe<Member_Channel_Arr_Rel_Insert_Input>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   deletedAt?: InputMaybe<Scalars['timestamptz']>;
@@ -2043,6 +2223,7 @@ export type Member_Insert_Input = {
   externalId?: InputMaybe<Scalars['String']>;
   files?: InputMaybe<Member_File_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['uuid']>;
+  message_reactions?: InputMaybe<Message_Reaction_Arr_Rel_Insert_Input>;
   messages?: InputMaybe<Message_Arr_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['timestamptz']>;
@@ -2052,6 +2233,7 @@ export type Member_Insert_Input = {
 export type Member_Max_Fields = {
   __typename?: 'member_max_fields';
   appId?: Maybe<Scalars['uuid']>;
+  avatarFileId?: Maybe<Scalars['uuid']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   deletedAt?: Maybe<Scalars['timestamptz']>;
   encryptedPassword?: Maybe<Scalars['String']>;
@@ -2064,6 +2246,7 @@ export type Member_Max_Fields = {
 /** order by max() on columns of table "member" */
 export type Member_Max_Order_By = {
   appId?: InputMaybe<Order_By>;
+  avatarFileId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   deletedAt?: InputMaybe<Order_By>;
   encryptedPassword?: InputMaybe<Order_By>;
@@ -2077,6 +2260,7 @@ export type Member_Max_Order_By = {
 export type Member_Min_Fields = {
   __typename?: 'member_min_fields';
   appId?: Maybe<Scalars['uuid']>;
+  avatarFileId?: Maybe<Scalars['uuid']>;
   createdAt?: Maybe<Scalars['timestamptz']>;
   deletedAt?: Maybe<Scalars['timestamptz']>;
   encryptedPassword?: Maybe<Scalars['String']>;
@@ -2089,6 +2273,7 @@ export type Member_Min_Fields = {
 /** order by min() on columns of table "member" */
 export type Member_Min_Order_By = {
   appId?: InputMaybe<Order_By>;
+  avatarFileId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
   deletedAt?: InputMaybe<Order_By>;
   encryptedPassword?: InputMaybe<Order_By>;
@@ -2125,6 +2310,8 @@ export type Member_On_Conflict = {
 export type Member_Order_By = {
   app?: InputMaybe<App_Order_By>;
   appId?: InputMaybe<Order_By>;
+  avatarFile?: InputMaybe<File_Order_By>;
+  avatarFileId?: InputMaybe<Order_By>;
   channels_aggregate?: InputMaybe<Member_Channel_Aggregate_Order_By>;
   createdAt?: InputMaybe<Order_By>;
   deletedAt?: InputMaybe<Order_By>;
@@ -2132,6 +2319,7 @@ export type Member_Order_By = {
   externalId?: InputMaybe<Order_By>;
   files_aggregate?: InputMaybe<Member_File_Aggregate_Order_By>;
   id?: InputMaybe<Order_By>;
+  message_reactions_aggregate?: InputMaybe<Message_Reaction_Aggregate_Order_By>;
   messages_aggregate?: InputMaybe<Message_Aggregate_Order_By>;
   name?: InputMaybe<Order_By>;
   updatedAt?: InputMaybe<Order_By>;
@@ -2146,6 +2334,8 @@ export type Member_Pk_Columns_Input = {
 export enum Member_Select_Column {
   /** column name */
   AppId = 'appId',
+  /** column name */
+  AvatarFileId = 'avatarFileId',
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
@@ -2165,6 +2355,7 @@ export enum Member_Select_Column {
 /** input type for updating data in table "member" */
 export type Member_Set_Input = {
   appId?: InputMaybe<Scalars['uuid']>;
+  avatarFileId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   deletedAt?: InputMaybe<Scalars['timestamptz']>;
   encryptedPassword?: InputMaybe<Scalars['String']>;
@@ -2185,6 +2376,7 @@ export type Member_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Member_Stream_Cursor_Value_Input = {
   appId?: InputMaybe<Scalars['uuid']>;
+  avatarFileId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamptz']>;
   deletedAt?: InputMaybe<Scalars['timestamptz']>;
   encryptedPassword?: InputMaybe<Scalars['String']>;
@@ -2198,6 +2390,8 @@ export type Member_Stream_Cursor_Value_Input = {
 export enum Member_Update_Column {
   /** column name */
   AppId = 'appId',
+  /** column name */
+  AvatarFileId = 'avatarFileId',
   /** column name */
   CreatedAt = 'createdAt',
   /** column name */
@@ -3068,6 +3262,10 @@ export type Mutation_Root = {
   delete_file_service?: Maybe<File_Service_Mutation_Response>;
   /** delete single row from the table: "file_service" */
   delete_file_service_by_pk?: Maybe<File_Service>;
+  /** delete data from the table: "file_type" */
+  delete_file_type?: Maybe<File_Type_Mutation_Response>;
+  /** delete single row from the table: "file_type" */
+  delete_file_type_by_pk?: Maybe<File_Type>;
   /** delete data from the table: "member" */
   delete_member?: Maybe<Member_Mutation_Response>;
   /** delete single row from the table: "member" */
@@ -3120,6 +3318,10 @@ export type Mutation_Root = {
   insert_file_service?: Maybe<File_Service_Mutation_Response>;
   /** insert a single row into the table: "file_service" */
   insert_file_service_one?: Maybe<File_Service>;
+  /** insert data into the table: "file_type" */
+  insert_file_type?: Maybe<File_Type_Mutation_Response>;
+  /** insert a single row into the table: "file_type" */
+  insert_file_type_one?: Maybe<File_Type>;
   /** insert data into the table: "member" */
   insert_member?: Maybe<Member_Mutation_Response>;
   /** insert data into the table: "member_channel" */
@@ -3184,6 +3386,12 @@ export type Mutation_Root = {
   update_file_service_by_pk?: Maybe<File_Service>;
   /** update multiples rows of table: "file_service" */
   update_file_service_many?: Maybe<Array<Maybe<File_Service_Mutation_Response>>>;
+  /** update data of the table: "file_type" */
+  update_file_type?: Maybe<File_Type_Mutation_Response>;
+  /** update single row of the table: "file_type" */
+  update_file_type_by_pk?: Maybe<File_Type>;
+  /** update multiples rows of table: "file_type" */
+  update_file_type_many?: Maybe<Array<Maybe<File_Type_Mutation_Response>>>;
   /** update data of the table: "member" */
   update_member?: Maybe<Member_Mutation_Response>;
   /** update single row of the table: "member" */
@@ -3297,6 +3505,18 @@ export type Mutation_RootDelete_File_ServiceArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_File_Service_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_File_TypeArgs = {
+  where: File_Type_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_File_Type_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -3471,6 +3691,20 @@ export type Mutation_RootInsert_File_ServiceArgs = {
 export type Mutation_RootInsert_File_Service_OneArgs = {
   object: File_Service_Insert_Input;
   on_conflict?: InputMaybe<File_Service_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_File_TypeArgs = {
+  objects: Array<File_Type_Insert_Input>;
+  on_conflict?: InputMaybe<File_Type_On_Conflict>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_File_Type_OneArgs = {
+  object: File_Type_Insert_Input;
+  on_conflict?: InputMaybe<File_Type_On_Conflict>;
 };
 
 
@@ -3703,6 +3937,26 @@ export type Mutation_RootUpdate_File_Service_ManyArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_File_TypeArgs = {
+  _set?: InputMaybe<File_Type_Set_Input>;
+  where: File_Type_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_File_Type_By_PkArgs = {
+  _set?: InputMaybe<File_Type_Set_Input>;
+  pk_columns: File_Type_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_File_Type_ManyArgs = {
+  updates: Array<File_Type_Updates>;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_MemberArgs = {
   _set?: InputMaybe<Member_Set_Input>;
   where: Member_Bool_Exp;
@@ -3895,6 +4149,12 @@ export type Query_Root = {
   file_service_aggregate: File_Service_Aggregate;
   /** fetch data from the table: "file_service" using primary key columns */
   file_service_by_pk?: Maybe<File_Service>;
+  /** fetch data from the table: "file_type" */
+  file_type: Array<File_Type>;
+  /** fetch aggregated fields from the table: "file_type" */
+  file_type_aggregate: File_Type_Aggregate;
+  /** fetch data from the table: "file_type" using primary key columns */
+  file_type_by_pk?: Maybe<File_Type>;
   /** fetch data from the table: "member" */
   member: Array<Member>;
   /** fetch aggregated fields from the table: "member" */
@@ -4074,6 +4334,29 @@ export type Query_RootFile_Service_AggregateArgs = {
 
 
 export type Query_RootFile_Service_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+export type Query_RootFile_TypeArgs = {
+  distinct_on?: InputMaybe<Array<File_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<File_Type_Order_By>>;
+  where?: InputMaybe<File_Type_Bool_Exp>;
+};
+
+
+export type Query_RootFile_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<File_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<File_Type_Order_By>>;
+  where?: InputMaybe<File_Type_Bool_Exp>;
+};
+
+
+export type Query_RootFile_Type_By_PkArgs = {
   value: Scalars['String'];
 };
 
@@ -4433,6 +4716,14 @@ export type Subscription_Root = {
   file_service_stream: Array<File_Service>;
   /** fetch data from the table in a streaming manner: "file" */
   file_stream: Array<File>;
+  /** fetch data from the table: "file_type" */
+  file_type: Array<File_Type>;
+  /** fetch aggregated fields from the table: "file_type" */
+  file_type_aggregate: File_Type_Aggregate;
+  /** fetch data from the table: "file_type" using primary key columns */
+  file_type_by_pk?: Maybe<File_Type>;
+  /** fetch data from the table in a streaming manner: "file_type" */
+  file_type_stream: Array<File_Type>;
   /** fetch data from the table: "member" */
   member: Array<Member>;
   /** fetch aggregated fields from the table: "member" */
@@ -4669,6 +4960,36 @@ export type Subscription_RootFile_StreamArgs = {
   batch_size: Scalars['Int'];
   cursor: Array<InputMaybe<File_Stream_Cursor_Input>>;
   where?: InputMaybe<File_Bool_Exp>;
+};
+
+
+export type Subscription_RootFile_TypeArgs = {
+  distinct_on?: InputMaybe<Array<File_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<File_Type_Order_By>>;
+  where?: InputMaybe<File_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootFile_Type_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<File_Type_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<File_Type_Order_By>>;
+  where?: InputMaybe<File_Type_Bool_Exp>;
+};
+
+
+export type Subscription_RootFile_Type_By_PkArgs = {
+  value: Scalars['String'];
+};
+
+
+export type Subscription_RootFile_Type_StreamArgs = {
+  batch_size: Scalars['Int'];
+  cursor: Array<InputMaybe<File_Type_Stream_Cursor_Input>>;
+  where?: InputMaybe<File_Type_Bool_Exp>;
 };
 
 

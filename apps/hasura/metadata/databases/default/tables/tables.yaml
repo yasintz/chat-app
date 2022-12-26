@@ -4,6 +4,7 @@
 - "!include public_customer_role.yaml"
 - "!include public_file.yaml"
 - "!include public_file_service.yaml"
+- "!include public_file_type.yaml"
 - "!include public_member.yaml"
 - "!include public_member_channel.yaml"
 - "!include public_member_file.yaml"
