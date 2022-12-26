@@ -67,34 +67,27 @@ select_permissions:
     permission:
       columns:
         - app_id
+        - avatar_file_id
         - created_at
         - deleted_at
-        - name
         - id
+        - name
         - updated_at
-      filter: {}
+      filter:
+        app_id:
+          _eq: X-Hasura-App-Id
       allow_aggregations: true
   - role: member
     permission:
       columns:
         - app_id
+        - avatar_file_id
         - created_at
         - deleted_at
-        - encryptedPassword
-        - name
         - id
+        - name
         - updated_at
-      filter: {}
+      filter:
+        app_id:
+          _eq: X-Hasura-App-Id
       allow_aggregations: true
-update_permissions:
-  - role: customer
-    permission:
-      columns:
-        - app_id
-        - created_at
-        - deleted_at
-        - name
-        - id
-        - updated_at
-      filter: {}
-      check: null

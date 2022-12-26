@@ -9864,6 +9864,12 @@
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "url",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "possibleTypes": null

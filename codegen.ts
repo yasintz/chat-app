@@ -80,6 +80,9 @@ const config: CodegenConfig = {
     './graphql.schema.json': {
       plugins: ['introspection'],
     },
+    './graphql.schema.ts': {
+      plugins: ['typescript'],
+    },
   },
 };
 

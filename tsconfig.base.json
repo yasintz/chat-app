@@ -16,7 +16,8 @@
     "baseUrl": ".",
     "paths": {
       "@helpers/client": ["libs/helpers/client/src/index.ts"],
-      "@ui": ["libs/ui/src/index.ts"]
+      "@ui": ["libs/ui/src/index.ts"],
+      "@gql/schema": ["./graphql.schema.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

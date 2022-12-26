@@ -1300,7 +1300,8 @@ export enum File_Service_Constraint {
 }
 
 export enum File_Service_Enum {
-  Cloudinary = 'cloudinary'
+  Cloudinary = 'cloudinary',
+  Url = 'url'
 }
 
 /** Boolean expression to compare columns of type "file_service_enum". All fields are combined with logical 'AND'. */
