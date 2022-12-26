@@ -1,7 +1,6 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 //#region Import
 import { useQuery } from '@apollo/client';
-import React from 'react';
+import {useMemo} from 'react';
 import { gql } from '../gql';
 import useAuthStore from '../store/auth';
 //#endregion
@@ -29,7 +28,7 @@ export const useAuthenticatedUserData = () => {
     variables: { memberId },
   });
 
-  const channels = React.useMemo(() => {
+  const channels = useMemo(() => {
     if (data && !isLoading && !error) {
       return data?.member_channel.map((item: { channel: any }) => {
         return {

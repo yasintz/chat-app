@@ -1,6 +1,6 @@
 //#region Import
 import { useMutation, useQuery } from '@apollo/client';
-import React from 'react';
+import { useState, useMemo } from 'react';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { ChannelList } from '../../components/page/channels-page/channel-list';
 import { gql } from '../../gql';
@@ -65,7 +65,7 @@ export const ChannelsPage = () => {
     error: appError,
   } = useAuthenticatedUserData();
 
-  const [newChannelName, setNewChannelName] = React.useState('');
+  const [newChannelName, setNewChannelName] = useState('');
 
   const { data, loading, error } = useQuery(getChannels, {
     variables: { appId: app?.id as string },
@@ -85,7 +85,7 @@ export const ChannelsPage = () => {
     },
   });
 
-  const channelList = React.useMemo(() => {
+  const channelList = useMemo(() => {
     if (!loading && !error && data?.channel) {
       return data?.channel.map((item) => {
         return {
