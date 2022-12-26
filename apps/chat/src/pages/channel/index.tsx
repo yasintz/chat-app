@@ -3,7 +3,6 @@ import immer from 'immer';
 import _ from 'lodash';
 import { useState, useEvent, useMemo, useId } from 'react';
 import { useMutation, useQuery, useSubscription } from '@apollo/client';
-import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -12,6 +11,7 @@ import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-da
 import { gql } from '../../gql';
 import { ChatInput } from './chat-input';
 import { MessageItem } from './message-item';
+import { Markdown } from '../../components/common/markdown';
 //#endregion
 
 //#region GQL
@@ -43,9 +43,10 @@ const getChannelMessagesQuery = gql(/* GraphQL */ `
 
 const getChannelMembers = gql(/* GraphQL */ `
   query getChannelMembers($channelId: uuid!) {
-    channel_by_pk(id: $channelId) {
+    channel: channel_by_pk(id: $channelId) {
       id
       members {
+        id
         member {
           name
           id
@@ -131,16 +132,16 @@ export const ChannelPage = () => {
   const messages = useMemo(() => data?.message || [], [data?.message]);
 
   const members = useMemo(() => {
-    if (!memberData?.channel_by_pk?.members) {
+    if (!memberData?.channel?.members) {
       return [];
     }
 
-    return memberData?.channel_by_pk?.members
+    return memberData?.channel?.members
       ?.filter((member) => member.member.id !== memberId)
       .map((member) => {
         return { id: member.member.id, display: member.member.name };
       });
-  }, [memberData?.channel_by_pk?.members, memberId]);
+  }, [memberData?.channel?.members, memberId]);
 
   const onMessageSent = useEvent(() => {
     createNewCustomer();
@@ -203,7 +204,7 @@ export const ChannelPage = () => {
         <>
           <b>Preview</b>
           <hr />
-          <ReactMarkdown>{newMessage}</ReactMarkdown>
+          <Markdown message={newMessage} />
           <hr />
         </>
       )}

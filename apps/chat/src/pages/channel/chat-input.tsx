@@ -131,6 +131,7 @@ export const ChatInput = ({
             trigger="@"
             data={userList}
             className="user-mention"
+            markup="[@__display__](__id__)"
             style={{ backgroundcolor: '#cee4e5' }}
           />
         </MentionsInput>

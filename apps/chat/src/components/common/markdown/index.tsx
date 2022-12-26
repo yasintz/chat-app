@@ -1,5 +1,5 @@
 // #region Import
-import React, { ReactNode, useMemo } from 'react';
+import React, { ReactNode } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styled from 'styled-components';
@@ -42,17 +42,6 @@ export const Markdown = ({ message }: MarkdownProps) => {
     );
   };
 
-  const messageBody = useMemo(() => {
-    const messageWithMentions = message.replace(
-      /@\[(.*?)\]\((.*?)\)/g,
-      (_, name, id) => {
-        return `[@${name}](${id})`;
-      }
-    );
-
-    return messageWithMentions;
-  }, [message]);
-
   return (
     <StyledContainer>
       <ReactMarkdown
@@ -61,7 +50,7 @@ export const Markdown = ({ message }: MarkdownProps) => {
         }}
         remarkPlugins={[remarkGfm]}
       >
-        {messageBody}
+        {message}
       </ReactMarkdown>
     </StyledContainer>
   );
