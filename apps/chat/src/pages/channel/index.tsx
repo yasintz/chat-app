@@ -41,6 +41,20 @@ const getChannelMessagesQuery = gql(/* GraphQL */ `
   }
 `);
 
+const getChannelMembers = gql(/* GraphQL */ `
+  query getChannelMembers($channelId: uuid!) {
+    channel_by_pk(id: $channelId) {
+      id
+      members {
+        member {
+          name
+          id
+        }
+      }
+    }
+  }
+`);
+
 const addNewMessage = gql(/* GraphQL */ `
   mutation insertNewMessage(
     $body: String!
@@ -89,6 +103,12 @@ export const ChannelPage = () => {
     variables: { channelId, limit: LIMIT, offset: 0 },
   });
 
+  const {
+    data: memberData,
+    loading: isMembersLoading,
+    error: memberError,
+  } = useQuery(getChannelMembers, { variables: { channelId } });
+
   useSubscription(getChannelMessagesSubscription, {
     variables: { channelId },
     onData: ({ data }) => {
@@ -104,11 +124,23 @@ export const ChannelPage = () => {
     },
   });
 
-  const messages = useMemo(() => data?.message || [], [data?.message]);
-
   const [createNewCustomer] = useMutation(addNewMessage, {
     variables: { channelId, body: newMessage || '', senderId: memberId },
   });
+
+  const messages = useMemo(() => data?.message || [], [data?.message]);
+
+  const members = useMemo(() => {
+    if (!memberData?.channel_by_pk?.members) {
+      return [];
+    }
+
+    return memberData?.channel_by_pk?.members
+      ?.filter((member) => member.member.id !== memberId)
+      .map((member) => {
+        return { id: member.member.id, display: member.member.name };
+      });
+  }, [memberData?.channel_by_pk?.members, memberId]);
 
   const onMessageSent = useEvent(() => {
     createNewCustomer();
@@ -134,11 +166,11 @@ export const ChannelPage = () => {
     );
   });
 
-  if (isLoading || loading) {
+  if (isLoading || loading || isMembersLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error || messageError) {
+  if (error || messageError || memberError) {
     return <div>Error...</div>;
   }
 
@@ -165,6 +197,7 @@ export const ChannelPage = () => {
         onChange={setNewMessage}
         onPreview={onPreviewClick}
         onSend={onMessageSent}
+        userList={members}
       />
       {showPreview && (
         <>

@@ -3,6 +3,7 @@ import { useEvent, useState } from 'react';
 import styled from 'styled-components';
 import martData from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
+import { MentionsInput, Mention } from 'react-mentions';
 //#endregion
 
 // #region Styled
@@ -23,13 +24,37 @@ const StyledChatInputFooterLeftContainer = styled.div`
   display: flex;
 `;
 
-const StyledChatInput = styled.textarea`
-  border: none;
-  margin-bottom: 8px;
-  resize: none;
-  height: 80px;
-  &:focus {
-    outline: none;
+const StyledChatInputWrapper = styled.div`
+  .chat-input {
+    border: none;
+    margin-bottom: 8px;
+    resize: none;
+    height: 80px;
+    &:focus {
+      outline: none;
+    }
+    .chat-input__suggestions {
+      position: absolute;
+      left: 1rem;
+      box-shadow: 0 0 1rem rgba(0, 0, 0, 0.16);
+      border-radius: 0.5rem;
+      .chat-input__suggestions__list {
+        backgroundcolor: 'white';
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        fontsize: 14;
+      }
+      .chat-input__suggestions__item {
+        padding: 0.5rem 1rem;
+      }
+      .chat-input__suggestions__item--focused {
+        background-color: lightblue;
+      }
+    }
+    .chat-input__highlighter {
+      .user-mention {
+        background-color: #cee4e5;
+      }
+    }
   }
 `;
 
@@ -49,6 +74,7 @@ type PropsType = {
   onChange: (value: string) => void;
   onPreview: () => void;
   onSend: () => void;
+  userList: { id: string; display: string }[];
 };
 
 export const ChatInput = ({
@@ -56,6 +82,7 @@ export const ChatInput = ({
   onChange,
   onPreview,
   onSend,
+  userList,
 }: PropsType) => {
   const [isEmojiModalOpen, setEmojiModalOpen] = useState(false);
   const onMarkdownItemClick = useEvent((text: string) => {
@@ -93,11 +120,21 @@ export const ChatInput = ({
           <s>S</s>
         </StyledChatInputHeaderMarkdownItem>
       </StyledChatInputHeaderContainer>
-      <StyledChatInput
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        placeholder="Message..."
-      />
+      <StyledChatInputWrapper>
+        <MentionsInput
+          value={value}
+          className="chat-input"
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="Message..."
+        >
+          <Mention
+            trigger="@"
+            data={userList}
+            className="user-mention"
+            style={{ backgroundcolor: '#cee4e5' }}
+          />
+        </MentionsInput>
+      </StyledChatInputWrapper>
       <StyledChatInputFooterContainer>
         <StyledChatInputFooterLeftContainer>
           <button onClick={onPreview}>Toggle Preview</button>
