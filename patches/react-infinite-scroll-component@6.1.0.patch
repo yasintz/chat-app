@@ -1,0 +1,16 @@
+diff --git a/dist/index.d.ts b/dist/index.d.ts
+index 074f572c30154287af2ef6547117c426a9f4b6cd..825d413b49ff187d4fbfb7f8cdcf7c6a9c8216d1 100644
+--- a/dist/index.d.ts
++++ b/dist/index.d.ts
+@@ -43,11 +43,6 @@ export default class InfiniteScroll extends Component<Props, State> {
+     componentDidMount(): void;
+     componentWillUnmount(): void;
+     componentDidUpdate(prevProps: Props): void;
+-    static getDerivedStateFromProps(nextProps: Props, prevState: State): {
+-        prevDataLength: number;
+-        showLoader: boolean;
+-        pullToRefreshThresholdBreached: boolean;
+-    } | null;
+     getScrollableTarget: () => HTMLElement | null;
+     onStart: EventListener;
+     onMove: EventListener;

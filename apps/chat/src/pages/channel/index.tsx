@@ -1,22 +1,40 @@
 //#region Import
-import { useState, useEvent } from 'react';
-import { useMutation, useSubscription } from '@apollo/client';
+import immer from 'immer';
+import _ from 'lodash';
+import { useState, useEvent, useMemo, useId } from 'react';
+import { useMutation, useQuery, useSubscription } from '@apollo/client';
 import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
 import { gql } from '../../gql';
-import martData from '@emoji-mart/data';
-import Picker from '@emoji-mart/react';
 import { ChatInput } from './chat-input';
 import { MessageItem } from './message-item';
 //#endregion
 
 //#region GQL
-const getChannelMessages = gql(/* GraphQL */ `
-  subscription getChannelMessages($channelId: uuid!) {
-    message(where: { channelId: { _eq: $channelId } }) {
+const getChannelMessagesSubscription = gql(/* GraphQL */ `
+  subscription getChannelNewMessages($channelId: uuid!) {
+    message(
+      where: { channelId: { _eq: $channelId } }
+      order_by: { createdAt: desc }
+      limit: 1
+    ) {
+      id
+      ...Message
+    }
+  }
+`);
+const getChannelMessagesQuery = gql(/* GraphQL */ `
+  query getChannelMessages($channelId: uuid!, $limit: Int!, $offset: Int!) {
+    message(
+      where: { channelId: { _eq: $channelId } }
+      limit: $limit
+      offset: $offset
+      order_by: { createdAt: desc }
+    ) {
       id
       ...Message
     }
@@ -40,26 +58,53 @@ const addNewMessage = gql(/* GraphQL */ `
 
 // #region Styled
 const StyledMessageListContainer = styled.div`
-  overflow-y: scroll;
-  height: 600px;
+  overflow-y: auto;
+  height: 400px;
+  display: flex;
+  flex-direction: column-reverse;
 `;
 
+const StyledScroll = styled(InfiniteScroll)`
+  display: flex;
+  flex-direction: column-reverse;
+`;
 // #endregion
 
+const LIMIT = 5;
 export const ChannelPage = () => {
   const { channels, memberId, isLoading, error } = useAuthenticatedUserData();
   const { channelId } = useParams();
   const [showPreview, setShowPreview] = useState(false);
   const [newMessage, setNewMessage] = useState<string>('');
-  const [isEmojiModalOpen, setEmojiModalOpen] = useState<boolean>(false);
+  const scrollContainerId = useId();
+  const [hasMore, setHasMore] = useState(true);
 
   const {
     data,
+    fetchMore,
     loading,
+    updateQuery,
     error: messageError,
-  } = useSubscription(getChannelMessages, {
-    variables: { channelId },
+  } = useQuery(getChannelMessagesQuery, {
+    variables: { channelId, limit: LIMIT, offset: 0 },
   });
+
+  useSubscription(getChannelMessagesSubscription, {
+    variables: { channelId },
+    onData: ({ data }) => {
+      updateQuery((prev) =>
+        immer(prev, (draft) => {
+          draft.message = _.unionBy(
+            data?.data?.message || [],
+            draft.message,
+            'id'
+          );
+        })
+      );
+    },
+  });
+
+  const messages = useMemo(() => data?.message || [], [data?.message]);
 
   const [createNewCustomer] = useMutation(addNewMessage, {
     variables: { channelId, body: newMessage || '', senderId: memberId },
@@ -74,13 +119,19 @@ export const ChannelPage = () => {
     setShowPreview((prev) => !prev);
   };
 
-  const addEmoji = useEvent((emoji: { native: string | number }) => {
-    setNewMessage((prev) => `${prev}${emoji.native}`);
-    setEmojiModalOpen(false);
-  });
-
-  const onEmojiModalOpened = useEvent(() => {
-    setEmojiModalOpen(true);
+  const onNext = useEvent(async () => {
+    const response = await fetchMore({
+      variables: {
+        offset: messages.length || 0,
+      },
+    });
+    const newMessages = response.data.message;
+    setHasMore(newMessages.length === LIMIT);
+    updateQuery((prev) =>
+      immer(prev, (draft) => {
+        draft.message = _.unionBy(draft.message, newMessages, 'id');
+      })
+    );
   });
 
   if (isLoading || loading) {
@@ -93,10 +144,20 @@ export const ChannelPage = () => {
 
   return (
     <AuthenticatedPageLayout channels={channels}>
-      <StyledMessageListContainer>
-        {data?.message.map((message) => (
-          <MessageItem key={message.id} message={message} />
-        ))}
+      <StyledMessageListContainer id={scrollContainerId}>
+        <StyledScroll
+          dataLength={messages.length}
+          next={onNext}
+          hasMore={hasMore}
+          loader={null}
+          scrollableTarget={scrollContainerId}
+          inverse
+        >
+          {messages.map((message) => (
+            <MessageItem key={message.id} message={message} />
+          ))}
+          {hasMore && <h1>Loading...</h1>}
+        </StyledScroll>
       </StyledMessageListContainer>
 
       <ChatInput
@@ -113,15 +174,6 @@ export const ChannelPage = () => {
           <hr />
         </>
       )}
-      {isEmojiModalOpen && (
-        <Picker
-          theme={'auto'}
-          skin={3}
-          data={martData}
-          onEmojiSelect={addEmoji}
-        />
-      )}
-      <button onClick={onEmojiModalOpened}>Add Emoji</button>
     </AuthenticatedPageLayout>
   );
 };

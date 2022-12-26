@@ -1,6 +1,8 @@
 //#region Import
-import React from 'react';
+import { useEvent, useState } from 'react';
 import styled from 'styled-components';
+import martData from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
 //#endregion
 
 // #region Styled
@@ -55,9 +57,17 @@ export const ChatInput = ({
   onPreview,
   onSend,
 }: PropsType) => {
-  const onMarkdownItemClick = (text: string) => {
+  const [isEmojiModalOpen, setEmojiModalOpen] = useState(false);
+  const onMarkdownItemClick = useEvent((text: string) => {
     onChange(`${value}${text}`);
-  };
+  });
+  const onEmojiModalOpened = useEvent(() => {
+    setEmojiModalOpen(true);
+  });
+  const addEmoji = useEvent((emoji: { native: string | number }) => {
+    onChange(`${value}${emoji.native}`);
+    setEmojiModalOpen(false);
+  });
 
   return (
     <StyledChatInputContainer>
@@ -91,9 +101,18 @@ export const ChatInput = ({
       <StyledChatInputFooterContainer>
         <StyledChatInputFooterLeftContainer>
           <button onClick={onPreview}>Toggle Preview</button>
+          <button onClick={onEmojiModalOpened}>Add Emoji</button>
         </StyledChatInputFooterLeftContainer>
         <button onClick={onSend}>Send</button>
       </StyledChatInputFooterContainer>
+      {isEmojiModalOpen && (
+        <Picker
+          theme={'auto'}
+          skin={3}
+          data={martData}
+          onEmojiSelect={addEmoji}
+        />
+      )}
     </StyledChatInputContainer>
   );
 };
