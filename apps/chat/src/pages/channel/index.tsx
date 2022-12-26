@@ -7,7 +7,8 @@ import styled from 'styled-components';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
 import { gql } from '../../gql';
-
+import martData from '@emoji-mart/data';
+import Picker from '@emoji-mart/react';
 import { ChatInput } from './chat-input';
 import { MessageItem } from './message-item';
 //#endregion
@@ -50,6 +51,7 @@ export const ChannelPage = () => {
   const { channelId } = useParams();
   const [showPreview, setShowPreview] = useState(false);
   const [newMessage, setNewMessage] = React.useState<string>('');
+  const [isEmojiModalOpen, setEmojiModalOpen] = React.useState<boolean>(false);
 
   const {
     data,
@@ -71,6 +73,15 @@ export const ChannelPage = () => {
   const onPreviewClick = () => {
     setShowPreview((prev) => !prev);
   };
+
+  const addEmoji = React.useCallback((emoji: { native: string | number }) => {
+    setNewMessage((prev) => (prev ? prev + emoji.native : emoji.native));
+    setEmojiModalOpen(false);
+  }, []);
+
+  const onEmojiModalOpened = React.useCallback(() => {
+    setEmojiModalOpen(true);
+  }, []);
 
   if (isLoading || loading) {
     return <div>Loading...</div>;
@@ -102,6 +113,15 @@ export const ChannelPage = () => {
           <hr />
         </>
       )}
+      {isEmojiModalOpen && (
+        <Picker
+          theme={'auto'}
+          skin={3}
+          data={martData}
+          onEmojiSelect={addEmoji}
+        />
+      )}
+      <button onClick={onEmojiModalOpened}>Add Emoji</button>
     </AuthenticatedPageLayout>
   );
 };

@@ -6,6 +6,8 @@ specifiers:
   '@babel/core': 7.12.13
   '@babel/preset-typescript': 7.12.13
   '@dbml/core': ^2.4.4
+  '@emoji-mart/data': ^1.1.0
+  '@emoji-mart/react': ^1.1.0
   '@graphql-codegen/cli': 2.14.0
   '@graphql-codegen/client-preset': 1.1.5
   '@graphql-codegen/introspection': 2.2.1
@@ -74,6 +76,7 @@ specifiers:
   cypress: ^11.0.0
   dayjs: ^1.11.7
   dbdocs: ^0.7.3
+  emoji-mart: ^5.4.0
   eslint: ~8.15.0
   eslint-config-next: 13.0.0
   eslint-config-prettier: 8.1.0
@@ -131,6 +134,8 @@ specifiers:
 dependencies:
   '@anatine/zod-nestjs': 1.8.0_z27xi5wz5uv5jzbbwy55zr5iiy
   '@apollo/client': 3.7.1_xe4twbeoqswbn2uas4ov5melbq
+  '@emoji-mart/data': 1.1.0
+  '@emoji-mart/react': 1.1.0_64mwqb66z7c4vy75vn2wjcn7pu
   '@graphql-typed-document-node/core': 3.1.1_graphql@16.6.0
   '@nestjs/common': 9.2.0_yzt46al3aifnexifjjdb4dxxja
   '@nestjs/core': 9.2.0_jfowmhmgk7kwjudosrpv7e7liy
@@ -142,6 +147,7 @@ dependencies:
   core-js: 3.26.1
   dayjs: 1.11.7
   dbdocs: 0.7.3
+  emoji-mart: 5.4.0
   express: 4.18.2
   fast-deep-equal: 3.1.3
   graphql: 16.6.0
@@ -4178,6 +4184,20 @@ packages:
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
     dev: true
+
+  /@emoji-mart/data/1.1.0:
+    resolution: {integrity: sha512-gwwGC0v5+BQM5On8hy0Uw7qT+xBHVLFuamHj8wHLo4JkuYM+XlGbQuQZj/X7JJLQuBiHs4d3Xh2O+h6YlbtCCA==}
+    dev: false
+
+  /@emoji-mart/react/1.1.0_64mwqb66z7c4vy75vn2wjcn7pu:
+    resolution: {integrity: sha512-6MnXNSfR69hmgH/mZIux4NGAjmS90f+rtJu8Soq1rCb27JWmYCQLAP7BqOVPUN4BL+c4ONUK+PPPihQho0eIxg==}
+    peerDependencies:
+      emoji-mart: ^5.2
+      react: ^16.8 || ^17 || ^18
+    dependencies:
+      emoji-mart: 5.4.0
+      react: 18.2.0
+    dev: false
 
   /@emotion/is-prop-valid/1.2.0:
     resolution: {integrity: sha512-3aDpDprjM0AwaxGE09bOPkNxHpBd+kA6jty3RnaEXdweX1DF1U3VQpPYb0g1IStAuK7SVQ1cy+bNBBKp4W3Fjg==}
@@ -13946,6 +13966,10 @@ packages:
     resolution: {integrity: sha512-aITqOwnLanpHLNXZJENbOgjUBeHocD+xsSJmNrjovKBW5HbSpW3d1pEls7GFQPUWXiwG9+0P4GtHfEqC/4M0Iw==}
     engines: {node: '>=12'}
     dev: true
+
+  /emoji-mart/5.4.0:
+    resolution: {integrity: sha512-xrRrUmMqZG64oRxmUZcf8zSMUGQtIUYUL3aZD5iMkqAve+I9wMNh3OVOXL7NW9fEm48L2LI3BUPpj/DUIAJrVg==}
+    dev: false
 
   /emoji-regex/8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
