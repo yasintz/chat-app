@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import martData from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { MentionsInput, Mention } from 'react-mentions';
+import { ChatInputHeader } from './header';
 //#endregion
 
 // #region Styled
@@ -39,9 +40,9 @@ const StyledChatInputWrapper = styled.div`
       box-shadow: 0 0 1rem rgba(0, 0, 0, 0.16);
       border-radius: 0.5rem;
       .chat-input__suggestions__list {
-        backgroundcolor: 'white';
+        background-color: 'white';
         border: 1px solid rgba(0, 0, 0, 0.15);
-        fontsize: 14;
+        font-size: 14;
       }
       .chat-input__suggestions__item {
         padding: 0.5rem 1rem;
@@ -52,21 +53,12 @@ const StyledChatInputWrapper = styled.div`
     }
     .chat-input__highlighter {
       .user-mention {
-        background-color: #cee4e5;
+        background-color: #dfed44;
+        border-radius: 4px;
       }
     }
   }
 `;
-
-const StyledChatInputHeaderContainer = styled.div`
-  display: flex;
-`;
-const StyledChatInputHeaderMarkdownItem = styled.div`
-  margin: 0 4px;
-  padding: 4px;
-  cursor: pointer;
-`;
-
 // #endregion
 
 type PropsType = {
@@ -85,9 +77,7 @@ export const ChatInput = ({
   userList,
 }: PropsType) => {
   const [isEmojiModalOpen, setEmojiModalOpen] = useState(false);
-  const onMarkdownItemClick = useEvent((text: string) => {
-    onChange(`${value}${text}`);
-  });
+
   const onEmojiModalOpened = useEvent(() => {
     setEmojiModalOpen(true);
   });
@@ -98,28 +88,7 @@ export const ChatInput = ({
 
   return (
     <StyledChatInputContainer>
-      <StyledChatInputHeaderContainer>
-        <StyledChatInputHeaderMarkdownItem
-          onClick={() => onMarkdownItemClick('### Title')}
-        >
-          H
-        </StyledChatInputHeaderMarkdownItem>
-        <StyledChatInputHeaderMarkdownItem
-          onClick={() => onMarkdownItemClick('**Bold Message**')}
-        >
-          <b>B</b>
-        </StyledChatInputHeaderMarkdownItem>
-        <StyledChatInputHeaderMarkdownItem
-          onClick={() => onMarkdownItemClick('_Italic Message_')}
-        >
-          <i>I</i>
-        </StyledChatInputHeaderMarkdownItem>
-        <StyledChatInputHeaderMarkdownItem
-          onClick={() => onMarkdownItemClick('~~Strikethrough~~')}
-        >
-          <s>S</s>
-        </StyledChatInputHeaderMarkdownItem>
-      </StyledChatInputHeaderContainer>
+      <ChatInputHeader value={value} onChange={onChange} />
       <StyledChatInputWrapper>
         <MentionsInput
           value={value}
@@ -129,6 +98,7 @@ export const ChatInput = ({
         >
           <Mention
             trigger="@"
+            displayTransform={(id, display) => `@${display}`}
             data={userList}
             className="user-mention"
             markup="[@__display__](__id__)"

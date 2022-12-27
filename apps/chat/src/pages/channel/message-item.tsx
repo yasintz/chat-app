@@ -85,31 +85,32 @@ export const MessageItem = ({
   const createdAtInstance = dayjs(createdAt);
   const createdTime = createdAtInstance.format('h:mm A');
   return (
-    <StyledContainer>
+    <>
       {showMessageDivider && (
-        <div>
+        <div style={{ margin: '0 auto' }}>
           {createdAtInstance.format('MM/DD/YYYY')}
-          <hr />
         </div>
       )}
-      <StyledAvatar
-        src={
-          url ||
-          'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png'
-        }
-        alt="Avatar"
-      />
-      <StyledMessageRightContainer>
-        <StyledAuthorContainer>
-          <StyledAuthorName>{sender.name}</StyledAuthorName>
-          <StyledGrayText>{createdTime}</StyledGrayText>
-        </StyledAuthorContainer>
-        <div>
-          <Markdown message={body} />
+      <StyledContainer>
+        <StyledAvatar
+          src={
+            url ||
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png'
+          }
+          alt="Avatar"
+        />
+        <StyledMessageRightContainer>
+          <StyledAuthorContainer>
+            <StyledAuthorName>{sender.name}</StyledAuthorName>
+            <StyledGrayText>{createdTime}</StyledGrayText>
+          </StyledAuthorContainer>
+          <div>
+            <Markdown message={body} />
 
-          {updatedAt && <StyledGrayText>(edited)</StyledGrayText>}
-        </div>
-      </StyledMessageRightContainer>
-    </StyledContainer>
+            {updatedAt && <StyledGrayText>(edited)</StyledGrayText>}
+          </div>
+        </StyledMessageRightContainer>
+      </StyledContainer>
+    </>
   );
 };

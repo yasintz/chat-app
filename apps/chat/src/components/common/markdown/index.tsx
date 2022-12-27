@@ -9,10 +9,11 @@ import styled from 'styled-components';
 
 const StyledContainer = styled.div`
   .mention-user {
-    background-color: #ffe505;
-    color: #000;
+    background-color: rgba(29, 155, 209, 0.1);
+    color: rgb(29, 155, 209);
+    border-radius: 5px;
+    padding: 2px;
     text-decoration: none;
-    font-weight: bold;
   }
 `;
 
