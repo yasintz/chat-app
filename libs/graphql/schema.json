@@ -3181,7 +3181,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "timestamptz",
+                "name": "timestamp",
                 "ofType": null
               }
             },
@@ -3194,7 +3194,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3629,7 +3629,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "timestamptz",
+                "name": "timestamp",
                 "ofType": null
               }
             },
@@ -4048,7 +4048,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -4060,7 +4060,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -4144,7 +4144,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -4208,7 +4208,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -4220,7 +4220,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -4280,7 +4280,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -4315,7 +4315,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -4327,7 +4327,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -4363,7 +4363,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -4481,7 +4481,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -4493,7 +4493,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -4529,7 +4529,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -4993,7 +4993,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -5005,7 +5005,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -5041,7 +5041,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -5115,7 +5115,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -5127,7 +5127,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -5163,7 +5163,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -5330,7 +5330,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "timestamptz",
+                "name": "timestamp",
                 "ofType": null
               }
             },
@@ -5438,7 +5438,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "timestamptz",
+                "name": "timestamp",
                 "ofType": null
               }
             },
@@ -5857,7 +5857,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -5941,7 +5941,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -6011,7 +6011,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -6095,7 +6095,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -6130,7 +6130,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6202,7 +6202,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6344,7 +6344,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -6416,7 +6416,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -7646,7 +7646,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -7730,7 +7730,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -7804,7 +7804,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -7888,7 +7888,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -8018,7 +8018,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "timestamptz",
+                "name": "timestamp",
                 "ofType": null
               }
             },
@@ -8031,7 +8031,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -8530,7 +8530,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "timestamptz",
+                "name": "timestamp",
                 "ofType": null
               }
             },
@@ -8737,7 +8737,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -8749,7 +8749,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -8881,7 +8881,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -8921,7 +8921,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -8933,7 +8933,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -9041,7 +9041,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -9064,7 +9064,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9076,7 +9076,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9124,7 +9124,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9147,7 +9147,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9159,7 +9159,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -9207,7 +9207,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -10402,7 +10402,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -10414,7 +10414,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -10486,7 +10486,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -10548,7 +10548,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -10560,7 +10560,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -10632,7 +10632,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -11767,6 +11767,18 @@
         "description": "columns and relationships of \"member\"",
         "fields": [
           {
+            "name": "activeAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "app",
             "description": "An object relationship",
             "args": [],
@@ -12025,7 +12037,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "timestamptz",
+                "name": "timestamp",
                 "ofType": null
               }
             },
@@ -12038,7 +12050,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -12695,7 +12707,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "timestamptz",
+                "name": "timestamp",
                 "ofType": null
               }
             },
@@ -13086,6 +13098,18 @@
             "deprecationReason": null
           },
           {
+            "name": "activeAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "timestamp_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "app",
             "description": null,
             "type": {
@@ -13162,7 +13186,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -13174,7 +13198,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -13306,7 +13330,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -13367,6 +13391,18 @@
                 "name": "uuid",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastSeenAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -13823,6 +13859,18 @@
             "deprecationReason": null
           },
           {
+            "name": "lastSeenAt",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "timestamp_comparison_exp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "member",
             "description": null,
             "type": {
@@ -13917,6 +13965,18 @@
             "deprecationReason": null
           },
           {
+            "name": "lastSeenAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "member",
             "description": null,
             "type": {
@@ -13975,6 +14035,18 @@
             "deprecationReason": null
           },
           {
+            "name": "lastSeenAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "memberId",
             "description": null,
             "args": [],
@@ -14012,6 +14084,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastSeenAt",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -14069,6 +14153,18 @@
             "deprecationReason": null
           },
           {
+            "name": "lastSeenAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "memberId",
             "description": null,
             "args": [],
@@ -14106,6 +14202,18 @@
           },
           {
             "name": "id",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastSeenAt",
             "description": null,
             "type": {
               "kind": "ENUM",
@@ -14290,6 +14398,18 @@
             "deprecationReason": null
           },
           {
+            "name": "lastSeenAt",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "member",
             "description": null,
             "type": {
@@ -14382,6 +14502,12 @@
             "deprecationReason": null
           },
           {
+            "name": "lastSeenAt",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "memberId",
             "description": "column name",
             "isDeprecated": false,
@@ -14414,6 +14540,18 @@
             "type": {
               "kind": "SCALAR",
               "name": "uuid",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastSeenAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -14507,6 +14645,18 @@
             "deprecationReason": null
           },
           {
+            "name": "lastSeenAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "memberId",
             "description": null,
             "type": {
@@ -14539,6 +14689,12 @@
           },
           {
             "name": "id",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastSeenAt",
             "description": "column name",
             "isDeprecated": false,
             "deprecationReason": null
@@ -15894,6 +16050,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "activeAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "app",
             "description": null,
             "type": {
@@ -15958,7 +16126,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -15970,7 +16138,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -16066,7 +16234,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -16083,6 +16251,18 @@
         "name": "member_max_fields",
         "description": "aggregate max on columns",
         "fields": [
+          {
+            "name": "activeAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "appId",
             "description": null,
@@ -16113,7 +16293,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -16125,7 +16305,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -16185,7 +16365,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -16203,6 +16383,18 @@
         "description": "order by max() on columns of table \"member\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "activeAt",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "appId",
             "description": null,
@@ -16322,6 +16514,18 @@
         "description": "aggregate min on columns",
         "fields": [
           {
+            "name": "activeAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "appId",
             "description": null,
             "args": [],
@@ -16351,7 +16555,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -16363,7 +16567,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -16423,7 +16627,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -16441,6 +16645,18 @@
         "description": "order by min() on columns of table \"member\"",
         "fields": null,
         "inputFields": [
+          {
+            "name": "activeAt",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "appId",
             "description": null,
@@ -16714,6 +16930,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "activeAt",
+            "description": null,
+            "type": {
+              "kind": "ENUM",
+              "name": "order_by",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "app",
             "description": null,
             "type": {
@@ -16934,6 +17162,12 @@
         "interfaces": null,
         "enumValues": [
           {
+            "name": "activeAt",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "appId",
             "description": "column name",
             "isDeprecated": false,
@@ -16997,6 +17231,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "activeAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "appId",
             "description": null,
             "type": {
@@ -17025,7 +17271,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -17037,7 +17283,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -17097,7 +17343,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -17155,6 +17401,18 @@
         "fields": null,
         "inputFields": [
           {
+            "name": "activeAt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "timestamp",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "appId",
             "description": null,
             "type": {
@@ -17183,7 +17441,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -17195,7 +17453,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -17255,7 +17513,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -17275,6 +17533,12 @@
         "inputFields": null,
         "interfaces": null,
         "enumValues": [
+          {
+            "name": "activeAt",
+            "description": "column name",
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
           {
             "name": "appId",
             "description": "column name",
@@ -17627,7 +17891,7 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
-                "name": "timestamptz",
+                "name": "timestamp",
                 "ofType": null
               }
             },
@@ -17640,7 +17904,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -18330,7 +18594,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -18784,7 +19048,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -18796,7 +19060,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -18964,7 +19228,7 @@
             "description": null,
             "type": {
               "kind": "INPUT_OBJECT",
-              "name": "timestamptz_comparison_exp",
+              "name": "timestamp_comparison_exp",
               "ofType": null
             },
             "defaultValue": null,
@@ -20325,7 +20589,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -20337,7 +20601,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -20469,7 +20733,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -20516,7 +20780,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -20528,7 +20792,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -20588,7 +20852,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -20754,7 +21018,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -20766,7 +21030,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -20826,7 +21090,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "isDeprecated": false,
@@ -22929,7 +23193,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -22941,7 +23205,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -23001,7 +23265,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -23087,7 +23351,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -23099,7 +23363,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -23159,7 +23423,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -35569,7 +35833,7 @@
       },
       {
         "kind": "SCALAR",
-        "name": "timestamptz",
+        "name": "timestamp",
         "description": null,
         "fields": null,
         "inputFields": null,
@@ -35579,8 +35843,8 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "timestamptz_comparison_exp",
-        "description": "Boolean expression to compare columns of type \"timestamptz\". All fields are combined with logical 'AND'.",
+        "name": "timestamp_comparison_exp",
+        "description": "Boolean expression to compare columns of type \"timestamp\". All fields are combined with logical 'AND'.",
         "fields": null,
         "inputFields": [
           {
@@ -35588,7 +35852,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -35600,7 +35864,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -35612,7 +35876,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -35630,7 +35894,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "timestamptz",
+                  "name": "timestamp",
                   "ofType": null
                 }
               }
@@ -35656,7 +35920,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -35668,7 +35932,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -35680,7 +35944,7 @@
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "timestamptz",
+              "name": "timestamp",
               "ofType": null
             },
             "defaultValue": null,
@@ -35698,7 +35962,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "timestamptz",
+                  "name": "timestamp",
                   "ofType": null
                 }
               }

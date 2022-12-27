@@ -5,10 +5,13 @@ configuration:
   column_config:
     channel_id:
       custom_name: channelId
+    last_seen_at:
+      custom_name: lastSeenAt
     member_id:
       custom_name: memberId
   custom_column_names:
     channel_id: channelId
+    last_seen_at: lastSeenAt
     member_id: memberId
   custom_root_fields: {}
 object_relationships:

@@ -3,6 +3,8 @@ table:
   schema: public
 configuration:
   column_config:
+    active_at:
+      custom_name: activeAt
     app_id:
       custom_name: appId
     avatar_file_id:
@@ -18,6 +20,7 @@ configuration:
     updated_at:
       custom_name: updatedAt
   custom_column_names:
+    active_at: activeAt
     app_id: appId
     avatar_file_id: avatarFileId
     created_at: createdAt

@@ -13,7 +13,7 @@ export type Scalars = {
   Int: number;
   Float: number;
   jsonb: any;
-  timestamptz: any;
+  timestamp: any;
   uuid: any;
 };
 
@@ -344,8 +344,8 @@ export type Channel = {
   /** An object relationship */
   app: App;
   appId: Scalars['uuid'];
-  createdAt: Scalars['timestamptz'];
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt: Scalars['timestamp'];
+  deletedAt?: Maybe<Scalars['timestamp']>;
   id: Scalars['uuid'];
   /** An array relationship */
   members: Array<Member_Channel>;
@@ -356,7 +356,7 @@ export type Channel = {
   /** An aggregate relationship */
   messages_aggregate: Message_Aggregate;
   name: Scalars['String'];
-  updatedAt: Scalars['timestamptz'];
+  updatedAt: Scalars['timestamp'];
 };
 
 
@@ -453,15 +453,15 @@ export type Channel_Bool_Exp = {
   _or?: InputMaybe<Array<Channel_Bool_Exp>>;
   app?: InputMaybe<App_Bool_Exp>;
   appId?: InputMaybe<Uuid_Comparison_Exp>;
-  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  deletedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  createdAt?: InputMaybe<Timestamp_Comparison_Exp>;
+  deletedAt?: InputMaybe<Timestamp_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   members?: InputMaybe<Member_Channel_Bool_Exp>;
   members_aggregate?: InputMaybe<Member_Channel_Aggregate_Bool_Exp>;
   messages?: InputMaybe<Message_Bool_Exp>;
   messages_aggregate?: InputMaybe<Message_Aggregate_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
-  updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  updatedAt?: InputMaybe<Timestamp_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "channel" */
@@ -474,24 +474,24 @@ export enum Channel_Constraint {
 export type Channel_Insert_Input = {
   app?: InputMaybe<App_Obj_Rel_Insert_Input>;
   appId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['uuid']>;
   members?: InputMaybe<Member_Channel_Arr_Rel_Insert_Input>;
   messages?: InputMaybe<Message_Arr_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** aggregate max on columns */
 export type Channel_Max_Fields = {
   __typename?: 'channel_max_fields';
   appId?: Maybe<Scalars['uuid']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt?: Maybe<Scalars['timestamp']>;
+  deletedAt?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** order by max() on columns of table "channel" */
@@ -508,11 +508,11 @@ export type Channel_Max_Order_By = {
 export type Channel_Min_Fields = {
   __typename?: 'channel_min_fields';
   appId?: Maybe<Scalars['uuid']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt?: Maybe<Scalars['timestamp']>;
+  deletedAt?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** order by min() on columns of table "channel" */
@@ -585,11 +585,11 @@ export enum Channel_Select_Column {
 /** input type for updating data in table "channel" */
 export type Channel_Set_Input = {
   appId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** Streaming cursor of the table "channel" */
@@ -603,11 +603,11 @@ export type Channel_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Channel_Stream_Cursor_Value_Input = {
   appId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** update columns of table "channel" */
@@ -646,14 +646,14 @@ export type Customer = {
   /** An object relationship */
   app: App;
   appId: Scalars['uuid'];
-  createdAt: Scalars['timestamptz'];
+  createdAt: Scalars['timestamp'];
   email: Scalars['String'];
   encryptedPassword?: Maybe<Scalars['String']>;
   firstName: Scalars['String'];
   id: Scalars['uuid'];
   lastName: Scalars['String'];
   role: Customer_Role_Enum;
-  updatedAt: Scalars['timestamptz'];
+  updatedAt: Scalars['timestamp'];
 };
 
 /** aggregated selection of "customer" */
@@ -710,14 +710,14 @@ export type Customer_Bool_Exp = {
   _or?: InputMaybe<Array<Customer_Bool_Exp>>;
   app?: InputMaybe<App_Bool_Exp>;
   appId?: InputMaybe<Uuid_Comparison_Exp>;
-  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  createdAt?: InputMaybe<Timestamp_Comparison_Exp>;
   email?: InputMaybe<String_Comparison_Exp>;
   encryptedPassword?: InputMaybe<String_Comparison_Exp>;
   firstName?: InputMaybe<String_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   lastName?: InputMaybe<String_Comparison_Exp>;
   role?: InputMaybe<Customer_Role_Enum_Comparison_Exp>;
-  updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  updatedAt?: InputMaybe<Timestamp_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "customer" */
@@ -732,27 +732,27 @@ export enum Customer_Constraint {
 export type Customer_Insert_Input = {
   app?: InputMaybe<App_Obj_Rel_Insert_Input>;
   appId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
   email?: InputMaybe<Scalars['String']>;
   encryptedPassword?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   lastName?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Customer_Role_Enum>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** aggregate max on columns */
 export type Customer_Max_Fields = {
   __typename?: 'customer_max_fields';
   appId?: Maybe<Scalars['uuid']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
+  createdAt?: Maybe<Scalars['timestamp']>;
   email?: Maybe<Scalars['String']>;
   encryptedPassword?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   lastName?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** order by max() on columns of table "customer" */
@@ -771,13 +771,13 @@ export type Customer_Max_Order_By = {
 export type Customer_Min_Fields = {
   __typename?: 'customer_min_fields';
   appId?: Maybe<Scalars['uuid']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
+  createdAt?: Maybe<Scalars['timestamp']>;
   email?: Maybe<Scalars['String']>;
   encryptedPassword?: Maybe<Scalars['String']>;
   firstName?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   lastName?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** order by min() on columns of table "customer" */
@@ -987,14 +987,14 @@ export enum Customer_Select_Column {
 /** input type for updating data in table "customer" */
 export type Customer_Set_Input = {
   appId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
   email?: InputMaybe<Scalars['String']>;
   encryptedPassword?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   lastName?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Customer_Role_Enum>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** Streaming cursor of the table "customer" */
@@ -1008,14 +1008,14 @@ export type Customer_Stream_Cursor_Input = {
 /** Initial value of the column from where the streaming should start */
 export type Customer_Stream_Cursor_Value_Input = {
   appId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
   email?: InputMaybe<Scalars['String']>;
   encryptedPassword?: InputMaybe<Scalars['String']>;
   firstName?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   lastName?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Customer_Role_Enum>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** update columns of table "customer" */
@@ -1049,8 +1049,8 @@ export type Customer_Updates = {
 /** columns and relationships of "file" */
 export type File = {
   __typename?: 'file';
-  createdAt: Scalars['timestamptz'];
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt: Scalars['timestamp'];
+  deletedAt?: Maybe<Scalars['timestamp']>;
   /** An object relationship */
   file_service: File_Service;
   id: Scalars['uuid'];
@@ -1066,7 +1066,7 @@ export type File = {
   path: Scalars['String'];
   service: File_Service_Enum;
   type: File_Type_Enum;
-  updatedAt: Scalars['timestamptz'];
+  updatedAt: Scalars['timestamp'];
 };
 
 
@@ -1136,8 +1136,8 @@ export type File_Bool_Exp = {
   _and?: InputMaybe<Array<File_Bool_Exp>>;
   _not?: InputMaybe<File_Bool_Exp>;
   _or?: InputMaybe<Array<File_Bool_Exp>>;
-  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  deletedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  createdAt?: InputMaybe<Timestamp_Comparison_Exp>;
+  deletedAt?: InputMaybe<Timestamp_Comparison_Exp>;
   file_service?: InputMaybe<File_Service_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
   member_files?: InputMaybe<Member_File_Bool_Exp>;
@@ -1148,7 +1148,7 @@ export type File_Bool_Exp = {
   path?: InputMaybe<String_Comparison_Exp>;
   service?: InputMaybe<File_Service_Enum_Comparison_Exp>;
   type?: InputMaybe<File_Type_Enum_Comparison_Exp>;
-  updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  updatedAt?: InputMaybe<Timestamp_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "file" */
@@ -1159,8 +1159,8 @@ export enum File_Constraint {
 
 /** input type for inserting data into table "file" */
 export type File_Insert_Input = {
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   file_service?: InputMaybe<File_Service_Obj_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['uuid']>;
   member_files?: InputMaybe<Member_File_Arr_Rel_Insert_Input>;
@@ -1169,29 +1169,29 @@ export type File_Insert_Input = {
   path?: InputMaybe<Scalars['String']>;
   service?: InputMaybe<File_Service_Enum>;
   type?: InputMaybe<File_Type_Enum>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** aggregate max on columns */
 export type File_Max_Fields = {
   __typename?: 'file_max_fields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt?: Maybe<Scalars['timestamp']>;
+  deletedAt?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** aggregate min on columns */
 export type File_Min_Fields = {
   __typename?: 'file_min_fields';
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt?: Maybe<Scalars['timestamp']>;
+  deletedAt?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
   path?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** response of any mutation on the table "file" */
@@ -1401,14 +1401,14 @@ export type File_Service_Updates = {
 
 /** input type for updating data in table "file" */
 export type File_Set_Input = {
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
   path?: InputMaybe<Scalars['String']>;
   service?: InputMaybe<File_Service_Enum>;
   type?: InputMaybe<File_Type_Enum>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** Streaming cursor of the table "file" */
@@ -1421,14 +1421,14 @@ export type File_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type File_Stream_Cursor_Value_Input = {
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
   path?: InputMaybe<Scalars['String']>;
   service?: InputMaybe<File_Service_Enum>;
   type?: InputMaybe<File_Type_Enum>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** columns and relationships of "file_type" */
@@ -1625,6 +1625,7 @@ export type Jsonb_Comparison_Exp = {
 /** columns and relationships of "member" */
 export type Member = {
   __typename?: 'member';
+  activeAt?: Maybe<Scalars['timestamp']>;
   /** An object relationship */
   app: App;
   appId: Scalars['uuid'];
@@ -1635,8 +1636,8 @@ export type Member = {
   channels: Array<Member_Channel>;
   /** An aggregate relationship */
   channels_aggregate: Member_Channel_Aggregate;
-  createdAt: Scalars['timestamptz'];
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt: Scalars['timestamp'];
+  deletedAt?: Maybe<Scalars['timestamp']>;
   encryptedPassword?: Maybe<Scalars['String']>;
   externalId: Scalars['String'];
   /** An array relationship */
@@ -1653,7 +1654,7 @@ export type Member = {
   /** An aggregate relationship */
   messages_aggregate: Message_Aggregate;
   name: Scalars['String'];
-  updatedAt: Scalars['timestamptz'];
+  updatedAt: Scalars['timestamp'];
 };
 
 
@@ -1788,14 +1789,15 @@ export type Member_Bool_Exp = {
   _and?: InputMaybe<Array<Member_Bool_Exp>>;
   _not?: InputMaybe<Member_Bool_Exp>;
   _or?: InputMaybe<Array<Member_Bool_Exp>>;
+  activeAt?: InputMaybe<Timestamp_Comparison_Exp>;
   app?: InputMaybe<App_Bool_Exp>;
   appId?: InputMaybe<Uuid_Comparison_Exp>;
   avatarFile?: InputMaybe<File_Bool_Exp>;
   avatarFileId?: InputMaybe<Uuid_Comparison_Exp>;
   channels?: InputMaybe<Member_Channel_Bool_Exp>;
   channels_aggregate?: InputMaybe<Member_Channel_Aggregate_Bool_Exp>;
-  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  deletedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  createdAt?: InputMaybe<Timestamp_Comparison_Exp>;
+  deletedAt?: InputMaybe<Timestamp_Comparison_Exp>;
   encryptedPassword?: InputMaybe<String_Comparison_Exp>;
   externalId?: InputMaybe<String_Comparison_Exp>;
   files?: InputMaybe<Member_File_Bool_Exp>;
@@ -1806,7 +1808,7 @@ export type Member_Bool_Exp = {
   messages?: InputMaybe<Message_Bool_Exp>;
   messages_aggregate?: InputMaybe<Message_Aggregate_Bool_Exp>;
   name?: InputMaybe<String_Comparison_Exp>;
-  updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  updatedAt?: InputMaybe<Timestamp_Comparison_Exp>;
 };
 
 /** columns and relationships of "member_channel" */
@@ -1816,6 +1818,7 @@ export type Member_Channel = {
   channel: Channel;
   channelId: Scalars['uuid'];
   id: Scalars['uuid'];
+  lastSeenAt?: Maybe<Scalars['timestamp']>;
   /** An object relationship */
   member: Member;
   memberId: Scalars['uuid'];
@@ -1876,6 +1879,7 @@ export type Member_Channel_Bool_Exp = {
   channel?: InputMaybe<Channel_Bool_Exp>;
   channelId?: InputMaybe<Uuid_Comparison_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
+  lastSeenAt?: InputMaybe<Timestamp_Comparison_Exp>;
   member?: InputMaybe<Member_Bool_Exp>;
   memberId?: InputMaybe<Uuid_Comparison_Exp>;
 };
@@ -1893,6 +1897,7 @@ export type Member_Channel_Insert_Input = {
   channel?: InputMaybe<Channel_Obj_Rel_Insert_Input>;
   channelId?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
+  lastSeenAt?: InputMaybe<Scalars['timestamp']>;
   member?: InputMaybe<Member_Obj_Rel_Insert_Input>;
   memberId?: InputMaybe<Scalars['uuid']>;
 };
@@ -1902,6 +1907,7 @@ export type Member_Channel_Max_Fields = {
   __typename?: 'member_channel_max_fields';
   channelId?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
+  lastSeenAt?: Maybe<Scalars['timestamp']>;
   memberId?: Maybe<Scalars['uuid']>;
 };
 
@@ -1909,6 +1915,7 @@ export type Member_Channel_Max_Fields = {
 export type Member_Channel_Max_Order_By = {
   channelId?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  lastSeenAt?: InputMaybe<Order_By>;
   memberId?: InputMaybe<Order_By>;
 };
 
@@ -1917,6 +1924,7 @@ export type Member_Channel_Min_Fields = {
   __typename?: 'member_channel_min_fields';
   channelId?: Maybe<Scalars['uuid']>;
   id?: Maybe<Scalars['uuid']>;
+  lastSeenAt?: Maybe<Scalars['timestamp']>;
   memberId?: Maybe<Scalars['uuid']>;
 };
 
@@ -1924,6 +1932,7 @@ export type Member_Channel_Min_Fields = {
 export type Member_Channel_Min_Order_By = {
   channelId?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  lastSeenAt?: InputMaybe<Order_By>;
   memberId?: InputMaybe<Order_By>;
 };
 
@@ -1948,6 +1957,7 @@ export type Member_Channel_Order_By = {
   channel?: InputMaybe<Channel_Order_By>;
   channelId?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  lastSeenAt?: InputMaybe<Order_By>;
   member?: InputMaybe<Member_Order_By>;
   memberId?: InputMaybe<Order_By>;
 };
@@ -1965,6 +1975,8 @@ export enum Member_Channel_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  LastSeenAt = 'lastSeenAt',
+  /** column name */
   MemberId = 'memberId'
 }
 
@@ -1972,6 +1984,7 @@ export enum Member_Channel_Select_Column {
 export type Member_Channel_Set_Input = {
   channelId?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
+  lastSeenAt?: InputMaybe<Scalars['timestamp']>;
   memberId?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -1987,6 +2000,7 @@ export type Member_Channel_Stream_Cursor_Input = {
 export type Member_Channel_Stream_Cursor_Value_Input = {
   channelId?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
+  lastSeenAt?: InputMaybe<Scalars['timestamp']>;
   memberId?: InputMaybe<Scalars['uuid']>;
 };
 
@@ -1996,6 +2010,8 @@ export enum Member_Channel_Update_Column {
   ChannelId = 'channelId',
   /** column name */
   Id = 'id',
+  /** column name */
+  LastSeenAt = 'lastSeenAt',
   /** column name */
   MemberId = 'memberId'
 }
@@ -2213,13 +2229,14 @@ export type Member_File_Updates = {
 
 /** input type for inserting data into table "member" */
 export type Member_Insert_Input = {
+  activeAt?: InputMaybe<Scalars['timestamp']>;
   app?: InputMaybe<App_Obj_Rel_Insert_Input>;
   appId?: InputMaybe<Scalars['uuid']>;
   avatarFile?: InputMaybe<File_Obj_Rel_Insert_Input>;
   avatarFileId?: InputMaybe<Scalars['uuid']>;
   channels?: InputMaybe<Member_Channel_Arr_Rel_Insert_Input>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   encryptedPassword?: InputMaybe<Scalars['String']>;
   externalId?: InputMaybe<Scalars['String']>;
   files?: InputMaybe<Member_File_Arr_Rel_Insert_Input>;
@@ -2227,25 +2244,27 @@ export type Member_Insert_Input = {
   message_reactions?: InputMaybe<Message_Reaction_Arr_Rel_Insert_Input>;
   messages?: InputMaybe<Message_Arr_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** aggregate max on columns */
 export type Member_Max_Fields = {
   __typename?: 'member_max_fields';
+  activeAt?: Maybe<Scalars['timestamp']>;
   appId?: Maybe<Scalars['uuid']>;
   avatarFileId?: Maybe<Scalars['uuid']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt?: Maybe<Scalars['timestamp']>;
+  deletedAt?: Maybe<Scalars['timestamp']>;
   encryptedPassword?: Maybe<Scalars['String']>;
   externalId?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** order by max() on columns of table "member" */
 export type Member_Max_Order_By = {
+  activeAt?: InputMaybe<Order_By>;
   appId?: InputMaybe<Order_By>;
   avatarFileId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
@@ -2260,19 +2279,21 @@ export type Member_Max_Order_By = {
 /** aggregate min on columns */
 export type Member_Min_Fields = {
   __typename?: 'member_min_fields';
+  activeAt?: Maybe<Scalars['timestamp']>;
   appId?: Maybe<Scalars['uuid']>;
   avatarFileId?: Maybe<Scalars['uuid']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt?: Maybe<Scalars['timestamp']>;
+  deletedAt?: Maybe<Scalars['timestamp']>;
   encryptedPassword?: Maybe<Scalars['String']>;
   externalId?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['uuid']>;
   name?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** order by min() on columns of table "member" */
 export type Member_Min_Order_By = {
+  activeAt?: InputMaybe<Order_By>;
   appId?: InputMaybe<Order_By>;
   avatarFileId?: InputMaybe<Order_By>;
   createdAt?: InputMaybe<Order_By>;
@@ -2309,6 +2330,7 @@ export type Member_On_Conflict = {
 
 /** Ordering options when selecting data from "member". */
 export type Member_Order_By = {
+  activeAt?: InputMaybe<Order_By>;
   app?: InputMaybe<App_Order_By>;
   appId?: InputMaybe<Order_By>;
   avatarFile?: InputMaybe<File_Order_By>;
@@ -2334,6 +2356,8 @@ export type Member_Pk_Columns_Input = {
 /** select columns of table "member" */
 export enum Member_Select_Column {
   /** column name */
+  ActiveAt = 'activeAt',
+  /** column name */
   AppId = 'appId',
   /** column name */
   AvatarFileId = 'avatarFileId',
@@ -2355,15 +2379,16 @@ export enum Member_Select_Column {
 
 /** input type for updating data in table "member" */
 export type Member_Set_Input = {
+  activeAt?: InputMaybe<Scalars['timestamp']>;
   appId?: InputMaybe<Scalars['uuid']>;
   avatarFileId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   encryptedPassword?: InputMaybe<Scalars['String']>;
   externalId?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** Streaming cursor of the table "member" */
@@ -2376,19 +2401,22 @@ export type Member_Stream_Cursor_Input = {
 
 /** Initial value of the column from where the streaming should start */
 export type Member_Stream_Cursor_Value_Input = {
+  activeAt?: InputMaybe<Scalars['timestamp']>;
   appId?: InputMaybe<Scalars['uuid']>;
   avatarFileId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   encryptedPassword?: InputMaybe<Scalars['String']>;
   externalId?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** update columns of table "member" */
 export enum Member_Update_Column {
+  /** column name */
+  ActiveAt = 'activeAt',
   /** column name */
   AppId = 'appId',
   /** column name */
@@ -2426,8 +2454,8 @@ export type Message = {
   children: Array<Message>;
   /** An aggregate relationship */
   children_aggregate: Message_Aggregate;
-  createdAt: Scalars['timestamptz'];
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt: Scalars['timestamp'];
+  deletedAt?: Maybe<Scalars['timestamp']>;
   /** An array relationship */
   files: Array<Message_File>;
   /** An aggregate relationship */
@@ -2450,7 +2478,7 @@ export type Message = {
   /** An object relationship */
   sender: Member;
   senderId: Scalars['uuid'];
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 
@@ -2590,8 +2618,8 @@ export type Message_Bool_Exp = {
   channelId?: InputMaybe<Uuid_Comparison_Exp>;
   children?: InputMaybe<Message_Bool_Exp>;
   children_aggregate?: InputMaybe<Message_Aggregate_Bool_Exp>;
-  createdAt?: InputMaybe<Timestamptz_Comparison_Exp>;
-  deletedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  createdAt?: InputMaybe<Timestamp_Comparison_Exp>;
+  deletedAt?: InputMaybe<Timestamp_Comparison_Exp>;
   files?: InputMaybe<Message_File_Bool_Exp>;
   files_aggregate?: InputMaybe<Message_File_Aggregate_Bool_Exp>;
   id?: InputMaybe<Uuid_Comparison_Exp>;
@@ -2605,7 +2633,7 @@ export type Message_Bool_Exp = {
   replyToId?: InputMaybe<Uuid_Comparison_Exp>;
   sender?: InputMaybe<Member_Bool_Exp>;
   senderId?: InputMaybe<Uuid_Comparison_Exp>;
-  updatedAt?: InputMaybe<Timestamptz_Comparison_Exp>;
+  updatedAt?: InputMaybe<Timestamp_Comparison_Exp>;
 };
 
 /** unique or primary key constraints on table "message" */
@@ -2817,8 +2845,8 @@ export type Message_Insert_Input = {
   channel?: InputMaybe<Channel_Obj_Rel_Insert_Input>;
   channelId?: InputMaybe<Scalars['uuid']>;
   children?: InputMaybe<Message_Arr_Rel_Insert_Input>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   files?: InputMaybe<Message_File_Arr_Rel_Insert_Input>;
   id?: InputMaybe<Scalars['uuid']>;
   messageReactions?: InputMaybe<Message_Reaction_Arr_Rel_Insert_Input>;
@@ -2829,7 +2857,7 @@ export type Message_Insert_Input = {
   replyToId?: InputMaybe<Scalars['uuid']>;
   sender?: InputMaybe<Member_Obj_Rel_Insert_Input>;
   senderId?: InputMaybe<Scalars['uuid']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** aggregate max on columns */
@@ -2837,13 +2865,13 @@ export type Message_Max_Fields = {
   __typename?: 'message_max_fields';
   body?: Maybe<Scalars['String']>;
   channelId?: Maybe<Scalars['uuid']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt?: Maybe<Scalars['timestamp']>;
+  deletedAt?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
   parentId?: Maybe<Scalars['uuid']>;
   replyToId?: Maybe<Scalars['uuid']>;
   senderId?: Maybe<Scalars['uuid']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** order by max() on columns of table "message" */
@@ -2864,13 +2892,13 @@ export type Message_Min_Fields = {
   __typename?: 'message_min_fields';
   body?: Maybe<Scalars['String']>;
   channelId?: Maybe<Scalars['uuid']>;
-  createdAt?: Maybe<Scalars['timestamptz']>;
-  deletedAt?: Maybe<Scalars['timestamptz']>;
+  createdAt?: Maybe<Scalars['timestamp']>;
+  deletedAt?: Maybe<Scalars['timestamp']>;
   id?: Maybe<Scalars['uuid']>;
   parentId?: Maybe<Scalars['uuid']>;
   replyToId?: Maybe<Scalars['uuid']>;
   senderId?: Maybe<Scalars['uuid']>;
-  updatedAt?: Maybe<Scalars['timestamptz']>;
+  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** order by min() on columns of table "message" */
@@ -3178,13 +3206,13 @@ export enum Message_Select_Column {
 export type Message_Set_Input = {
   body?: InputMaybe<Scalars['String']>;
   channelId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['uuid']>;
   parentId?: InputMaybe<Scalars['uuid']>;
   replyToId?: InputMaybe<Scalars['uuid']>;
   senderId?: InputMaybe<Scalars['uuid']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** Streaming cursor of the table "message" */
@@ -3199,13 +3227,13 @@ export type Message_Stream_Cursor_Input = {
 export type Message_Stream_Cursor_Value_Input = {
   body?: InputMaybe<Scalars['String']>;
   channelId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamptz']>;
-  deletedAt?: InputMaybe<Scalars['timestamptz']>;
+  createdAt?: InputMaybe<Scalars['timestamp']>;
+  deletedAt?: InputMaybe<Scalars['timestamp']>;
   id?: InputMaybe<Scalars['uuid']>;
   parentId?: InputMaybe<Scalars['uuid']>;
   replyToId?: InputMaybe<Scalars['uuid']>;
   senderId?: InputMaybe<Scalars['uuid']>;
-  updatedAt?: InputMaybe<Scalars['timestamptz']>;
+  updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
 /** update columns of table "message" */
@@ -5208,17 +5236,17 @@ export type Subscription_RootReaction_StreamArgs = {
   where?: InputMaybe<Reaction_Bool_Exp>;
 };
 
-/** Boolean expression to compare columns of type "timestamptz". All fields are combined with logical 'AND'. */
-export type Timestamptz_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['timestamptz']>;
-  _gt?: InputMaybe<Scalars['timestamptz']>;
-  _gte?: InputMaybe<Scalars['timestamptz']>;
-  _in?: InputMaybe<Array<Scalars['timestamptz']>>;
+/** Boolean expression to compare columns of type "timestamp". All fields are combined with logical 'AND'. */
+export type Timestamp_Comparison_Exp = {
+  _eq?: InputMaybe<Scalars['timestamp']>;
+  _gt?: InputMaybe<Scalars['timestamp']>;
+  _gte?: InputMaybe<Scalars['timestamp']>;
+  _in?: InputMaybe<Array<Scalars['timestamp']>>;
   _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['timestamptz']>;
-  _lte?: InputMaybe<Scalars['timestamptz']>;
-  _neq?: InputMaybe<Scalars['timestamptz']>;
-  _nin?: InputMaybe<Array<Scalars['timestamptz']>>;
+  _lt?: InputMaybe<Scalars['timestamp']>;
+  _lte?: InputMaybe<Scalars['timestamp']>;
+  _neq?: InputMaybe<Scalars['timestamp']>;
+  _nin?: InputMaybe<Array<Scalars['timestamp']>>;
 };
 
 /** Boolean expression to compare columns of type "uuid". All fields are combined with logical 'AND'. */
