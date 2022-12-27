@@ -8,77 +8,16 @@ import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
-import { gql } from '../../gql';
-import { getFragment } from '@gql/fragment-masking';
 import { ChatInput } from './chat-input';
 import { MessageItem } from './message-item';
-import dayjs from 'dayjs';
 import { Markdown } from '../../components/common/markdown';
-//#endregion
-
-//#region GQL
-const channelPageMessageFragment = gql(/* GraphQL */ `
-  fragment ChannelPageMessage on message {
-    id
-    createdAt
-  }
-`);
-
-const getChannelMessagesSubscription = gql(/* GraphQL */ `
-  subscription getChannelNewMessages($channelId: uuid!) {
-    message(
-      where: { channelId: { _eq: $channelId } }
-      order_by: { createdAt: desc }
-      limit: 1
-    ) {
-      ...ChannelPageMessage
-      ...MessageItemMessage
-    }
-  }
-`);
-const getChannelMessagesQuery = gql(/* GraphQL */ `
-  query getChannelMessages($channelId: uuid!, $limit: Int!, $offset: Int!) {
-    message(
-      where: { channelId: { _eq: $channelId } }
-      limit: $limit
-      offset: $offset
-      order_by: { createdAt: desc }
-    ) {
-      ...ChannelPageMessage
-      ...MessageItemMessage
-    }
-  }
-`);
-
-const getChannelMembers = gql(/* GraphQL */ `
-  query getChannelMembers($channelId: uuid!) {
-    channel: channel_by_pk(id: $channelId) {
-      id
-      members {
-        id
-        member {
-          name
-          id
-        }
-      }
-    }
-  }
-`);
-
-const addNewMessage = gql(/* GraphQL */ `
-  mutation insertNewMessage(
-    $body: String!
-    $channelId: uuid!
-    $senderId: uuid!
-  ) {
-    insert_message_one(
-      object: { body: $body, channelId: $channelId, senderId: $senderId }
-    ) {
-      ...ChannelPageMessage
-      ...MessageItemMessage
-    }
-  }
-`);
+import { transformMessages } from './utils';
+import {
+  getChannelMessagesQuery,
+  addNewMessage,
+  getChannelMembers,
+  getChannelMessagesSubscription,
+} from './gql';
 //#endregion
 
 // #region Styled
@@ -103,7 +42,6 @@ export const ChannelPage = () => {
   const [newMessage, setNewMessage] = useState<string>('');
   const scrollContainerId = useId();
   const [hasMore, setHasMore] = useState(true);
-
   const {
     data,
     fetchMore,
@@ -135,36 +73,20 @@ export const ChannelPage = () => {
     },
   });
 
-  const messages = useMemo(() => {
-    if (!data?.message) {
-      return [];
-    }
+  const lastSeenAt = memberData?.channel?.members?.find(
+    (m) => m.member.id === memberId
+  )?.lastSeenAt;
 
-    return data.message.map((message, index) => {
-      const prevMessage = getFragment(
-        channelPageMessageFragment,
-        data.message?.[index - 1]
-      );
-
-      const messageData = getFragment(channelPageMessageFragment, message);
-
-      const showDateDivider =
-        !prevMessage ||
-        dayjs(prevMessage.createdAt).diff(messageData.createdAt, 'day') > 0;
-
-      return {
-        id: messageData.id,
-        ...message,
-        showDateDivider,
-      };
-    });
-  }, [data?.message]);
+  const messages = useMemo(
+    () => transformMessages(data?.message, lastSeenAt),
+    [data?.message, lastSeenAt]
+  );
 
   const [createNewCustomer] = useMutation(addNewMessage, {
     variables: { channelId, body: newMessage || '', senderId: memberId },
   });
 
-  const members = useMemo(() => {
+  const mentionUsers = useMemo(() => {
     if (!memberData?.channel?.members) {
       return [];
     }
@@ -223,7 +145,8 @@ export const ChannelPage = () => {
             <MessageItem
               key={message.id}
               message={message}
-              showMessageDivider={message.showDateDivider}
+              showDateDivider={message.showDateDivider}
+              showNewMessageDivider={message.showNewMessageDivider}
             />
           ))}
           {hasMore && <h1>Loading...</h1>}
@@ -235,7 +158,7 @@ export const ChannelPage = () => {
         onChange={setNewMessage}
         onPreview={onPreviewClick}
         onSend={onMessageSent}
-        userList={members}
+        userList={mentionUsers}
       />
       {showPreview && (
         <>

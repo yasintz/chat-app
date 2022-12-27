@@ -35,6 +35,7 @@ select_permissions:
       columns:
         - channel_id
         - id
+        - last_seen_at
         - member_id
       filter: {}
       allow_aggregations: true

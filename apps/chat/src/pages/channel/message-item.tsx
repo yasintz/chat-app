@@ -68,12 +68,14 @@ const StyledAuthorContainer = styled.div`
 
 export interface MessageItemProps {
   message: FragmentType<typeof messageFragment>;
-  showMessageDivider: boolean;
+  showDateDivider: boolean;
+  showNewMessageDivider: boolean;
 }
 
 export const MessageItem = ({
   message,
-  showMessageDivider,
+  showDateDivider,
+  showNewMessageDivider,
 }: MessageItemProps) => {
   const { body, sender, createdAt, updatedAt } = useFragment(
     messageFragment,
@@ -85,9 +87,12 @@ export const MessageItem = ({
   const createdAtInstance = dayjs(createdAt);
   const createdTime = createdAtInstance.format('h:mm A');
   return (
-    <>
-      {showMessageDivider && (
-        <div style={{ margin: '0 auto' }}>
+    <div>
+      {showNewMessageDivider && (
+        <div style={{ textAlign: 'center', color: 'red' }}>New Messages</div>
+      )}
+      {showDateDivider && (
+        <div style={{ textAlign: 'center' }}>
           {createdAtInstance.format('MM/DD/YYYY')}
         </div>
       )}
@@ -103,6 +108,9 @@ export const MessageItem = ({
           <StyledAuthorContainer>
             <StyledAuthorName>{sender.name}</StyledAuthorName>
             <StyledGrayText>{createdTime}</StyledGrayText>
+            <StyledGrayText>
+              -- {createdAtInstance.format('MM/DD/YYYY')}
+            </StyledGrayText>
           </StyledAuthorContainer>
           <div>
             <Markdown message={body} />
@@ -111,6 +119,6 @@ export const MessageItem = ({
           </div>
         </StyledMessageRightContainer>
       </StyledContainer>
-    </>
+    </div>
   );
 };

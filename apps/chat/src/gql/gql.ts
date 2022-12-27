@@ -17,7 +17,7 @@ const documents = {
     "\n  fragment ChannelPageMessage on message {\n    id\n    createdAt\n  }\n": types.ChannelPageMessageFragmentDoc,
     "\n  subscription getChannelNewMessages($channelId: uuid!) {\n    message(\n      where: { channelId: { _eq: $channelId } }\n      order_by: { createdAt: desc }\n      limit: 1\n    ) {\n      ...ChannelPageMessage\n      ...MessageItemMessage\n    }\n  }\n": types.GetChannelNewMessagesDocument,
     "\n  query getChannelMessages($channelId: uuid!, $limit: Int!, $offset: Int!) {\n    message(\n      where: { channelId: { _eq: $channelId } }\n      limit: $limit\n      offset: $offset\n      order_by: { createdAt: desc }\n    ) {\n      ...ChannelPageMessage\n      ...MessageItemMessage\n    }\n  }\n": types.GetChannelMessagesDocument,
-    "\n  query getChannelMembers($channelId: uuid!) {\n    channel: channel_by_pk(id: $channelId) {\n      id\n      members {\n        id\n        member {\n          name\n          id\n        }\n      }\n    }\n  }\n": types.GetChannelMembersDocument,
+    "\n  query getChannelMembers($channelId: uuid!) {\n    channel: channel_by_pk(id: $channelId) {\n      id\n      members {\n        id\n        lastSeenAt\n        member {\n          name\n          id\n        }\n      }\n    }\n  }\n": types.GetChannelMembersDocument,
     "\n  mutation insertNewMessage(\n    $body: String!\n    $channelId: uuid!\n    $senderId: uuid!\n  ) {\n    insert_message_one(\n      object: { body: $body, channelId: $channelId, senderId: $senderId }\n    ) {\n      ...ChannelPageMessage\n      ...MessageItemMessage\n    }\n  }\n": types.InsertNewMessageDocument,
     "\n  fragment MessageItemMessage on message {\n    id\n    createdAt\n    updatedAt\n    body\n    parentId\n    replyToId\n    sender {\n      id\n      name\n      avatarFile {\n        id\n        path\n        service\n        type\n      }\n    }\n  }\n": types.MessageItemMessageFragmentDoc,
 };
@@ -41,7 +41,7 @@ export function gql(source: "\n  query getChannelMessages($channelId: uuid!, $li
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query getChannelMembers($channelId: uuid!) {\n    channel: channel_by_pk(id: $channelId) {\n      id\n      members {\n        id\n        member {\n          name\n          id\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getChannelMembers($channelId: uuid!) {\n    channel: channel_by_pk(id: $channelId) {\n      id\n      members {\n        id\n        member {\n          name\n          id\n        }\n      }\n    }\n  }\n"];
+export function gql(source: "\n  query getChannelMembers($channelId: uuid!) {\n    channel: channel_by_pk(id: $channelId) {\n      id\n      members {\n        id\n        lastSeenAt\n        member {\n          name\n          id\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query getChannelMembers($channelId: uuid!) {\n    channel: channel_by_pk(id: $channelId) {\n      id\n      members {\n        id\n        lastSeenAt\n        member {\n          name\n          id\n        }\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -83,6 +83,7 @@ select_permissions:
   - role: member
     permission:
       columns:
+        - active_at
         - app_id
         - avatar_file_id
         - created_at
