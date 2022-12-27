@@ -18,6 +18,7 @@ const documents = {
     "\n  mutation CreateMember($data: member_insert_input!) {\n    member: insert_member_one(\n      object: $data\n      on_conflict: {\n        constraint: member_app_id_external_id_key\n        update_columns: [name]\n      }\n    ) {\n      ...AppAuthMember\n    }\n  }\n": types.CreateMemberDocument,
     "\n  query AuthServiceGetCustomerByEmail($email: String!) {\n    customer(where: { email: { _eq: $email } }) {\n      id\n      encryptedPassword\n      appId\n    }\n  }\n": types.AuthServiceGetCustomerByEmailDocument,
     "\n  query AuthServiceGetMemberByEmail($email: String!) {\n    member(where: { externalId: { _eq: $email } }) {\n      id\n      appId\n      encryptedPassword\n    }\n  }\n": types.AuthServiceGetMemberByEmailDocument,
+    "\n  mutation HasuraEventsCreateDefaultChannelMutation(\n    $appId: uuid!\n    $name: String!\n  ) {\n    insert_channel_one(object: { appId: $appId, name: $name }) {\n      id\n    }\n  }\n": types.HasuraEventsCreateDefaultChannelMutationDocument,
 };
 
 /**
@@ -40,6 +41,10 @@ export function gql(source: "\n  query AuthServiceGetCustomerByEmail($email: Str
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query AuthServiceGetMemberByEmail($email: String!) {\n    member(where: { externalId: { _eq: $email } }) {\n      id\n      appId\n      encryptedPassword\n    }\n  }\n"): (typeof documents)["\n  query AuthServiceGetMemberByEmail($email: String!) {\n    member(where: { externalId: { _eq: $email } }) {\n      id\n      appId\n      encryptedPassword\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation HasuraEventsCreateDefaultChannelMutation(\n    $appId: uuid!\n    $name: String!\n  ) {\n    insert_channel_one(object: { appId: $appId, name: $name }) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation HasuraEventsCreateDefaultChannelMutation(\n    $appId: uuid!\n    $name: String!\n  ) {\n    insert_channel_one(object: { appId: $appId, name: $name }) {\n      id\n    }\n  }\n"];
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

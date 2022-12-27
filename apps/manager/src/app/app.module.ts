@@ -6,8 +6,8 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { AppAuthModule } from './app-auth/app-auth.module';
 import { environment } from '../environments/environment';
-import { HasuraEventsService } from './hasura-events.service';
 import { CONSTANTS } from '../environments/constants';
+import { HasuraEventsModule } from './hasura-events/hasura-events.module';
 
 @Module({
   imports: [
@@ -35,8 +35,9 @@ import { CONSTANTS } from '../environments/constants';
           }
         : undefined,
     }),
+    HasuraEventsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, HasuraEventsService],
+  providers: [AppService],
 })
 export class AppModule {}
