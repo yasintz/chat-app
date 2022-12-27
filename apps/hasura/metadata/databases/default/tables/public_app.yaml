@@ -66,10 +66,10 @@ event_triggers:
       insert:
         columns: '*'
     retry_conf:
-      interval_sec: 15
       num_retries: 3
+      interval_sec: 15
       timeout_sec: 100
     webhook_from_env: MANAGER_EVENT_WEBHOOK_ENDPOINT
     headers:
-      - name: HASURA_MANAGER_WEBHOOK_SECRET_HEADER_VALUE
+      - name: hasura_manager_webhook_secret_header_value
         value_from_env: HASURA_MANAGER_WEBHOOK_SECRET_HEADER_VALUE

@@ -13,6 +13,8 @@ configuration:
       custom_name: createdAt
     deleted_at:
       custom_name: deletedAt
+    encrypted_password:
+      custom_name: encryptedPassword
     external_id:
       custom_name: externalId
     name:
@@ -25,6 +27,7 @@ configuration:
     avatar_file_id: avatarFileId
     created_at: createdAt
     deleted_at: deletedAt
+    encrypted_password: encryptedPassword
     external_id: externalId
     name: name
     updated_at: updatedAt
