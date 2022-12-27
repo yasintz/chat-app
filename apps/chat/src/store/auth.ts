@@ -1,6 +1,6 @@
 import shallow from 'zustand/shallow';
 import { parseJwt, HasuraJwtPayloadType } from '../utils/jwt';
-import { zustand, zustandComputed } from '@helpers/client';
+import { zustand, zustandComputed } from '@libs/react';
 
 type StoreType = {
   tokens?: {

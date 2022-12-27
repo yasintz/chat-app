@@ -8,25 +8,9 @@ const generateConfig: CodegenConfig['generates'][string] = {
   },
 };
 
-const generatesByProject: Record<string, CodegenConfig['generates'][string]> = {
-  dashboard: {
-    ...generateConfig,
-    documents: 'apps/dashboard/**/*.(ts|tsx)',
-  },
-  chat: {
-    ...generateConfig,
-    documents: 'apps/chat/**/*.(ts|tsx)',
-  },
-  manager: {
-    ...generateConfig,
-    documents: 'apps/manager/**/*.ts',
-  },
-};
-
+const allProjects = ['dashboard', 'chat', 'manager'];
 const argvProjects = process.argv.slice(3).filter((i) => i !== 'codegen.ts');
-const projects = argvProjects.length
-  ? argvProjects
-  : Object.keys(generatesByProject);
+const projects = argvProjects.length ? argvProjects : allProjects;
 
 if (!argvProjects.length) {
   console.log(`
@@ -43,21 +27,9 @@ const generates = projects.reduce(
   (acc, project) => ({
     ...acc,
     [`apps/${project}/src/gql/`]: {
-      ...generatesByProject[project],
-    },
-    [`apps/${project}/src/gql/index.ts`]: {
-      plugins: [
-        {
-          add: {
-            content: [
-              'export * from "./gql"',
-              'export * from "./fragment-masking"',
-              'export * from "@gql/fragment-masking"',
-            ],
-          },
-        },
-      ],
-    },
+      ...generateConfig,
+      documents: `apps/${project}/**/*.(ts|tsx)`,
+    } as CodegenConfig['generates'][string],
   }),
   {}
 );
@@ -86,10 +58,10 @@ const config: CodegenConfig = {
   },
   generates: {
     ...generates,
-    './graphql.schema.json': {
+    'libs/graphql/schema.json': {
       plugins: ['introspection'],
     },
-    './graphql.schema.ts': {
+    'libs/graphql/schema.ts': {
       plugins: ['typescript'],
     },
   },

@@ -8,7 +8,8 @@ import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
-import { getFragment, gql } from '../../gql';
+import { gql } from '../../gql';
+import { getFragment } from '@gql/fragment-masking';
 import { ChatInput } from './chat-input';
 import { MessageItem } from './message-item';
 import dayjs from 'dayjs';
@@ -16,7 +17,6 @@ import { Markdown } from '../../components/common/markdown';
 //#endregion
 
 //#region GQL
-
 const channelPageMessageFragment = gql(/* GraphQL */ `
   fragment ChannelPageMessage on message {
     id
@@ -163,8 +163,6 @@ export const ChannelPage = () => {
   const [createNewCustomer] = useMutation(addNewMessage, {
     variables: { channelId, body: newMessage || '', senderId: memberId },
   });
-
-  const messages = useMemo(() => data?.message || [], [data?.message]);
 
   const members = useMemo(() => {
     if (!memberData?.channel?.members) {

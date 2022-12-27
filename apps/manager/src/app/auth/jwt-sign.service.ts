@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { Member, Customer } from '../../gql/graphql';
+import { Member, Customer } from '@gql/schema';
 
 enum Roles {
   CUSTOMER = 'customer',

@@ -2,7 +2,7 @@
 import styled from 'styled-components';
 import { gql, FragmentType, useFragment } from '../../gql';
 import dayjs from 'dayjs';
-import { getFileConfigByServiceAndTypes } from '@helpers/client';
+import { getFileConfigByServiceAndTypes } from '@libs/react';
 import { Markdown } from '../../components/common/markdown';
 // #endregion
 
