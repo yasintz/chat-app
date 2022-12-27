@@ -59,3 +59,17 @@ update_permissions:
           id:
             _eq: X-Hasura-User-Id
       check: null
+event_triggers:
+  - name: app-created
+    definition:
+      enable_manual: false
+      insert:
+        columns: '*'
+    retry_conf:
+      num_retries: 3
+      interval_sec: 15
+      timeout_sec: 100
+    webhook_from_env: MANAGER_EVENT_WEBHOOK_ENDPOINT
+    headers:
+      - name: hasura_manager_webhook_secret_header_value
+        value_from_env: HASURA_MANAGER_WEBHOOK_SECRET_HEADER_VALUE

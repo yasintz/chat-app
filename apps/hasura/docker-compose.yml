@@ -29,6 +29,8 @@ services:
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: 'public'
       HASURA_GRAPHQL_MIGRATIONS_DIR: '/hasura/migrations'
       HASURA_GRAPHQL_METADATA_DIR: '/hasura/metadata'
+      MANAGER_EVENT_WEBHOOK_ENDPOINT: http://host.docker.internal:4203/api/hasura/events
+      HASURA_MANAGER_WEBHOOK_SECRET_HEADER_VALUE: secret1
     volumes:
       - ./hasura:/hasura/
 volumes:
