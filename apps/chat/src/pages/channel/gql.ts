@@ -34,7 +34,7 @@ export const getChannelMessagesQuery = gql(/* GraphQL */ `
   }
 `);
 
-export const getChannelMembers = gql(/* GraphQL */ `
+export const getChannelMembersQuery = gql(/* GraphQL */ `
   query getChannelMembers($channelId: uuid!) {
     channel: channel_by_pk(id: $channelId) {
       id
@@ -50,17 +50,35 @@ export const getChannelMembers = gql(/* GraphQL */ `
   }
 `);
 
-export const addNewMessage = gql(/* GraphQL */ `
+export const addNewMessageMutation = gql(/* GraphQL */ `
   mutation insertNewMessage(
     $body: String!
     $channelId: uuid!
     $senderId: uuid!
+    $files: [message_file_insert_input!]!
   ) {
     insert_message_one(
-      object: { body: $body, channelId: $channelId, senderId: $senderId }
+      object: {
+        body: $body
+        channelId: $channelId
+        senderId: $senderId
+        files: { data: $files }
+      }
     ) {
       ...ChannelPageMessage
       ...MessageItemMessage
+    }
+  }
+`);
+
+export const insertFileMutation = gql(/* GraphQL */ `
+  mutation ChannelPageInsertFile($file: file_insert_input!) {
+    file: insert_file_one(object: $file) {
+      id
+      name
+      path
+      type
+      service
     }
   }
 `);

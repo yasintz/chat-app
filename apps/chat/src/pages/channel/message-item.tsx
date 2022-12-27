@@ -4,6 +4,7 @@ import { gql, FragmentType, useFragment } from '../../gql';
 import dayjs from 'dayjs';
 import { getFileConfigByServiceAndTypes } from '@libs/react';
 import { Markdown } from '../../components/common/markdown';
+import { ChatInputFiles } from './chat-input/files';
 // #endregion
 
 // #region GQL
@@ -15,6 +16,16 @@ export const messageFragment = gql(/* GraphQL */ `
     body
     parentId
     replyToId
+    files {
+      id
+      file {
+        id
+        name
+        path
+        service
+        type
+      }
+    }
     sender {
       id
       name
@@ -77,7 +88,7 @@ export const MessageItem = ({
   showDateDivider,
   showNewMessageDivider,
 }: MessageItemProps) => {
-  const { body, sender, createdAt, updatedAt } = useFragment(
+  const { body, sender, createdAt, updatedAt, files } = useFragment(
     messageFragment,
     message
   );
@@ -116,6 +127,12 @@ export const MessageItem = ({
             <Markdown message={body} />
 
             {updatedAt && <StyledGrayText>(edited)</StyledGrayText>}
+            {files.length > 0 && (
+              <ChatInputFiles
+                files={files.map((file) => file.file)}
+                size="lg"
+              />
+            )}
           </div>
         </StyledMessageRightContainer>
       </StyledContainer>

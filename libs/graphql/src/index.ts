@@ -1,1 +1,1 @@
-export * from './lib/graphql';
+export * from './lib/fragment-masking';

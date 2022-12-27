@@ -15,8 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@gql/*": ["libs/graphql/*"],
-      "@helpers/client": ["libs/helpers/client/src/index.ts"],
+      "@libs/graphql": ["libs/graphql/src/index.ts"],
+      "@gql/schema": ["libs/graphql/schema.ts"],
       "@libs/react": ["libs/react/src/index.ts"],
       "@ui": ["libs/ui/src/index.ts"]
     }

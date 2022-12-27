@@ -4,7 +4,11 @@ import styled from 'styled-components';
 import martData from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import { MentionsInput, Mention } from 'react-mentions';
+import { useDropzone, DropzoneOptions } from 'react-dropzone';
 import { ChatInputHeader } from './header';
+import { FileType } from './helpers';
+import { ChatInputFiles } from './files';
+import { toast } from '@ui';
 //#endregion
 
 // #region Styled
@@ -61,20 +65,32 @@ const StyledChatInputWrapper = styled.div`
 `;
 // #endregion
 
+const FILE_MAX_SIZE_BYTE = 100000;
+
 type PropsType = {
   value: string;
+  disabled?: boolean;
+  loading?: boolean;
   onChange: (value: string) => void;
   onPreview: () => void;
   onSend: () => void;
+  onFileUpload: (files: File[]) => void;
+  onFileRemove: (file: FileType) => void;
   userList: { id: string; display: string }[];
+  files: FileType[];
 };
 
 export const ChatInput = ({
   value,
+  userList,
+  files,
+  disabled,
+  loading,
   onChange,
   onPreview,
   onSend,
-  userList,
+  onFileUpload,
+  onFileRemove,
 }: PropsType) => {
   const [isEmojiModalOpen, setEmojiModalOpen] = useState(false);
 
@@ -85,9 +101,46 @@ export const ChatInput = ({
     onChange(`${value}${emoji.native}`);
     setEmojiModalOpen(false);
   });
+  const onDrop = useEvent<NonNullable<DropzoneOptions['onDrop']>>(
+    (acceptedFiles, fileRejections) => {
+      if (fileRejections.length > 0) {
+        fileRejections.forEach((file) => {
+          toast.error(
+            `Upload Failed (${file.file.name})`,
+            file.errors.length > 1 ? (
+              <ul>
+                {file.errors.map((e) => (
+                  <li key={e.code}>{e.message}</li>
+                ))}
+              </ul>
+            ) : (
+              file.errors[0].message
+            ),
+            {
+              autoClose: 25000,
+            }
+          );
+        });
+        return;
+      }
+      onFileUpload(acceptedFiles);
+    }
+  );
+
+  const { getRootProps, getInputProps, open } = useDropzone({
+    onDrop,
+    noClick: true,
+    maxFiles: 5 - files.length,
+    maxSize: FILE_MAX_SIZE_BYTE,
+    accept: {
+      'image/png': ['.png'],
+      'image/jpeg': ['.jpeg', '.jpg'],
+      'video/mp4': ['.mp4'],
+    },
+  });
 
   return (
-    <StyledChatInputContainer>
+    <StyledChatInputContainer {...getRootProps()}>
       <ChatInputHeader value={value} onChange={onChange} />
       <StyledChatInputWrapper>
         <MentionsInput
@@ -106,12 +159,16 @@ export const ChatInput = ({
           />
         </MentionsInput>
       </StyledChatInputWrapper>
+      <ChatInputFiles files={files} onRemove={onFileRemove} />
       <StyledChatInputFooterContainer>
         <StyledChatInputFooterLeftContainer>
+          <button onClick={open}>+ Upload</button>
           <button onClick={onPreview}>Toggle Preview</button>
           <button onClick={onEmojiModalOpened}>Add Emoji</button>
         </StyledChatInputFooterLeftContainer>
-        <button onClick={onSend}>Send</button>
+        <button onClick={onSend} disabled={disabled}>
+          {loading ? 'Loading...' : 'Send'}
+        </button>
       </StyledChatInputFooterContainer>
       {isEmojiModalOpen && (
         <Picker
@@ -121,6 +178,9 @@ export const ChatInput = ({
           onEmojiSelect={addEmoji}
         />
       )}
+      <input {...getInputProps()} />
     </StyledChatInputContainer>
   );
 };
+
+export type { FileType };

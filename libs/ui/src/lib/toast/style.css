@@ -31,9 +31,7 @@
 .Toastify__toast--dark {
 } */
 .Toastify__toast--info {
-  background-color: #ffffff;
-  color: #000000;
-  font-family: 'circularXX';
+  background-color: #2e81ee;
 }
 .Toastify__toast--success {
   background-color: #40d5a0;

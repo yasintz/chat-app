@@ -1472,7 +1472,6 @@ export enum File_Type_Constraint {
 }
 
 export enum File_Type_Enum {
-  Jpeg = 'jpeg',
   Jpg = 'jpg',
   Mp4 = 'mp4',
   Png = 'png'

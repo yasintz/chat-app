@@ -33,6 +33,15 @@ array_relationships:
         table:
           name: message_file
           schema: public
+insert_permissions:
+  - role: member
+    permission:
+      check: {}
+      columns:
+        - name
+        - path
+        - service
+        - type
 select_permissions:
   - role: customer
     permission:

@@ -8,16 +8,20 @@ import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
-import { ChatInput } from './chat-input';
+import { ChatInput, FileType } from './chat-input';
 import { MessageItem } from './message-item';
 import { Markdown } from '../../components/common/markdown';
 import { transformMessages } from './utils';
+import { cloudinary, getHasuraFileType } from '@libs/react';
 import {
   getChannelMessagesQuery,
-  addNewMessage,
-  getChannelMembers,
+  addNewMessageMutation,
+  getChannelMembersQuery,
   getChannelMessagesSubscription,
+  insertFileMutation,
 } from './gql';
+import { File_Service_Enum, File_Type_Enum } from '@gql/schema';
+import { boolean } from 'zod';
 //#endregion
 
 // #region Styled
@@ -42,6 +46,8 @@ export const ChannelPage = () => {
   const [newMessage, setNewMessage] = useState<string>('');
   const scrollContainerId = useId();
   const [hasMore, setHasMore] = useState(true);
+  const [files, setFiles] = useState<FileType[]>([]);
+  const isFileLoading = files.some((f) => f.isLoading);
   const {
     data,
     fetchMore,
@@ -56,7 +62,7 @@ export const ChannelPage = () => {
     data: memberData,
     loading: isMembersLoading,
     error: memberError,
-  } = useQuery(getChannelMembers, { variables: { channelId } });
+  } = useQuery(getChannelMembersQuery, { variables: { channelId } });
 
   useSubscription(getChannelMessagesSubscription, {
     variables: { channelId },
@@ -73,6 +79,9 @@ export const ChannelPage = () => {
     },
   });
 
+  const [insertHasuraFile] = useMutation(insertFileMutation);
+  const [insertMessage] = useMutation(addNewMessageMutation);
+
   const lastSeenAt = memberData?.channel?.members?.find(
     (m) => m.member.id === memberId
   )?.lastSeenAt;
@@ -81,10 +90,6 @@ export const ChannelPage = () => {
     () => transformMessages(data?.message, lastSeenAt),
     [data?.message, lastSeenAt]
   );
-
-  const [createNewCustomer] = useMutation(addNewMessage, {
-    variables: { channelId, body: newMessage || '', senderId: memberId },
-  });
 
   const mentionUsers = useMemo(() => {
     if (!memberData?.channel?.members) {
@@ -99,13 +104,86 @@ export const ChannelPage = () => {
   }, [memberData?.channel?.members, memberId]);
 
   const onMessageSent = useEvent(() => {
-    createNewCustomer();
+    insertMessage({
+      variables: {
+        channelId,
+        body: newMessage || '',
+        senderId: memberId,
+        files: files.map((file) => ({
+          fileId: file.id,
+        })),
+      },
+    });
     setNewMessage('');
+    setFiles([]);
   });
 
   const onPreviewClick = () => {
     setShowPreview((prev) => !prev);
   };
+
+  const onFileUpload = useEvent(async (files: File[]) => {
+    const filesData = files.map((file) => {
+      const randomId = Math.random().toString();
+      const url = URL.createObjectURL(file);
+
+      const preview: FileType = {
+        id: randomId,
+        name: file.name,
+        path: url,
+        service: File_Service_Enum.Url,
+        type: getHasuraFileType(file) as File_Type_Enum,
+        isLoading: true,
+        isFailed: false,
+      };
+
+      return { preview, file };
+    });
+    setFiles((prev) => prev.concat(filesData.map((f) => f.preview)));
+
+    await Promise.all(
+      filesData.map(async ({ file, preview }) => {
+        const uploadedFile = await cloudinary.upload(file);
+        const insertHasuraFileResponse = await insertHasuraFile({
+          variables: {
+            file: {
+              path: uploadedFile?.public_id,
+              service: File_Service_Enum.Cloudinary,
+              type: preview.type,
+              name: file.name,
+            },
+          },
+        });
+        const hasuraFile = insertHasuraFileResponse.data?.file;
+        if (!hasuraFile) {
+          return;
+        }
+        setFiles((prev) =>
+          immer(prev, (draft) => {
+            const stateFile = draft.find((f) => f.id === preview.id);
+            if (stateFile) {
+              if (!uploadedFile) {
+                stateFile.isFailed = true;
+                stateFile.isLoading = false;
+                return;
+              }
+
+              const newFile: FileType = {
+                ...hasuraFile,
+                isFailed: false,
+                isLoading: false,
+              };
+
+              Object.assign(stateFile, newFile);
+            }
+          })
+        );
+      })
+    );
+  });
+  const onFileRemove = useEvent((file: FileType) =>
+    setFiles((prev) => prev.filter((f) => f.id !== file.id))
+  );
 
   const onNext = useEvent(async () => {
     const response = await fetchMore({
@@ -159,6 +237,13 @@ export const ChannelPage = () => {
         onPreview={onPreviewClick}
         onSend={onMessageSent}
         userList={mentionUsers}
+        files={files}
+        onFileRemove={onFileRemove}
+        onFileUpload={onFileUpload}
+        disabled={
+          isFileLoading || (newMessage.length === 0 && files.length === 0)
+        }
+        loading={isFileLoading}
       />
       {showPreview && (
         <>

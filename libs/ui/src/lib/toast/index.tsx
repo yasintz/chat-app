@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import {
   ToastContainer as ReactToastifyToastContainer,
   toast as toastify,
-  Zoom,
   ToastOptions,
 } from 'react-toastify';
 import { ReactComponent as SuccessIcon } from './assets/toast-success-check-mark';
 import { ReactComponent as ErrorIcon } from './assets/toast-error-cross';
+import { ReactComponent as InfoIcon } from './assets/toast-info';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './style.css';
@@ -43,13 +43,17 @@ const StyledIconWrapper = styled.div({
 });
 // #endregion
 
-const TOAST_DEFAULT_LIFE = 8000;
-
 type CustomToastContentPropsType = {
-  type: 'success' | 'error';
+  type: 'success' | 'error' | 'info';
   title: string;
-  message?: string;
+  message?: string | React.ReactNode;
 };
+
+type ToastFunction = (
+  title: CustomToastContentPropsType['title'],
+  message?: CustomToastContentPropsType['message'],
+  options?: ToastOptions
+) => void;
 
 const CustomToastContentIcons: Record<
   CustomToastContentPropsType['type'],
@@ -57,6 +61,7 @@ const CustomToastContentIcons: Record<
 > = {
   success: <SuccessIcon />,
   error: <ErrorIcon />,
+  info: <InfoIcon />,
 };
 
 const CustomToastContent: React.FunctionComponent<
@@ -73,51 +78,25 @@ const CustomToastContent: React.FunctionComponent<
   );
 };
 
-const toastSuccess = (
-  title: string,
-  message?: string,
-  options?: ToastOptions
-): void => {
+const toastSuccess: ToastFunction = (title, message, options): void => {
   toastify.success(
     <CustomToastContent type="success" title={title} message={message} />,
     options
   );
 };
 
-const toastError = (
-  title: string,
-  message?: string,
-  options?: ToastOptions
-): void => {
+const toastError: ToastFunction = (title, message, options): void => {
   toastify.error(
     <CustomToastContent type="error" title={title} message={message} />,
     options
   );
 };
 
-type ToastNotificationInputType = {
-  title: string;
-  options?: ToastOptions;
-};
-
-const toastInfo = ({
-  title,
-  options,
-}: ToastNotificationInputType): React.ReactText => {
-  return toastify.info(title, {
-    autoClose: TOAST_DEFAULT_LIFE,
-    closeOnClick: true,
-    draggable: true,
-    hideProgressBar: false,
-    pauseOnHover: false,
-    pauseOnFocusLoss: false,
-    closeButton: true,
-    transition: Zoom,
-    onClick: (e) => {
-      if (options?.onClick) options.onClick(e);
-    },
-    ...(options || {}),
-  });
+const toastInfo: ToastFunction = (title, message, options) => {
+  toastify.info(
+    <CustomToastContent type="info" title={title} message={message} />,
+    options
+  );
 };
 
 export function ToastContainer(): JSX.Element {

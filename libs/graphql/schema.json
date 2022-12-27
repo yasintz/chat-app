@@ -10903,12 +10903,6 @@
         "interfaces": null,
         "enumValues": [
           {
-            "name": "jpeg",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "jpg",
             "description": null,
             "isDeprecated": false,

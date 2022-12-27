@@ -5,8 +5,8 @@ enum UploadPresets {
 }
 
 const CLOUD_NAME = 'yasintz';
-// const CLOUDINARY_RES_IMAGE_URL = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload`;
-// const CLOUDINARY_RES_VIDEO_URL = `https://res.cloudinary.com/${CLOUD_NAME}/video/upload`;
+export const CLOUDINARY_RES_IMAGE_URL = `https://res.cloudinary.com/${CLOUD_NAME}/image/upload`;
+export const CLOUDINARY_RES_VIDEO_URL = `https://res.cloudinary.com/${CLOUD_NAME}/video/upload`;
 const CLOUDINARY_FETCH_IMAGE_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
 const CLOUDINARY_FETCH_VIDEO_URL = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/video/upload`;
 
@@ -50,15 +50,14 @@ export type CloudinaryFile = {
 };
 
 const upload = async (
-  file: string | File,
+  file: File,
   uploadPreset: UploadPresets = UploadPresets.Chat,
-  fileType: 'image' | 'video' = 'image',
   onUploadProgress?: AxiosRequestConfig['onUploadProgress']
 ): Promise<CloudinaryFile | null | undefined> => {
   const formData = new FormData();
   formData.append('file', file);
   formData.append('upload_preset', uploadPreset);
-  const isVideo = fileType === 'video';
+  const isVideo = file.type.includes('video/');
   const fetchUrl = isVideo
     ? CLOUDINARY_FETCH_VIDEO_URL
     : CLOUDINARY_FETCH_IMAGE_URL;

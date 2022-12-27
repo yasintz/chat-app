@@ -12,7 +12,7 @@ INSERT INTO "public"."file_service"("value") VALUES (E'url');
 
 CREATE TABLE "public"."file_type" ("value" text NOT NULL, PRIMARY KEY ("value") , UNIQUE ("value"));
 
-INSERT INTO "public"."file_type"("value") VALUES (E'jpg'), (E'png'), (E'jpeg'), (E'mp4');
+INSERT INTO "public"."file_type"("value") VALUES (E'jpg'), (E'png'), (E'mp4');
 
 alter table "public"."file" add column "type" text not null;
 

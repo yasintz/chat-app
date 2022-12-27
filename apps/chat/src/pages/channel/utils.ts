@@ -1,4 +1,4 @@
-import { getFragment } from '@gql/fragment-masking';
+import { getFragment } from '@libs/graphql';
 import dayjs from 'dayjs';
 import { channelPageMessageFragment, getChannelMessagesQuery } from './gql';
 import { DocumentType } from '../../gql';
