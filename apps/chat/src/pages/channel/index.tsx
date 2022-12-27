@@ -3,16 +3,16 @@ import immer from 'immer';
 import _ from 'lodash';
 import { useState, useEvent, useMemo, useId } from 'react';
 import { useMutation, useQuery, useSubscription } from '@apollo/client';
-import ReactMarkdown from 'react-markdown';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
-import { DocumentType, FragmentType, getFragment, gql } from '../../gql';
+import { getFragment, gql } from '../../gql';
 import { ChatInput } from './chat-input';
 import { MessageItem } from './message-item';
 import dayjs from 'dayjs';
+import { Markdown } from '../../components/common/markdown';
 //#endregion
 
 //#region GQL
@@ -46,6 +46,21 @@ const getChannelMessagesQuery = gql(/* GraphQL */ `
     ) {
       ...ChannelPageMessage
       ...MessageItemMessage
+    }
+  }
+`);
+
+const getChannelMembers = gql(/* GraphQL */ `
+  query getChannelMembers($channelId: uuid!) {
+    channel: channel_by_pk(id: $channelId) {
+      id
+      members {
+        id
+        member {
+          name
+          id
+        }
+      }
     }
   }
 `);
@@ -99,6 +114,12 @@ export const ChannelPage = () => {
     variables: { channelId, limit: LIMIT, offset: 0 },
   });
 
+  const {
+    data: memberData,
+    loading: isMembersLoading,
+    error: memberError,
+  } = useQuery(getChannelMembers, { variables: { channelId } });
+
   useSubscription(getChannelMessagesSubscription, {
     variables: { channelId },
     onData: ({ data }) => {
@@ -143,6 +164,20 @@ export const ChannelPage = () => {
     variables: { channelId, body: newMessage || '', senderId: memberId },
   });
 
+  const messages = useMemo(() => data?.message || [], [data?.message]);
+
+  const members = useMemo(() => {
+    if (!memberData?.channel?.members) {
+      return [];
+    }
+
+    return memberData?.channel?.members
+      ?.filter((member) => member.member.id !== memberId)
+      .map((member) => {
+        return { id: member.member.id, display: member.member.name };
+      });
+  }, [memberData?.channel?.members, memberId]);
+
   const onMessageSent = useEvent(() => {
     createNewCustomer();
     setNewMessage('');
@@ -167,11 +202,11 @@ export const ChannelPage = () => {
     );
   });
 
-  if (isLoading || loading) {
+  if (isLoading || loading || isMembersLoading) {
     return <div>Loading...</div>;
   }
 
-  if (error || messageError) {
+  if (error || messageError || memberError) {
     return <div>Error...</div>;
   }
 
@@ -202,12 +237,13 @@ export const ChannelPage = () => {
         onChange={setNewMessage}
         onPreview={onPreviewClick}
         onSend={onMessageSent}
+        userList={members}
       />
       {showPreview && (
         <>
           <b>Preview</b>
           <hr />
-          <ReactMarkdown>{newMessage}</ReactMarkdown>
+          <Markdown message={newMessage} />
           <hr />
         </>
       )}

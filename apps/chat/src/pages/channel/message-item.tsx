@@ -1,9 +1,9 @@
 // #region Import
-import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import { gql, FragmentType, useFragment } from '../../gql';
 import dayjs from 'dayjs';
 import { getFileConfigByServiceAndTypes } from '@helpers/client';
+import { Markdown } from '../../components/common/markdown';
 // #endregion
 
 // #region GQL
@@ -105,7 +105,8 @@ export const MessageItem = ({
           <StyledGrayText>{createdTime}</StyledGrayText>
         </StyledAuthorContainer>
         <div>
-          <ReactMarkdown>{body}</ReactMarkdown>
+          <Markdown message={body} />
+
           {updatedAt && <StyledGrayText>(edited)</StyledGrayText>}
         </div>
       </StyledMessageRightContainer>

@@ -18,7 +18,6 @@ const generatesByProject: Record<string, CodegenConfig['generates'][string]> = {
     documents: 'apps/chat/**/*.(ts|tsx)',
   },
   manager: {
-    // 'apps/manager/src/gql/': {
     ...generateConfig,
     documents: 'apps/manager/**/*.ts',
   },
