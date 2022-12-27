@@ -1,5 +1,4 @@
 // #region Import
-import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 import { gql, FragmentType, useFragment } from '../../gql';
@@ -9,7 +8,7 @@ import { getFileConfigByServiceAndTypes } from '@helpers/client';
 
 // #region GQL
 export const messageFragment = gql(/* GraphQL */ `
-  fragment Message on message {
+  fragment MessageItemMessage on message {
     id
     createdAt
     updatedAt
@@ -69,21 +68,31 @@ const StyledAuthorContainer = styled.div`
 
 export interface MessageItemProps {
   message: FragmentType<typeof messageFragment>;
+  showMessageDivider: boolean;
 }
 
-export const MessageItem = ({ message: messageData }: MessageItemProps) => {
+export const MessageItem = ({
+  message,
+  showMessageDivider,
+}: MessageItemProps) => {
   const { body, sender, createdAt, updatedAt } = useFragment(
     messageFragment,
-    messageData
+    message
   );
 
   const { url } = getFileConfigByServiceAndTypes(sender.avatarFile);
 
-  const createdTime = dayjs(createdAt).format('h:mm A');
+  const createdAtInstance = dayjs(createdAt);
+  const createdTime = createdAtInstance.format('h:mm A');
   return (
     <StyledContainer>
+      {showMessageDivider && (
+        <div>
+          {createdAtInstance.format('MM/DD/YYYY')}
+          <hr />
+        </div>
+      )}
       <StyledAvatar
-        // src={`https://i.pravatar.cc/150?u=${sender.id}`}
         src={
           url ||
           'https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png'

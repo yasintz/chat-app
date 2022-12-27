@@ -61,6 +61,7 @@
     "@babel/core": "7.12.13",
     "@babel/preset-typescript": "7.12.13",
     "@dbml/core": "^2.4.4",
+    "@graphql-codegen/add": "^3.2.3",
     "@graphql-codegen/cli": "2.14.0",
     "@graphql-codegen/client-preset": "1.1.5",
     "@graphql-codegen/introspection": "2.2.1",

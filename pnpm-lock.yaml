@@ -19,6 +19,7 @@ specifiers:
   '@dbml/core': ^2.4.4
   '@emoji-mart/data': ^1.1.0
   '@emoji-mart/react': ^1.1.0
+  '@graphql-codegen/add': ^3.2.3
   '@graphql-codegen/cli': 2.14.0
   '@graphql-codegen/client-preset': 1.1.5
   '@graphql-codegen/introspection': 2.2.1
@@ -193,6 +194,7 @@ devDependencies:
   '@babel/core': 7.12.13
   '@babel/preset-typescript': 7.12.13_@babel+core@7.12.13
   '@dbml/core': 2.4.4
+  '@graphql-codegen/add': 3.2.3_graphql@16.6.0
   '@graphql-codegen/cli': 2.14.0_p4ieg4kh5srszso24fdph7jpgi
   '@graphql-codegen/client-preset': 1.1.5_graphql@16.6.0
   '@graphql-codegen/introspection': 2.2.1_graphql@16.6.0
@@ -4463,12 +4465,12 @@ packages:
     resolution: {integrity: sha512-k2Ty1JcVojjJFwrg/ThKi2ujJ7XNLYaFGNB/bWT9wGR+oSMJHMa5w+CUq6p/pVrKeNNgA7pCqEcjSnHVoqJQFw==}
     dev: true
 
-  /@graphql-codegen/add/3.2.1_graphql@16.6.0:
-    resolution: {integrity: sha512-w82H/evh8SSGoD3K6K/Oh3kqSdbuU+TgHqMYmmHFxtH692v2xhN/cu1s/TotBQ7r4mO7OQutze7dde2tZEXGEQ==}
+  /@graphql-codegen/add/3.2.3_graphql@16.6.0:
+    resolution: {integrity: sha512-sQOnWpMko4JLeykwyjFTxnhqjd/3NOG2OyMuvK76Wnnwh8DRrNf2VEs2kmSvLl7MndMlOj7Kh5U154dVcvhmKQ==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
-      '@graphql-codegen/plugin-helpers': 2.7.2_graphql@16.6.0
+      '@graphql-codegen/plugin-helpers': 3.1.1_graphql@16.6.0
       graphql: 16.6.0
       tslib: 2.4.1
     dev: true
@@ -4537,7 +4539,7 @@ packages:
     dependencies:
       '@babel/helper-plugin-utils': 7.20.2
       '@babel/template': 7.18.10
-      '@graphql-codegen/add': 3.2.1_graphql@16.6.0
+      '@graphql-codegen/add': 3.2.3_graphql@16.6.0
       '@graphql-codegen/gql-tag-operations': 1.5.8_graphql@16.6.0
       '@graphql-codegen/plugin-helpers': 2.7.2_graphql@16.6.0
       '@graphql-codegen/typed-document-node': 2.3.7_graphql@16.6.0
@@ -4602,6 +4604,20 @@ packages:
     dependencies:
       '@graphql-tools/utils': 8.13.1_graphql@16.6.0
       change-case-all: 1.0.14
+      common-tags: 1.8.2
+      graphql: 16.6.0
+      import-from: 4.0.0
+      lodash: 4.17.21
+      tslib: 2.4.1
+    dev: true
+
+  /@graphql-codegen/plugin-helpers/3.1.1_graphql@16.6.0:
+    resolution: {integrity: sha512-+V1WK4DUhejVSbkZrAsyv9gA4oQABVrtEUkT7vWq7gSf7Ln6OEM59lDUDsjp5wpLPTBIDJANbAe3qEd+iCB3Ow==}
+    peerDependencies:
+      graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
+    dependencies:
+      '@graphql-tools/utils': 8.13.1_graphql@16.6.0
+      change-case-all: 1.0.15
       common-tags: 1.8.2
       graphql: 16.6.0
       import-from: 4.0.0
@@ -12261,6 +12277,21 @@ packages:
 
   /change-case-all/1.0.14:
     resolution: {integrity: sha512-CWVm2uT7dmSHdO/z1CXT/n47mWonyypzBbuCy5tN7uMg22BsfkhwT6oHmFCAk+gL1LOOxhdbB9SZz3J1KTY3gA==}
+    dependencies:
+      change-case: 4.1.2
+      is-lower-case: 2.0.2
+      is-upper-case: 2.0.2
+      lower-case: 2.0.2
+      lower-case-first: 2.0.2
+      sponge-case: 1.0.1
+      swap-case: 2.0.2
+      title-case: 3.0.3
+      upper-case: 2.0.2
+      upper-case-first: 2.0.2
+    dev: true
+
+  /change-case-all/1.0.15:
+    resolution: {integrity: sha512-3+GIFhk3sNuvFAJKU46o26OdzudQlPNBCu1ZQi3cMeMHhty1bhDxu2WrEilVNYaGvqUtR1VSigFcJOiS13dRhQ==}
     dependencies:
       change-case: 4.1.2
       is-lower-case: 2.0.2

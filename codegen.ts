@@ -8,24 +8,19 @@ const generateConfig: CodegenConfig['generates'][string] = {
   },
 };
 
-const generatesByProject: Record<string, CodegenConfig['generates']> = {
+const generatesByProject: Record<string, CodegenConfig['generates'][string]> = {
   dashboard: {
-    'apps/dashboard/src/gql/': {
-      ...generateConfig,
-      documents: 'apps/dashboard/**/*.(ts|tsx)',
-    },
+    ...generateConfig,
+    documents: 'apps/dashboard/**/*.(ts|tsx)',
   },
   chat: {
-    'apps/chat/src/gql/': {
-      ...generateConfig,
-      documents: 'apps/chat/**/*.(ts|tsx)',
-    },
+    ...generateConfig,
+    documents: 'apps/chat/**/*.(ts|tsx)',
   },
   manager: {
-    'apps/manager/src/gql/': {
-      ...generateConfig,
-      documents: 'apps/manager/**/*.ts',
-    },
+    // 'apps/manager/src/gql/': {
+    ...generateConfig,
+    documents: 'apps/manager/**/*.ts',
   },
 };
 
@@ -48,7 +43,22 @@ projects : ${projects.join(', ')}
 const generates = projects.reduce(
   (acc, project) => ({
     ...acc,
-    ...generatesByProject[project],
+    [`apps/${project}/src/gql/`]: {
+      ...generatesByProject[project],
+    },
+    [`apps/${project}/src/gql/index.ts`]: {
+      plugins: [
+        {
+          add: {
+            content: [
+              'export * from "./gql"',
+              'export * from "./fragment-masking"',
+              'export * from "@gql/fragment-masking"',
+            ],
+          },
+        },
+      ],
+    },
   }),
   {}
 );

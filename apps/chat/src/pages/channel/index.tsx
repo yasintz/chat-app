@@ -9,12 +9,21 @@ import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
-import { gql } from '../../gql';
+import { DocumentType, FragmentType, getFragment, gql } from '../../gql';
 import { ChatInput } from './chat-input';
 import { MessageItem } from './message-item';
+import dayjs from 'dayjs';
 //#endregion
 
 //#region GQL
+
+const channelPageMessageFragment = gql(/* GraphQL */ `
+  fragment ChannelPageMessage on message {
+    id
+    createdAt
+  }
+`);
+
 const getChannelMessagesSubscription = gql(/* GraphQL */ `
   subscription getChannelNewMessages($channelId: uuid!) {
     message(
@@ -22,8 +31,8 @@ const getChannelMessagesSubscription = gql(/* GraphQL */ `
       order_by: { createdAt: desc }
       limit: 1
     ) {
-      id
-      ...Message
+      ...ChannelPageMessage
+      ...MessageItemMessage
     }
   }
 `);
@@ -35,8 +44,8 @@ const getChannelMessagesQuery = gql(/* GraphQL */ `
       offset: $offset
       order_by: { createdAt: desc }
     ) {
-      id
-      ...Message
+      ...ChannelPageMessage
+      ...MessageItemMessage
     }
   }
 `);
@@ -50,7 +59,8 @@ const addNewMessage = gql(/* GraphQL */ `
     insert_message_one(
       object: { body: $body, channelId: $channelId, senderId: $senderId }
     ) {
-      ...Message
+      ...ChannelPageMessage
+      ...MessageItemMessage
     }
   }
 `);
@@ -104,7 +114,30 @@ export const ChannelPage = () => {
     },
   });
 
-  const messages = useMemo(() => data?.message || [], [data?.message]);
+  const messages = useMemo(() => {
+    if (!data?.message) {
+      return [];
+    }
+
+    return data.message.map((message, index) => {
+      const prevMessage = getFragment(
+        channelPageMessageFragment,
+        data.message?.[index - 1]
+      );
+
+      const messageData = getFragment(channelPageMessageFragment, message);
+
+      const showDateDivider =
+        !prevMessage ||
+        dayjs(prevMessage.createdAt).diff(messageData.createdAt, 'day') > 0;
+
+      return {
+        id: messageData.id,
+        ...message,
+        showDateDivider,
+      };
+    });
+  }, [data?.message]);
 
   const [createNewCustomer] = useMutation(addNewMessage, {
     variables: { channelId, body: newMessage || '', senderId: memberId },
@@ -154,7 +187,11 @@ export const ChannelPage = () => {
           inverse
         >
           {messages.map((message) => (
-            <MessageItem key={message.id} message={message} />
+            <MessageItem
+              key={message.id}
+              message={message}
+              showMessageDivider={message.showDateDivider}
+            />
           ))}
           {hasMore && <h1>Loading...</h1>}
         </StyledScroll>

@@ -17,7 +17,8 @@
     "paths": {
       "@helpers/client": ["libs/helpers/client/src/index.ts"],
       "@ui": ["libs/ui/src/index.ts"],
-      "@gql/schema": ["./graphql.schema.ts"]
+      "@gql/schema": ["./graphql.schema.ts"],
+      "@gql/fragment-masking": ["libs/graphql/fragment-masking.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
