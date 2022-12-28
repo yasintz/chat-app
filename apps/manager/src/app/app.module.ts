@@ -9,7 +9,7 @@ import { environment } from '../environments/environment';
 import { CONSTANTS } from '../environments/constants';
 import { HasuraEventsModule } from './hasura-events/hasura-events.module';
 import { TypeGraphQLModule } from 'typegraphql-nestjs/dist/typegraphql.module';
-import { RecipeResolver } from './app.resolver';
+import { HasuraActionsModule } from './hasura-actions/hasura-actions.module';
 
 @Module({
   imports: [
@@ -45,8 +45,9 @@ import { RecipeResolver } from './app.resolver';
       dateScalarMode: 'timestamp',
       // context: ({ req }) => ({ currentUser: req.user }),
     }),
+    HasuraActionsModule,
   ],
   controllers: [AppController],
-  providers: [AppService, RecipeResolver],
+  providers: [AppService],
 })
 export class AppModule {}

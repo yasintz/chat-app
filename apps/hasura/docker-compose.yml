@@ -30,6 +30,7 @@ services:
       HASURA_GRAPHQL_MIGRATIONS_DIR: '/hasura/migrations'
       HASURA_GRAPHQL_METADATA_DIR: '/hasura/metadata'
       MANAGER_EVENT_WEBHOOK_ENDPOINT: http://host.docker.internal:4203/api/hasura/events
+      MANAGER_GRAPHQL_URL: http://host.docker.internal:4203/graphql
       HASURA_MANAGER_WEBHOOK_SECRET_HEADER_VALUE: secret1
       HASURA_GRAPHQL_ENABLE_REMOTE_SCHEMA_PERMISSIONS: true
     volumes:

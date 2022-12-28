@@ -1,4 +1,5 @@
 import { Query, Resolver, ObjectType, Field, ID, Arg } from 'type-graphql';
+import { HasuraActionsService } from './hasura-actions.service';
 
 @ObjectType()
 class Recipe {
@@ -19,7 +20,9 @@ class Recipe {
 }
 
 @Resolver(Recipe)
-export class RecipeResolver {
+export class HasuraActionsResolver {
+  constructor(private hasuraActionService: HasuraActionsService) {}
+
   @Query(() => Recipe)
   async recipe(@Arg('id') id: string): Promise<Recipe> {
     return {

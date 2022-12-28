@@ -1,1 +1,6 @@
-[]
+- name: Manager Graphql
+  definition:
+    url_from_env: MANAGER_GRAPHQL_URL
+    timeout_seconds: 60
+    customization: {}
+    forward_client_headers: true
