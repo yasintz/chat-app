@@ -1,0 +1,38 @@
+[
+  {
+    "id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "app_id": "ae993ef6-7618-49c5-b032-2e072aa57973",
+    "name": "Yasin T.",
+    "created_at": "2022-11-28T20:46:48.201Z",
+    "updated_at": "2022-12-26T10:09:07.477Z",
+    "deleted_at": null,
+    "encrypted_password": "$2b$10$1NPoPCpjzMqr0Uv.E4/vEe5DjyeR.aWEDOm7vyKEDbpWShmJJBilK",
+    "external_id": "yasin@chat.app",
+    "avatar_file_id": "3943b4f9-3ef3-43b5-9048-3e83fe6995f5",
+    "active_at": null
+  },
+  {
+    "id": "48af78d8-246f-482b-826c-a5c61194e612",
+    "app_id": "ae993ef6-7618-49c5-b032-2e072aa57973",
+    "name": "Yusuf C.",
+    "created_at": "2022-11-28T20:46:48.201Z",
+    "updated_at": "2022-12-26T10:09:07.477Z",
+    "deleted_at": null,
+    "encrypted_password": "$2b$10$1NPoPCpjzMqr0Uv.E4/vEe5DjyeR.aWEDOm7vyKEDbpWShmJJBilK",
+    "external_id": "yusuf@chat.app",
+    "avatar_file_id": "987a243b-2a39-4c0a-be6c-546285d19d13",
+    "active_at": null
+  },
+  {
+    "id": "d49fa8e5-4708-4f53-9648-4b57ae36e34e",
+    "app_id": "ae993ef6-7618-49c5-b032-2e072aa57973",
+    "name": "Jane D.",
+    "created_at": "2022-12-23T20:09:25.239Z",
+    "updated_at": "2022-12-26T10:10:30.357Z",
+    "deleted_at": null,
+    "encrypted_password": null,
+    "external_id": "207b8a60-e962-4ff6-a34d-3330029043ca",
+    "avatar_file_id": "5044b369-97bf-4302-aadd-8ec927eea7bc",
+    "active_at": null
+  }
+]

@@ -1,0 +1,222 @@
+[
+  {
+    "id": "2e6dfe63-79a3-4704-85cf-c69041df6fa4",
+    "created_at": "2022-12-02T21:57:29.526Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "Test Mesaj",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "3890f7ff-903d-4037-87c1-488c218990ec",
+    "created_at": "2022-12-02T22:01:25.547Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "Test Mesaj 2",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "a6d6cfd3-7018-4f6b-b8cc-00dec907979e",
+    "created_at": "2022-12-03T18:35:22.830Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "Test WS Mesaj",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "c22f0d9b-ae31-4ad3-a954-aa8d3017fd82",
+    "created_at": "2022-12-03T19:15:23.946Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "test",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "a4f3cfdc-84aa-4d48-898a-3de428274b8b",
+    "created_at": "2022-12-03T19:18:20.408Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "test",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "1b27e100-a326-4d4d-8873-85eda4af2ea6",
+    "created_at": "2022-12-03T19:24:34.373Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "asd",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "a3d7cc00-fec9-4c3e-9238-740fdcbbbf31",
+    "created_at": "2022-12-03T19:25:30.650Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "werwe",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "cb5e14aa-64e7-45ec-ac25-39d4409541aa",
+    "created_at": "2022-12-03T19:27:19.516Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "ret",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "7a41703c-388f-4f19-abc1-eb433af9e036",
+    "created_at": "2022-12-03T19:27:35.235Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "bu bitti",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "888939fc-7f56-4c47-98f4-0a4ee83b0932",
+    "created_at": "2022-12-23T21:04:02.430Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "d49fa8e5-4708-4f53-9648-4b57ae36e34e",
+    "body": "testing..",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "87aedf84-eef0-4e3b-8571-7fcc1ad57351",
+    "created_at": "2022-12-26T08:38:13.381Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "🍔",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "e21814d0-fd1e-4257-93ec-32717fb17b04",
+    "created_at": "2022-12-26T08:42:53.670Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "asfasdf😜",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "36e97196-ccf3-4746-8746-b47f553cdd1d",
+    "created_at": "2022-12-26T09:17:26.467Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "test message",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "e145387c-e622-4eb0-bb9a-2f6596155710",
+    "created_at": "2022-12-26T09:18:54.613Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "asdf\n**Bold Message**",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "7bd01885-2271-4881-be9c-fb1587905c49",
+    "created_at": "2022-12-27T19:36:36.504Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "Test Message",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "0bfcaff6-2cda-49d0-ab81-47aeaab511b1",
+    "created_at": "2022-12-27T19:36:55.690Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "1013b417-10e1-4b47-9eed-c6c30bb1d8cd",
+    "created_at": "2022-12-27T19:38:57.355Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "custom message",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "42a0593b-4ac4-4e79-9e38-1765543ab804",
+    "created_at": "2022-12-27T20:13:38.789Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "a7f4c2d8-11db-4564-a194-e5f550e0ac51",
+    "body": "test message",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "17f54155-eaa0-4976-b2c3-c6c899fcd104",
+    "created_at": "2022-12-27T20:41:41.714Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "48af78d8-246f-482b-826c-a5c61194e612",
+    "body": "thats cool",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  },
+  {
+    "id": "a66eff27-3cef-453f-9330-eca5380c3ec7",
+    "created_at": "2022-12-27T20:42:13.670Z",
+    "updated_at": null,
+    "deleted_at": null,
+    "sender_id": "48af78d8-246f-482b-826c-a5c61194e612",
+    "body": "**Bold Message**\n\n### Title",
+    "channel_id": "d9526cd5-b04f-4003-9ac8-fea05175f62d",
+    "parent_id": null,
+    "reply_to_id": null
+  }
+]

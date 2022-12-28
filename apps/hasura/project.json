@@ -65,14 +65,14 @@
     "dumpdb": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["sh tools/generators/db/dumpdb.sh"],
+        "commands": ["node tools/generators/db/dump.js --dump"],
         "parallel": false
       }
     },
     "loaddb": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["sh tools/generators/db/loaddb.sh"],
+        "commands": ["node tools/generators/db/dump.js --load"],
         "parallel": false
       }
     },

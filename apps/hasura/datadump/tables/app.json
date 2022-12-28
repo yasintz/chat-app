@@ -1,0 +1,7 @@
+[
+  {
+    "id": "ae993ef6-7618-49c5-b032-2e072aa57973",
+    "name": "Chat App Developers",
+    "jwt_secrets": "[{\"key\":\"-----BEGIN PUBLIC KEY---MIGfMA0GCSqGSIb3DQEBAQUAA4GN\\nADCBiQKBgQClDyElcTC9VnPjJg\\nn4IRHAVGoTFi1Un/uYWQcKs76G7EinDUbgiaCkVcHc1J9jfiZK+mzV/4YAJkMCaOzA\\nbX2ZxB7bMyA2NJECGGcZnjxR9FQv46TvnN\\nnNpz13bQIyMzIXBIFky51Juitxb/e7KC7+nd6Fml0IiXX4dipLG1jMbQIDAQAB-----END PUBLIC KEY-----\",\"issuer\":\"simple-user\",\"algorithm\":\"RS256\"}]"
+  }
+]
