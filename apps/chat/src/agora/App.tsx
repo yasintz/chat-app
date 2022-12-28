@@ -122,10 +122,10 @@ const App = ({
           );
           // Create a local audio track from the audio sampled by a microphone.
           channelParameters.localAudioTrack =
-            await AgoraRTC.createMicrophoneAudioTrack({ microphoneId });
+            await AgoraRTC.createMicrophoneAudioTrack();
           // Create a local video track from the video captured by a camera.
           channelParameters.localVideoTrack =
-            await AgoraRTC.createCameraVideoTrack({ cameraId });
+            await AgoraRTC.createCameraVideoTrack();
 
           // Append the local video container to the page body.
           document.body.append(localPlayerContainer);
