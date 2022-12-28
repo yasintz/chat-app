@@ -1,8 +1,9 @@
 // #region Import
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useQuery } from '@apollo/client';
 import { gql } from '../../../gql';
+import { Markdown } from '../../../components/common/markdown';
 // #endregion
 
 // #region GQL
@@ -30,14 +31,23 @@ const StyledContainer = styled.div<{ $isLoaded: boolean }>(({ $isLoaded }) => ({
 }));
 
 const StyledBorder = styled.div`
-  width: 10px;
-  border-radius: 10px;
-  background-color: gray;
   margin-right: 10px;
+  background-color: #7d7d7d;
+  border-radius: 8px;
+  flex-shrink: 0;
+  width: 4px;
 `;
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
+`;
+const StyledLink = styled.a`
+  margin-bottom: 8px;
+  display: block;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 // #endregion
 
@@ -59,13 +69,16 @@ const LinkPreview: React.FC<PropsType> = ({
     variables: { url },
     skip: !url,
   });
+  const [isSquare, setIsSquare] = useState(false);
 
   const onClose: React.MouseEventHandler<HTMLDivElement> | undefined = (e) => {
     e.stopPropagation();
     setIsClosed(true);
   };
 
-  const onLoad = () => {
+  const onLoad: React.ReactEventHandler<HTMLImageElement> = (event) => {
+    const el = event.target as HTMLImageElement;
+    setIsSquare(el.naturalWidth === el.naturalHeight || el.naturalWidth < 400);
     setIsLoaded(true);
   };
 
@@ -86,7 +99,6 @@ const LinkPreview: React.FC<PropsType> = ({
 
   const domain = new URL(url).hostname || url;
 
-  console.log(linkBody);
   return (
     <StyledContainer className={className} $isLoaded={isLoaded}>
       <StyledBorder />
@@ -103,26 +115,23 @@ const LinkPreview: React.FC<PropsType> = ({
             <b>{domain}</b>
           </span>
         </div>
-        <div style={{ marginTop: 8 }}>
+        <div style={{ marginTop: 8, display: isSquare ? 'flex' : 'block' }}>
           <div>
-            <a
-              href={url}
-              target="_blank"
-              rel="noreferrer"
-              style={{ marginBottom: 8, display: 'block' }}
-            >
+            <StyledLink href={url} target="_blank" rel="noreferrer" >
               {linkBody.title}
-            </a>
-            <div>{linkBody.description}</div>
+            </StyledLink>
+            <Markdown text={linkBody.description || ''} />
           </div>
           <img
             src={linkBody.images?.[0]}
             alt="any"
             style={{
-              maxWidth: 220,
-              objectFit: 'cover',
-              marginTop: 12,
+              maxWidth: isSquare ? 64 : 220,
+              objectFit: 'contain',
+              marginTop: isSquare ? 0 : 12,
               borderRadius: 8,
+              marginLeft: isSquare ? 24 : 0,
+              objectPosition: isSquare ? 'top' : undefined,
             }}
             onLoad={onLoad}
             onError={onError}
