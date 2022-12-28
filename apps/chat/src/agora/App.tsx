@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import AgoraRTC from 'agora-rtc-sdk-ng';
+import AgoraRTC, {
+  IAgoraRTCClient,
+  ICameraVideoTrack,
+  IMicrophoneAudioTrack,
+  IRemoteAudioTrack,
+  IRemoteVideoTrack,
+} from 'agora-rtc-sdk-ng';
 
 const config = {
   mode: 'rtc',
@@ -8,16 +14,21 @@ const config = {
 
 const appId = '8c6d7ddd9f9445bba88713c13a115467';
 
+let agoraEngine: IAgoraRTCClient;
 const App = ({
   channelId,
   memberId,
   token,
   onClose,
+  cameraId,
+  microphoneId,
 }: {
   onClose: () => void;
   channelId: string;
   memberId: string;
   token: string;
+  cameraId: string;
+  microphoneId: string;
 }) => {
   useEffect(() => {
     const options = {
@@ -27,7 +38,13 @@ const App = ({
       uid: memberId,
     };
 
-    const channelParameters: any = {
+    const channelParameters: {
+      localVideoTrack: ICameraVideoTrack | null | undefined;
+      remoteVideoTrack: IRemoteVideoTrack | null | undefined;
+      localAudioTrack: IMicrophoneAudioTrack | null | undefined;
+      remoteAudioTrack: IRemoteAudioTrack | null | undefined;
+      remoteUid: null | string;
+    } = {
       // A variable to hold a local audio track.
       localAudioTrack: null,
       // A variable to hold a local video track.
@@ -42,7 +59,7 @@ const App = ({
     async function startBasicCall() {
       // Create an instance of the Agora Engine
 
-      const agoraEngine = AgoraRTC.createClient(config);
+      agoraEngine = AgoraRTC.createClient(config);
       // Dynamically create a container in the form of a DIV element to play the remote video track.
       const remotePlayerContainer = document.createElement('div');
       // Dynamically create a container in the form of a DIV element to play the local video track.
@@ -80,14 +97,14 @@ const App = ({
           // Append the remote container to the page body.
           document.body.append(remotePlayerContainer);
           // Play the remote video track.
-          channelParameters.remoteVideoTrack.play(remotePlayerContainer);
+          channelParameters.remoteVideoTrack?.play(remotePlayerContainer);
         }
         // Subscribe and play the remote audio track If the remote user publishes the audio track only.
         if (mediaType == 'audio') {
           // Get the RemoteAudioTrack object in the AgoraRTCRemoteUser object.
           channelParameters.remoteAudioTrack = user.audioTrack;
           // Play the remote audio track. No need to pass any DOM element.
-          channelParameters.remoteAudioTrack.play();
+          channelParameters.remoteAudioTrack?.play();
         }
         // Listen for the "user-unpublished" event.
         agoraEngine.on('user-unpublished', (user) => {
@@ -105,10 +122,11 @@ const App = ({
           );
           // Create a local audio track from the audio sampled by a microphone.
           channelParameters.localAudioTrack =
-            await AgoraRTC.createMicrophoneAudioTrack();
+            await AgoraRTC.createMicrophoneAudioTrack({ microphoneId });
           // Create a local video track from the video captured by a camera.
           channelParameters.localVideoTrack =
-            await AgoraRTC.createCameraVideoTrack();
+            await AgoraRTC.createCameraVideoTrack({ cameraId });
+
           // Append the local video container to the page body.
           document.body.append(localPlayerContainer);
           // Publish the local audio and video tracks in the channel.
@@ -122,8 +140,8 @@ const App = ({
         }
 
         document.getElementById('leave')!.onclick = async function () {
-          channelParameters.localAudioTrack.close();
-          channelParameters.localVideoTrack.close();
+          channelParameters.localAudioTrack?.close();
+          channelParameters.localVideoTrack?.close();
           removeVideoDiv(remotePlayerContainer.id);
           removeVideoDiv(localPlayerContainer.id);
           await agoraEngine.leave();

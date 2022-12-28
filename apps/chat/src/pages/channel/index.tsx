@@ -1,7 +1,7 @@
 //#region Import
 import immer from 'immer';
 import _ from 'lodash';
-import { useState, useEvent, useMemo, useId } from 'react';
+import { useState, useEvent, useMemo, useId, useEffect } from 'react';
 import { useMutation, useQuery, useSubscription } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -23,6 +23,8 @@ import {
 } from './gql';
 import { File_Service_Enum, File_Type_Enum } from '@gql/schema';
 import Agora from '../../agora/App';
+import AgoraRTC from 'agora-rtc-sdk-ng';
+
 //#endregion
 
 // #region Styled
@@ -39,6 +41,9 @@ const StyledScroll = styled(InfiniteScroll)`
 `;
 // #endregion
 
+const camerasPromise = AgoraRTC.getCameras();
+const micsPromise = AgoraRTC.getMicrophones();
+
 const LIMIT = 5;
 export const ChannelPage = () => {
   const { channels, memberId, isLoading, error } = useAuthenticatedUserData();
@@ -50,6 +55,23 @@ export const ChannelPage = () => {
   const [hasMore, setHasMore] = useState(true);
   const [files, setFiles] = useState<FileType[]>([]);
   const isFileLoading = files.some((f) => f.isLoading);
+  const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
+  const [mics, setMics] = useState<MediaDeviceInfo[]>([]);
+
+  const [activeCamera, setActiveCamera] = useState<string>();
+  const [activeMic, setActiveMic] = useState<string>();
+
+  useEffect(() => {
+    camerasPromise.then((c) => {
+      setCameras(c);
+      setActiveCamera(c[0].deviceId);
+    });
+    micsPromise.then((m) => {
+      setMics(m);
+      setActiveMic(m[0].deviceId);
+    });
+  }, []);
+
   const {
     data,
     fetchMore,
@@ -271,7 +293,41 @@ export const ChannelPage = () => {
           <hr />
         </>
       )}
-      {videoCallToken && channelId && memberId && (
+      <ul>
+        <li>
+          Camera
+          <ul>
+            {cameras.map((c) => (
+              <li
+                key={c.deviceId}
+                style={{
+                  fontWeight: activeCamera === c.deviceId ? 'bold' : undefined,
+                }}
+                onClick={() => setActiveCamera(c.deviceId)}
+              >
+                {c.label}
+              </li>
+            ))}
+          </ul>
+        </li>
+        <li>
+          Microphone
+          <ul>
+            {mics.map((c) => (
+              <li
+                key={c.deviceId}
+                onClick={() => setActiveMic(c.deviceId)}
+                style={{
+                  fontWeight: activeMic === c.deviceId ? 'bold' : undefined,
+                }}
+              >
+                {c.label}
+              </li>
+            ))}
+          </ul>
+        </li>
+      </ul>
+      {videoCallToken && channelId && memberId && activeCamera && activeMic && (
         <Agora
           onClose={() => {
             setVideoCallToken(undefined);
@@ -279,6 +335,8 @@ export const ChannelPage = () => {
           channelId={channelId}
           memberId={memberId}
           token={videoCallToken}
+          cameraId={activeCamera}
+          microphoneId={activeMic}
         />
       )}
     </AuthenticatedPageLayout>
