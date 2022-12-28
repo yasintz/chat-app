@@ -9,7 +9,7 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
 import { useAuthenticatedUserData } from '../../hooks/load-authenticated-user-data';
 import { ChatInput, FileType } from './chat-input';
-import { MessageItem } from './message-item';
+import { Message } from './message';
 import { Markdown } from '../../components/common/markdown';
 import { transformMessages } from './utils';
 import { cloudinary, getHasuraFileType } from '@libs/react';
@@ -21,7 +21,6 @@ import {
   insertFileMutation,
 } from './gql';
 import { File_Service_Enum, File_Type_Enum } from '@gql/schema';
-import { boolean } from 'zod';
 //#endregion
 
 // #region Styled
@@ -220,7 +219,7 @@ export const ChannelPage = () => {
           inverse
         >
           {messages.map((message) => (
-            <MessageItem
+            <Message
               key={message.id}
               message={message}
               showDateDivider={message.showDateDivider}
@@ -249,7 +248,7 @@ export const ChannelPage = () => {
         <>
           <b>Preview</b>
           <hr />
-          <Markdown message={newMessage} />
+          <Markdown text={newMessage} />
           <hr />
         </>
       )}

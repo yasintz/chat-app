@@ -21,6 +21,7 @@ const documents = {
     "\n  mutation insertNewMessage(\n    $body: String!\n    $channelId: uuid!\n    $senderId: uuid!\n    $files: [message_file_insert_input!]!\n  ) {\n    insert_message_one(\n      object: {\n        body: $body\n        channelId: $channelId\n        senderId: $senderId\n        files: { data: $files }\n      }\n    ) {\n      ...ChannelPageMessage\n      ...MessageItemMessage\n    }\n  }\n": types.InsertNewMessageDocument,
     "\n  mutation ChannelPageInsertFile($file: file_insert_input!) {\n    file: insert_file_one(object: $file) {\n      id\n      name\n      path\n      type\n      service\n    }\n  }\n": types.ChannelPageInsertFileDocument,
     "\n  fragment MessageItemMessage on message {\n    id\n    createdAt\n    updatedAt\n    body\n    parentId\n    replyToId\n    files {\n      id\n      file {\n        id\n        name\n        path\n        service\n        type\n      }\n    }\n    sender {\n      id\n      name\n      avatarFile {\n        id\n        path\n        service\n        type\n      }\n    }\n  }\n": types.MessageItemMessageFragmentDoc,
+    "\n  query MessageItemGetLinkPreview($url: String!) {\n    linkPreview: get_link_preview(url: $url) {\n      description\n      images\n      favicons\n      title\n    }\n  }\n": types.MessageItemGetLinkPreviewDocument,
 };
 
 /**
@@ -55,6 +56,10 @@ export function gql(source: "\n  mutation ChannelPageInsertFile($file: file_inse
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  fragment MessageItemMessage on message {\n    id\n    createdAt\n    updatedAt\n    body\n    parentId\n    replyToId\n    files {\n      id\n      file {\n        id\n        name\n        path\n        service\n        type\n      }\n    }\n    sender {\n      id\n      name\n      avatarFile {\n        id\n        path\n        service\n        type\n      }\n    }\n  }\n"): (typeof documents)["\n  fragment MessageItemMessage on message {\n    id\n    createdAt\n    updatedAt\n    body\n    parentId\n    replyToId\n    files {\n      id\n      file {\n        id\n        name\n        path\n        service\n        type\n      }\n    }\n    sender {\n      id\n      name\n      avatarFile {\n        id\n        path\n        service\n        type\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query MessageItemGetLinkPreview($url: String!) {\n    linkPreview: get_link_preview(url: $url) {\n      description\n      images\n      favicons\n      title\n    }\n  }\n"): (typeof documents)["\n  query MessageItemGetLinkPreview($url: String!) {\n    linkPreview: get_link_preview(url: $url) {\n      description\n      images\n      favicons\n      title\n    }\n  }\n"];
 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

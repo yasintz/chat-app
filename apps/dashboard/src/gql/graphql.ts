@@ -30,6 +30,28 @@ export type Int_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['Int']>>;
 };
 
+export type LinkPreviewResponse = {
+  __typename?: 'LinkPreviewResponse';
+  contentType?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  favicons: Array<Scalars['String']>;
+  images?: Maybe<Array<Scalars['String']>>;
+  mediaType: Scalars['String'];
+  siteName?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  url: Scalars['String'];
+  videos?: Maybe<Array<LinkPreviewVideo>>;
+};
+
+export type LinkPreviewVideo = {
+  __typename?: 'LinkPreviewVideo';
+  height?: Maybe<Scalars['String']>;
+  secureUrl?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+  url?: Maybe<Scalars['String']>;
+  width?: Maybe<Scalars['String']>;
+};
+
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
 export type String_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['String']>;
@@ -4183,6 +4205,7 @@ export type Query_Root = {
   file_type_aggregate: File_Type_Aggregate;
   /** fetch data from the table: "file_type" using primary key columns */
   file_type_by_pk?: Maybe<File_Type>;
+  get_link_preview: LinkPreviewResponse;
   /** fetch data from the table: "member" */
   member: Array<Member>;
   /** fetch aggregated fields from the table: "member" */
@@ -4386,6 +4409,11 @@ export type Query_RootFile_Type_AggregateArgs = {
 
 export type Query_RootFile_Type_By_PkArgs = {
   value: Scalars['String'];
+};
+
+
+export type Query_RootGet_Link_PreviewArgs = {
+  url: Scalars['String'];
 };
 
 

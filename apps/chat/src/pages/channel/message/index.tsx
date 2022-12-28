@@ -1,10 +1,14 @@
 // #region Import
 import styled from 'styled-components';
-import { gql, FragmentType, useFragment } from '../../gql';
+import { FragmentType, useFragment } from '../../../gql';
 import dayjs from 'dayjs';
+import _ from 'lodash';
 import { getFileConfigByServiceAndTypes } from '@libs/react';
-import { Markdown } from '../../components/common/markdown';
-import { ChatInputFiles } from './chat-input/files';
+import { Markdown } from '../../../components/common/markdown';
+import { ChatInputFiles } from '../chat-input/files';
+import { useLayoutEffect, useRef, useState } from 'react';
+import LinkPreview from './link-preview';
+import { gql } from '../../../gql';
 // #endregion
 
 // #region GQL
@@ -83,7 +87,7 @@ export interface MessageItemProps {
   showNewMessageDivider: boolean;
 }
 
-export const MessageItem = ({
+export const Message = ({
   message,
   showDateDivider,
   showNewMessageDivider,
@@ -93,10 +97,27 @@ export const MessageItem = ({
     message
   );
 
+  const [links, setLinks] = useState<string[]>([]);
+
+  const messageContentRef = useRef<HTMLDivElement>(null);
   const { url } = getFileConfigByServiceAndTypes(sender.avatarFile);
 
   const createdAtInstance = dayjs(createdAt);
   const createdTime = createdAtInstance.format('h:mm A');
+
+  useLayoutEffect(() => {
+    if (messageContentRef.current) {
+      const linkElements =
+        messageContentRef.current.querySelectorAll('a.out-link');
+
+      setLinks(
+        _.uniq(
+          (Array.from(linkElements) as HTMLAnchorElement[]).map((el) => el.href)
+        )
+      );
+    }
+  }, []);
+
   return (
     <div>
       {showNewMessageDivider && (
@@ -124,7 +145,7 @@ export const MessageItem = ({
             </StyledGrayText>
           </StyledAuthorContainer>
           <div>
-            <Markdown message={body} />
+            <Markdown text={body} ref={messageContentRef} />
 
             {updatedAt && <StyledGrayText>(edited)</StyledGrayText>}
             {files.length > 0 && (
@@ -132,6 +153,13 @@ export const MessageItem = ({
                 files={files.map((file) => file.file)}
                 size="lg"
               />
+            )}
+            {links.length > 0 && (
+              <div style={{ maxWidth: 600 }}>
+                {links.map((link) => (
+                  <LinkPreview key={link} url={link} />
+                ))}
+              </div>
             )}
           </div>
         </StyledMessageRightContainer>

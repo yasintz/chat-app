@@ -1,5 +1,5 @@
 // #region Import
-import React, { ReactNode } from 'react';
+import React, { forwardRef, memo, ReactNode, Ref } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import styled from 'styled-components';
@@ -20,10 +20,13 @@ const StyledContainer = styled.div`
 // #endregion
 
 export interface MarkdownProps {
-  message: string;
+  text: string;
 }
 
-export const Markdown = ({ message }: MarkdownProps) => {
+const MarkdownComponent = (
+  { text }: MarkdownProps,
+  ref: Ref<HTMLDivElement>
+) => {
   const renderLink = (data: {
     href?: string;
     children: (ReactNode & ReactNode[]) | (string & string[]);
@@ -44,15 +47,18 @@ export const Markdown = ({ message }: MarkdownProps) => {
   };
 
   return (
-    <StyledContainer>
+    <StyledContainer ref={ref}>
       <ReactMarkdown
         components={{
           a: renderLink,
         }}
         remarkPlugins={[remarkGfm]}
       >
-        {message}
+        {text}
       </ReactMarkdown>
     </StyledContainer>
   );
 };
+
+const ForwardRef = forwardRef(MarkdownComponent);
+export const Markdown = memo(ForwardRef);
