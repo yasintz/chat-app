@@ -1,1 +1,38 @@
-[]
+- name: ManagerGraphql
+  definition:
+    url_from_env: MANAGER_GRAPHQL_URL
+    timeout_seconds: 60
+    customization: {}
+    headers:
+      - name: hasura_manager_graphql_secret_header_value
+        value_from_env: HASURA_MANAGER_GRAPHQL_SECRET_HEADER_VALUE
+    forward_client_headers: true
+  comment: ""
+  permissions:
+    - role: member
+      definition:
+        schema: |
+          schema {
+            query: Query
+          }
+          type LinkPreviewResponse {
+            contentType: String
+            description: String
+            favicons: [String!]!
+            images: [String!]
+            mediaType: String!
+            siteName: String
+            title: String
+            url: String!
+            videos: [LinkPreviewVideo!]
+          }
+          type LinkPreviewVideo {
+            height: String
+            secureUrl: String
+            type: String
+            url: String
+            width: String
+          }
+          type Query {
+            get_link_preview(url: String!): LinkPreviewResponse!
+          }

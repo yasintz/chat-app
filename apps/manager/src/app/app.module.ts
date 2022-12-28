@@ -8,6 +8,9 @@ import { AppAuthModule } from './app-auth/app-auth.module';
 import { environment } from '../environments/environment';
 import { CONSTANTS } from '../environments/constants';
 import { HasuraEventsModule } from './hasura-events/hasura-events.module';
+import { HasuraActionsModule } from './hasura-actions/hasura-actions.module';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { GraphQLModule } from '@nestjs/graphql';
 
 @Module({
   imports: [
@@ -36,6 +39,11 @@ import { HasuraEventsModule } from './hasura-events/hasura-events.module';
         : undefined,
     }),
     HasuraEventsModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: true,
+    }),
+    HasuraActionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

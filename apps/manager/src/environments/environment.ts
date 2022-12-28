@@ -7,6 +7,7 @@ export const environment = {
     endpoint: 'http://localhost:8080/v1/graphql',
     secret: 'chat',
     webhookSecretFactory: 'secret1',
+    actionSecretFactory: 'secret1',
   },
   jwtConstants: {
     privateKey: JWT_TOKEN_PRIVATE_KEY,
