@@ -13,6 +13,7 @@ specifiers:
   '@nestjs/jwt': 9.0.0
   '@nestjs/passport': 9.0.0
   '@nestjs/platform-express': 9.2.0
+  agora-access-token: 2.0.4
   apollo-server-core: 3.11.1
   apollo-server-express: 3.11.1
   apollo-server-fastify: 3.11.1
@@ -43,6 +44,7 @@ dependencies:
   '@nestjs/jwt': 9.0.0_@nestjs+common@9.2.0
   '@nestjs/passport': 9.0.0_s6va3jdeufsye4wwu25es3p4om
   '@nestjs/platform-express': 9.2.0_pf2fb646rsvo5szivgkaevcpvi
+  agora-access-token: 2.0.4
   apollo-server-core: 3.11.1_graphql@15.8.0
   apollo-server-express: 3.11.1_4mq2c443wwzwcb6dpxnwkfvrzm
   apollo-server-fastify: 3.11.1_graphql@15.8.0
@@ -985,6 +987,13 @@ packages:
       indent-string: 4.0.0
     dev: false
 
+  /agora-access-token/2.0.4:
+    resolution: {integrity: sha512-RtOIvi4PqV1ok3rdnopMZeVwiUqZgG9Pp56kqxJc5cU/+ljRBzs1Al+IThD5ahm528dGsdY1TyP1bJdqmgBCbQ==}
+    dependencies:
+      crc-32: 1.2.0
+      cuint: 0.2.2
+    dev: false
+
   /ansi-regex/5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
     engines: {node: '>=8'}
@@ -1451,6 +1460,15 @@ packages:
       vary: 1.1.2
     dev: false
 
+  /crc-32/1.2.0:
+    resolution: {integrity: sha512-1uBwHxF+Y/4yF5G48fwnKq6QsIXheor3ZLPT80yGBV1oEUwpPojlEhQbWKVw1VwcTQyMGHK1/XMmTjmlsmTTGA==}
+    engines: {node: '>=0.8'}
+    hasBin: true
+    dependencies:
+      exit-on-epipe: 1.0.1
+      printj: 1.1.2
+    dev: false
+
   /cross-fetch/3.1.5:
     resolution: {integrity: sha512-lvb1SBsI0Z7GDwmuid+mU3kWVBwTVUbe7S0H52yaaAdQOXq2YktTCZdlAcNKFzE6QtRz0snpw9bNiPeOIkkQvw==}
     dependencies:
@@ -1476,6 +1494,10 @@ packages:
 
   /cssfilter/0.0.10:
     resolution: {integrity: sha512-FAaLDaplstoRsDR8XGYH51znUN0UY7nMc6Z9/fvE8EXGwvJE9hu7W2vHwx1+bd6gCYnln9nLbzxFTrcO9YQDZw==}
+    dev: false
+
+  /cuint/0.2.2:
+    resolution: {integrity: sha512-d4ZVpCW31eWwCMe1YT3ur7mUDnTXbgwyzaL320DrcRT45rfjYxkt5QWLrmOJ+/UEAI2+fQgKe/fCjR8l4TpRgw==}
     dev: false
 
   /debug/2.6.9:
@@ -1650,6 +1672,11 @@ packages:
 
   /eventemitter3/3.1.2:
     resolution: {integrity: sha512-tvtQIeLVHjDkJYnzf2dgVMxfuSGJeM/7UCG17TT4EumTfNtF+0nebF/4zWOIkCreAbtNqhGEboB6BWrwqNaw4Q==}
+    dev: false
+
+  /exit-on-epipe/1.0.1:
+    resolution: {integrity: sha512-h2z5mrROTxce56S+pnvAV890uu7ls7f1kEvVGJbw1OlFH3/mlJ5bkXu0KRyW94v37zzHPiUd55iLn3DA7TjWpw==}
+    engines: {node: '>=0.8'}
     dev: false
 
   /express/4.18.2:
@@ -2676,6 +2703,12 @@ packages:
       '@jest/schemas': 29.0.0
       ansi-styles: 5.2.0
       react-is: 18.2.0
+    dev: false
+
+  /printj/1.1.2:
+    resolution: {integrity: sha512-zA2SmoLaxZyArQTOPj5LXecR+RagfPSU5Kw1qP+jkWeNlrq+eJZyY2oS68SU1Z/7/myXM4lo9716laOFAVStCQ==}
+    engines: {node: '>=0.8'}
+    hasBin: true
     dev: false
 
   /process-nextick-args/2.0.1:
