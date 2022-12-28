@@ -18,7 +18,7 @@ export const environment = {
   },
   agora: {
     appId: '8c6d7ddd9f9445bba88713c13a115467',
-    appCertificate: '65f5053e-47e9-4b8d-9916-f7dedfb47dcc',
+    appCertificate: '77db3cea1ed44db0b42f61258d25bf77',
   },
 };
 

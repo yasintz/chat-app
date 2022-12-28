@@ -62,11 +62,11 @@ export class HasuraActionsService {
     const expirationTimeInSeconds = 3600;
     const currentTimestamp = Math.floor(Date.now() / 1000);
     const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds;
-    const token = RtcTokenBuilder.buildTokenWithUid(
+    const token = RtcTokenBuilder.buildTokenWithAccount(
       appId,
       appCertificate,
       channelId,
-      uid,
+      memberId,
       role,
       privilegeExpiredTs
     );

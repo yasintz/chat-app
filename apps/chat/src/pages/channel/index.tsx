@@ -19,14 +19,16 @@ import {
   getChannelMembersQuery,
   getChannelMessagesSubscription,
   insertFileMutation,
+  getAgoraRtcTokenMutation,
 } from './gql';
 import { File_Service_Enum, File_Type_Enum } from '@gql/schema';
+import Agora from '../../agora/App';
 //#endregion
 
 // #region Styled
 const StyledMessageListContainer = styled.div`
   overflow-y: auto;
-  height: 400px;
+  height: 500px;
   display: flex;
   flex-direction: column-reverse;
 `;
@@ -42,6 +44,7 @@ export const ChannelPage = () => {
   const { channels, memberId, isLoading, error } = useAuthenticatedUserData();
   const { channelId } = useParams();
   const [showPreview, setShowPreview] = useState(false);
+  const [videoCallToken, setVideoCallToken] = useState<string>();
   const [newMessage, setNewMessage] = useState<string>('');
   const scrollContainerId = useId();
   const [hasMore, setHasMore] = useState(true);
@@ -80,6 +83,7 @@ export const ChannelPage = () => {
 
   const [insertHasuraFile] = useMutation(insertFileMutation);
   const [insertMessage] = useMutation(addNewMessageMutation);
+  const [getAgoraRtcToken] = useMutation(getAgoraRtcTokenMutation);
 
   const lastSeenAt = memberData?.channel?.members?.find(
     (m) => m.member.id === memberId
@@ -119,6 +123,20 @@ export const ChannelPage = () => {
 
   const onPreviewClick = () => {
     setShowPreview((prev) => !prev);
+  };
+  const onVideoCallClick = async () => {
+    if (videoCallToken) {
+      setVideoCallToken(undefined);
+      return;
+    }
+
+    const token = await getAgoraRtcToken({ variables: { channelId } });
+
+    if (!token.data) {
+      alert('Mutation failed');
+      return;
+    }
+    setVideoCallToken(token.data?.get_agora_rtc_token?.token);
   };
 
   const onFileUpload = useEvent(async (files: File[]) => {
@@ -244,6 +262,7 @@ export const ChannelPage = () => {
         }
         loading={isFileLoading}
       />
+      <button onClick={onVideoCallClick}>Video Call</button>
       {showPreview && (
         <>
           <b>Preview</b>
@@ -251,6 +270,16 @@ export const ChannelPage = () => {
           <Markdown text={newMessage} />
           <hr />
         </>
+      )}
+      {videoCallToken && channelId && memberId && (
+        <Agora
+          onClose={() => {
+            setVideoCallToken(undefined);
+          }}
+          channelId={channelId}
+          memberId={memberId}
+          token={videoCallToken}
+        />
       )}
     </AuthenticatedPageLayout>
   );

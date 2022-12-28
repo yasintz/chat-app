@@ -17,6 +17,11 @@ export type Scalars = {
   uuid: any;
 };
 
+export type GetAgoraRtcTokenResponse = {
+  __typename?: 'GetAgoraRtcTokenResponse';
+  token: Scalars['String'];
+};
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Int']>;
@@ -3344,6 +3349,7 @@ export type Mutation_Root = {
   delete_reaction?: Maybe<Reaction_Mutation_Response>;
   /** delete single row from the table: "reaction" */
   delete_reaction_by_pk?: Maybe<Reaction>;
+  get_agora_rtc_token: GetAgoraRtcTokenResponse;
   /** insert data into the table: "app" */
   insert_app?: Maybe<App_Mutation_Response>;
   /** insert a single row into the table: "app" */
@@ -3657,6 +3663,12 @@ export type Mutation_RootDelete_ReactionArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Reaction_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootGet_Agora_Rtc_TokenArgs = {
+  channelId: Scalars['uuid'];
 };
 
 
@@ -5347,6 +5359,13 @@ export type ChannelPageInsertFileMutationVariables = Exact<{
 
 export type ChannelPageInsertFileMutation = { __typename?: 'mutation_root', file?: { __typename?: 'file', id: any, name: string, path: string, type: File_Type_Enum, service: File_Service_Enum } | null };
 
+export type ChannelPageGetAgoraTokenMutationVariables = Exact<{
+  channelId: Scalars['uuid'];
+}>;
+
+
+export type ChannelPageGetAgoraTokenMutation = { __typename?: 'mutation_root', get_agora_rtc_token: { __typename?: 'GetAgoraRtcTokenResponse', token: string } };
+
 export type MessageItemMessageFragment = { __typename?: 'message', id: any, createdAt: any, updatedAt?: any | null, body: string, parentId?: any | null, replyToId?: any | null, files: Array<{ __typename?: 'message_file', id: any, file: { __typename?: 'file', id: any, name: string, path: string, service: File_Service_Enum, type: File_Type_Enum } }>, sender: { __typename?: 'member', id: any, name: string, avatarFile?: { __typename?: 'file', id: any, path: string, service: File_Service_Enum, type: File_Type_Enum } | null } } & { ' $fragmentName'?: 'MessageItemMessageFragment' };
 
 export type MessageItemGetLinkPreviewQueryVariables = Exact<{
@@ -5364,4 +5383,5 @@ export const GetChannelMessagesDocument = {"kind":"Document","definitions":[{"ki
 export const GetChannelMembersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getChannelMembers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"channel"},"name":{"kind":"Name","value":"channel_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastSeenAt"}},{"kind":"Field","name":{"kind":"Name","value":"member"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetChannelMembersQuery, GetChannelMembersQueryVariables>;
 export const InsertNewMessageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertNewMessage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"senderId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"files"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"message_file_insert_input"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_message_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"channelId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"senderId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"senderId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"files"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"files"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ChannelPageMessage"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"MessageItemMessage"}}]}}]}},...ChannelPageMessageFragmentDoc.definitions,...MessageItemMessageFragmentDoc.definitions]} as unknown as DocumentNode<InsertNewMessageMutation, InsertNewMessageMutationVariables>;
 export const ChannelPageInsertFileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChannelPageInsertFile"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"file"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"file_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"file"},"name":{"kind":"Name","value":"insert_file_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"file"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"service"}}]}}]}}]} as unknown as DocumentNode<ChannelPageInsertFileMutation, ChannelPageInsertFileMutationVariables>;
+export const ChannelPageGetAgoraTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChannelPageGetAgoraToken"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"get_agora_rtc_token"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"channelId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<ChannelPageGetAgoraTokenMutation, ChannelPageGetAgoraTokenMutationVariables>;
 export const MessageItemGetLinkPreviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MessageItemGetLinkPreview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"linkPreview"},"name":{"kind":"Name","value":"get_link_preview"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"url"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"favicons"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<MessageItemGetLinkPreviewQuery, MessageItemGetLinkPreviewQueryVariables>;

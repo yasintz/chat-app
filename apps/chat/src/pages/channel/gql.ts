@@ -82,3 +82,11 @@ export const insertFileMutation = gql(/* GraphQL */ `
     }
   }
 `);
+
+export const getAgoraRtcTokenMutation = gql(/* GraphQL */ `
+  mutation ChannelPageGetAgoraToken($channelId: uuid!) {
+    get_agora_rtc_token(channelId: $channelId) {
+      token
+    }
+  }
+`);
