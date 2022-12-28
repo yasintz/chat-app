@@ -8,6 +8,8 @@ import { AppAuthModule } from './app-auth/app-auth.module';
 import { environment } from '../environments/environment';
 import { CONSTANTS } from '../environments/constants';
 import { HasuraEventsModule } from './hasura-events/hasura-events.module';
+import { TypeGraphQLModule } from 'typegraphql-nestjs/dist/typegraphql.module';
+import { RecipeResolver } from './app.resolver';
 
 @Module({
   imports: [
@@ -36,8 +38,15 @@ import { HasuraEventsModule } from './hasura-events/hasura-events.module';
         : undefined,
     }),
     HasuraEventsModule,
+    TypeGraphQLModule.forRoot({
+      emitSchemaFile: false,
+      // validate: false,
+      // authChecker,
+      dateScalarMode: 'timestamp',
+      // context: ({ req }) => ({ currentUser: req.user }),
+    }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, RecipeResolver],
 })
 export class AppModule {}
