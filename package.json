@@ -43,6 +43,7 @@
     "immer": "^9.0.16",
     "jsonwebtoken": "^8.5.1",
     "knex": "^2.3.0",
+    "link-preview-js": "^3.0.4",
     "lodash": "^4.17.21",
     "next": "13.0.0",
     "passport": "^0.6.0",

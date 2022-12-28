@@ -1,35 +1,62 @@
-import { Query, Resolver, ObjectType, Field, ID, Arg } from 'type-graphql';
+import { Query, Resolver, ObjectType, Field, Arg } from 'type-graphql';
 import { HasuraActionsService } from './hasura-actions.service';
 
 @ObjectType()
-class Recipe {
-  @Field(() => ID)
-  id: string;
+class LinkPreviewVideo {
+  @Field(() => String, { nullable: true })
+  url?: string;
 
+  @Field(() => String, { nullable: true })
+  secureUrl?: string | null;
+
+  @Field(() => String, { nullable: true })
+  type?: string | null;
+
+  @Field(() => String, { nullable: true })
+  width?: string;
+
+  @Field(() => String, { nullable: true })
+  height?: string;
+}
+
+@ObjectType()
+class LinkPreviewResponse {
   @Field()
-  title: string;
+  url: string;
+
+  @Field({ nullable: true })
+  title?: string;
+
+  @Field({ nullable: true })
+  siteName?: string;
 
   @Field({ nullable: true })
   description?: string;
 
   @Field()
-  creationDate: Date;
+  mediaType: string;
+
+  @Field({ nullable: true })
+  contentType?: string;
+
+  @Field(() => [String], { nullable: true })
+  images?: string[];
 
   @Field(() => [String])
-  ingredients: string[];
+  favicons: string[];
+
+  @Field(() => [LinkPreviewVideo], { nullable: true })
+  videos?: LinkPreviewVideo[];
 }
 
-@Resolver(Recipe)
+@Resolver(LinkPreviewResponse)
 export class HasuraActionsResolver {
   constructor(private hasuraActionService: HasuraActionsService) {}
 
-  @Query(() => Recipe)
-  async recipe(@Arg('id') id: string): Promise<Recipe> {
-    return {
-      id: id,
-      title: 'asdfadsf',
-      creationDate: new Date(),
-      ingredients: [],
-    };
+  @Query(() => LinkPreviewResponse)
+  async get_link_preview(
+    @Arg('url') url: string
+  ): Promise<LinkPreviewResponse> {
+    return this.hasuraActionService.getLinkPreview(url);
   }
 }

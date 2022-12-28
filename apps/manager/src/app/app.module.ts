@@ -40,10 +40,17 @@ import { HasuraActionsModule } from './hasura-actions/hasura-actions.module';
     HasuraEventsModule,
     TypeGraphQLModule.forRoot({
       emitSchemaFile: false,
-      // validate: false,
-      // authChecker,
       dateScalarMode: 'timestamp',
-      // context: ({ req }) => ({ currentUser: req.user }),
+      context: (params: any) => {
+        const headers = params.req.headers;
+        if (
+          headers.hasura_manager_graphql_secret_header_value !==
+          environment.hasura.actionSecretFactory
+        ) {
+          throw new Error('invalid request');
+        }
+        return {};
+      },
     }),
     HasuraActionsModule,
   ],
