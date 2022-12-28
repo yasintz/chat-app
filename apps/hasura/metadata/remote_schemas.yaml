@@ -14,6 +14,11 @@
         schema: |
           schema {
             query: Query
+            mutation: Mutation
+          }
+          scalar uuid
+          type GetAgoraRtcTokenResponse {
+            token: String!
           }
           type LinkPreviewResponse {
             contentType: String
@@ -32,6 +37,9 @@
             type: String
             url: String
             width: String
+          }
+          type Mutation {
+            get_agora_rtc_token(channelId: uuid!): GetAgoraRtcTokenResponse!
           }
           type Query {
             get_link_preview(url: String!): LinkPreviewResponse!

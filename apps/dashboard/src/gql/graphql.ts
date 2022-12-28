@@ -17,6 +17,11 @@ export type Scalars = {
   uuid: any;
 };
 
+export type GetAgoraRtcTokenResponse = {
+  __typename?: 'GetAgoraRtcTokenResponse';
+  token: Scalars['String'];
+};
+
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Int']>;
@@ -3344,6 +3349,7 @@ export type Mutation_Root = {
   delete_reaction?: Maybe<Reaction_Mutation_Response>;
   /** delete single row from the table: "reaction" */
   delete_reaction_by_pk?: Maybe<Reaction>;
+  get_agora_rtc_token: GetAgoraRtcTokenResponse;
   /** insert data into the table: "app" */
   insert_app?: Maybe<App_Mutation_Response>;
   /** insert a single row into the table: "app" */
@@ -3657,6 +3663,12 @@ export type Mutation_RootDelete_ReactionArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Reaction_By_PkArgs = {
   id: Scalars['uuid'];
+};
+
+
+/** mutation root */
+export type Mutation_RootGet_Agora_Rtc_TokenArgs = {
+  channelId: Scalars['uuid'];
 };
 
 

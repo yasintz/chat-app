@@ -1,12 +1,8 @@
 import * as z from 'zod';
 import { createZodDto } from '@anatine/zod-nestjs';
+import { jwtTokenSchema } from '../../helpers/zod';
 
 const claimKey = 'https://chat.app/jwt/claim';
-
-const jwtTokenSchema = z
-  .string()
-  //eslint-disable-next-line no-useless-escape
-  .regex(/^([a-zA-Z0-9_=]+)\.([a-zA-Z0-9_=]+)\.([a-zA-Z0-9_\-+\/=]*)/g);
 
 export const jwtSecretTypeKeySchema = z.array(
   z.object({
@@ -41,7 +37,7 @@ export const memberTokenPayloadSchema = z
   }));
 
 const postMemberHeadersSchema = z.object({
-  authorization: jwtTokenSchema,
+  authorization: jwtTokenSchema.bearer,
 });
 
 export class PostMemberHeadersDto extends createZodDto(

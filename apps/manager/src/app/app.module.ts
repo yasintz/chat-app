@@ -11,7 +11,6 @@ import { HasuraEventsModule } from './hasura-events/hasura-events.module';
 import { HasuraActionsModule } from './hasura-actions/hasura-actions.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
-
 @Module({
   imports: [
     AuthModule,
@@ -42,6 +41,7 @@ import { GraphQLModule } from '@nestjs/graphql';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
+      playground: !environment.production,
     }),
     HasuraActionsModule,
   ],

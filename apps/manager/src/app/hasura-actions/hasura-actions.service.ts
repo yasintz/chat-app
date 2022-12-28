@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { getLinkPreview } from 'link-preview-js';
+import { RtcTokenBuilder, RtcRole } from 'agora-access-token';
 import * as dns from 'dns';
+import { environment } from '../../environments/environment';
+import { hashString } from '../../utils/hash';
+import hasura from '../../clients/graphql-request';
+import { getMemberAndChannelQuery } from './hasura-actions.gql';
 
 @Injectable()
 export class HasuraActionsService {
   async getLinkPreview(url: string) {
-    // Standard for Ajax Crawling. Alternatively, we could add an user-agent header as a known bot
-    // https://docs.netlify.com/site-deploys/post-processing/prerendering/
     const urlInstance = new URL(url);
     urlInstance.searchParams.append('_escaped_fragment_', '');
 
@@ -36,5 +39,38 @@ export class HasuraActionsService {
       },
     });
     return response;
+  }
+
+  async getAgoraRtcToken(memberId: string, channelId: string) {
+    const { member } = await hasura.request(getMemberAndChannelQuery, {
+      memberId,
+      channelId,
+    });
+
+    if (!member) {
+      throw Error("Member doesn't exists");
+    }
+
+    if (member.channels.length === 0) {
+      throw Error("Member isn't part of the channel");
+    }
+
+    const appId = environment.agora.appId;
+    const appCertificate = environment.agora.appCertificate;
+    const uid = hashString(memberId);
+    const role = RtcRole.PUBLISHER;
+    const expirationTimeInSeconds = 3600;
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+    const privilegeExpiredTs = currentTimestamp + expirationTimeInSeconds;
+    const token = RtcTokenBuilder.buildTokenWithUid(
+      appId,
+      appCertificate,
+      channelId,
+      uid,
+      role,
+      privilegeExpiredTs
+    );
+
+    return { token };
   }
 }

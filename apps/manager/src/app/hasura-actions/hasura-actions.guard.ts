@@ -5,6 +5,10 @@ import { environment } from '../../environments/environment';
 @Injectable()
 export class HasuraActionsGuard implements CanActivate {
   canActivate(context: ExecutionContext) {
+    if (!environment.production) {
+      return true;
+    }
+
     const ctx = GqlExecutionContext.create(context);
     const {
       req: { headers },
