@@ -17,11 +17,6 @@ export type Scalars = {
   uuid: any;
 };
 
-export type GetAgoraRtcTokenResponse = {
-  __typename?: 'GetAgoraRtcTokenResponse';
-  token: Scalars['String'];
-};
-
 /** Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'. */
 export type Int_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['Int']>;
@@ -35,26 +30,18 @@ export type Int_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['Int']>>;
 };
 
-export type LinkPreviewResponse = {
-  __typename?: 'LinkPreviewResponse';
-  contentType?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
-  favicons: Array<Scalars['String']>;
-  images?: Maybe<Array<Scalars['String']>>;
-  mediaType: Scalars['String'];
-  siteName?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  url: Scalars['String'];
-  videos?: Maybe<Array<LinkPreviewVideo>>;
+/** An object with globally unique ID */
+export type Node = {
+  /** A globally unique identifier */
+  id: Scalars['ID'];
 };
 
-export type LinkPreviewVideo = {
-  __typename?: 'LinkPreviewVideo';
-  height?: Maybe<Scalars['String']>;
-  secureUrl?: Maybe<Scalars['String']>;
-  type?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
-  width?: Maybe<Scalars['String']>;
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  endCursor: Scalars['String'];
+  hasNextPage: Scalars['Boolean'];
+  hasPreviousPage: Scalars['Boolean'];
+  startCursor: Scalars['String'];
 };
 
 /** Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'. */
@@ -91,22 +78,28 @@ export type String_Comparison_Exp = {
 };
 
 /** columns and relationships of "app" */
-export type App = {
+export type App = Node & {
   __typename?: 'app';
   /** An array relationship */
   channels: Array<Channel>;
   /** An aggregate relationship */
   channels_aggregate: Channel_Aggregate;
+  /** An array relationship connection */
+  channels_connection: ChannelConnection;
   /** An array relationship */
   customers: Array<Customer>;
   /** An aggregate relationship */
   customers_aggregate: Customer_Aggregate;
-  id: Scalars['uuid'];
+  /** An array relationship connection */
+  customers_connection: CustomerConnection;
+  id: Scalars['ID'];
   jwtSecrets?: Maybe<Scalars['jsonb']>;
   /** An array relationship */
   members: Array<Member>;
   /** An aggregate relationship */
   members_aggregate: Member_Aggregate;
+  /** An array relationship connection */
+  members_connection: MemberConnection;
   name: Scalars['String'];
 };
 
@@ -132,6 +125,18 @@ export type AppChannels_AggregateArgs = {
 
 
 /** columns and relationships of "app" */
+export type AppChannels_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Channel_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Channel_Order_By>>;
+  where?: InputMaybe<Channel_Bool_Exp>;
+};
+
+
+/** columns and relationships of "app" */
 export type AppCustomersArgs = {
   distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -146,6 +151,18 @@ export type AppCustomers_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Customer_Order_By>>;
+  where?: InputMaybe<Customer_Bool_Exp>;
+};
+
+
+/** columns and relationships of "app" */
+export type AppCustomers_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Customer_Order_By>>;
   where?: InputMaybe<Customer_Bool_Exp>;
 };
@@ -176,26 +193,29 @@ export type AppMembers_AggregateArgs = {
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
-/** aggregated selection of "app" */
-export type App_Aggregate = {
-  __typename?: 'app_aggregate';
-  aggregate?: Maybe<App_Aggregate_Fields>;
-  nodes: Array<App>;
+
+/** columns and relationships of "app" */
+export type AppMembers_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Member_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Member_Order_By>>;
+  where?: InputMaybe<Member_Bool_Exp>;
 };
 
-/** aggregate fields of "app" */
-export type App_Aggregate_Fields = {
-  __typename?: 'app_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<App_Max_Fields>;
-  min?: Maybe<App_Min_Fields>;
+/** A Relay connection object on "app" */
+export type AppConnection = {
+  __typename?: 'appConnection';
+  edges: Array<AppEdge>;
+  pageInfo: PageInfo;
 };
 
-
-/** aggregate fields of "app" */
-export type App_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<App_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
+export type AppEdge = {
+  __typename?: 'appEdge';
+  cursor: Scalars['String'];
+  node: App;
 };
 
 /** append existing jsonb value of filtered columns with new jsonb value */
@@ -248,20 +268,6 @@ export type App_Insert_Input = {
   jwtSecrets?: InputMaybe<Scalars['jsonb']>;
   members?: InputMaybe<Member_Arr_Rel_Insert_Input>;
   name?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type App_Max_Fields = {
-  __typename?: 'app_max_fields';
-  id?: Maybe<Scalars['uuid']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type App_Min_Fields = {
-  __typename?: 'app_min_fields';
-  id?: Maybe<Scalars['uuid']>;
-  name?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "app" */
@@ -324,21 +330,6 @@ export type App_Set_Input = {
   name?: InputMaybe<Scalars['String']>;
 };
 
-/** Streaming cursor of the table "app" */
-export type App_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: App_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type App_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['uuid']>;
-  jwtSecrets?: InputMaybe<Scalars['jsonb']>;
-  name?: InputMaybe<Scalars['String']>;
-};
-
 /** update columns of table "app" */
 export enum App_Update_Column {
   /** column name */
@@ -366,22 +357,26 @@ export type App_Updates = {
 };
 
 /** columns and relationships of "channel" */
-export type Channel = {
+export type Channel = Node & {
   __typename?: 'channel';
   /** An object relationship */
   app: App;
   appId: Scalars['uuid'];
   createdAt: Scalars['timestamp'];
   deletedAt?: Maybe<Scalars['timestamp']>;
-  id: Scalars['uuid'];
+  id: Scalars['ID'];
   /** An array relationship */
   members: Array<Member_Channel>;
   /** An aggregate relationship */
   members_aggregate: Member_Channel_Aggregate;
+  /** An array relationship connection */
+  members_connection: Member_ChannelConnection;
   /** An array relationship */
   messages: Array<Message>;
   /** An aggregate relationship */
   messages_aggregate: Message_Aggregate;
+  /** An array relationship connection */
+  messages_connection: MessageConnection;
   name: Scalars['String'];
   updatedAt: Scalars['timestamp'];
 };
@@ -408,6 +403,18 @@ export type ChannelMembers_AggregateArgs = {
 
 
 /** columns and relationships of "channel" */
+export type ChannelMembers_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Member_Channel_Order_By>>;
+  where?: InputMaybe<Member_Channel_Bool_Exp>;
+};
+
+
+/** columns and relationships of "channel" */
 export type ChannelMessagesArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -424,6 +431,31 @@ export type ChannelMessages_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Message_Order_By>>;
   where?: InputMaybe<Message_Bool_Exp>;
+};
+
+
+/** columns and relationships of "channel" */
+export type ChannelMessages_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Message_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Message_Order_By>>;
+  where?: InputMaybe<Message_Bool_Exp>;
+};
+
+/** A Relay connection object on "channel" */
+export type ChannelConnection = {
+  __typename?: 'channelConnection';
+  edges: Array<ChannelEdge>;
+  pageInfo: PageInfo;
+};
+
+export type ChannelEdge = {
+  __typename?: 'channelEdge';
+  cursor: Scalars['String'];
+  node: Channel;
 };
 
 /** aggregated selection of "channel" */
@@ -619,24 +651,6 @@ export type Channel_Set_Input = {
   updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
-/** Streaming cursor of the table "channel" */
-export type Channel_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Channel_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Channel_Stream_Cursor_Value_Input = {
-  appId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamp']>;
-  deletedAt?: InputMaybe<Scalars['timestamp']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  name?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamp']>;
-};
-
 /** update columns of table "channel" */
 export enum Channel_Update_Column {
   /** column name */
@@ -659,16 +673,8 @@ export type Channel_Updates = {
   where: Channel_Bool_Exp;
 };
 
-/** ordering argument of a cursor */
-export enum Cursor_Ordering {
-  /** ascending ordering of the cursor */
-  Asc = 'ASC',
-  /** descending ordering of the cursor */
-  Desc = 'DESC'
-}
-
 /** columns and relationships of "customer" */
-export type Customer = {
+export type Customer = Node & {
   __typename?: 'customer';
   /** An object relationship */
   app: App;
@@ -677,10 +683,23 @@ export type Customer = {
   email: Scalars['String'];
   encryptedPassword?: Maybe<Scalars['String']>;
   firstName: Scalars['String'];
-  id: Scalars['uuid'];
+  id: Scalars['ID'];
   lastName: Scalars['String'];
   role: Customer_Role_Enum;
   updatedAt: Scalars['timestamp'];
+};
+
+/** A Relay connection object on "customer" */
+export type CustomerConnection = {
+  __typename?: 'customerConnection';
+  edges: Array<CustomerEdge>;
+  pageInfo: PageInfo;
+};
+
+export type CustomerEdge = {
+  __typename?: 'customerEdge';
+  cursor: Scalars['String'];
+  node: Customer;
 };
 
 /** aggregated selection of "customer" */
@@ -855,31 +874,23 @@ export type Customer_Pk_Columns_Input = {
 };
 
 /** columns and relationships of "customer_role" */
-export type Customer_Role = {
+export type Customer_Role = Node & {
   __typename?: 'customer_role';
+  id: Scalars['ID'];
   value: Scalars['String'];
 };
 
-/** aggregated selection of "customer_role" */
-export type Customer_Role_Aggregate = {
-  __typename?: 'customer_role_aggregate';
-  aggregate?: Maybe<Customer_Role_Aggregate_Fields>;
-  nodes: Array<Customer_Role>;
+/** A Relay connection object on "customer_role" */
+export type Customer_RoleConnection = {
+  __typename?: 'customer_roleConnection';
+  edges: Array<Customer_RoleEdge>;
+  pageInfo: PageInfo;
 };
 
-/** aggregate fields of "customer_role" */
-export type Customer_Role_Aggregate_Fields = {
-  __typename?: 'customer_role_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Customer_Role_Max_Fields>;
-  min?: Maybe<Customer_Role_Min_Fields>;
-};
-
-
-/** aggregate fields of "customer_role" */
-export type Customer_Role_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Customer_Role_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
+export type Customer_RoleEdge = {
+  __typename?: 'customer_roleEdge';
+  cursor: Scalars['String'];
+  node: Customer_Role;
 };
 
 /** Boolean expression to filter rows from the table "customer_role". All fields are combined with a logical 'AND'. */
@@ -913,18 +924,6 @@ export type Customer_Role_Enum_Comparison_Exp = {
 /** input type for inserting data into table "customer_role" */
 export type Customer_Role_Insert_Input = {
   value?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Customer_Role_Max_Fields = {
-  __typename?: 'customer_role_max_fields';
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Customer_Role_Min_Fields = {
-  __typename?: 'customer_role_min_fields';
-  value?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "customer_role" */
@@ -961,19 +960,6 @@ export enum Customer_Role_Select_Column {
 
 /** input type for updating data in table "customer_role" */
 export type Customer_Role_Set_Input = {
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** Streaming cursor of the table "customer_role" */
-export type Customer_Role_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Customer_Role_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Customer_Role_Stream_Cursor_Value_Input = {
   value?: InputMaybe<Scalars['String']>;
 };
 
@@ -1024,27 +1010,6 @@ export type Customer_Set_Input = {
   updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
-/** Streaming cursor of the table "customer" */
-export type Customer_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Customer_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Customer_Stream_Cursor_Value_Input = {
-  appId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamp']>;
-  email?: InputMaybe<Scalars['String']>;
-  encryptedPassword?: InputMaybe<Scalars['String']>;
-  firstName?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  lastName?: InputMaybe<Scalars['String']>;
-  role?: InputMaybe<Customer_Role_Enum>;
-  updatedAt?: InputMaybe<Scalars['timestamp']>;
-};
-
 /** update columns of table "customer" */
 export enum Customer_Update_Column {
   /** column name */
@@ -1074,21 +1039,25 @@ export type Customer_Updates = {
 };
 
 /** columns and relationships of "file" */
-export type File = {
+export type File = Node & {
   __typename?: 'file';
   createdAt: Scalars['timestamp'];
   deletedAt?: Maybe<Scalars['timestamp']>;
   /** An object relationship */
   file_service: File_Service;
-  id: Scalars['uuid'];
+  id: Scalars['ID'];
   /** An array relationship */
   member_files: Array<Member_File>;
   /** An aggregate relationship */
   member_files_aggregate: Member_File_Aggregate;
+  /** An array relationship connection */
+  member_files_connection: Member_FileConnection;
   /** An array relationship */
   message_files: Array<Message_File>;
   /** An aggregate relationship */
   message_files_aggregate: Message_File_Aggregate;
+  /** An array relationship connection */
+  message_files_connection: Message_FileConnection;
   name: Scalars['String'];
   path: Scalars['String'];
   service: File_Service_Enum;
@@ -1118,6 +1087,18 @@ export type FileMember_Files_AggregateArgs = {
 
 
 /** columns and relationships of "file" */
+export type FileMember_Files_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Member_File_Order_By>>;
+  where?: InputMaybe<Member_File_Bool_Exp>;
+};
+
+
+/** columns and relationships of "file" */
 export type FileMessage_FilesArgs = {
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1136,26 +1117,29 @@ export type FileMessage_Files_AggregateArgs = {
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
 
-/** aggregated selection of "file" */
-export type File_Aggregate = {
-  __typename?: 'file_aggregate';
-  aggregate?: Maybe<File_Aggregate_Fields>;
-  nodes: Array<File>;
+
+/** columns and relationships of "file" */
+export type FileMessage_Files_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Message_File_Order_By>>;
+  where?: InputMaybe<Message_File_Bool_Exp>;
 };
 
-/** aggregate fields of "file" */
-export type File_Aggregate_Fields = {
-  __typename?: 'file_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<File_Max_Fields>;
-  min?: Maybe<File_Min_Fields>;
+/** A Relay connection object on "file" */
+export type FileConnection = {
+  __typename?: 'fileConnection';
+  edges: Array<FileEdge>;
+  pageInfo: PageInfo;
 };
 
-
-/** aggregate fields of "file" */
-export type File_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<File_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
+export type FileEdge = {
+  __typename?: 'fileEdge';
+  cursor: Scalars['String'];
+  node: File;
 };
 
 /** Boolean expression to filter rows from the table "file". All fields are combined with a logical 'AND'. */
@@ -1197,28 +1181,6 @@ export type File_Insert_Input = {
   service?: InputMaybe<File_Service_Enum>;
   type?: InputMaybe<File_Type_Enum>;
   updatedAt?: InputMaybe<Scalars['timestamp']>;
-};
-
-/** aggregate max on columns */
-export type File_Max_Fields = {
-  __typename?: 'file_max_fields';
-  createdAt?: Maybe<Scalars['timestamp']>;
-  deletedAt?: Maybe<Scalars['timestamp']>;
-  id?: Maybe<Scalars['uuid']>;
-  name?: Maybe<Scalars['String']>;
-  path?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamp']>;
-};
-
-/** aggregate min on columns */
-export type File_Min_Fields = {
-  __typename?: 'file_min_fields';
-  createdAt?: Maybe<Scalars['timestamp']>;
-  deletedAt?: Maybe<Scalars['timestamp']>;
-  id?: Maybe<Scalars['uuid']>;
-  name?: Maybe<Scalars['String']>;
-  path?: Maybe<Scalars['String']>;
-  updatedAt?: Maybe<Scalars['timestamp']>;
 };
 
 /** response of any mutation on the table "file" */
@@ -1285,31 +1247,23 @@ export enum File_Select_Column {
 }
 
 /** columns and relationships of "file_service" */
-export type File_Service = {
+export type File_Service = Node & {
   __typename?: 'file_service';
+  id: Scalars['ID'];
   value: Scalars['String'];
 };
 
-/** aggregated selection of "file_service" */
-export type File_Service_Aggregate = {
-  __typename?: 'file_service_aggregate';
-  aggregate?: Maybe<File_Service_Aggregate_Fields>;
-  nodes: Array<File_Service>;
+/** A Relay connection object on "file_service" */
+export type File_ServiceConnection = {
+  __typename?: 'file_serviceConnection';
+  edges: Array<File_ServiceEdge>;
+  pageInfo: PageInfo;
 };
 
-/** aggregate fields of "file_service" */
-export type File_Service_Aggregate_Fields = {
-  __typename?: 'file_service_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<File_Service_Max_Fields>;
-  min?: Maybe<File_Service_Min_Fields>;
-};
-
-
-/** aggregate fields of "file_service" */
-export type File_Service_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<File_Service_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
+export type File_ServiceEdge = {
+  __typename?: 'file_serviceEdge';
+  cursor: Scalars['String'];
+  node: File_Service;
 };
 
 /** Boolean expression to filter rows from the table "file_service". All fields are combined with a logical 'AND'. */
@@ -1343,18 +1297,6 @@ export type File_Service_Enum_Comparison_Exp = {
 /** input type for inserting data into table "file_service" */
 export type File_Service_Insert_Input = {
   value?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type File_Service_Max_Fields = {
-  __typename?: 'file_service_max_fields';
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type File_Service_Min_Fields = {
-  __typename?: 'file_service_min_fields';
-  value?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "file_service" */
@@ -1401,19 +1343,6 @@ export type File_Service_Set_Input = {
   value?: InputMaybe<Scalars['String']>;
 };
 
-/** Streaming cursor of the table "file_service" */
-export type File_Service_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: File_Service_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type File_Service_Stream_Cursor_Value_Input = {
-  value?: InputMaybe<Scalars['String']>;
-};
-
 /** update columns of table "file_service" */
 export enum File_Service_Update_Column {
   /** column name */
@@ -1438,52 +1367,24 @@ export type File_Set_Input = {
   updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
-/** Streaming cursor of the table "file" */
-export type File_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: File_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type File_Stream_Cursor_Value_Input = {
-  createdAt?: InputMaybe<Scalars['timestamp']>;
-  deletedAt?: InputMaybe<Scalars['timestamp']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  name?: InputMaybe<Scalars['String']>;
-  path?: InputMaybe<Scalars['String']>;
-  service?: InputMaybe<File_Service_Enum>;
-  type?: InputMaybe<File_Type_Enum>;
-  updatedAt?: InputMaybe<Scalars['timestamp']>;
-};
-
 /** columns and relationships of "file_type" */
-export type File_Type = {
+export type File_Type = Node & {
   __typename?: 'file_type';
+  id: Scalars['ID'];
   value: Scalars['String'];
 };
 
-/** aggregated selection of "file_type" */
-export type File_Type_Aggregate = {
-  __typename?: 'file_type_aggregate';
-  aggregate?: Maybe<File_Type_Aggregate_Fields>;
-  nodes: Array<File_Type>;
+/** A Relay connection object on "file_type" */
+export type File_TypeConnection = {
+  __typename?: 'file_typeConnection';
+  edges: Array<File_TypeEdge>;
+  pageInfo: PageInfo;
 };
 
-/** aggregate fields of "file_type" */
-export type File_Type_Aggregate_Fields = {
-  __typename?: 'file_type_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<File_Type_Max_Fields>;
-  min?: Maybe<File_Type_Min_Fields>;
-};
-
-
-/** aggregate fields of "file_type" */
-export type File_Type_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<File_Type_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
+export type File_TypeEdge = {
+  __typename?: 'file_typeEdge';
+  cursor: Scalars['String'];
+  node: File_Type;
 };
 
 /** Boolean expression to filter rows from the table "file_type". All fields are combined with a logical 'AND'. */
@@ -1520,18 +1421,6 @@ export type File_Type_Insert_Input = {
   value?: InputMaybe<Scalars['String']>;
 };
 
-/** aggregate max on columns */
-export type File_Type_Max_Fields = {
-  __typename?: 'file_type_max_fields';
-  value?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type File_Type_Min_Fields = {
-  __typename?: 'file_type_min_fields';
-  value?: Maybe<Scalars['String']>;
-};
-
 /** response of any mutation on the table "file_type" */
 export type File_Type_Mutation_Response = {
   __typename?: 'file_type_mutation_response';
@@ -1566,19 +1455,6 @@ export enum File_Type_Select_Column {
 
 /** input type for updating data in table "file_type" */
 export type File_Type_Set_Input = {
-  value?: InputMaybe<Scalars['String']>;
-};
-
-/** Streaming cursor of the table "file_type" */
-export type File_Type_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: File_Type_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type File_Type_Stream_Cursor_Value_Input = {
   value?: InputMaybe<Scalars['String']>;
 };
 
@@ -1649,7 +1525,7 @@ export type Jsonb_Comparison_Exp = {
 };
 
 /** columns and relationships of "member" */
-export type Member = {
+export type Member = Node & {
   __typename?: 'member';
   activeAt?: Maybe<Scalars['timestamp']>;
   /** An object relationship */
@@ -1662,6 +1538,8 @@ export type Member = {
   channels: Array<Member_Channel>;
   /** An aggregate relationship */
   channels_aggregate: Member_Channel_Aggregate;
+  /** An array relationship connection */
+  channels_connection: Member_ChannelConnection;
   createdAt: Scalars['timestamp'];
   deletedAt?: Maybe<Scalars['timestamp']>;
   encryptedPassword?: Maybe<Scalars['String']>;
@@ -1670,15 +1548,21 @@ export type Member = {
   files: Array<Member_File>;
   /** An aggregate relationship */
   files_aggregate: Member_File_Aggregate;
-  id: Scalars['uuid'];
+  /** An array relationship connection */
+  files_connection: Member_FileConnection;
+  id: Scalars['ID'];
   /** An array relationship */
   message_reactions: Array<Message_Reaction>;
   /** An aggregate relationship */
   message_reactions_aggregate: Message_Reaction_Aggregate;
+  /** An array relationship connection */
+  message_reactions_connection: Message_ReactionConnection;
   /** An array relationship */
   messages: Array<Message>;
   /** An aggregate relationship */
   messages_aggregate: Message_Aggregate;
+  /** An array relationship connection */
+  messages_connection: MessageConnection;
   name: Scalars['String'];
   updatedAt: Scalars['timestamp'];
 };
@@ -1705,6 +1589,18 @@ export type MemberChannels_AggregateArgs = {
 
 
 /** columns and relationships of "member" */
+export type MemberChannels_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Member_Channel_Order_By>>;
+  where?: InputMaybe<Member_Channel_Bool_Exp>;
+};
+
+
+/** columns and relationships of "member" */
 export type MemberFilesArgs = {
   distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1719,6 +1615,18 @@ export type MemberFiles_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Member_File_Order_By>>;
+  where?: InputMaybe<Member_File_Bool_Exp>;
+};
+
+
+/** columns and relationships of "member" */
+export type MemberFiles_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Member_File_Order_By>>;
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
@@ -1745,6 +1653,18 @@ export type MemberMessage_Reactions_AggregateArgs = {
 
 
 /** columns and relationships of "member" */
+export type MemberMessage_Reactions_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Message_Reaction_Order_By>>;
+  where?: InputMaybe<Message_Reaction_Bool_Exp>;
+};
+
+
+/** columns and relationships of "member" */
 export type MemberMessagesArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -1761,6 +1681,31 @@ export type MemberMessages_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Message_Order_By>>;
   where?: InputMaybe<Message_Bool_Exp>;
+};
+
+
+/** columns and relationships of "member" */
+export type MemberMessages_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Message_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Message_Order_By>>;
+  where?: InputMaybe<Message_Bool_Exp>;
+};
+
+/** A Relay connection object on "member" */
+export type MemberConnection = {
+  __typename?: 'memberConnection';
+  edges: Array<MemberEdge>;
+  pageInfo: PageInfo;
+};
+
+export type MemberEdge = {
+  __typename?: 'memberEdge';
+  cursor: Scalars['String'];
+  node: Member;
 };
 
 /** aggregated selection of "member" */
@@ -1838,16 +1783,29 @@ export type Member_Bool_Exp = {
 };
 
 /** columns and relationships of "member_channel" */
-export type Member_Channel = {
+export type Member_Channel = Node & {
   __typename?: 'member_channel';
   /** An object relationship */
   channel: Channel;
   channelId: Scalars['uuid'];
-  id: Scalars['uuid'];
+  id: Scalars['ID'];
   lastSeenAt?: Maybe<Scalars['timestamp']>;
   /** An object relationship */
   member: Member;
   memberId: Scalars['uuid'];
+};
+
+/** A Relay connection object on "member_channel" */
+export type Member_ChannelConnection = {
+  __typename?: 'member_channelConnection';
+  edges: Array<Member_ChannelEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Member_ChannelEdge = {
+  __typename?: 'member_channelEdge';
+  cursor: Scalars['String'];
+  node: Member_Channel;
 };
 
 /** aggregated selection of "member_channel" */
@@ -2014,22 +1972,6 @@ export type Member_Channel_Set_Input = {
   memberId?: InputMaybe<Scalars['uuid']>;
 };
 
-/** Streaming cursor of the table "member_channel" */
-export type Member_Channel_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Member_Channel_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Member_Channel_Stream_Cursor_Value_Input = {
-  channelId?: InputMaybe<Scalars['uuid']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  lastSeenAt?: InputMaybe<Scalars['timestamp']>;
-  memberId?: InputMaybe<Scalars['uuid']>;
-};
-
 /** update columns of table "member_channel" */
 export enum Member_Channel_Update_Column {
   /** column name */
@@ -2057,15 +1999,28 @@ export enum Member_Constraint {
 }
 
 /** columns and relationships of "member_file" */
-export type Member_File = {
+export type Member_File = Node & {
   __typename?: 'member_file';
   /** An object relationship */
   file: File;
   fileId: Scalars['uuid'];
-  id: Scalars['uuid'];
+  id: Scalars['ID'];
   /** An object relationship */
   member: Member;
   memberId: Scalars['uuid'];
+};
+
+/** A Relay connection object on "member_file" */
+export type Member_FileConnection = {
+  __typename?: 'member_fileConnection';
+  edges: Array<Member_FileEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Member_FileEdge = {
+  __typename?: 'member_fileEdge';
+  cursor: Scalars['String'];
+  node: Member_File;
 };
 
 /** aggregated selection of "member_file" */
@@ -2217,21 +2172,6 @@ export enum Member_File_Select_Column {
 
 /** input type for updating data in table "member_file" */
 export type Member_File_Set_Input = {
-  fileId?: InputMaybe<Scalars['uuid']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  memberId?: InputMaybe<Scalars['uuid']>;
-};
-
-/** Streaming cursor of the table "member_file" */
-export type Member_File_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Member_File_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Member_File_Stream_Cursor_Value_Input = {
   fileId?: InputMaybe<Scalars['uuid']>;
   id?: InputMaybe<Scalars['uuid']>;
   memberId?: InputMaybe<Scalars['uuid']>;
@@ -2417,28 +2357,6 @@ export type Member_Set_Input = {
   updatedAt?: InputMaybe<Scalars['timestamp']>;
 };
 
-/** Streaming cursor of the table "member" */
-export type Member_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Member_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Member_Stream_Cursor_Value_Input = {
-  activeAt?: InputMaybe<Scalars['timestamp']>;
-  appId?: InputMaybe<Scalars['uuid']>;
-  avatarFileId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamp']>;
-  deletedAt?: InputMaybe<Scalars['timestamp']>;
-  encryptedPassword?: InputMaybe<Scalars['String']>;
-  externalId?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  name?: InputMaybe<Scalars['String']>;
-  updatedAt?: InputMaybe<Scalars['timestamp']>;
-};
-
 /** update columns of table "member" */
 export enum Member_Update_Column {
   /** column name */
@@ -2470,7 +2388,7 @@ export type Member_Updates = {
 };
 
 /** columns and relationships of "message" */
-export type Message = {
+export type Message = Node & {
   __typename?: 'message';
   body: Scalars['String'];
   /** An object relationship */
@@ -2480,17 +2398,23 @@ export type Message = {
   children: Array<Message>;
   /** An aggregate relationship */
   children_aggregate: Message_Aggregate;
+  /** An array relationship connection */
+  children_connection: MessageConnection;
   createdAt: Scalars['timestamp'];
   deletedAt?: Maybe<Scalars['timestamp']>;
   /** An array relationship */
   files: Array<Message_File>;
   /** An aggregate relationship */
   files_aggregate: Message_File_Aggregate;
-  id: Scalars['uuid'];
+  /** An array relationship connection */
+  files_connection: Message_FileConnection;
+  id: Scalars['ID'];
   /** An array relationship */
   messageReactions: Array<Message_Reaction>;
   /** An aggregate relationship */
   messageReactions_aggregate: Message_Reaction_Aggregate;
+  /** An array relationship connection */
+  messageReactions_connection: Message_ReactionConnection;
   /** An object relationship */
   parent?: Maybe<Message>;
   parentId?: Maybe<Scalars['uuid']>;
@@ -2498,6 +2422,8 @@ export type Message = {
   references: Array<Message>;
   /** An aggregate relationship */
   references_aggregate: Message_Aggregate;
+  /** An array relationship connection */
+  references_connection: MessageConnection;
   /** An object relationship */
   replyTo?: Maybe<Message>;
   replyToId?: Maybe<Scalars['uuid']>;
@@ -2529,6 +2455,18 @@ export type MessageChildren_AggregateArgs = {
 
 
 /** columns and relationships of "message" */
+export type MessageChildren_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Message_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Message_Order_By>>;
+  where?: InputMaybe<Message_Bool_Exp>;
+};
+
+
+/** columns and relationships of "message" */
 export type MessageFilesArgs = {
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2543,6 +2481,18 @@ export type MessageFiles_AggregateArgs = {
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Message_File_Order_By>>;
+  where?: InputMaybe<Message_File_Bool_Exp>;
+};
+
+
+/** columns and relationships of "message" */
+export type MessageFiles_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Message_File_Order_By>>;
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
@@ -2569,6 +2519,18 @@ export type MessageMessageReactions_AggregateArgs = {
 
 
 /** columns and relationships of "message" */
+export type MessageMessageReactions_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Message_Reaction_Order_By>>;
+  where?: InputMaybe<Message_Reaction_Bool_Exp>;
+};
+
+
+/** columns and relationships of "message" */
 export type MessageReferencesArgs = {
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
   limit?: InputMaybe<Scalars['Int']>;
@@ -2585,6 +2547,31 @@ export type MessageReferences_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Message_Order_By>>;
   where?: InputMaybe<Message_Bool_Exp>;
+};
+
+
+/** columns and relationships of "message" */
+export type MessageReferences_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Message_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Message_Order_By>>;
+  where?: InputMaybe<Message_Bool_Exp>;
+};
+
+/** A Relay connection object on "message" */
+export type MessageConnection = {
+  __typename?: 'messageConnection';
+  edges: Array<MessageEdge>;
+  pageInfo: PageInfo;
+};
+
+export type MessageEdge = {
+  __typename?: 'messageEdge';
+  cursor: Scalars['String'];
+  node: Message;
 };
 
 /** aggregated selection of "message" */
@@ -2669,15 +2656,28 @@ export enum Message_Constraint {
 }
 
 /** columns and relationships of "message_file" */
-export type Message_File = {
+export type Message_File = Node & {
   __typename?: 'message_file';
   /** An object relationship */
   file: File;
   fileId: Scalars['uuid'];
-  id: Scalars['uuid'];
+  id: Scalars['ID'];
   /** An object relationship */
   message: Message;
   messageId: Scalars['uuid'];
+};
+
+/** A Relay connection object on "message_file" */
+export type Message_FileConnection = {
+  __typename?: 'message_fileConnection';
+  edges: Array<Message_FileEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Message_FileEdge = {
+  __typename?: 'message_fileEdge';
+  cursor: Scalars['String'];
+  node: Message_File;
 };
 
 /** aggregated selection of "message_file" */
@@ -2834,21 +2834,6 @@ export type Message_File_Set_Input = {
   messageId?: InputMaybe<Scalars['uuid']>;
 };
 
-/** Streaming cursor of the table "message_file" */
-export type Message_File_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Message_File_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Message_File_Stream_Cursor_Value_Input = {
-  fileId?: InputMaybe<Scalars['uuid']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  messageId?: InputMaybe<Scalars['uuid']>;
-};
-
 /** update columns of table "message_file" */
 export enum Message_File_Update_Column {
   /** column name */
@@ -2990,9 +2975,9 @@ export type Message_Pk_Columns_Input = {
 };
 
 /** columns and relationships of "message_reaction" */
-export type Message_Reaction = {
+export type Message_Reaction = Node & {
   __typename?: 'message_reaction';
-  id: Scalars['uuid'];
+  id: Scalars['ID'];
   /** An object relationship */
   member: Member;
   member_id: Scalars['uuid'];
@@ -3002,6 +2987,19 @@ export type Message_Reaction = {
   /** An object relationship */
   reaction: Reaction;
   reactionId: Scalars['uuid'];
+};
+
+/** A Relay connection object on "message_reaction" */
+export type Message_ReactionConnection = {
+  __typename?: 'message_reactionConnection';
+  edges: Array<Message_ReactionEdge>;
+  pageInfo: PageInfo;
+};
+
+export type Message_ReactionEdge = {
+  __typename?: 'message_reactionEdge';
+  cursor: Scalars['String'];
+  node: Message_Reaction;
 };
 
 /** aggregated selection of "message_reaction" */
@@ -3172,22 +3170,6 @@ export type Message_Reaction_Set_Input = {
   reactionId?: InputMaybe<Scalars['uuid']>;
 };
 
-/** Streaming cursor of the table "message_reaction" */
-export type Message_Reaction_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Message_Reaction_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Message_Reaction_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['uuid']>;
-  member_id?: InputMaybe<Scalars['uuid']>;
-  messageId?: InputMaybe<Scalars['uuid']>;
-  reactionId?: InputMaybe<Scalars['uuid']>;
-};
-
 /** update columns of table "message_reaction" */
 export enum Message_Reaction_Update_Column {
   /** column name */
@@ -3230,27 +3212,6 @@ export enum Message_Select_Column {
 
 /** input type for updating data in table "message" */
 export type Message_Set_Input = {
-  body?: InputMaybe<Scalars['String']>;
-  channelId?: InputMaybe<Scalars['uuid']>;
-  createdAt?: InputMaybe<Scalars['timestamp']>;
-  deletedAt?: InputMaybe<Scalars['timestamp']>;
-  id?: InputMaybe<Scalars['uuid']>;
-  parentId?: InputMaybe<Scalars['uuid']>;
-  replyToId?: InputMaybe<Scalars['uuid']>;
-  senderId?: InputMaybe<Scalars['uuid']>;
-  updatedAt?: InputMaybe<Scalars['timestamp']>;
-};
-
-/** Streaming cursor of the table "message" */
-export type Message_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Message_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Message_Stream_Cursor_Value_Input = {
   body?: InputMaybe<Scalars['String']>;
   channelId?: InputMaybe<Scalars['uuid']>;
   createdAt?: InputMaybe<Scalars['timestamp']>;
@@ -3349,7 +3310,6 @@ export type Mutation_Root = {
   delete_reaction?: Maybe<Reaction_Mutation_Response>;
   /** delete single row from the table: "reaction" */
   delete_reaction_by_pk?: Maybe<Reaction>;
-  get_agora_rtc_token: GetAgoraRtcTokenResponse;
   /** insert data into the table: "app" */
   insert_app?: Maybe<App_Mutation_Response>;
   /** insert a single row into the table: "app" */
@@ -3663,12 +3623,6 @@ export type Mutation_RootDelete_ReactionArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Reaction_By_PkArgs = {
   id: Scalars['uuid'];
-};
-
-
-/** mutation root */
-export type Mutation_RootGet_Agora_Rtc_TokenArgs = {
-  channelId: Scalars['uuid'];
 };
 
 
@@ -4176,451 +4130,213 @@ export enum Order_By {
 export type Query_Root = {
   __typename?: 'query_root';
   /** fetch data from the table: "app" */
-  app: Array<App>;
-  /** fetch aggregated fields from the table: "app" */
-  app_aggregate: App_Aggregate;
-  /** fetch data from the table: "app" using primary key columns */
-  app_by_pk?: Maybe<App>;
+  app_connection: AppConnection;
   /** fetch data from the table: "channel" */
-  channel: Array<Channel>;
-  /** fetch aggregated fields from the table: "channel" */
-  channel_aggregate: Channel_Aggregate;
-  /** fetch data from the table: "channel" using primary key columns */
-  channel_by_pk?: Maybe<Channel>;
+  channel_connection: ChannelConnection;
   /** fetch data from the table: "customer" */
-  customer: Array<Customer>;
-  /** fetch aggregated fields from the table: "customer" */
-  customer_aggregate: Customer_Aggregate;
-  /** fetch data from the table: "customer" using primary key columns */
-  customer_by_pk?: Maybe<Customer>;
+  customer_connection: CustomerConnection;
   /** fetch data from the table: "customer_role" */
-  customer_role: Array<Customer_Role>;
-  /** fetch aggregated fields from the table: "customer_role" */
-  customer_role_aggregate: Customer_Role_Aggregate;
-  /** fetch data from the table: "customer_role" using primary key columns */
-  customer_role_by_pk?: Maybe<Customer_Role>;
+  customer_role_connection: Customer_RoleConnection;
   /** fetch data from the table: "file" */
-  file: Array<File>;
-  /** fetch aggregated fields from the table: "file" */
-  file_aggregate: File_Aggregate;
-  /** fetch data from the table: "file" using primary key columns */
-  file_by_pk?: Maybe<File>;
+  file_connection: FileConnection;
   /** fetch data from the table: "file_service" */
-  file_service: Array<File_Service>;
-  /** fetch aggregated fields from the table: "file_service" */
-  file_service_aggregate: File_Service_Aggregate;
-  /** fetch data from the table: "file_service" using primary key columns */
-  file_service_by_pk?: Maybe<File_Service>;
+  file_service_connection: File_ServiceConnection;
   /** fetch data from the table: "file_type" */
-  file_type: Array<File_Type>;
-  /** fetch aggregated fields from the table: "file_type" */
-  file_type_aggregate: File_Type_Aggregate;
-  /** fetch data from the table: "file_type" using primary key columns */
-  file_type_by_pk?: Maybe<File_Type>;
-  get_link_preview: LinkPreviewResponse;
-  /** fetch data from the table: "member" */
-  member: Array<Member>;
-  /** fetch aggregated fields from the table: "member" */
-  member_aggregate: Member_Aggregate;
-  /** fetch data from the table: "member" using primary key columns */
-  member_by_pk?: Maybe<Member>;
+  file_type_connection: File_TypeConnection;
   /** fetch data from the table: "member_channel" */
-  member_channel: Array<Member_Channel>;
-  /** fetch aggregated fields from the table: "member_channel" */
-  member_channel_aggregate: Member_Channel_Aggregate;
-  /** fetch data from the table: "member_channel" using primary key columns */
-  member_channel_by_pk?: Maybe<Member_Channel>;
+  member_channel_connection: Member_ChannelConnection;
+  /** fetch data from the table: "member" */
+  member_connection: MemberConnection;
   /** fetch data from the table: "member_file" */
-  member_file: Array<Member_File>;
-  /** fetch aggregated fields from the table: "member_file" */
-  member_file_aggregate: Member_File_Aggregate;
-  /** fetch data from the table: "member_file" using primary key columns */
-  member_file_by_pk?: Maybe<Member_File>;
+  member_file_connection: Member_FileConnection;
   /** fetch data from the table: "message" */
-  message: Array<Message>;
-  /** fetch aggregated fields from the table: "message" */
-  message_aggregate: Message_Aggregate;
-  /** fetch data from the table: "message" using primary key columns */
-  message_by_pk?: Maybe<Message>;
+  message_connection: MessageConnection;
   /** fetch data from the table: "message_file" */
-  message_file: Array<Message_File>;
-  /** fetch aggregated fields from the table: "message_file" */
-  message_file_aggregate: Message_File_Aggregate;
-  /** fetch data from the table: "message_file" using primary key columns */
-  message_file_by_pk?: Maybe<Message_File>;
+  message_file_connection: Message_FileConnection;
   /** fetch data from the table: "message_reaction" */
-  message_reaction: Array<Message_Reaction>;
-  /** fetch aggregated fields from the table: "message_reaction" */
-  message_reaction_aggregate: Message_Reaction_Aggregate;
-  /** fetch data from the table: "message_reaction" using primary key columns */
-  message_reaction_by_pk?: Maybe<Message_Reaction>;
+  message_reaction_connection: Message_ReactionConnection;
+  node?: Maybe<Node>;
   /** fetch data from the table: "reaction" */
-  reaction: Array<Reaction>;
-  /** fetch aggregated fields from the table: "reaction" */
-  reaction_aggregate: Reaction_Aggregate;
-  /** fetch data from the table: "reaction" using primary key columns */
-  reaction_by_pk?: Maybe<Reaction>;
+  reaction_connection: ReactionConnection;
 };
 
 
-export type Query_RootAppArgs = {
+export type Query_RootApp_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<App_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<App_Order_By>>;
   where?: InputMaybe<App_Bool_Exp>;
 };
 
 
-export type Query_RootApp_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<App_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<App_Order_By>>;
-  where?: InputMaybe<App_Bool_Exp>;
-};
-
-
-export type Query_RootApp_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Query_RootChannelArgs = {
+export type Query_RootChannel_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Channel_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Channel_Order_By>>;
   where?: InputMaybe<Channel_Bool_Exp>;
 };
 
 
-export type Query_RootChannel_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Channel_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Channel_Order_By>>;
-  where?: InputMaybe<Channel_Bool_Exp>;
-};
-
-
-export type Query_RootChannel_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Query_RootCustomerArgs = {
+export type Query_RootCustomer_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Customer_Order_By>>;
   where?: InputMaybe<Customer_Bool_Exp>;
 };
 
 
-export type Query_RootCustomer_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Customer_Order_By>>;
-  where?: InputMaybe<Customer_Bool_Exp>;
-};
-
-
-export type Query_RootCustomer_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Query_RootCustomer_RoleArgs = {
+export type Query_RootCustomer_Role_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Customer_Role_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Customer_Role_Order_By>>;
   where?: InputMaybe<Customer_Role_Bool_Exp>;
 };
 
 
-export type Query_RootCustomer_Role_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Customer_Role_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Customer_Role_Order_By>>;
-  where?: InputMaybe<Customer_Role_Bool_Exp>;
-};
-
-
-export type Query_RootCustomer_Role_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Query_RootFileArgs = {
+export type Query_RootFile_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<File_Order_By>>;
   where?: InputMaybe<File_Bool_Exp>;
 };
 
 
-export type Query_RootFile_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<File_Order_By>>;
-  where?: InputMaybe<File_Bool_Exp>;
-};
-
-
-export type Query_RootFile_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Query_RootFile_ServiceArgs = {
+export type Query_RootFile_Service_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<File_Service_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<File_Service_Order_By>>;
   where?: InputMaybe<File_Service_Bool_Exp>;
 };
 
 
-export type Query_RootFile_Service_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<File_Service_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<File_Service_Order_By>>;
-  where?: InputMaybe<File_Service_Bool_Exp>;
-};
-
-
-export type Query_RootFile_Service_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Query_RootFile_TypeArgs = {
+export type Query_RootFile_Type_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<File_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<File_Type_Order_By>>;
   where?: InputMaybe<File_Type_Bool_Exp>;
 };
 
 
-export type Query_RootFile_Type_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<File_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<File_Type_Order_By>>;
-  where?: InputMaybe<File_Type_Bool_Exp>;
-};
-
-
-export type Query_RootFile_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Query_RootGet_Link_PreviewArgs = {
-  url: Scalars['String'];
-};
-
-
-export type Query_RootMemberArgs = {
-  distinct_on?: InputMaybe<Array<Member_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Member_Order_By>>;
-  where?: InputMaybe<Member_Bool_Exp>;
-};
-
-
-export type Query_RootMember_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Member_Order_By>>;
-  where?: InputMaybe<Member_Bool_Exp>;
-};
-
-
-export type Query_RootMember_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Query_RootMember_ChannelArgs = {
+export type Query_RootMember_Channel_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Member_Channel_Order_By>>;
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Channel_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Member_Channel_Order_By>>;
-  where?: InputMaybe<Member_Channel_Bool_Exp>;
+export type Query_RootMember_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Member_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Member_Order_By>>;
+  where?: InputMaybe<Member_Bool_Exp>;
 };
 
 
-export type Query_RootMember_Channel_By_PkArgs = {
-  channelId: Scalars['uuid'];
-  memberId: Scalars['uuid'];
-};
-
-
-export type Query_RootMember_FileArgs = {
+export type Query_RootMember_File_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Member_File_Order_By>>;
   where?: InputMaybe<Member_File_Bool_Exp>;
 };
 
 
-export type Query_RootMember_File_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Member_File_Order_By>>;
-  where?: InputMaybe<Member_File_Bool_Exp>;
-};
-
-
-export type Query_RootMember_File_By_PkArgs = {
-  fileId: Scalars['uuid'];
-  memberId: Scalars['uuid'];
-};
-
-
-export type Query_RootMessageArgs = {
+export type Query_RootMessage_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Message_Order_By>>;
   where?: InputMaybe<Message_Bool_Exp>;
 };
 
 
-export type Query_RootMessage_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Message_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Message_Order_By>>;
-  where?: InputMaybe<Message_Bool_Exp>;
-};
-
-
-export type Query_RootMessage_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Query_RootMessage_FileArgs = {
+export type Query_RootMessage_File_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Message_File_Order_By>>;
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
 
 
-export type Query_RootMessage_File_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Message_File_Order_By>>;
-  where?: InputMaybe<Message_File_Bool_Exp>;
-};
-
-
-export type Query_RootMessage_File_By_PkArgs = {
-  fileId: Scalars['uuid'];
-  messageId: Scalars['uuid'];
-};
-
-
-export type Query_RootMessage_ReactionArgs = {
+export type Query_RootMessage_Reaction_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Message_Reaction_Order_By>>;
   where?: InputMaybe<Message_Reaction_Bool_Exp>;
 };
 
 
-export type Query_RootMessage_Reaction_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Message_Reaction_Order_By>>;
-  where?: InputMaybe<Message_Reaction_Bool_Exp>;
+export type Query_RootNodeArgs = {
+  id: Scalars['ID'];
 };
 
 
-export type Query_RootMessage_Reaction_By_PkArgs = {
-  member_id: Scalars['uuid'];
-  messageId: Scalars['uuid'];
-  reactionId: Scalars['uuid'];
-};
-
-
-export type Query_RootReactionArgs = {
+export type Query_RootReaction_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Reaction_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Reaction_Order_By>>;
   where?: InputMaybe<Reaction_Bool_Exp>;
-};
-
-
-export type Query_RootReaction_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Reaction_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Reaction_Order_By>>;
-  where?: InputMaybe<Reaction_Bool_Exp>;
-};
-
-
-export type Query_RootReaction_By_PkArgs = {
-  id: Scalars['uuid'];
 };
 
 /** columns and relationships of "reaction" */
-export type Reaction = {
+export type Reaction = Node & {
   __typename?: 'reaction';
-  id: Scalars['uuid'];
+  id: Scalars['ID'];
   name: Scalars['String'];
 };
 
-/** aggregated selection of "reaction" */
-export type Reaction_Aggregate = {
-  __typename?: 'reaction_aggregate';
-  aggregate?: Maybe<Reaction_Aggregate_Fields>;
-  nodes: Array<Reaction>;
+/** A Relay connection object on "reaction" */
+export type ReactionConnection = {
+  __typename?: 'reactionConnection';
+  edges: Array<ReactionEdge>;
+  pageInfo: PageInfo;
 };
 
-/** aggregate fields of "reaction" */
-export type Reaction_Aggregate_Fields = {
-  __typename?: 'reaction_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Reaction_Max_Fields>;
-  min?: Maybe<Reaction_Min_Fields>;
-};
-
-
-/** aggregate fields of "reaction" */
-export type Reaction_Aggregate_FieldsCountArgs = {
-  columns?: InputMaybe<Array<Reaction_Select_Column>>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
+export type ReactionEdge = {
+  __typename?: 'reactionEdge';
+  cursor: Scalars['String'];
+  node: Reaction;
 };
 
 /** Boolean expression to filter rows from the table "reaction". All fields are combined with a logical 'AND'. */
@@ -4642,20 +4358,6 @@ export enum Reaction_Constraint {
 export type Reaction_Insert_Input = {
   id?: InputMaybe<Scalars['uuid']>;
   name?: InputMaybe<Scalars['String']>;
-};
-
-/** aggregate max on columns */
-export type Reaction_Max_Fields = {
-  __typename?: 'reaction_max_fields';
-  id?: Maybe<Scalars['uuid']>;
-  name?: Maybe<Scalars['String']>;
-};
-
-/** aggregate min on columns */
-export type Reaction_Min_Fields = {
-  __typename?: 'reaction_min_fields';
-  id?: Maybe<Scalars['uuid']>;
-  name?: Maybe<Scalars['String']>;
 };
 
 /** response of any mutation on the table "reaction" */
@@ -4706,20 +4408,6 @@ export type Reaction_Set_Input = {
   name?: InputMaybe<Scalars['String']>;
 };
 
-/** Streaming cursor of the table "reaction" */
-export type Reaction_Stream_Cursor_Input = {
-  /** Stream column input with initial value */
-  initial_value: Reaction_Stream_Cursor_Value_Input;
-  /** cursor ordering */
-  ordering?: InputMaybe<Cursor_Ordering>;
-};
-
-/** Initial value of the column from where the streaming should start */
-export type Reaction_Stream_Cursor_Value_Input = {
-  id?: InputMaybe<Scalars['uuid']>;
-  name?: InputMaybe<Scalars['String']>;
-};
-
 /** update columns of table "reaction" */
 export enum Reaction_Update_Column {
   /** column name */
@@ -4737,541 +4425,192 @@ export type Reaction_Updates = {
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "app" */
-  app: Array<App>;
-  /** fetch aggregated fields from the table: "app" */
-  app_aggregate: App_Aggregate;
-  /** fetch data from the table: "app" using primary key columns */
-  app_by_pk?: Maybe<App>;
-  /** fetch data from the table in a streaming manner: "app" */
-  app_stream: Array<App>;
+  app_connection: AppConnection;
   /** fetch data from the table: "channel" */
-  channel: Array<Channel>;
-  /** fetch aggregated fields from the table: "channel" */
-  channel_aggregate: Channel_Aggregate;
-  /** fetch data from the table: "channel" using primary key columns */
-  channel_by_pk?: Maybe<Channel>;
-  /** fetch data from the table in a streaming manner: "channel" */
-  channel_stream: Array<Channel>;
+  channel_connection: ChannelConnection;
   /** fetch data from the table: "customer" */
-  customer: Array<Customer>;
-  /** fetch aggregated fields from the table: "customer" */
-  customer_aggregate: Customer_Aggregate;
-  /** fetch data from the table: "customer" using primary key columns */
-  customer_by_pk?: Maybe<Customer>;
+  customer_connection: CustomerConnection;
   /** fetch data from the table: "customer_role" */
-  customer_role: Array<Customer_Role>;
-  /** fetch aggregated fields from the table: "customer_role" */
-  customer_role_aggregate: Customer_Role_Aggregate;
-  /** fetch data from the table: "customer_role" using primary key columns */
-  customer_role_by_pk?: Maybe<Customer_Role>;
-  /** fetch data from the table in a streaming manner: "customer_role" */
-  customer_role_stream: Array<Customer_Role>;
-  /** fetch data from the table in a streaming manner: "customer" */
-  customer_stream: Array<Customer>;
+  customer_role_connection: Customer_RoleConnection;
   /** fetch data from the table: "file" */
-  file: Array<File>;
-  /** fetch aggregated fields from the table: "file" */
-  file_aggregate: File_Aggregate;
-  /** fetch data from the table: "file" using primary key columns */
-  file_by_pk?: Maybe<File>;
+  file_connection: FileConnection;
   /** fetch data from the table: "file_service" */
-  file_service: Array<File_Service>;
-  /** fetch aggregated fields from the table: "file_service" */
-  file_service_aggregate: File_Service_Aggregate;
-  /** fetch data from the table: "file_service" using primary key columns */
-  file_service_by_pk?: Maybe<File_Service>;
-  /** fetch data from the table in a streaming manner: "file_service" */
-  file_service_stream: Array<File_Service>;
-  /** fetch data from the table in a streaming manner: "file" */
-  file_stream: Array<File>;
+  file_service_connection: File_ServiceConnection;
   /** fetch data from the table: "file_type" */
-  file_type: Array<File_Type>;
-  /** fetch aggregated fields from the table: "file_type" */
-  file_type_aggregate: File_Type_Aggregate;
-  /** fetch data from the table: "file_type" using primary key columns */
-  file_type_by_pk?: Maybe<File_Type>;
-  /** fetch data from the table in a streaming manner: "file_type" */
-  file_type_stream: Array<File_Type>;
-  /** fetch data from the table: "member" */
-  member: Array<Member>;
-  /** fetch aggregated fields from the table: "member" */
-  member_aggregate: Member_Aggregate;
-  /** fetch data from the table: "member" using primary key columns */
-  member_by_pk?: Maybe<Member>;
+  file_type_connection: File_TypeConnection;
   /** fetch data from the table: "member_channel" */
-  member_channel: Array<Member_Channel>;
-  /** fetch aggregated fields from the table: "member_channel" */
-  member_channel_aggregate: Member_Channel_Aggregate;
-  /** fetch data from the table: "member_channel" using primary key columns */
-  member_channel_by_pk?: Maybe<Member_Channel>;
-  /** fetch data from the table in a streaming manner: "member_channel" */
-  member_channel_stream: Array<Member_Channel>;
+  member_channel_connection: Member_ChannelConnection;
+  /** fetch data from the table: "member" */
+  member_connection: MemberConnection;
   /** fetch data from the table: "member_file" */
-  member_file: Array<Member_File>;
-  /** fetch aggregated fields from the table: "member_file" */
-  member_file_aggregate: Member_File_Aggregate;
-  /** fetch data from the table: "member_file" using primary key columns */
-  member_file_by_pk?: Maybe<Member_File>;
-  /** fetch data from the table in a streaming manner: "member_file" */
-  member_file_stream: Array<Member_File>;
-  /** fetch data from the table in a streaming manner: "member" */
-  member_stream: Array<Member>;
+  member_file_connection: Member_FileConnection;
   /** fetch data from the table: "message" */
-  message: Array<Message>;
-  /** fetch aggregated fields from the table: "message" */
-  message_aggregate: Message_Aggregate;
-  /** fetch data from the table: "message" using primary key columns */
-  message_by_pk?: Maybe<Message>;
+  message_connection: MessageConnection;
   /** fetch data from the table: "message_file" */
-  message_file: Array<Message_File>;
-  /** fetch aggregated fields from the table: "message_file" */
-  message_file_aggregate: Message_File_Aggregate;
-  /** fetch data from the table: "message_file" using primary key columns */
-  message_file_by_pk?: Maybe<Message_File>;
-  /** fetch data from the table in a streaming manner: "message_file" */
-  message_file_stream: Array<Message_File>;
+  message_file_connection: Message_FileConnection;
   /** fetch data from the table: "message_reaction" */
-  message_reaction: Array<Message_Reaction>;
-  /** fetch aggregated fields from the table: "message_reaction" */
-  message_reaction_aggregate: Message_Reaction_Aggregate;
-  /** fetch data from the table: "message_reaction" using primary key columns */
-  message_reaction_by_pk?: Maybe<Message_Reaction>;
-  /** fetch data from the table in a streaming manner: "message_reaction" */
-  message_reaction_stream: Array<Message_Reaction>;
-  /** fetch data from the table in a streaming manner: "message" */
-  message_stream: Array<Message>;
+  message_reaction_connection: Message_ReactionConnection;
+  node?: Maybe<Node>;
   /** fetch data from the table: "reaction" */
-  reaction: Array<Reaction>;
-  /** fetch aggregated fields from the table: "reaction" */
-  reaction_aggregate: Reaction_Aggregate;
-  /** fetch data from the table: "reaction" using primary key columns */
-  reaction_by_pk?: Maybe<Reaction>;
-  /** fetch data from the table in a streaming manner: "reaction" */
-  reaction_stream: Array<Reaction>;
+  reaction_connection: ReactionConnection;
 };
 
 
-export type Subscription_RootAppArgs = {
+export type Subscription_RootApp_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<App_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<App_Order_By>>;
   where?: InputMaybe<App_Bool_Exp>;
 };
 
 
-export type Subscription_RootApp_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<App_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<App_Order_By>>;
-  where?: InputMaybe<App_Bool_Exp>;
-};
-
-
-export type Subscription_RootApp_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootApp_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<App_Stream_Cursor_Input>>;
-  where?: InputMaybe<App_Bool_Exp>;
-};
-
-
-export type Subscription_RootChannelArgs = {
+export type Subscription_RootChannel_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Channel_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Channel_Order_By>>;
   where?: InputMaybe<Channel_Bool_Exp>;
 };
 
 
-export type Subscription_RootChannel_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Channel_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Channel_Order_By>>;
-  where?: InputMaybe<Channel_Bool_Exp>;
-};
-
-
-export type Subscription_RootChannel_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootChannel_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Channel_Stream_Cursor_Input>>;
-  where?: InputMaybe<Channel_Bool_Exp>;
-};
-
-
-export type Subscription_RootCustomerArgs = {
+export type Subscription_RootCustomer_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Customer_Order_By>>;
   where?: InputMaybe<Customer_Bool_Exp>;
 };
 
 
-export type Subscription_RootCustomer_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Customer_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Customer_Order_By>>;
-  where?: InputMaybe<Customer_Bool_Exp>;
-};
-
-
-export type Subscription_RootCustomer_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootCustomer_RoleArgs = {
+export type Subscription_RootCustomer_Role_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Customer_Role_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Customer_Role_Order_By>>;
   where?: InputMaybe<Customer_Role_Bool_Exp>;
 };
 
 
-export type Subscription_RootCustomer_Role_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Customer_Role_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Customer_Role_Order_By>>;
-  where?: InputMaybe<Customer_Role_Bool_Exp>;
-};
-
-
-export type Subscription_RootCustomer_Role_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Subscription_RootCustomer_Role_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Customer_Role_Stream_Cursor_Input>>;
-  where?: InputMaybe<Customer_Role_Bool_Exp>;
-};
-
-
-export type Subscription_RootCustomer_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Customer_Stream_Cursor_Input>>;
-  where?: InputMaybe<Customer_Bool_Exp>;
-};
-
-
-export type Subscription_RootFileArgs = {
+export type Subscription_RootFile_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<File_Order_By>>;
   where?: InputMaybe<File_Bool_Exp>;
 };
 
 
-export type Subscription_RootFile_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<File_Order_By>>;
-  where?: InputMaybe<File_Bool_Exp>;
-};
-
-
-export type Subscription_RootFile_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootFile_ServiceArgs = {
+export type Subscription_RootFile_Service_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<File_Service_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<File_Service_Order_By>>;
   where?: InputMaybe<File_Service_Bool_Exp>;
 };
 
 
-export type Subscription_RootFile_Service_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<File_Service_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<File_Service_Order_By>>;
-  where?: InputMaybe<File_Service_Bool_Exp>;
-};
-
-
-export type Subscription_RootFile_Service_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Subscription_RootFile_Service_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<File_Service_Stream_Cursor_Input>>;
-  where?: InputMaybe<File_Service_Bool_Exp>;
-};
-
-
-export type Subscription_RootFile_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<File_Stream_Cursor_Input>>;
-  where?: InputMaybe<File_Bool_Exp>;
-};
-
-
-export type Subscription_RootFile_TypeArgs = {
+export type Subscription_RootFile_Type_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<File_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<File_Type_Order_By>>;
   where?: InputMaybe<File_Type_Bool_Exp>;
 };
 
 
-export type Subscription_RootFile_Type_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<File_Type_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<File_Type_Order_By>>;
-  where?: InputMaybe<File_Type_Bool_Exp>;
-};
-
-
-export type Subscription_RootFile_Type_By_PkArgs = {
-  value: Scalars['String'];
-};
-
-
-export type Subscription_RootFile_Type_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<File_Type_Stream_Cursor_Input>>;
-  where?: InputMaybe<File_Type_Bool_Exp>;
-};
-
-
-export type Subscription_RootMemberArgs = {
-  distinct_on?: InputMaybe<Array<Member_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Member_Order_By>>;
-  where?: InputMaybe<Member_Bool_Exp>;
-};
-
-
-export type Subscription_RootMember_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Member_Order_By>>;
-  where?: InputMaybe<Member_Bool_Exp>;
-};
-
-
-export type Subscription_RootMember_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootMember_ChannelArgs = {
+export type Subscription_RootMember_Channel_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Member_Channel_Order_By>>;
   where?: InputMaybe<Member_Channel_Bool_Exp>;
 };
 
 
-export type Subscription_RootMember_Channel_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_Channel_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Member_Channel_Order_By>>;
-  where?: InputMaybe<Member_Channel_Bool_Exp>;
-};
-
-
-export type Subscription_RootMember_Channel_By_PkArgs = {
-  channelId: Scalars['uuid'];
-  memberId: Scalars['uuid'];
-};
-
-
-export type Subscription_RootMember_Channel_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Member_Channel_Stream_Cursor_Input>>;
-  where?: InputMaybe<Member_Channel_Bool_Exp>;
-};
-
-
-export type Subscription_RootMember_FileArgs = {
-  distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Member_File_Order_By>>;
-  where?: InputMaybe<Member_File_Bool_Exp>;
-};
-
-
-export type Subscription_RootMember_File_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Member_File_Order_By>>;
-  where?: InputMaybe<Member_File_Bool_Exp>;
-};
-
-
-export type Subscription_RootMember_File_By_PkArgs = {
-  fileId: Scalars['uuid'];
-  memberId: Scalars['uuid'];
-};
-
-
-export type Subscription_RootMember_File_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Member_File_Stream_Cursor_Input>>;
-  where?: InputMaybe<Member_File_Bool_Exp>;
-};
-
-
-export type Subscription_RootMember_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Member_Stream_Cursor_Input>>;
+export type Subscription_RootMember_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Member_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Member_Order_By>>;
   where?: InputMaybe<Member_Bool_Exp>;
 };
 
 
-export type Subscription_RootMessageArgs = {
+export type Subscription_RootMember_File_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  distinct_on?: InputMaybe<Array<Member_File_Select_Column>>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Member_File_Order_By>>;
+  where?: InputMaybe<Member_File_Bool_Exp>;
+};
+
+
+export type Subscription_RootMessage_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Message_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Message_Order_By>>;
   where?: InputMaybe<Message_Bool_Exp>;
 };
 
 
-export type Subscription_RootMessage_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Message_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Message_Order_By>>;
-  where?: InputMaybe<Message_Bool_Exp>;
-};
-
-
-export type Subscription_RootMessage_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootMessage_FileArgs = {
+export type Subscription_RootMessage_File_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Message_File_Order_By>>;
   where?: InputMaybe<Message_File_Bool_Exp>;
 };
 
 
-export type Subscription_RootMessage_File_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Message_File_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Message_File_Order_By>>;
-  where?: InputMaybe<Message_File_Bool_Exp>;
-};
-
-
-export type Subscription_RootMessage_File_By_PkArgs = {
-  fileId: Scalars['uuid'];
-  messageId: Scalars['uuid'];
-};
-
-
-export type Subscription_RootMessage_File_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Message_File_Stream_Cursor_Input>>;
-  where?: InputMaybe<Message_File_Bool_Exp>;
-};
-
-
-export type Subscription_RootMessage_ReactionArgs = {
+export type Subscription_RootMessage_Reaction_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Message_Reaction_Order_By>>;
   where?: InputMaybe<Message_Reaction_Bool_Exp>;
 };
 
 
-export type Subscription_RootMessage_Reaction_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Message_Reaction_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Message_Reaction_Order_By>>;
-  where?: InputMaybe<Message_Reaction_Bool_Exp>;
+export type Subscription_RootNodeArgs = {
+  id: Scalars['ID'];
 };
 
 
-export type Subscription_RootMessage_Reaction_By_PkArgs = {
-  member_id: Scalars['uuid'];
-  messageId: Scalars['uuid'];
-  reactionId: Scalars['uuid'];
-};
-
-
-export type Subscription_RootMessage_Reaction_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Message_Reaction_Stream_Cursor_Input>>;
-  where?: InputMaybe<Message_Reaction_Bool_Exp>;
-};
-
-
-export type Subscription_RootMessage_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Message_Stream_Cursor_Input>>;
-  where?: InputMaybe<Message_Bool_Exp>;
-};
-
-
-export type Subscription_RootReactionArgs = {
+export type Subscription_RootReaction_ConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   distinct_on?: InputMaybe<Array<Reaction_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Reaction_Order_By>>;
-  where?: InputMaybe<Reaction_Bool_Exp>;
-};
-
-
-export type Subscription_RootReaction_AggregateArgs = {
-  distinct_on?: InputMaybe<Array<Reaction_Select_Column>>;
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Reaction_Order_By>>;
-  where?: InputMaybe<Reaction_Bool_Exp>;
-};
-
-
-export type Subscription_RootReaction_By_PkArgs = {
-  id: Scalars['uuid'];
-};
-
-
-export type Subscription_RootReaction_StreamArgs = {
-  batch_size: Scalars['Int'];
-  cursor: Array<InputMaybe<Reaction_Stream_Cursor_Input>>;
   where?: InputMaybe<Reaction_Bool_Exp>;
 };
 
@@ -5306,38 +4645,40 @@ export type GetMemberChannelsQueryVariables = Exact<{
 }>;
 
 
-export type GetMemberChannelsQuery = { __typename?: 'query_root', member_channel: Array<{ __typename?: 'member_channel', channel: { __typename?: 'channel', id: any, name: string } }> };
+export type GetMemberChannelsQuery = { __typename?: 'query_root', member_channel_connection: { __typename?: 'member_channelConnection', edges: Array<{ __typename?: 'member_channelEdge', node: { __typename?: 'member_channel', channelId: any, channel: { __typename?: 'channel', name: string } } }> } };
 
-export type ChannelPageMessageFragment = { __typename?: 'message', id: any, createdAt: any } & { ' $fragmentName'?: 'ChannelPageMessageFragment' };
+export type ChannelPageMessageFragment = { __typename?: 'message', id: string, createdAt: any } & { ' $fragmentName'?: 'ChannelPageMessageFragment' };
 
 export type GetChannelNewMessagesSubscriptionVariables = Exact<{
   channelId: Scalars['uuid'];
 }>;
 
 
-export type GetChannelNewMessagesSubscription = { __typename?: 'subscription_root', message: Array<(
-    { __typename?: 'message' }
-    & { ' $fragmentRefs'?: { 'ChannelPageMessageFragment': ChannelPageMessageFragment;'MessageItemMessageFragment': MessageItemMessageFragment } }
-  )> };
+export type GetChannelNewMessagesSubscription = { __typename?: 'subscription_root', message_connection: { __typename?: 'messageConnection', edges: Array<{ __typename?: 'messageEdge', cursor: string, node: (
+        { __typename?: 'message' }
+        & { ' $fragmentRefs'?: { 'ChannelPageMessageFragment': ChannelPageMessageFragment;'MessageItemMessageFragment': MessageItemMessageFragment } }
+      ) }> } };
 
 export type GetChannelMessagesQueryVariables = Exact<{
   channelId: Scalars['uuid'];
-  limit: Scalars['Int'];
-  offset: Scalars['Int'];
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  before?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type GetChannelMessagesQuery = { __typename?: 'query_root', message: Array<(
-    { __typename?: 'message' }
-    & { ' $fragmentRefs'?: { 'ChannelPageMessageFragment': ChannelPageMessageFragment;'MessageItemMessageFragment': MessageItemMessageFragment } }
-  )> };
+export type GetChannelMessagesQuery = { __typename?: 'query_root', message_connection: { __typename?: 'messageConnection', edges: Array<{ __typename?: 'messageEdge', cursor: string, node: (
+        { __typename?: 'message' }
+        & { ' $fragmentRefs'?: { 'ChannelPageMessageFragment': ChannelPageMessageFragment;'MessageItemMessageFragment': MessageItemMessageFragment } }
+      ) }>, pageInfo: { __typename?: 'PageInfo', endCursor: string, startCursor: string, hasPreviousPage: boolean, hasNextPage: boolean } } };
 
 export type GetChannelMembersQueryVariables = Exact<{
   channelId: Scalars['uuid'];
 }>;
 
 
-export type GetChannelMembersQuery = { __typename?: 'query_root', channel?: { __typename?: 'channel', id: any, members: Array<{ __typename?: 'member_channel', id: any, lastSeenAt?: any | null, member: { __typename?: 'member', name: string, id: any } }> } | null };
+export type GetChannelMembersQuery = { __typename?: 'query_root', channel: { __typename?: 'channelConnection', edges: Array<{ __typename?: 'channelEdge', node: { __typename?: 'channel', id: string, members: Array<{ __typename?: 'member_channel', id: string, lastSeenAt?: any | null, member: { __typename?: 'member', name: string, id: string } }> } }> } };
 
 export type InsertNewMessageMutationVariables = Exact<{
   body: Scalars['String'];
@@ -5352,36 +4693,12 @@ export type InsertNewMessageMutation = { __typename?: 'mutation_root', insert_me
     & { ' $fragmentRefs'?: { 'ChannelPageMessageFragment': ChannelPageMessageFragment;'MessageItemMessageFragment': MessageItemMessageFragment } }
   ) | null };
 
-export type ChannelPageInsertFileMutationVariables = Exact<{
-  file: File_Insert_Input;
-}>;
-
-
-export type ChannelPageInsertFileMutation = { __typename?: 'mutation_root', file?: { __typename?: 'file', id: any, name: string, path: string, type: File_Type_Enum, service: File_Service_Enum } | null };
-
-export type ChannelPageGetAgoraTokenMutationVariables = Exact<{
-  channelId: Scalars['uuid'];
-}>;
-
-
-export type ChannelPageGetAgoraTokenMutation = { __typename?: 'mutation_root', get_agora_rtc_token: { __typename?: 'GetAgoraRtcTokenResponse', token: string } };
-
-export type MessageItemMessageFragment = { __typename?: 'message', id: any, createdAt: any, updatedAt?: any | null, body: string, parentId?: any | null, replyToId?: any | null, files: Array<{ __typename?: 'message_file', id: any, file: { __typename?: 'file', id: any, name: string, path: string, service: File_Service_Enum, type: File_Type_Enum } }>, sender: { __typename?: 'member', id: any, name: string, avatarFile?: { __typename?: 'file', id: any, path: string, service: File_Service_Enum, type: File_Type_Enum } | null } } & { ' $fragmentName'?: 'MessageItemMessageFragment' };
-
-export type MessageItemGetLinkPreviewQueryVariables = Exact<{
-  url: Scalars['String'];
-}>;
-
-
-export type MessageItemGetLinkPreviewQuery = { __typename?: 'query_root', linkPreview: { __typename?: 'LinkPreviewResponse', description?: string | null, images?: Array<string> | null, favicons: Array<string>, title?: string | null } };
+export type MessageItemMessageFragment = { __typename?: 'message', id: string, createdAt: any, updatedAt?: any | null, body: string, parentId?: any | null, replyToId?: any | null, files: Array<{ __typename?: 'message_file', id: string, file: { __typename?: 'file', id: string, name: string, path: string, service: File_Service_Enum, type: File_Type_Enum } }>, sender: { __typename?: 'member', id: string, name: string, avatarFile?: { __typename?: 'file', id: string, path: string, service: File_Service_Enum, type: File_Type_Enum } | null } } & { ' $fragmentName'?: 'MessageItemMessageFragment' };
 
 export const ChannelPageMessageFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ChannelPageMessage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"message"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}}]}}]} as unknown as DocumentNode<ChannelPageMessageFragment, unknown>;
 export const MessageItemMessageFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"MessageItemMessage"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"message"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"body"}},{"kind":"Field","name":{"kind":"Name","value":"parentId"}},{"kind":"Field","name":{"kind":"Name","value":"replyToId"}},{"kind":"Field","name":{"kind":"Name","value":"files"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"file"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"service"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"sender"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"avatarFile"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"service"}},{"kind":"Field","name":{"kind":"Name","value":"type"}}]}}]}}]}}]} as unknown as DocumentNode<MessageItemMessageFragment, unknown>;
-export const GetMemberChannelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMemberChannels"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"memberId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"member_channel"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"memberId"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"memberId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"channel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]}}]} as unknown as DocumentNode<GetMemberChannelsQuery, GetMemberChannelsQueryVariables>;
-export const GetChannelNewMessagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"getChannelNewMessages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"channelId"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ChannelPageMessage"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"MessageItemMessage"}}]}}]}},...ChannelPageMessageFragmentDoc.definitions,...MessageItemMessageFragmentDoc.definitions]} as unknown as DocumentNode<GetChannelNewMessagesSubscription, GetChannelNewMessagesSubscriptionVariables>;
-export const GetChannelMessagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getChannelMessages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"limit"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"offset"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"channelId"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"Variable","name":{"kind":"Name","value":"limit"}}},{"kind":"Argument","name":{"kind":"Name","value":"offset"},"value":{"kind":"Variable","name":{"kind":"Name","value":"offset"}}},{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"desc"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ChannelPageMessage"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"MessageItemMessage"}}]}}]}},...ChannelPageMessageFragmentDoc.definitions,...MessageItemMessageFragmentDoc.definitions]} as unknown as DocumentNode<GetChannelMessagesQuery, GetChannelMessagesQueryVariables>;
-export const GetChannelMembersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getChannelMembers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"channel"},"name":{"kind":"Name","value":"channel_by_pk"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastSeenAt"}},{"kind":"Field","name":{"kind":"Name","value":"member"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetChannelMembersQuery, GetChannelMembersQueryVariables>;
+export const GetMemberChannelsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getMemberChannels"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"memberId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"member_channel_connection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"memberId"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"memberId"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"channel"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}}]}},{"kind":"Field","name":{"kind":"Name","value":"channelId"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetMemberChannelsQuery, GetMemberChannelsQueryVariables>;
+export const GetChannelNewMessagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"getChannelNewMessages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message_connection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"channelId"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ChannelPageMessage"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"MessageItemMessage"}}]}}]}}]}}]}},...ChannelPageMessageFragmentDoc.definitions,...MessageItemMessageFragmentDoc.definitions]} as unknown as DocumentNode<GetChannelNewMessagesSubscription, GetChannelNewMessagesSubscriptionVariables>;
+export const GetChannelMessagesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getChannelMessages"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"first"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"last"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"before"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"after"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"message_connection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"order_by"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"createdAt"},"value":{"kind":"EnumValue","value":"desc"}}]}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"channelId"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"Variable","name":{"kind":"Name","value":"first"}}},{"kind":"Argument","name":{"kind":"Name","value":"last"},"value":{"kind":"Variable","name":{"kind":"Name","value":"last"}}},{"kind":"Argument","name":{"kind":"Name","value":"before"},"value":{"kind":"Variable","name":{"kind":"Name","value":"before"}}},{"kind":"Argument","name":{"kind":"Name","value":"after"},"value":{"kind":"Variable","name":{"kind":"Name","value":"after"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cursor"}},{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ChannelPageMessage"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"MessageItemMessage"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"pageInfo"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"endCursor"}},{"kind":"Field","name":{"kind":"Name","value":"startCursor"}},{"kind":"Field","name":{"kind":"Name","value":"hasPreviousPage"}},{"kind":"Field","name":{"kind":"Name","value":"hasNextPage"}}]}}]}}]}},...ChannelPageMessageFragmentDoc.definitions,...MessageItemMessageFragmentDoc.definitions]} as unknown as DocumentNode<GetChannelMessagesQuery, GetChannelMessagesQueryVariables>;
+export const GetChannelMembersDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getChannelMembers"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"channel"},"name":{"kind":"Name","value":"channel_connection"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"id"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"_eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}]}}]}},{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"members"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"lastSeenAt"}},{"kind":"Field","name":{"kind":"Name","value":"member"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetChannelMembersQuery, GetChannelMembersQueryVariables>;
 export const InsertNewMessageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"insertNewMessage"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"body"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"senderId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"files"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"message_file_insert_input"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"insert_message_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"body"},"value":{"kind":"Variable","name":{"kind":"Name","value":"body"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"channelId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"senderId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"senderId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"files"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"data"},"value":{"kind":"Variable","name":{"kind":"Name","value":"files"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ChannelPageMessage"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"MessageItemMessage"}}]}}]}},...ChannelPageMessageFragmentDoc.definitions,...MessageItemMessageFragmentDoc.definitions]} as unknown as DocumentNode<InsertNewMessageMutation, InsertNewMessageMutationVariables>;
-export const ChannelPageInsertFileDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChannelPageInsertFile"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"file"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"file_insert_input"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"file"},"name":{"kind":"Name","value":"insert_file_one"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"object"},"value":{"kind":"Variable","name":{"kind":"Name","value":"file"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"type"}},{"kind":"Field","name":{"kind":"Name","value":"service"}}]}}]}}]} as unknown as DocumentNode<ChannelPageInsertFileMutation, ChannelPageInsertFileMutationVariables>;
-export const ChannelPageGetAgoraTokenDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ChannelPageGetAgoraToken"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"uuid"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"get_agora_rtc_token"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"channelId"},"value":{"kind":"Variable","name":{"kind":"Name","value":"channelId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"token"}}]}}]}}]} as unknown as DocumentNode<ChannelPageGetAgoraTokenMutation, ChannelPageGetAgoraTokenMutationVariables>;
-export const MessageItemGetLinkPreviewDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"MessageItemGetLinkPreview"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"url"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"linkPreview"},"name":{"kind":"Name","value":"get_link_preview"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"url"},"value":{"kind":"Variable","name":{"kind":"Name","value":"url"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"images"}},{"kind":"Field","name":{"kind":"Name","value":"favicons"}},{"kind":"Field","name":{"kind":"Name","value":"title"}}]}}]}}]} as unknown as DocumentNode<MessageItemGetLinkPreviewQuery, MessageItemGetLinkPreviewQueryVariables>;

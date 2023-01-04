@@ -15,3 +15,5 @@ const wsScheme = wsSchemes[environment.dataEnv];
 
 export const httpURI = `${httpScheme}://${endpoint}/v1/graphql`;
 export const wsURI = `${wsScheme}://${endpoint}/v1/graphql`;
+export const httpRelayURI = `${httpScheme}://${endpoint}/v1beta1/relay`;
+export const wsRelayURI = `${wsScheme}://${endpoint}/v1beta1/relay`;

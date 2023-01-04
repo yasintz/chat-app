@@ -13,7 +13,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { BatchHttpLink } from '@apollo/client/link/batch-http';
 import { createClient } from 'graphql-ws';
 import unfetch from 'unfetch';
-import { httpURI, wsURI } from './config';
+import { httpRelayURI, httpURI, wsRelayURI, wsURI } from './config';
 import useAuthStore from '../../store/auth';
 
 const errorLink = onError(({ operation, graphQLErrors, networkError }) => {
@@ -32,14 +32,14 @@ const authLink = setContext(() => {
 });
 
 const httpLinkOptions: HttpOptions = {
-  uri: httpURI,
+  uri: httpRelayURI,
   fetch: unfetch as unknown as HttpOptions['fetch'],
 };
 const httpLink = new HttpLink(httpLinkOptions);
 
 const wsLink = new GraphQLWsLink(
   createClient({
-    url: wsURI,
+    url: wsRelayURI,
     connectionParams: {
       headers: {
         Authorization: idToken,

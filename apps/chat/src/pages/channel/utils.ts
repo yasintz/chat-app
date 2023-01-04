@@ -27,7 +27,9 @@ function getShowNewMessageDivider(
 
 export function transformMessages(
   messages:
-    | DocumentType<typeof getChannelMessagesQuery>['message']
+    | DocumentType<
+        typeof getChannelMessagesQuery
+      >['message_connection']['edges']
     | undefined
     | null,
   lastSeenAt: string
@@ -37,10 +39,10 @@ export function transformMessages(
   }
 
   return messages.map((message, index) => {
-    const messageData = getFragment(channelPageMessageFragment, message);
+    const messageData = getFragment(channelPageMessageFragment, message.node);
     const previousMessage = getFragment(
       channelPageMessageFragment,
-      messages?.[index + 1]
+      messages?.[index + 1]?.node
     );
 
     const showDateDivider = getShowDateDivider(messageData, previousMessage);

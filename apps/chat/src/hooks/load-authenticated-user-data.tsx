@@ -1,6 +1,6 @@
 //#region Import
 import { useQuery } from '@apollo/client';
-import {useMemo} from 'react';
+import { useMemo } from 'react';
 import { gql } from '../gql';
 import useAuthStore from '../store/auth';
 //#endregion
@@ -8,10 +8,14 @@ import useAuthStore from '../store/auth';
 //#region GQL
 const getMemberChannels = gql(/* GraphQL */ `
   query getMemberChannels($memberId: uuid!) {
-    member_channel(where: { memberId: { _eq: $memberId } }) {
-      channel {
-        id
-        name
+    member_channel_connection(where: { memberId: { _eq: $memberId } }) {
+      edges {
+        node {
+          channel {
+            name
+          }
+          channelId
+        }
       }
     }
   }
@@ -30,11 +34,14 @@ export const useAuthenticatedUserData = () => {
 
   const channels = useMemo(() => {
     if (data && !isLoading && !error) {
-      return data?.member_channel.map((item: { channel: any }) => {
-        return {
-          ...item.channel,
-        };
-      });
+      return data?.member_channel_connection.edges.map(
+        (item: { node: { channel: { name: string }; channelId: string } }) => {
+          return {
+            id: item.node.channelId,
+            name: item.node.channel.name,
+          };
+        }
+      );
     }
 
     return [];

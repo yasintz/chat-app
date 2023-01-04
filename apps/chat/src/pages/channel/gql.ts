@@ -9,41 +9,79 @@ export const channelPageMessageFragment = gql(/* GraphQL */ `
 
 export const getChannelMessagesSubscription = gql(/* GraphQL */ `
   subscription getChannelNewMessages($channelId: uuid!) {
-    message(
-      where: { channelId: { _eq: $channelId } }
-      order_by: { createdAt: desc }
-      limit: 1
-    ) {
-      ...ChannelPageMessage
-      ...MessageItemMessage
+    message_connection(where: { channelId: { _eq: $channelId } }, last: 1) {
+      edges {
+        cursor
+        node {
+          ...ChannelPageMessage
+          ...MessageItemMessage
+        }
+      }
     }
   }
 `);
 
+// export const getChannelMessagesQuery = gql(/* GraphQL */ `
+//   query getChannelMessages($channelId: uuid!, $limit: Int!, $offset: Int!) {
+//     message(
+//       where: { channelId: { _eq: $channelId } }
+//       limit: $limit
+//       offset: $offset
+//       order_by: { createdAt: desc }
+//     ) {
+//       ...ChannelPageMessage
+//       ...MessageItemMessage
+//     }
+//   }
+// `);
+
 export const getChannelMessagesQuery = gql(/* GraphQL */ `
-  query getChannelMessages($channelId: uuid!, $limit: Int!, $offset: Int!) {
-    message(
-      where: { channelId: { _eq: $channelId } }
-      limit: $limit
-      offset: $offset
+  query getChannelMessages(
+    $channelId: uuid!
+    $first: Int
+    $last: Int
+    $before: String
+    $after: String
+  ) {
+    message_connection(
       order_by: { createdAt: desc }
+      where: { channelId: { _eq: $channelId } }
+      first: $first
+      last: $last
+      before: $before
+      after: $after
     ) {
-      ...ChannelPageMessage
-      ...MessageItemMessage
+      edges {
+        cursor
+        node {
+          ...ChannelPageMessage
+          ...MessageItemMessage
+        }
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasPreviousPage
+        hasNextPage
+      }
     }
   }
 `);
 
 export const getChannelMembersQuery = gql(/* GraphQL */ `
   query getChannelMembers($channelId: uuid!) {
-    channel: channel_by_pk(id: $channelId) {
-      id
-      members {
-        id
-        lastSeenAt
-        member {
-          name
+    channel: channel_connection(where: { id: { _eq: $channelId } }, first: 1) {
+      edges {
+        node {
           id
+          members {
+            id
+            lastSeenAt
+            member {
+              name
+              id
+            }
+          }
         }
       }
     }
@@ -71,22 +109,22 @@ export const addNewMessageMutation = gql(/* GraphQL */ `
   }
 `);
 
-export const insertFileMutation = gql(/* GraphQL */ `
-  mutation ChannelPageInsertFile($file: file_insert_input!) {
-    file: insert_file_one(object: $file) {
-      id
-      name
-      path
-      type
-      service
-    }
-  }
-`);
+// export const insertFileMutation = gql(/* GraphQL */ `
+//   mutation ChannelPageInsertFile($file: file_insert_input!) {
+//     file: insert_file_one(object: $file) {
+//       id
+//       name
+//       path
+//       type
+//       service
+//     }
+//   }
+// `);
 
-export const getAgoraRtcTokenMutation = gql(/* GraphQL */ `
-  mutation ChannelPageGetAgoraToken($channelId: uuid!) {
-    get_agora_rtc_token(channelId: $channelId) {
-      token
-    }
-  }
-`);
+// export const getAgoraRtcTokenMutation = gql(/* GraphQL */ `
+//   mutation ChannelPageGetAgoraToken($channelId: uuid!) {
+//     get_agora_rtc_token(channelId: $channelId) {
+//       token
+//     }
+//   }
+// `);

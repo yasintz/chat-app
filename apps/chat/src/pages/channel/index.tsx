@@ -3,7 +3,7 @@ import immer from 'immer';
 import _ from 'lodash';
 import { useState, useEvent, useMemo, useId, useEffect } from 'react';
 import { useMutation, useQuery, useSubscription } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { AuthenticatedPageLayout } from '../../components/common/layouts/AuthenticatedPageLayout';
@@ -18,8 +18,6 @@ import {
   addNewMessageMutation,
   getChannelMembersQuery,
   getChannelMessagesSubscription,
-  insertFileMutation,
-  getAgoraRtcTokenMutation,
 } from './gql';
 import { File_Service_Enum, File_Type_Enum } from '@gql/schema';
 import Agora from '../../agora/App';
@@ -48,16 +46,15 @@ const LIMIT = 5;
 export const ChannelPage = () => {
   const { channels, memberId, isLoading, error } = useAuthenticatedUserData();
   const { channelId } = useParams();
+  const [searchParams] = useSearchParams();
   const [showPreview, setShowPreview] = useState(false);
   const [videoCallToken, setVideoCallToken] = useState<string>();
   const [newMessage, setNewMessage] = useState<string>('');
   const scrollContainerId = useId();
-  const [hasMore, setHasMore] = useState(true);
   const [files, setFiles] = useState<FileType[]>([]);
   const isFileLoading = files.some((f) => f.isLoading);
   const [cameras, setCameras] = useState<MediaDeviceInfo[]>([]);
   const [mics, setMics] = useState<MediaDeviceInfo[]>([]);
-
   const [activeCamera, setActiveCamera] = useState<string>();
   const [activeMic, setActiveMic] = useState<string>();
 
@@ -79,7 +76,13 @@ export const ChannelPage = () => {
     updateQuery,
     error: messageError,
   } = useQuery(getChannelMessagesQuery, {
-    variables: { channelId, limit: LIMIT, offset: 0 },
+    variables: {
+      channelId,
+      first: searchParams.get('beforeCursor') ? null : LIMIT,
+      last: searchParams.get('beforeCursor') ? LIMIT : null,
+      before: searchParams.get('beforeCursor') ?? null,
+      after: null,
+    },
   });
 
   const {
@@ -90,43 +93,44 @@ export const ChannelPage = () => {
 
   useSubscription(getChannelMessagesSubscription, {
     variables: { channelId },
-    onData: ({ data }) => {
+    skip: !data?.message_connection,
+    onData: ({ data: subData }) => {
       updateQuery((prev) =>
         immer(prev, (draft) => {
-          draft.message = _.unionBy(
-            data?.data?.message || [],
-            draft.message,
-            'id'
+          draft.message_connection.edges = _.unionBy(
+            subData.data?.message_connection.edges,
+            draft.message_connection.edges || [],
+            'node.id'
           );
         })
       );
     },
   });
 
-  const [insertHasuraFile] = useMutation(insertFileMutation);
+  // const [insertHasuraFile] = useMutation(insertFileMutation);
   const [insertMessage] = useMutation(addNewMessageMutation);
-  const [getAgoraRtcToken] = useMutation(getAgoraRtcTokenMutation);
+  // const [getAgoraRtcToken] = useMutation(getAgoraRtcTokenMutation);
 
-  const lastSeenAt = memberData?.channel?.members?.find(
-    (m) => m.member.id === memberId
+  const lastSeenAt = memberData?.channel?.edges[0]?.node.members.find(
+    (m) => m.id === memberId
   )?.lastSeenAt;
 
   const messages = useMemo(
-    () => transformMessages(data?.message, lastSeenAt),
-    [data?.message, lastSeenAt]
+    () => transformMessages(data?.message_connection.edges, lastSeenAt),
+    [data?.message_connection.edges, lastSeenAt]
   );
 
   const mentionUsers = useMemo(() => {
-    if (!memberData?.channel?.members) {
+    if (!memberData?.channel?.edges[0]?.node.members) {
       return [];
     }
 
-    return memberData?.channel?.members
+    return memberData?.channel?.edges[0]?.node.members
       ?.filter((member) => member.member.id !== memberId)
       .map((member) => {
         return { id: member.member.id, display: member.member.name };
       });
-  }, [memberData?.channel?.members, memberId]);
+  }, [memberData?.channel?.edges, memberId]);
 
   const onMessageSent = useEvent(() => {
     insertMessage({
@@ -152,7 +156,7 @@ export const ChannelPage = () => {
       return;
     }
 
-    const token = await getAgoraRtcToken({ variables: { channelId } });
+    // const token = await getAgoraRtcToken({ variables: { channelId } });
 
     if (!token.data) {
       alert('Mutation failed');
@@ -161,65 +165,65 @@ export const ChannelPage = () => {
     setVideoCallToken(token.data?.get_agora_rtc_token?.token);
   };
 
-  const onFileUpload = useEvent(async (files: File[]) => {
-    const filesData = files.map((file) => {
-      const randomId = Math.random().toString();
-      const url = URL.createObjectURL(file);
+  // const onFileUpload = useEvent(async (files: File[]) => {
+  //   const filesData = files.map((file) => {
+  //     const randomId = Math.random().toString();
+  //     const url = URL.createObjectURL(file);
 
-      const preview: FileType = {
-        id: randomId,
-        name: file.name,
-        path: url,
-        service: File_Service_Enum.Url,
-        type: getHasuraFileType(file) as File_Type_Enum,
-        isLoading: true,
-        isFailed: false,
-      };
+  //     const preview: FileType = {
+  //       id: randomId,
+  //       name: file.name,
+  //       path: url,
+  //       service: File_Service_Enum.Url,
+  //       type: getHasuraFileType(file) as File_Type_Enum,
+  //       isLoading: true,
+  //       isFailed: false,
+  //     };
 
-      return { preview, file };
-    });
-    setFiles((prev) => prev.concat(filesData.map((f) => f.preview)));
+  //     return { preview, file };
+  //   });
+  //   setFiles((prev) => prev.concat(filesData.map((f) => f.preview)));
 
-    await Promise.all(
-      filesData.map(async ({ file, preview }) => {
-        const uploadedFile = await cloudinary.upload(file);
-        const insertHasuraFileResponse = await insertHasuraFile({
-          variables: {
-            file: {
-              path: uploadedFile?.public_id,
-              service: File_Service_Enum.Cloudinary,
-              type: preview.type,
-              name: file.name,
-            },
-          },
-        });
-        const hasuraFile = insertHasuraFileResponse.data?.file;
-        if (!hasuraFile) {
-          return;
-        }
-        setFiles((prev) =>
-          immer(prev, (draft) => {
-            const stateFile = draft.find((f) => f.id === preview.id);
-            if (stateFile) {
-              if (!uploadedFile) {
-                stateFile.isFailed = true;
-                stateFile.isLoading = false;
-                return;
-              }
+  //   await Promise.all(
+  //     filesData.map(async ({ file, preview }) => {
+  //       const uploadedFile = await cloudinary.upload(file);
+  //       const insertHasuraFileResponse = await insertHasuraFile({
+  //         variables: {
+  //           file: {
+  //             path: uploadedFile?.public_id,
+  //             service: File_Service_Enum.Cloudinary,
+  //             type: preview.type,
+  //             name: file.name,
+  //           },
+  //         },
+  //       });
+  //       const hasuraFile = insertHasuraFileResponse.data?.file;
+  //       if (!hasuraFile) {
+  //         return;
+  //       }
+  //       setFiles((prev) =>
+  //         immer(prev, (draft) => {
+  //           const stateFile = draft.find((f) => f.id === preview.id);
+  //           if (stateFile) {
+  //             if (!uploadedFile) {
+  //               stateFile.isFailed = true;
+  //               stateFile.isLoading = false;
+  //               return;
+  //             }
 
-              const newFile: FileType = {
-                ...hasuraFile,
-                isFailed: false,
-                isLoading: false,
-              };
+  //             const newFile: FileType = {
+  //               ...hasuraFile,
+  //               isFailed: false,
+  //               isLoading: false,
+  //             };
 
-              Object.assign(stateFile, newFile);
-            }
-          })
-        );
-      })
-    );
-  });
+  //             Object.assign(stateFile, newFile);
+  //           }
+  //         })
+  //       );
+  //     })
+  //   );
+  // });
   const onFileRemove = useEvent((file: FileType) =>
     setFiles((prev) => prev.filter((f) => f.id !== file.id))
   );
@@ -227,17 +231,66 @@ export const ChannelPage = () => {
   const onNext = useEvent(async () => {
     const response = await fetchMore({
       variables: {
-        offset: messages.length || 0,
+        first: LIMIT,
+        last: null,
+        before: null,
+        after: data?.message_connection.pageInfo.endCursor,
       },
     });
-    const newMessages = response.data.message;
-    setHasMore(newMessages.length === LIMIT);
+    const newMessages = response.data.message_connection.edges;
     updateQuery((prev) =>
       immer(prev, (draft) => {
-        draft.message = _.unionBy(draft.message, newMessages, 'id');
+        draft.message_connection.pageInfo = {
+          ...draft.message_connection.pageInfo,
+          hasNextPage: response.data.message_connection.pageInfo.hasNextPage,
+          endCursor: response.data.message_connection.pageInfo.endCursor,
+        };
+        draft.message_connection.pageInfo =
+          response.data.message_connection.pageInfo;
+        draft.message_connection.edges = _.unionBy(
+          draft.message_connection.edges,
+          newMessages,
+          'node.id'
+        );
       })
     );
   });
+
+  const onScroll = useEvent(async (e) => {
+    if (
+      e.target.scrollTop > -5 &&
+      data?.message_connection.pageInfo.hasPreviousPage
+    ) {
+      const response = await fetchMore({
+        variables: {
+          first: null,
+          last: LIMIT,
+          before: data?.message_connection.pageInfo.startCursor,
+          after: null,
+        },
+      });
+      const newMessages = response.data.message_connection.edges;
+      updateQuery((prev) =>
+        immer(prev, (draft) => {
+          draft.message_connection.pageInfo = {
+            ...draft.message_connection.pageInfo,
+            hasPreviousPage:
+              response.data.message_connection.pageInfo.hasPreviousPage,
+            startCursor: response.data.message_connection.pageInfo.startCursor,
+          };
+          draft.message_connection.edges = _.unionBy(
+            newMessages,
+            draft.message_connection.edges,
+            'node.id'
+          );
+        })
+      );
+    }
+  });
+
+  const haasMore = useMemo(() => {
+    return data?.message_connection.pageInfo.hasNextPage || false;
+  }, [data?.message_connection.pageInfo]);
 
   if (isLoading || loading || isMembersLoading) {
     return <div>Loading...</div>;
@@ -253,20 +306,27 @@ export const ChannelPage = () => {
         <StyledScroll
           dataLength={messages.length}
           next={onNext}
-          hasMore={hasMore}
+          hasMore={haasMore}
           loader={null}
           scrollableTarget={scrollContainerId}
+          onScroll={onScroll}
           inverse
         >
-          {messages.map((message) => (
+          {messages.map((message, index) => (
             <Message
               key={message.id}
-              message={message}
+              beforeCursor={
+                messages[index !== messages.length - 1 ? index + 1 : index]
+                  .cursor
+              }
+              messageCursor={message.cursor}
+              scrollTo={message.cursor === searchParams.get('messageId')}
+              message={message.node}
               showDateDivider={message.showDateDivider}
               showNewMessageDivider={message.showNewMessageDivider}
             />
           ))}
-          {hasMore && <h1>Loading...</h1>}
+          {haasMore && <h1>Loading...</h1>}
         </StyledScroll>
       </StyledMessageListContainer>
 
@@ -278,7 +338,8 @@ export const ChannelPage = () => {
         userList={mentionUsers}
         files={files}
         onFileRemove={onFileRemove}
-        onFileUpload={onFileUpload}
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
+        onFileUpload={() => {}}
         disabled={
           isFileLoading || (newMessage.length === 0 && files.length === 0)
         }

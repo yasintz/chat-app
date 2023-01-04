@@ -6,9 +6,18 @@ import _ from 'lodash';
 import { getFileConfigByServiceAndTypes } from '@libs/react';
 import { Markdown } from '../../../components/common/markdown';
 import { ChatInputFiles } from '../chat-input/files';
-import { useLayoutEffect, useRef, useState } from 'react';
+import {
+  ForwardedRef,
+  forwardRef,
+  useEffect,
+  useEvent,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import LinkPreview from './link-preview';
 import { gql } from '../../../gql';
+import { ReactComponent as VerticalThreeDotsIcon } from '../../../assets/icons/vertical-three-dots.svg';
 // #endregion
 
 // #region GQL
@@ -50,6 +59,7 @@ const StyledContainer = styled.div`
   display: flex;
   border-top: 1px solid #ddd;
   padding: 12px 24px;
+  position: relative;
 `;
 
 const StyledMessageRightContainer = styled.div`
@@ -79,19 +89,32 @@ const StyledAuthorContainer = styled.div`
   margin-bottom: 8px;
 `;
 
+const StyledActionContainer = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+`;
+
 // #endregion
 
 export interface MessageItemProps {
   message: FragmentType<typeof messageFragment>;
+  beforeCursor: string;
+  messageCursor: string;
+  scrollTo: boolean;
   showDateDivider: boolean;
   showNewMessageDivider: boolean;
 }
 
 export const Message = ({
   message,
+  beforeCursor,
+  messageCursor,
   showDateDivider,
   showNewMessageDivider,
+  scrollTo,
 }: MessageItemProps) => {
+  const messageRef = useRef<HTMLDivElement>(null);
   const { body, sender, createdAt, updatedAt, files } = useFragment(
     messageFragment,
     message
@@ -104,6 +127,12 @@ export const Message = ({
 
   const createdAtInstance = dayjs(createdAt);
   const createdTime = createdAtInstance.format('h:mm A');
+
+  const onMessageLinkCopy = useEvent(() => {
+    navigator.clipboard.writeText(
+      `${window.location.origin}${window.location.pathname}?messageId=${messageCursor}&beforeCursor=${beforeCursor}`
+    );
+  });
 
   useLayoutEffect(() => {
     if (messageContentRef.current) {
@@ -118,8 +147,14 @@ export const Message = ({
     }
   }, []);
 
+  useEffect(() => {
+    if (scrollTo && messageRef.current) {
+      messageRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [scrollTo]);
+
   return (
-    <div>
+    <div ref={messageRef}>
       {showNewMessageDivider && (
         <div style={{ textAlign: 'center', color: 'red' }}>New Messages</div>
       )}
@@ -162,6 +197,9 @@ export const Message = ({
               </div>
             )}
           </div>
+          <StyledActionContainer>
+            <VerticalThreeDotsIcon onClick={onMessageLinkCopy} width={30} />
+          </StyledActionContainer>
         </StyledMessageRightContainer>
       </StyledContainer>
     </div>

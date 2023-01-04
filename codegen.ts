@@ -44,7 +44,7 @@ const prodSchema = {
 };
 
 const localSchema = {
-  'http://localhost:8080/v1/graphql': {
+  'http://127.0.0.1:8080/v1beta1/relay': {
     headers: {
       'x-hasura-admin-secret': 'chat',
     },
